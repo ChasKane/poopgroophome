@@ -15,14 +15,17 @@ CREATE TABLE contacts (
 	user_id int NOT NULL,
 	fname VARCHAR(20) NOT NULL,
 	lname VARCHAR(20) NOT NULL,
-	address VARCHAR(50) NOT NULL
+	address VARCHAR(50) NOT NULL,
+	city VARCHAR(20) NOT NULL,
+	state VARCHAR(20) NOT NULL,
+	zip_code int NOT NULL
 );
 
 # Create user
 # INSERT INTO users VALUES ("user", "pass");
 
 # Create contact
-# INSERT INTO contacts VALUES (user_id, "first", "last", "address");
+# INSERT INTO contacts VALUES (user_id, "first", "last", "address", "city", "state", zip_code);
 
 # Get user 0's contacts
 # SELECT * FROM contacts WHERE user_id = 0;
