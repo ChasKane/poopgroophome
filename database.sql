@@ -21,11 +21,11 @@ CREATE TABLE contacts (
 	zip_code int NOT NULL
 );
 
-# Create user
-# INSERT INTO users VALUES ("user", "pass");
+# Create user (Don't worry about the null value, the ID will auto-increment)
+# INSERT INTO users VALUES (null, first_name, last_name, username, password);
 
 # Create contact
-# INSERT INTO contacts VALUES (user_id, "first", "last", "address", "city", "state", zip_code);
+# INSERT INTO contacts VALUES (null, user_id, first_name, last_name, address, city, state, zip_code);
 
 # Get user 0's contacts
 # SELECT * FROM contacts WHERE user_id = 0;
