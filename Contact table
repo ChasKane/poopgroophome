@@ -28,10 +28,10 @@
 							<td>Dam</td>
 							<td>
 								<!-- make buttons together -->
-								<div class="btn-group">
+																<div class="btn-group">
 									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 								</div>
 							</td>
 						</tr>
@@ -41,8 +41,8 @@
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 								</div>
 							</td>
 						</tr>
@@ -52,8 +52,8 @@
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 								</div>
 							</td>
 						</tr>
@@ -63,8 +63,8 @@
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-									<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 								</div>
 							</td>
 						</tr>
@@ -94,23 +94,42 @@
 					</div>
 				</div>
 			</div>
-			
-			
 		</div>
 		
-		<div>
-			
-			
-			
+		<div class="modal fade" id="contactEdit" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h2 class="modal-title">Contact Name</h2>
+					</div>
+					<div class="modal-body">
+						<p>Edit info</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		
-		<div>
-			
-			
-			
+		<div class="modal fade" id="contactDelete" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h2 class="modal-title">Delete Contact</h2>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to delet this contact?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-		
+
 	</body>
 	
 	<!-- get styls and stuff from bootstrap-->
