@@ -61,13 +61,14 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 class="modal-title">Contact Name</h2>
+						<h2 id="popViewTitle" class="modal-title">Contact Name</h2>
 					</div>
-					<div class="modal-body">
-						<p>contact info</p>
+					<div id="popViewBod" class="modal-body">
+						<p id="popViewInfo">contact info</p>
+						
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -78,13 +79,14 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 class="modal-title">Contact Name</h2>
+						<h2 id="popEditTitle" class="modal-title">Contact Name</h2>
 					</div>
 					<div class="modal-body">
-						<p>Edit info</p>
+						<p id="popEditInfo">Edit info</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
@@ -98,10 +100,11 @@
 						<h2 class="modal-title">Delete Contact</h2>
 					</div>
 					<div class="modal-body">
-						<p>Are you sure you want to delet this contact?</p>
+						<p id="popDeleteQuestion">Are you sure you want to delet this contact?</p>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
 					</div>
 				</div>
 			</div>
@@ -114,7 +117,7 @@
 
 	
 	<script>
-		var sessId, baseUrl = "http://46.101.111.146", objRequest, dbReqParam, xmlHRequest, tObjs, x, htmlTxt = "";
+		var sessId, baseUrl = "http://46.101.111.146", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
 		
 
 		function signUp()
@@ -155,6 +158,7 @@
 				xmlHRequest.send(dbReqParam);
 				
 				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				tObjs = jsonRec;
 				
 				sessId = jsonRec.session_id;
 				
@@ -190,34 +194,22 @@
 				xmlHRequest.send(dbReqParam);
 				
 				var jsonRec = JSON.parse(xmlHRequest.responseText);
-				
-				if (sessId < 1)
-				{
-					document.getElementById("demo").innerHTML += "<div>SessionID: " + sessId + " ERR: User/Pass incorrect"+ "</div>";
-					return;
-				}
-				
-				document.getElementById("contactTableDiv").style.visibility = "visible";
+				tObjs = jsonRec;
+
 				document.getElementById("tableBod").innerHTML = "<div></div>";
 				
 				document.getElementById("demo").innerHTML += "<div>" + " SessionID: " + sessId + "</div>";
 				
 				for (i = 0; i < jsonRec.contact_list.length; i++)
 				{
-					document.getElementById("tableBod").innerHTML += "<tr>";
+					document.getElementById("tableBod").innerHTML += "<tr id=" + "r" + i + ">";
 					
 					document.getElementById("tableBod").innerHTML += "<td>" + jsonRec.contact_list[i][2] + "</td>" + "<td>" + jsonRec.contact_list[i][3] + "</td>"
 					+'<td> <div class="btn-group">' +
-										 '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>' +
-										'<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
-										'<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>' +
+									'<button id="' + "lb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="viewPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>' +
+									'<button id="' + "mb" + i + '" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+									'<button id="' + "rb" + i + '" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>' +
 									'</div></td>';
-					
-					//for (j = 0; j < jsonRec.contact_list[i].length; j++)
-					//{
-						//document.getElementById("tableBod").innerHTML += "<td>" + jsonRec.contact_list[i][2] + "</td>" + 
-						//"<td>" + jsonRec.contact_list[i][3] + "</td>";
-					//}
 					
 					document.getElementById("tableBod").innerHTML += "</tr>";
 				}
@@ -232,6 +224,31 @@
 			}
 		}
 		
+		//onclick="viewPop(' + jsonRec.contact_list[i][0] + ');"
+		function viewPop(arg)
+		{
+			var i, j;
+		
+			for (i = 0; i < tObjs.contact_list.length; i++)
+				{
+					if (tObjs.contact_list[i][0] == arg)
+					{
+						document.getElementById("popViewTitle").innerHTML = tObjs.contact_list[i][2] + " " + tObjs.contact_list[i][3];
+						//document.getElementById("popViewInfo").innerHTML = tObjs.contact_list[i][j];
+
+						document.getElementById("popViewBod").innerHTML += "<p>First Name: " + tObjs.contact_list[i][2] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>Last Name: " + tObjs.contact_list[i][3] + "</p>";
+						
+						return;
+					}
+				}
+		}
+		
+		function updateContact()
+		{
+			
+		}
+		
 		
 	</script>
 
@@ -244,3 +261,4 @@
 		
 	
 </html>
+
