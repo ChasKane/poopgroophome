@@ -64,47 +64,10 @@
 						<h2 id="popViewTitle" class="modal-title">Contact Name</h2>
 					</div>
 					<div id="popViewBod" class="modal-body">
-						<p id="popViewInfo">contact info</p>
 						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="contactEdit" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 id="popEditTitle" class="modal-title">Contact Name</h2>
-					</div>
-					<div class="modal-body">
-						<p id="popEditInfo">Edit info</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="contactDelete" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 class="modal-title">Delete Contact</h2>
-					</div>
-					<div class="modal-body">
-						<p id="popDeleteQuestion">Are you sure you want to delet this contact?</p>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					</div>
-					<div class="modal-footer">
 					</div>
 				</div>
 			</div>
@@ -207,7 +170,7 @@
 					document.getElementById("tableBod").innerHTML += "<td>" + jsonRec.contact_list[i][2] + "</td>" + "<td>" + jsonRec.contact_list[i][3] + "</td>"
 					+'<td> <div class="btn-group">' +
 									'<button id="' + "lb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="viewPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>' +
-									'<button id="' + "mb" + i + '" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+									'<button id="' + "mb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="editPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
 									'<button id="' + "rb" + i + '" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#contactDelete"><span class="glyphicon glyphicon-trash"></span> Delete</button>' +
 									'</div></td>';
 					
@@ -236,8 +199,33 @@
 						document.getElementById("popViewTitle").innerHTML = tObjs.contact_list[i][2] + " " + tObjs.contact_list[i][3];
 						//document.getElementById("popViewInfo").innerHTML = tObjs.contact_list[i][j];
 
+						document.getElementById("popViewBod").innerHTML = "<p></p>";
 						document.getElementById("popViewBod").innerHTML += "<p>First Name: " + tObjs.contact_list[i][2] + "</p>";
 						document.getElementById("popViewBod").innerHTML += "<p>Last Name: " + tObjs.contact_list[i][3] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>Address1: " + tObjs.contact_list[i][4] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>Address2: " + tObjs.contact_list[i][5] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>City: " + tObjs.contact_list[i][6] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>State: " + tObjs.contact_list[i][7] + "</p>";
+						document.getElementById("popViewBod").innerHTML += "<p>Phone Number: " + tObjs.contact_list[i][8] + "</p>";
+						return;
+					}
+				}
+		}
+		
+		function editPop(arg)
+		{
+			var i, j;
+		
+			for (i = 0; i < tObjs.contact_list.length; i++)
+				{
+					if (tObjs.contact_list[i][0] == arg)
+					{
+						document.getElementById("popViewTitle").innerHTML = tObjs.contact_list[i][2] + " " + tObjs.contact_list[i][3];
+
+						document.getElementById("popViewBod").innerHTML = '<form>First Name:<br><input type="text" name="firstName" value="' + tObjs.contact_list[i][2] + 
+							'"><br>Last Name:<br><input type="text" name="lastName" value="' + tObjs.contact_list[i][3] + '"><br>'+
+							'Last Name:<br><input type="text" name="lastName" value="' + tObjs.contact_list[i][3] + '"><br><br><br>'+
+							'<input type="submit" value="Submit"></form>';
 						
 						return;
 					}
@@ -261,4 +249,3 @@
 		
 	
 </html>
-
