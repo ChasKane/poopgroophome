@@ -8,9 +8,10 @@
 		
 	</head>
 	
-	<div align="right" style="visibility:visible;">
+	<div id="homeDiv" align="right" style="visibility:visible;">
 		<button type="button" id="loginButton" class="buttons" onclick="loginPop();" data-toggle="modal" data-target="#contactView"> Login </button>
 		<button type="button" id="signupButton" class="buttons" data-toggle="modal" data-target="#contactView" onclick="newUserPop();"> SignUp </button>
+		<h1 class="text-center">Welcome to POOP GROOP Contacts!!</h1>
 	</div>
 	
 	<p id="demo"></p>
@@ -22,8 +23,9 @@
 			<h2 class="text-center">Contact List</h2>
 			
 			<div align="center"><br>
-				<button type="button" id="loginButton" class="buttons" onclick="fillContactTable();"> Update Table </button>
-				<button type="button" id="createButton" class="buttons" onclick="createPop();" data-toggle="modal" data-target="#contactView"> AddContact </button>
+				<button type="button" id="fillTableButton" class="buttons" onclick="fillContactTable();"> Update Table </button>
+				<button type="button" id="createButton" class="buttons" onclick="createPop();" data-toggle="modal" data-target="#contactView"> Add Contact </button>
+				<button type="button" id="searchButton" class="buttons" data-toggle="modal" data-target="#contactView" onclick="searchPop();"> Search Contact </button>
 			</div>
 
 			
@@ -129,7 +131,7 @@
 				
 				if (!userChk)
 				{
-					document.getElementById("errorMess").innerHTML += "<div>ERR: Username taken"+ "</div>";
+					document.getElementById("signup_errorMess").innerHTML += "<div>ERR: Username taken"+ "</div>";
 					return;
 				}
 				
@@ -169,25 +171,24 @@
 				console.log(xmlHRequest.responseText);
 				
 				var jsonRec = JSON.parse(xmlHRequest.responseText);
-				tObjs = jsonRec;
 				
 				sessId = jsonRec.session_id;
 				var userFound = jsonRec.user_found;
 				
 				if (!userFound) 
 				{
-					document.getElementById("demo").innerHTML += "<div>SessionID: " + sessId + " ERR: User not found"+ "</div>";
+					document.getElementById("login_errorMess").innerHTML += "<div>SessionID: " + sessId + " ERR: User not found"+ "</div>";
 					return;
 				}
 				
 				if (sessId < 1)
 				{
-					document.getElementById("demo").innerHTML += "<div>SessionID: " + sessId + " ERR: User/Pass incorrect"+ "</div>";
+					document.getElementById("login_errorMess").innerHTML += "<div>SessionID: " + sessId + " ERR: User/Pass incorrect"+ "</div>";
 					return;
 				}
 				
 				document.getElementById("contactTableDiv").style.visibility = "visible";
-				document.getElementById("loginDiv").style.visibility = "hidden";
+				document.getElementById("homeDiv").style.visibility = "hidden";
 				
 				fillContactTable();
 
@@ -288,7 +289,7 @@
 						'City:<br><input type="text" id="city" name="updateInfo" value="' + tObjs.contact_list[i][6] + '"><br>'+
 						'State:<br><input id="state" type="text" name="updateInfo" value="' + tObjs.contact_list[i][7] + '"><br>'+
 						'Zip Code:<br><input id="zip" type="text" name="updateInfo" value="' + tObjs.contact_list[i][8] + '"><br><br>'+
-						'<Button type="button" class="buttons" onclick="updateContact('+ arg +')">Submit</button></div>';
+						'<Button type="button" class="buttons" data-dismiss="modal" onclick="updateContact('+ arg +')">Submit</button></div>';
 						
 					document.getElementById("popBottomButt").innerHTML = "Cancel";
 					
@@ -309,34 +310,32 @@
 				'City:<br><input type="text" id="city" name="updateInfo"><br>'+
 				'State:<br><input id="state" type="text" name="updateInfo"><br>'+
 				'Zip Code:<br><input id="zip" type="text" name="updateInfo"><br><br>'+
-				'<Button type="button" class="buttons" onclick="createContact()">Submit</button></div>';
+				'<Button type="button" class="buttons" data-dismiss="modal" onclick="createContact()">Submit</button></div>';
 				
 			document.getElementById("popBottomButt").innerHTML = "Cancel";
 		}
 		
 		function loginPop()
 		{
-			document.getElementById("popViewTitle").innerHTML = "Login or Signup";
+			document.getElementById("popViewTitle").innerHTML = "Please Log In";
 
-			document.getElementById("popViewBod").innerHTML = '<div id="loginDiv" align="center" style="visibility:visible;">'+
-				'<h1 class="text-center">Welcome to POOP GROOP Contacts!!</h1>'+
-				'<span id="inner-title">Please Log In</span><br>'+
+			document.getElementById("popViewBod").innerHTML = '<div id="login_errorMess"></div><div id="loginDiv" align="center">'+
 				'<input type="text" id="user_loginName" placeholder="Username"><br>'+
 				'<input type="password" id="user_loginPassword" placeholder="Password"><br><br>'+
-				'<button type="button" id="loginButton" class="buttons" data-dismiss="modal" onclick="doLogin();"> Login </button>'+
+				'<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>'+
 				'<span id="loginResult"></span>'+
 				'</div>';
 		}
+		//data-dismiss="modal" 
 		
 		function newUserPop()
 		{
-			document.getElementById("popViewTitle").innerHTML = '<p>Create New User</p>';
+			document.getElementById("popViewTitle").innerHTML = '<p>Register a New User</p>';
 
-			document.getElementById("popViewBod").innerHTML = '<div id="errorMess"></div><div id="signupDiv">'+
-			'<span id="inner-tile">Sign-Up</span><br>'+
+			document.getElementById("popViewBod").innerHTML = '<div id="signup_errorMess"></div><div id="signupDiv">'+
 			'<input type="text" id="signup_userName" placeholder="Username"><br>'+
-			'<input type="text" id="signup_password" placeholder="Password"><br>'+
-			'<input type="text" id="signup_passwordconf" placeholder="Password (Confirmation)"><br><br>'+
+			'<input type="password" id="signup_password" placeholder="Password"><br>'+
+			'<input type="password" id="signup_passwordconf" placeholder="Password (Confirmation)"><br><br>'+
 			'<input type="text" id="signup_firstName" placeholder="First Name"><br>'+
 			'<input type="text" id="signup_lastName" placeholder="Last Name"><br>'+
 			'<button type="button" id="signupButton" class="buttons" onclick="doSignup();"> SignUp </button>'+
@@ -346,11 +345,25 @@
 			document.getElementById("popBottomButt").innerHTML = "Cancel";
 		}
 		
+		function searchPop()
+		{
+			document.getElementById("popViewTitle").innerHTML = '<p>Search for a Contact</p>';
+
+			document.getElementById("popViewBod").innerHTML = '<div id="searchDiv">'+
+			'<input type="text" id="search_firstName" placeholder="First Name"><br>'+
+			'<input type="text" id="search_lastName" placeholder="Last Name"><br>'+
+			'<button type="button" id="searchButton" class="buttons" data-dismiss="modal" onclick="search();"> Search </button>'+
+			'<span id="searchResult"></span>'+
+			'</div>';
+				
+			document.getElementById("popBottomButt").innerHTML = "Cancel";
+		}
+		
 		function deletePop(arg)
 		{
 			document.getElementById("popViewTitle").innerHTML = "Delete Contact";
 
-			document.getElementById("popViewBod").innerHTML = '<div>Are you sure you wish to delete contact?<br><br><Button type="button" class="buttons" onclick="deleteContact('+arg+')">Delete</button></div>';
+			document.getElementById("popViewBod").innerHTML = '<div>Are you sure you wish to delete contact?<br><br><Button type="button" class="buttons" data-dismiss="modal" onclick="deleteContact('+arg+')">Delete</button></div>';
 				
 			document.getElementById("popBottomButt").innerHTML = "Cancel";
 		}
@@ -452,6 +465,60 @@
 				document.getElementById("demo").innerHTML += "<div>" + " Rec: " + jsonRec + "</div>";
 				
 				fillContactTable();
+				
+				//make a log of jsonRec var into console (for Debugging)
+				console.log(xmlHRequest.responseText);
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+		}
+		
+		function search()
+		{
+			var createInfo, i, url = baseUrl + "/searchcontact";
+			var firstName =  document.getElementById("search_firstName").value;
+			var lastName =  document.getElementById("search_lastName").value;
+			
+			createInfo = document.getElementsByName("updateInfo");
+			dbReqParam = '{"session_id" : "' + sessId + '", "first_name" : "' + firstName + '", "last_name" : "' + lastName + '"}';
+
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			
+			try
+			{
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				tObjs = jsonRec;
+
+				document.getElementById("tableBod").innerHTML = "<div></div>";
+				
+				document.getElementById("demo").innerHTML += "<div>" + " SessionID: " + sessId + "</div>";
+				
+				for (i = 0; i < jsonRec.contact_list.length; i++)
+				{
+					document.getElementById("tableBod").innerHTML += "<tr id=" + "r" + i + ">";
+					
+					document.getElementById("tableBod").innerHTML += "<td>" + jsonRec.contact_list[i][2] + "</td>" + "<td>" + jsonRec.contact_list[i][3] + "</td>"
+					+'<td> <div class="btn-group">' +
+									'<button id="' + "lb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="viewPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>' +
+									'<button id="' + "mb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="editPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+									'<button id="' + "rb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="deletePop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-trash"></span> Delete</button>' +
+									'</div></td>';
+					
+					document.getElementById("tableBod").innerHTML += "</tr>";
+				}
+				
+				// make a log of jsonRec var into console (for Debugging)
+				console.log(jsonRec);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				
+				document.getElementById("demo").innerHTML += "<div>" + " Rec: " + jsonRec + "</div>";
 				
 				//make a log of jsonRec var into console (for Debugging)
 				console.log(xmlHRequest.responseText);
