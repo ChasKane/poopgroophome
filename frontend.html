@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>Contacts</title>
+		<script type="text/javascript" src="js/frcode.js"></script>
+	    <link href="css/styles.css" rel="stylesheet">	
+	    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	</head>
+
+	<body>
+		<h1 id="title">CONTACTS</h1>
+
+		<div id="loginDiv">
+			<span id="inner-title">Please Log In</span>
+			<input type="text" id="user_loginName" placeholder="Username" /><br />
+			<input type="password" id="user_loginPassword" placeholder="Password"/><br />
+			<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
+			<button type="button" id="signupButton" class="buttons" onclick="doSignup();"> SignUp </button> <!-- change onclick to move to different page, not "sign up" -->
+			<span id="loginResult"></span>
+		</div>
+
+		<div id="signupDiv"> <!-- style="display:none; visibility:hidden;"-->
+			<span id="inner-tile">Sign-Up</span>
+			<input type="text" id="signup_userName" placeholder="Username" /><br />
+			<input type="text" id="signup_password" placeholder="Password" /><br />
+			<input type="text" id="signup_passwordconf" placeholder="Password (Confirmation)" /><br /><br>
+			<input type="text" id="signup_firstName" placeholder="First Name" /><br />
+			<input type="text" id="signup_lastName" placeholder="Last Name" /><br />
+			<input type="text" id="signup_phoneNum" placeholder="Phone Number" /><br />
+			<input type="text" id="signup_email" placeholder="Email" /><br />
+			<input type="text" id="signup_address1" placeholder="Address 1" /><br />
+			<input type="text" id="signup_address2" placeholder="Address 2" /><br />
+			<input type="text" id="signup_city" placeholder="City" /><br />
+			<input type="text" id="signup_state" placeholder="State" /><br />
+			<input type="text" id="signup_zipCode" placeholder="Zip Code" /><br />
+			<button type="button" id="signup_signupButton" class="buttons" onclick="doSignup();"> SignUp </button>
+			<span id="signupResult"></span>
+		</div>
+
+		<!-- Edit loggedInDiv -->
+		<div id="loggedInDiv"> <!-- style="display:none; visibility:hidden;"-->
+			<span id="inner-tile">Welcome <span id="user_firstName"></span> <span id="user_lastName"></span>!</span>
+			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+		</div>
+
+		<div id="addContact"> <!-- style="display:none; visibility:hidden;"-->
+			<span id="inner-tile">Add New Contact</span>
+			<input type="text" id="add_firstName" placeholder="First Name" /><br />
+			<input type="text" id="add_lastName" placeholder="Last Name" /><br />
+			<input type="text" id="add_phoneNum" placeholder="Phone Number" /><br />
+			<input type="text" id="add_email" placeholder="Email" /><br />
+			<input type="text" id="add_address1" placeholder="Address 1" /><br />
+			<input type="text" id="add_address2" placeholder="Address 2" /><br />
+			<input type="text" id="add_city" placeholder="City" /><br />
+			<input type="text" id="add_state" placeholder="State" /><br />
+			<input type="text" id="add_zipCode" placeholder="Zip Code" /><br />
+			<button type="button" id="add_addContactButton" class="buttons" onclick="addContact();"> Add </button>
+			<span id="addContactResult"></span>
+		</div>
+	</body>
+</html>
