@@ -8,7 +8,7 @@
 		
 	</head>
 	
-	<div id="homeDiv" align="right" style="visibility:visible;">
+	<div id="homeDiv" align="center" style="visibility:visible;">
 		<h1 class="text-center">Welcome to Arbitrary Contacts!!</h1>
 		<button type="button" id="loginButton" class="buttons" onclick="loginPop();" data-toggle="modal" data-target="#contactView"> Login </button>
 		<button type="button" id="signupButton" class="buttons" data-toggle="modal" data-target="#contactView" onclick="newUserPop();"> SignUp </button>
@@ -20,7 +20,7 @@
 	
 		<div id="contactTableDiv" align="center" style="visibility:hidden;"> 
 			<h2 class="text-center">Contact List</h2>
-			<button type="button" align="right" id="logoutButton" class="buttons" onclick="logout();"> Logout </button>
+			<button type="button" id="logoutButton" class="buttons" onclick="logout();"> Logout </button>
 			
 			<div align="center"><br>
 				<button type="button" id="fillTableButton" class="buttons" onclick="fillContactTable();"> Update Table </button>
@@ -149,8 +149,9 @@
 				
 				sessId = jsonRec.session_id;
 				var userFound = jsonRec.user_found;
+				var passMatch = jsonRec.pass_match;
 				
-				if (!userFound || sessId < 1) 
+				if (!userFound || !passMatch || sessId < 1) 
 				{
 					document.getElementById("login_errorMess").innerHTML = "<div>* Username or password is incorrect *</div>";
 					return;
