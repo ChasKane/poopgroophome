@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Contacts</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+	</head>
+	
+	<h1 class="text-center">LogIn or SignIn</h1>
+	
+	<h2>This is a login for testing the contactTable. (contacts are recieved from DB)</h2>
+
+	<p id="demo"></p>
+	<div>
+		<button type="button" id="signButton" class="buttons" onclick="signUp();"> SignUp </button>
+	</div>
+	<div>
+		<button type="button" id="loginButton" class="buttons" onclick="login();"> Login </button>
+	</div>
+	<div>
+		<button type="button" id="createButton" class="buttons" onclick="createPop();" data-toggle="modal" data-target="#contactView"> AddContact </button>
+	</div>
+
+	
+	
+	<body id="contactTableBod" style="background-color:rgb(255, 255, 255);">
+	
+		
+		<div id="contactTableDiv" style="visibility:hidden;">
+			<h2 class="text-center">Contact List</h2>
+			
+			<div>
+			<button type="button" id="loginButton" class="buttons" onclick="fillContactTable();"> Update Table </button>
+		</div>
+
+			
+			<div class="container">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						
+						<thead>
+							<tr>
+								<th>FirstName</th>
+								<th>LastName</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody id="tableBod">
+							
+						</tbody>
+						
+						
+					</table>
+				</div>
+				
+			</div>
+		</div>
+		<!-- Here is the pop ups -->
+		
+		<div class="modal fade" id="contactView" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h2 id="popViewTitle" class="modal-title">Contact Name</h2>
+					</div>
+					<div id="popViewBod" class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button id="popBottomButt" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+
+	<script>
+		var sessId, baseUrl = "http://46.101.111.146", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+		
+
+		function signUp()
+		{
+			var url = baseUrl + '/signup';
+			dbReqParam = '{"first_name" : "Anonie3", "last_name" : "Derpie3", "username" : "Mortyie3", "password" : "password"}';
+			
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			try
+			{
+				
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				
+				sessId = jsonRec.session_id;
+				
+				document.getElementById("demo").innerHTML += "<div>Object recieved:" + jsonRec + " SessionID: " + sessId + "</div>";
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+		}
+		
+		
+		<!-- Used as a temp means of getting tin to db for testing -->	
+		function login()
+		{
+			var url = baseUrl + '/login';
+			dbReqParam = '{"username" : "suraj", "password" : "password"}';
+			
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			try
+			{
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				tObjs = jsonRec;
+				
+				sessId = jsonRec.session_id;
+				
+				if (sessId < 1)
+				{
+					document.getElementById("demo").innerHTML += "<div>SessionID: " + sessId + " ERR: User/Pass incorrect"+ "</div>";
+					return;
+				}
+				
+				document.getElementById("contactTableDiv").style.visibility = "visible";
+				
+				fillContactTable();
+				
+				document.getElementById("demo").innerHTML += "<div>Object recieved: " + jsonRec + " SessionID: " + sessId + "</div>";
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+			
+		}
+		
+		<!-- Function to fill table with JSON Obj Contact list -->
+		function fillContactTable() 
+		{
+			var i, j, url = baseUrl + '/profile';
+			dbReqParam = '{"session_id" : "' + sessId + '"}';
+			
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			try
+			{
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				tObjs = jsonRec;
+
+				document.getElementById("tableBod").innerHTML = "<div></div>";
+				
+				document.getElementById("demo").innerHTML += "<div>" + " SessionID: " + sessId + "</div>";
+				
+				for (i = 0; i < jsonRec.contact_list.length; i++)
+				{
+					document.getElementById("tableBod").innerHTML += "<tr id=" + "r" + i + ">";
+					
+					document.getElementById("tableBod").innerHTML += "<td>" + jsonRec.contact_list[i][2] + "</td>" + "<td>" + jsonRec.contact_list[i][3] + "</td>"
+					+'<td> <div class="btn-group">' +
+									'<button id="' + "lb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="viewPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-info-sign"></span> View</button>' +
+									'<button id="' + "mb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="editPop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-pencil"></span> Edit</button>' +
+									'<button id="' + "rb" + i + '" type="button" class="btn btn-primary btn-xs" onclick="deletePop(' + jsonRec.contact_list[i][0] + ');" data-toggle="modal" data-target="#contactView"><span class="glyphicon glyphicon-trash"></span> Delete</button>' +
+									'</div></td>';
+					
+					document.getElementById("tableBod").innerHTML += "</tr>";
+				}
+				
+				// make a log of jsonRec var into console (for Debugging)
+				console.log(jsonRec);
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+		}
+		
+		
+		<!-- Pop up function to give pop up the HTML needed -->
+		function viewPop(arg)
+		{
+			var i, j;
+		
+			for (i = 0; i < tObjs.contact_list.length; i++)
+			{
+				if (tObjs.contact_list[i][0] == arg)
+				{
+					document.getElementById("popViewTitle").innerHTML = tObjs.contact_list[i][2] + " " + tObjs.contact_list[i][3];
+
+					document.getElementById("popViewBod").innerHTML = "<p></p>";
+					document.getElementById("popViewBod").innerHTML += "<p>First Name: " + tObjs.contact_list[i][2] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>Last Name: " + tObjs.contact_list[i][3] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>Address1: " + tObjs.contact_list[i][4] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>Address2: " + tObjs.contact_list[i][5] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>City: " + tObjs.contact_list[i][6] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>State: " + tObjs.contact_list[i][7] + "</p>";
+					document.getElementById("popViewBod").innerHTML += "<p>Zip Code: " + tObjs.contact_list[i][8] + "</p>";
+					document.getElementById("popBottomButt").innerHTML = "Close";
+					return;
+				}
+			}
+		}
+		
+		
+		<!-- Pop up function to give pop up the HTML needed -->
+		function editPop(arg)
+		{
+			var i, j;
+		
+			for (i = 0; i < tObjs.contact_list.length; i++)
+			{
+				if (tObjs.contact_list[i][0] == arg)
+				{
+					document.getElementById("popViewTitle").innerHTML = tObjs.contact_list[i][2] + " " + tObjs.contact_list[i][3];
+
+					document.getElementById("popViewBod").innerHTML = '<div>First Name:<br><input id="first_name" type="text" name="updateInfo" value="' + tObjs.contact_list[i][2] + 
+						'"><br>Last Name:<br><input id="last_name" type="text" name="updateInfo" value="' + tObjs.contact_list[i][3] + '"><br>'+
+						'Address1:<br><input id="address1" type="text" name="updateInfo" value="' + tObjs.contact_list[i][4] + '"><br>'+
+						'Address2:<br><input id="address2" type="text" name="updateInfo" value="' + tObjs.contact_list[i][5] + '"><br>'+
+						'City:<br><input type="text" id="city" name="updateInfo" value="' + tObjs.contact_list[i][6] + '"><br>'+
+						'State:<br><input id="state" type="text" name="updateInfo" value="' + tObjs.contact_list[i][7] + '"><br>'+
+						'Zip Code:<br><input id="zip" type="text" name="updateInfo" value="' + tObjs.contact_list[i][8] + '"><br><br>'+
+						'<Button type="button" class="buttons" onclick="updateContact('+ arg +')">Submit</button></div>';
+						
+					document.getElementById("popBottomButt").innerHTML = "Cancel";
+					
+					return;
+				}
+			}
+		}
+		
+		
+		function createPop()
+		{
+			document.getElementById("popViewTitle").innerHTML = "Create New Contact";
+
+			document.getElementById("popViewBod").innerHTML = '<div>First Name:<br><input id="first_name" type="text" name="updateInfo"'+ 
+				'><br>Last Name:<br><input id="last_name" type="text" name="updateInfo"><br>'+
+				'Address1:<br><input id="address1" type="text" name="updateInfo"><br>'+
+				'Address2:<br><input id="address2" type="text" name="updateInfo"><br>'+
+				'City:<br><input type="text" id="city" name="updateInfo"><br>'+
+				'State:<br><input id="state" type="text" name="updateInfo"><br>'+
+				'Zip Code:<br><input id="zip" type="text" name="updateInfo"><br><br>'+
+				'<Button type="button" class="buttons" onclick="createContact()">Submit</button></div>';
+				
+			document.getElementById("popBottomButt").innerHTML = "Cancel";
+		}
+		
+		function deletePop(arg)
+		{
+			document.getElementById("popViewTitle").innerHTML = "Delete Contact";
+
+			document.getElementById("popViewBod").innerHTML = '<div>Are you sure you wish to delete contact?<br><br><Button type="button" class="buttons" onclick="createContact()">Delete</button></div>';
+				
+			document.getElementById("popBottomButt").innerHTML = "Cancel";
+		}
+		
+		function updateContact(arg)
+		{
+			var updateInfo, i, url = baseUrl + "/updatecontact";
+			
+			updateInfo = document.getElementsByName("updateInfo");
+			dbReqParam = '{"session_id" : "' + sessId + '"';
+			dbReqParam += ',"contact_id" : "' + arg + '"';
+			
+			for (i = 0; i < updateInfo.length; i++)
+			{
+				dbReqParam += ',"'+ updateInfo[i].id +'" : "' + updateInfo[i].value + '"';
+			}
+			
+			dbReqParam += '}';
+			
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			
+			try
+			{
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				
+				document.getElementById("demo").innerHTML += "<div>" + " Rec: " + jsonRec + "</div>";
+				
+				fillContactTable();
+				
+				//make a log of jsonRec var into console (for Debugging)
+				onsole.log(jsonRec);
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+		}
+		
+		
+		function createContact()
+		{
+			var createInfo, i, url = baseUrl + "/makecontact";
+			
+			createInfo = document.getElementsByName("updateInfo");
+			dbReqParam = '{"session_id" : "' + sessId + '"';
+			
+			for (i = 0; i < createInfo.length; i++)
+			{
+				dbReqParam += ',"'+ createInfo[i].id +'" : "' + createInfo[i].value + '"';
+			}
+			
+			dbReqParam += '}';
+			
+			xmlHRequest = new XMLHttpRequest();
+			xmlHRequest.open("POST", url, false);
+			xmlHRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			
+			try
+			{
+				xmlHRequest.send(dbReqParam);
+				
+				var jsonRec = JSON.parse(xmlHRequest.responseText);
+				
+				document.getElementById("demo").innerHTML += "<div>" + " Rec: " + jsonRec + "</div>";
+				
+				fillContactTable();
+				
+				//make a log of jsonRec var into console (for Debugging)
+				console.log(jsonRec);
+			}
+			catch(err)
+			{
+				document.getElementById("demo").innerHTML += "<div>" + err.message + " " + jsonRec + " " + sessId + "</div>";
+			}
+		}
+		
+	</script>
+	
+	<!-- get styls and stuff from bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+	
+</html>
