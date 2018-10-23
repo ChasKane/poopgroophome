@@ -1,0 +1,29 @@
+DROP TABLE users;
+DROP TABLE contacts;
+
+DROP DATABASE test;
+CREATE DATABASE test;
+
+USE test;
+
+CREATE TABLE users (
+	user_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(32) NOT NULL,
+	last_name VARCHAR(32) NOT NULL,
+	username VARCHAR(32) NOT NULL UNIQUE,
+	password VARCHAR(60) NOT NULL,
+	session_id VARCHAR(32) UNIQUE,
+	last_updated DATETIME
+);
+
+CREATE TABLE contacts (
+	contact_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id int NOT NULL,
+	first_name VARCHAR(32) NOT NULL,
+	last_name VARCHAR(32) NOT NULL,
+	address1 VARCHAR(32) NOT NULL,
+	address2 VARCHAR(32) NOT NULL,
+	city VARCHAR(32) NOT NULL,
+	state VARCHAR(32) NOT NULL,
+	zip_code VARCHAR(32) NOT NULL
+);
