@@ -202,7 +202,7 @@ function checkSwap(id, display_id) {
 	console.log(elem);
 	if(id == display_id && elem.getAttribute("vis") == "none") {
 		swapDisplay(id);
-	} else if(elem.getAttribute("vis") == "block") {
+	} else if(id != display_id && elem.getAttribute("vis") == "block") {
 		swapDisplay(id);
 	}
 }
