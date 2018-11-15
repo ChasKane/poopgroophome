@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+            <title>TI Innovation Lab</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+            <!-- get styls and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <style>
+        .custom-container {
+            padding-left: 260px;
+            padding-right: 50px;
+        }
+    </style>
+
+    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs();">
+
+        
+
+        <div class="custom-container">
+    
+            <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
+
+            <div class="container-fluid col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">3D Print Queue</a></li>
+                    <li onclick="focus();"><a data-toggle="tab" href="#menu1">3D Print Material</a></li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <body>
+                            <div id="b-color-3" class="well container-fluid">
+                                <div class="row content">
+                                    <div><center>
+                                        <h1 class="title-color">3D Printer Queue</h1>
+                                    </center></div>
+    
+                                    <form class="form-horizontal">
+                                        <div class="from-group container-fluid">
+                                            <label class="col-sm-1" for="tech_Select">Tech:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="tech_Select">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="from-group container-fluid">
+                                            <label class="col-sm-1 control-label">Add:</label>
+                                            <div class="col-sm-4">
+                                                <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
+                                            </div>
+                                            <a class="btn btn-default btn-sm col-sm-2" href="../../html/lab/Laser_Form.html" role="button">Manualy Add Student</a>
+                                        </div>
+                                    </form>
+                        
+                                    <div id="contactTableDiv"> 
+                                        
+                                        <div><br><center>
+                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                        </center></div>
+                                        <br>
+                        
+                                        
+                                        <div class="container-fluid">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-condensed table-hover">
+                                                    
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Queue Position</th>
+                                                            <th>Machine ID</th>
+                                                            <th>Student ID</th>
+                                                            <th>Tech ID</th> <!-- waiting cutting done skipped-->
+                                                            <th>Estimated time</th> <!-- delete-->
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tableBody">
+                                                        
+                                                    </tbody>
+                                                    
+                                                    
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>        
+                            </div>
+                        </body>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default btn-sm" onclick="modPop('insertArg');" data-toggle="modal" data-target="#modalPop">TEST</button>
+            </div>
+        </div>
+    </body>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+        var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+
+        /*function that includes html*/
+        function includeHTML(arg)
+        {
+            var z, i, elmnt, file, xhttp, id;
+            file = arg
+
+            /*loop thru html elements*/
+            z = document.getElementsByTagName("*");
+
+            for (i = 0; i < z.length; i++) 
+            {
+                elmnt = z[i];
+
+                if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
+                {
+                    /*make http req*/
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function()
+                    {
+                        if (this.readyState == 4)
+                        {
+                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                            /*edit attrib, call again*/
+                            elmnt.setAttribute("content-include-html", "nope");
+                            includeHTML();
+                            elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                        }
+                    }
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    
+                    return;
+                }
+            }
+        }
+
+        // Pop up function for confirmations and alerts
+        function modPop(arg)
+		{
+			var i, j;
+		
+			
+			// 	if (true)
+			// 	{
+					// document.getElementById("popViewTitle").innerHTML = "Hello There";
+					// document.getElementById("popViewBod").innerHTML = "<p></p>";
+					// document.getElementById("popBottomButt").innerHTML = "Close";
+			// 		return;
+			// 	}
+        }
+
+        $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+            
+            alert(e.target.href);
+        })
+        
+        // focus an element
+        function focusPocus()
+        {
+            document.getElementById("userCard_ID").focus();
+        }
+    </script>
+</html>

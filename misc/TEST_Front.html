@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TI Innovation Lab</title>
+
+        <style>
+            
+
+            /* set color of navigation */
+            .sidenav {
+                background-color:rgb(204, 0, 0);
+                height: 100%;
+            }
+            
+            #b-color-1 {
+                background-color:rgb(204, 0, 0);
+            }
+
+            #b-color-2 {
+                background-color:rgb(199, 199, 199);
+            }
+            
+            #b-color-3 {
+                background-color:rgb(255, 255, 255);
+            }
+
+            #b-color-4 {
+                background-color:rgb(199, 199, 199);
+            }
+
+            #color-1 {
+                background-color:rgb(204, 0, 0);
+            }
+
+            #color-2 {
+                background-color:rgb(199, 199, 199);
+            }
+
+            #color-3 {
+                background-color:rgb(255, 255, 255);
+            }
+
+            #color-4 {
+                background-color:rgb(199, 199, 199);
+            }
+        </style>
+        
+
+    </head>
+
+    <body id="sexyBody">
+        <nav class="navbar navbar-inverse visible-xs">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar main-color" ></span>
+                        <span class="icon-bar main-color" ></span>
+                        <span class="icon-bar" ></span>                        
+                    </button>
+                    <a id="color-3" class="navbar-brand" href="#" >Logo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Students</a></li>
+                        <li><a href="#">Lab</a></li>
+                        <li><a href="#">Management</a></li>
+                        <li><a href="#">Reports</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="container-fluid">
+            <div class="row content">
+                <div class="col-sm-2 sidenav hidden-xs second-color-back"> <!--hidden-xs-->
+                    <h1><img src="logo.png" alt="logo" style="width:210px;height:50px; padding-left: 0px "  ></h1>
+                    <div class="panel-group">
+                        <div id="backpanel-1" class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="panel panel-default third-color-back">
+                                    <div class="panel-body">
+                                        <h3>Students</h3>
+                                        <div><a onclick="includeHTML('addstudent.html');" href="#">Add Student </a></div>
+                                        <div><a href="#">Current Students</a></div>
+                                        <div><a href="#">Groups and Clubs</a></div>
+                                        <div><a href="#">Majors</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="backpanel-1" class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="panel panel-default third-color-back">
+                                    <div class="panel-body">
+                                        <h3>Lab</h3>
+                                        <h4>Laser Cutters</h4>
+                                        <div><a href="#">   Laser Appt</a></div>
+                                        <div><a href="#">   Laser Queue</a></div>
+                                        <div><a href="#">   Laser Config</a></div>
+                                        <div><a href="#">   Laser Camera</a></div>
+                                        <h4>3D Printers</h4>
+                                        <div><a href="#">   3D Print Queue</a></div>
+                                        <div><a href="#">   3D Print Material</a></div>
+                                        <h4>Equipment</h4>
+                                        <div><a href="#">   Equipment Rental</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="backpanel-1" class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="panel panel-default third-color-back">
+                                    <div class="panel-body">
+                                        <h3>Management</h3>
+                                        <div><a href="#">TA Work Schedules</a></div>
+                                        <div><a href="#">Lab Inventory</a></div>
+                                        <div><a href="#">Machine Inventory</a></div>
+                                        <div><a href="#">Lab Hours and FAQ</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="backpanel-1" class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="panel panel-default third-color-back">
+                                    <div class="panel-body">
+                                        <h3>Reports</h3>
+                                        <div><a href="#">Laser Cutter</a></div>
+                                        <div><a href="#">3D Printer</a></div>
+                                        <div><a href="#">Rented Material</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <!-- <ul class="nav nav-pills nav-stacked">
+                                <li><h2>Students</h2></li>
+                                <li><a href="#">Find Students</a></li>
+                            </ul><br> -->
+                        
+                    </div>
+                </div>
+                <br>
+                    <div class="col-sm-10">
+                            <div id="display" content-include-html="This is where the other HTML conent is displayed"></div>
+
+                    </div>
+                    
+            </div>
+        </div>
+
+
+
+    </body>
+
+    <script>
+        /*function that includes html*/
+        function includeHTML(arg)
+        {
+            var z, i, elmnt, file, xhttp, id;
+            file = arg
+
+            /*loop thru html elements*/
+            z = document.getElementsByTagName("*");
+
+            for (i = 0; i < z.length; i++) 
+            {
+                elmnt = z[i];
+
+                /*search for elements with this attrib*/
+                /*file = elmnt.getAttribute("wdd-include-html");*/
+                id = elmnt.getAttribute("id");
+
+                if (elmnt.getAttribute("content-include-html"))
+                {
+                    /*make http req*/
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function()
+                    {
+                        if (this.readyState == 4)
+                        {
+                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                            /*remove attrib, call again*/
+                            elmnt.removeAttribute("content-include-html");
+                            includeHTML();
+                        }
+                    }
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed")
+                    return;
+                }
+            }
+        }
+    </script>
+
+    <!-- get styls and stuff from bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</html>

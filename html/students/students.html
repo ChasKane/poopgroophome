@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+            <title>TI Innovation Lab</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+            <!-- get styles and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            
+
+            
+            <script type="text/javascript" src="/js/students/currentstudents.js"></script>
+            
+            <style>
+              * {
+                box-sizing: border-box;
+              }
+              
+              ul.list {
+                list-style-type: none;
+                padding-left: 200px;
+                padding-top: 20px;
+                margin: 0;
+                width: 50%;
+              }
+              
+              ul li.list {
+                border: 1px solid #ddd;
+                margin-top: -1px; /* Prevent double borders */
+                background-color: #f6f6f6;
+                padding: 12px;
+                text-decoration: none;
+                font-size: 18px;
+                color: black;
+                display: block;
+                position: relative;
+                align: center;
+              }
+              
+              ul li.list:hover {
+                background-color: #eee;
+              }
+              
+              .close {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                right: 0%;
+                padding: 12px 16px;
+                transform: translate(0%, -50%);
+              }
+              
+              .close:hover {background: #bbb;}
+
+
+
+            /* set color of navigation */
+            .sidenav {
+                background-color:rgb(204, 0, 0);
+                height: 100%;
+                width: 240px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                overflow-x: hidden;
+            }
+            
+            .nav-selections {
+                font-size: x-large;
+            }
+
+            .nav-sub-selections {
+                font-size: large;
+            }
+
+            /* .main {
+                margin-left: 160px;
+                padding: 0px 10px;
+            } */
+
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+            }
+
+            /*Mehoy*/
+            .b-color-1 {
+                background-color:rgb(204, 0, 0);
+            }
+
+            .b-color-2 {
+                background-color:rgb(199, 199, 199);
+            }
+            
+            .b-color-3 {
+                background-color:rgb(255, 255, 255);
+            }
+
+            .b-color-4 {
+                background-color:rgb(199, 199, 199);
+            }
+
+            .color-1 {
+                color:rgb(204, 0, 0);
+            }
+
+            .color-2 {
+                color:rgb(199, 199, 199);
+            }
+
+            .color-3 {
+                color:rgb(255, 255, 255);
+            }
+
+            .color-4 {
+                color:rgb(199, 199, 199);
+            }
+
+            .hidden {
+                display: "none";
+            }
+
+            .custom-container-fluid {
+                padding-left: 260px;
+                padding-right: 50px;
+            }
+
+            table, th, td {
+    			border: 1px solid black;
+			}
+
+			col {
+				width: 50%
+			}
+
+
+        </style>
+    </head>
+    <body onload="includeHTML('../../html/Menu_Bar.html');">
+
+    	<div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
+    
+      
+      <div class="custom-container-fluid col-sm-12">
+        <div class="row content">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Students</a></li>
+                        <li><a data-toggle="tab" href="#menu1" onclick="getcurrentstudents();">Current Students</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Groups and Clubs</a></li>
+                        <li><a data-toggle="tab" href="#menu3">Majors</a></li>
+                    </ul>
+                    
+    <div class="tab-content">
+                        <!-- students tab -->
+        <div id="home" class="tab-pane fade in active">
+            <div id="main_student" class="well b-color-3 container-fluid" vis="block">
+                <div><center>
+                    <h1>Students</h1>
+                </center></div>
+                <div>
+                    <form class="form-horizontal">
+                        <div class="from-group container-fluid">
+                            <label class="col-sm-2 control-label">Find:</label>
+                            <div class="col-sm-8" id="swipeCard">
+                                <input id="userCard_ID" class="form-control" placeholder="Search" type="text" autofocus>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile();">Manually Find Student</button>
+                        </div>
+                    </form>
+                    <br><br><br>
+                    <form class="form-horizontal">
+                        <div class="from-group container-fluid">
+                            <label class="col-sm-2 control-label">Add:</label>
+                            <div class="col-sm-8">
+                                <input id="user_ID" class="form-control" placeholder="Search" type="text">
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">Manually Add Student</button>
+                        </div>
+                    </form>
+                    <br><br><br>
+                    <form class="form-horizontal">
+                      <div class="from-group container-fluid">
+                         
+                         <label class="col-sm-2 control-label" >See All:</label>
+                         <div class="col-sm-8">
+                         <button type="button" class="btn btn-default" onclick="loadAllStudents();">Go</button> 
+                         </div>
+                      </div>
+                      
+                     </form>
+                    <br><br><br>
+                </div>
+            </div>
+        	
+        	
+	        <div id="student_profile" vis="none" style="display: none;">
+	          <div id="rcorners1">
+	            <div>
+	              <form action="/action_page.php">
+	                <label for="fname">First Name </label>
+	                <input class="form-control" type="text" id="fname" name="firstname" placeholder="Your name..">
+	                <br>
+	                <label for="lname">Last Name </label>
+	                <input class="form-control" type="text" id="lname" name="lastname" placeholder="Your last name..">
+	                <br>
+	                <label for="email">School Email </label><span></span>
+	                <input class="form-control" type="text" id="email" name="schoolemail" placeholder="Your school email..">
+	                <br>
+	                <label for="major">Major</label> &nbsp;<span></span><span></span>
+	                <select  class="form-control" id="major_profile" name="major">
+	                  <option value="australia">Australia</option>
+	                  <option value="canada">Canada</option>
+	                  <option value="usa">USA</option>
+	                </select>
+	                <br>
+	                <br>
+	                <label>Material Used </label><span id="material_used">6.5</span>
+	                <br>
+	                <br>
+	                <label>Soluble Used </label><span id="soluble_used">3.5</span>
+	                <br>
+	              
+	              </form>
+	            </div>
+	            </div>
+
+	            <br>
+	            <div id="rcorners1">
+	            <p> Groups</p>
+	            <div id="groups">
+	            Add Groups Here
+	            </div>
+
+
+	            </div>
+	            <button class="btn btn-default" onclick="swapStudentsHTML('main_student')">Back</button>
+	        </div>
+
+	        <div id="all_students" vis="none" style="display: none;">
+	        	<h1>
+	        		All Students
+	        	</h1>
+	        	<div class="table-responsive">
+	                <table class="table table-bordered table-condensed table-hover">
+	                	<thead>
+	                		<tr>
+	                			<td>First Name</td>
+	                			<td>Last Name</td>
+	                			<td>Email</td>
+	                			<td>Major</td>
+	                		</tr>
+	                	</thead>
+	                	<tbody id="all_students_body" style="min-height: 31px">
+	                		
+	                	</tbody>
+	                </table>
+	        	</div>
+	        	<button class="btn btn-default" onclick="swapStudentsHTML('main_student')">Back</button>
+        	</div>
+        </div>
+                        
+                        <!-- current lab status -->
+                        <div id="menu1" class="tab-pane fade">
+                              <ul  class="list" id="listy">
+                                <li class="list">Sample<span class="close">&times;</span></li>
+                              </ul>
+
+
+                        </div>
+                        
+                        <!-- Groups and Clubs -->
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Menu 2</h3>
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            <div class="col-xs-6">
+	                            <div class="table-responsive">
+	                                <table class="table table-bordered table-condensed table-hover">
+	                                	<thead>
+	                                		<tr>
+	                                			<td>Group/Club</td>
+	                                		</tr>
+	                                	</thead>
+	                                	<tbody id="club_table_body" style="min-height: 31px">
+	                                		
+	                                	</tbody>
+	                                </table>
+	                            </div>
+	                        </div>
+	                        <div class="col-xs-6">
+	                            <div class="table-responsive">
+	                                <table class="table table-bordered table-condensed table-hover">
+	                                	<thead>
+	                                		<tr>
+	                                			<td>Members</td>
+	                                		</tr>
+	                                	</thead>
+	                                	<tbody id="member_table_body" style="min-height: 31px">
+	                                		
+	                                	</tbody>
+	                                </table>
+	                            </div>
+	                        </div>
+	                        <br>
+                            <button onclick="loadClubTable()">Get Groups</button>
+
+                        </div>
+                        
+                        <!-- Majors -->
+                        <div id="menu3" class="tab-pane fade">
+                            <h3>Menu 3</h3>
+                            <p id="menu3_text"></p>
+                            <button onclick="showMajors();">Show Majors</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">TEST</button>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
+<script>
+    
+    
+    var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+
+    /*function that includes html*/
+    function includeHTML(arg)
+    {
+        var z, i, elmnt, file, xhttp, id;
+        file = arg
+
+        /*loop thru html elements*/
+        z = document.getElementsByTagName("*");
+
+        for (i = 0; i < z.length; i++) 
+        {
+            elmnt = z[i];
+
+            if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
+            {
+                /*make http req*/
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function()
+                {
+                    if (this.readyState == 4)
+                    {
+                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                        if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                        /*edit attrib, call again*/
+                        elmnt.setAttribute("content-include-html", "nope");
+                        includeHTML();
+                        elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                    }
+                }
+                xhttp.open("GET", file, true);
+                xhttp.send();
+                
+                return;
+            }
+        }
+    }
+
+        // Pop up function for confirmations and alerts
+    function modPop(arg) {   
+  		// document.getElementById("popViewTitle").innerHTML = "Add Student";
+		// var newInnerHTML = ""; 
+		// newInnerHTML += ""
+
+
+  		// document.getElementById("popViewBod").innerHTML = newInnerHTML;
+  		// document.getElementById("popBottomButt").innerHTML = "Close";
+  		// return;
+    	   
+    }
+        
+    $(document).ready(function() {
+        $('.nav-tabs a').on('show.bs.tab', function(e){
+            console.log(e.href);
+            activeTab = $(this).attr('href').split('-')[1];        
+            if(this.getAttribute('href') == "#menu1") {
+                console.log("clicked")
+                //focusOn("userCard_ID")
+            }
+        });
+    });
+
+        
+</script>       
+<script src="../../js/students/students.js"></script>
+<script src="../../js/students/majors.js"></script>
+<script src="../../js/students/groupsandclubs.js"></script>
+</html>

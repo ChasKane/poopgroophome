@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <style>
+      #rcorners1 {
+      border-radius: 15px 50px; 
+      border: 2px solid #F2F3F4;
+      padding: 20px; 
+      width:70%;
+      height: 230px; 
+      }
+      
+      .overall { 
+	    font-family: Arial; 
+      color: #7F8C8D;
+      font-size: 11px;
+      
+      }
+      #text{
+      padding-left:3%;
+      }
+      
+      input[type=text], select {
+          font-size: 12px;
+          width: 40%;
+          padding: 5px 11px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+      }
+      
+      input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      
+      input[type=submit]:hover {
+          background-color: #45a049;
+      }
+      
+      span {
+        padding-left: 2%;
+        padding-right: 2%;
+        }
+      
+
+      
+    </style>
+    
+    </head>
+        
+        <div class="overall">
+          <div id="rcorners1">
+            <div>
+              <form action="/action_page.php">
+                <label for="fname">First Name </label>
+                <input class="form-control" type="text" id="fname" name="firstname" placeholder="Your name..">
+                <br>
+                <label for="lname">Last Name </label>
+                <input class="form-control" type="text" id="lname" name="lastname" placeholder="Your last name..">
+                <br>
+                <label for="lname">School Email </label><span></span>
+                <input class="form-control" type="text" id="lname" name="lastname" placeholder="Your school email..">
+                <br>
+                <label for="country">Major</label> &nbsp;<span></span><span></span>
+                <select  class="form-control" id="country" name="country">
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+                <br>
+                <br>
+                <label for="lname">Material Used </label><span>6.5</span>
+                <br>
+                <br>
+                <label for="lname">Soluble Used </label><span>3.5</span>
+                <br>
+              
+              </form>
+            </div>
+          </div>
+        
+          <br>
+          <div id="rcorners1">
+          <p> Groups</p>
+          <div id="groups">
+          Add Groups Here
+          </div>
+          
+          
+          </div>
+        </div>
+        
+        
+        
+   </body>
+</html>
