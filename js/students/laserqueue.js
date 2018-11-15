@@ -279,3 +279,16 @@ async function addToLaserQueueButton() {
 	checkSwap("manually_add_to_queue", "laser_cutting_queue");
 	laserQueueButton();
 }
+
+// make sure the right elements are visible
+
+$(document).ready(function() {
+    $('.nav-tabs a').on('show.bs.tab', function(e){
+        activeTab = $(this).attr('href').split('-')[1];
+        href = this.getAttribute('href');        
+        if(href == "#menu1") {
+            checkSwap("laser_cutting_queue", "laser_cutting_queue");
+			checkSwap("manually_add_to_queue", "laser_cutting_queue");
+        }
+    });
+});

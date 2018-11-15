@@ -273,14 +273,7 @@ async function loadStudentProfile(event) {
 	swapStudentsHTML("student_profile");
 }
 
-// {string: student_card_id,
-// string:first_name,
-// string:last_name,
-// string:major_name, 
-// string:school_email
-// }
-
-
+// add student to db from modal form
 function addStudent(event) {
 	console.log(event.target);
 	var fname = document.getElementById("add_fname");
@@ -318,9 +311,10 @@ function addStudent(event) {
 
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
-        activeTab = $(this).attr('href').split('-')[1];        
-        if(this.getAttribute('href') == "#home") {
+        activeTab = $(this).attr('href').split('-')[1];
+        href = this.getAttribute('href');        
+        if(href == "#home") {
             swapStudentsHTML("main_student");
-        }
+        } 
     });
 });
