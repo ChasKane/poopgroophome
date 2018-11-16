@@ -312,11 +312,13 @@ function updateStudent() {
 	var lname = document.getElementById("lname").value;
 	var email = document.getElementById("email").value;
 	var major = document.getElementById("major_profile");
+	var mat_used = document.getElementById("material_used");
 
+	console.log(mat_used);
+	console.log(mat_used.value);
 	major = major.options[major.selectedIndex].value;
-	console.log(fname);
-	console.log(lname);
-	console.log(major);
+	
+
 
 
 }
