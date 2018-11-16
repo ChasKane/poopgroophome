@@ -336,6 +336,7 @@ async function updateStudent() {
 		}
 	});
 
+	console.log(student);
 	student = student.students[0].student_id;
 	console.log(student);
 
