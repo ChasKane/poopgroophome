@@ -307,6 +307,20 @@ function addStudent(event) {
 	});
 }
 
+function updateStudent() {
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var email = document.getElementById("email").value;
+	var major = document.getElementById("major_profile");
+
+	major = major.options[major.selectedIndex].value;
+	console.log(fname);
+	console.log(lname);
+	console.log(major);
+
+
+}
+
 //-----------------------------------------
 
 $(document).ready(function() {
