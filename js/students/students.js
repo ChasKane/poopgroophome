@@ -252,7 +252,9 @@ async function loadStudentProfile(event) {
 	// fill in materials used
 	elem = document.getElementById("material_used");
 	elem.innerHTML = ": " +result.material_used;
+	elem.setAttribute("value", result.material_used);
 	elem = document.getElementById("soluble_used");
+	elem.setAttribute("value", result.soluble_used);
 	elem.innerHTML = ": " + result.soluble_used;
 
 	// fill in groups
