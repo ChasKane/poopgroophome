@@ -324,7 +324,7 @@ async function updateStudent() {
 	sol_used = sol_used.getAttribute("value");
 
 	var payload = { 
-		"query_field" : fname;
+		"query_field" : fname
 	};
 
 	var student = await $.ajax({
