@@ -309,20 +309,54 @@ function addStudent(event) {
 	});
 }
 
-function updateStudent() {
+async function updateStudent() {
 	var fname = document.getElementById("fname").value;
 	var lname = document.getElementById("lname").value;
 	var email = document.getElementById("email").value;
 	var major = document.getElementById("major_profile");
 	var mat_used = document.getElementById("material_used");
+	var sol_used = document.getElementById("soluble_used");
 
 	console.log(mat_used);
-	console.log(mat_used.value);
+	console.log(mat_used.getAttribute("value"));
 	major = major.options[major.selectedIndex].value;
-	
+	mat_used = mat_used.getAttribute("value");
+	sol_used = sol_used.getAttribute("value");
 
+	var payload = { 
+		"query_field" : fname;
+	};
 
+	var student = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
 
+	student = student.students[0].student_id;
+	console.log(student);
+
+	payload = {
+		"student_id" : student,
+		"first_name" : fname,
+		"last_name" : lname,
+		"major_name" : major,
+		"school_email" : email,
+		"material_used" : mat_used,
+		"soluble_used" : sol_used
+	};
+
+	$.ajax({
+		url : url + "api/web/student/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
 }
 
 //-----------------------------------------
