@@ -15,7 +15,6 @@ function swapDisplay(div_name) {
 	var x = document.getElementById(div_name);
 	var display = x.getAttribute("vis");
     if (display == "" || display == "none") {
-    	console.log("should display "  + x);
     	x.setAttribute("vis", "block")
         x.style.display = "block";
     } else {
@@ -91,7 +90,6 @@ async function removeFromClub(studentID, clubName) {
 		"student_id" : studentID,
 		"club_name" : clubName
 	};
-	console.log(payload)
 	await $.ajax({
 		url : url + "api/web/student_club/delete.php",
 		type : "POST",
@@ -109,8 +107,6 @@ function removefromClubButton(event) {
 	
 	getStudent(student_name).then(function(result) {
 		var student_id = result.students[0].student_id;
-		console.log(student_id);
-		console.log(clubName);
 		removeFromClub(student_id, clubName).then(function() {
 			loadStudentProfile();
 		});
@@ -218,7 +214,6 @@ async function loadStudentProfile(event) {
 	if(event == undefined) {
 		student = document.getElementById("userCard_ID");
 		student = student.value;
-		console.log("It was undefined");
 	} else {
 		var targ = event.target;
 		student = targ.parentElement.getElementsByTagName("td");
@@ -277,7 +272,6 @@ async function loadStudentProfile(event) {
 
 // add student to db from modal form
 function addStudent(event) {
-	console.log(event.target);
 	var fname = document.getElementById("add_fname");
 	var lname = document.getElementById("add_lname");
 	var email = document.getElementById("add_email");
@@ -299,7 +293,6 @@ function addStudent(event) {
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
-			console.log(responseCode)
 			$('#addStudentModal').modal('hide');
 		},
 		error : function (response, tStatus, responseCode) {
@@ -317,8 +310,6 @@ async function updateStudent() {
 	var mat_used = document.getElementById("material_used");
 	var sol_used = document.getElementById("soluble_used");
 
-	console.log(mat_used);
-	console.log(mat_used.getAttribute("value"));
 	major = major.options[major.selectedIndex].value;
 	mat_used = mat_used.getAttribute("value");
 	sol_used = sol_used.getAttribute("value");
@@ -336,10 +327,7 @@ async function updateStudent() {
 		}
 	});
 
-	console.log(student);
 	student = student.students[0].student_id;
-	console.log(student);
-
 	payload = {
 		"student_id" : student,
 		"first_name" : fname,
