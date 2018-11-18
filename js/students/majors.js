@@ -11,16 +11,6 @@ async function getMajors() {
 	//retval = retval.then(result => result.data);
 }
 
-function showMajors() {
-	getMajors().then(function(result) {
-		var newInnerHTML = "";
-		for (var idx in result.majors) {
-			newInnerHTML += "<p>"+result.majors[idx].major_name+"</p>";
-		}
-		document.getElementById("menu3_text").innerHTML = newInnerHTML;
-	});
-}
-
 function buildMajorTable(majors) {
 	var newHTML = "";
 	console.log(majors);
@@ -36,14 +26,12 @@ function buildMajorTable(majors) {
 function editMajor(event) {
 	var targ = event.target;
 	var major_name = targ.innerHTML;
-	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value=' + major_name + ' autofocus>'
+	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
 }
 
 
 function submitMajor(event) {
 	var targ = event.target;
-	console.log(targ)
-	console.log(targ.value)
 	targ.parentElement.innerHTML = targ.value;
 }
 
