@@ -373,6 +373,7 @@ function showCurrentStudents(currentStudents) {
 	for(var idx in currentStudents) {
 		newHTML += "<tr>" + currentStudents[idx].first_name + " " + currentStudents[idx].last_name + "<span class='close'>&times</span></tr>";
 	}
+	console.log(newHTML);
 	var elem = document.getElementById("current_table_body");
 	elem.innerHTML = newHTML;
 }
