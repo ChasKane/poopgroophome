@@ -43,7 +43,8 @@ function editMajor(event) {
 function submitMajor(event) {
 	var targ = event.target;
 	console.log(targ)
-	targ.innerHTML = targ.firstChild.value;
+	console.log(targ.value)
+	targ.innerHTML = targ.value;
 }
 
 async function addMajor() {
