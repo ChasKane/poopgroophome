@@ -23,7 +23,7 @@ function showMajors() {
 
 function buildMajorTable(majors) {
 	var newHTML = "";
-	console.log(majors)
+	console.log(majors);
 	majors = majors.majors
 
 	for(var idx in majors) {
@@ -34,8 +34,9 @@ function buildMajorTable(majors) {
 }
 
 function editMajor(event) {
-	var targ = event.target.parentElement;
-	console.log(targ)
+	var targ = event.target;
+	var major_name = targ.innerHTML;
+	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value=' + major_name + ' autofocus>'
 }
 
 
