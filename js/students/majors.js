@@ -27,7 +27,7 @@ function editMajor(event) {
 	var targ = event.target;
 	var major_name = targ.innerHTML;
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
-	targ.focus();
+	targ.firstChild.focus();
 }
 
 
