@@ -17,7 +17,7 @@ function buildMajorTable(majors) {
 	majors = majors.majors
 
 	for(var idx in majors) {
-		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event)' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td></tr>";
+		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td></tr>";
 	}
 	var elem = document.getElementById("major_table");
 	elem.innerHTML = newHTML;
@@ -27,6 +27,7 @@ function editMajor(event) {
 	var targ = event.target;
 	var major_name = targ.innerHTML;
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
+	targ.focus();
 }
 
 
@@ -35,10 +36,12 @@ function submitMajor(event) {
 	targ.parentElement.innerHTML = targ.value;
 }
 
+
 async function addMajor() {
 	var payload = {
 		"major_name" : document.getElementById("add_major").value
 	}
+
 	await $.ajax({
 		url : url + "api/web/major/create.php",
 		type : "POST",
@@ -47,5 +50,5 @@ async function addMajor() {
 			retval = response;
 		}
 	});
-	showMajors();
+	getMajors();
 }
