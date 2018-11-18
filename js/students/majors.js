@@ -4,6 +4,7 @@ async function getMajors() {
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			retval = response;
+			buildMajorTable(response);
 		}
 	});
 	return retval;
@@ -18,6 +19,27 @@ function showMajors() {
 		}
 		document.getElementById("menu3_text").innerHTML = newInnerHTML;
 	});
+}
+
+function buildMajorTable(majors) {
+	var newHTML = "";
+	console.log(majors)
+	majors = majors.majors
+
+	for(var idx in majors) {
+		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event)' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td></tr>";
+	}
+}
+
+function editMajor(event) {
+	var targ = event.target.parentElement;
+	console.log(targ)
+}
+
+
+function submitMajor(event) {
+	var targ = event.target.parentElement;
+	console.log(targ)
 }
 
 async function addMajor() {

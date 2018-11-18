@@ -256,6 +256,7 @@ async function loadStudentProfile(event) {
 	var clubs = await getGroups(result.student_id);
 	elem = document.getElementById("groups");
 	newHTML = "";
+	console.log(result)
 	if(result == undefined) {
 		elem.innerHTML = "Oh no you arent in any clubs!";
 	} else {
@@ -349,6 +350,35 @@ async function updateStudent() {
 }
 
 //-----------------------------------------
+// Current Students
+//-----------------------------------------
+
+function getCurrentStudents() {
+	$.ajax({
+	    url : url + "api/web/labstatus/read.php",
+	    type : "POST",
+	    success : function(response, tStatus, responseCode) {
+	    	showCurrentStudents(response); 
+	    },
+	    error : function(response, tStatus, responseCode) {
+	    	return responseCode.status; 
+		}
+	});
+}
+
+function showCurrentStudents(currentStudents) {
+	currentStudents = currentStudents.lab_status;
+	var newHTML = "";
+
+	for(var idx in currentStudents) {
+		newHTML += "<li class='list'>" + currentStudents[idx].first_name + " ";
+		newHTML += currentStudents[idx].last_name + "<span class='close'>&times</span></li>";
+	}
+	var elem = document.getElementById("current_table_body");
+	elem.innerHTML = newHTML;
+}
+
+//-----------------------------------------
 
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
@@ -356,6 +386,8 @@ $(document).ready(function() {
         href = this.getAttribute('href');        
         if(href == "#home") {
             swapStudentsHTML("main_student");
+        } else if(href == "#menu2") {
+            getCurrentStudents();
         } 
     });
 });
