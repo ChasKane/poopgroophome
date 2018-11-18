@@ -42,7 +42,7 @@ function editMajor(event) {
 
 function submitMajor(event) {
 	var targ = event.target;
-	console.log(targ.value)
+	console.log(targ)
 	targ.innerHTML = targ.firstChild.value;
 }
 
