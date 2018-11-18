@@ -44,7 +44,7 @@ function submitMajor(event) {
 	var targ = event.target;
 	console.log(targ)
 	console.log(targ.value)
-	targ.innerHTML = targ.value;
+	targ.parentElement.innerHTML = targ.value;
 }
 
 async function addMajor() {
