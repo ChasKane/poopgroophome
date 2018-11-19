@@ -40,6 +40,7 @@ function fill3DPrinterQueue(object) {
 
 	var statuses = ["Waiting", "Printing", "Skipped", "Done"]
 	var newInnerHTML = "";
+	var i = 0
 	
 	for (var idx in elements) {
 		console.log("1 boi")
