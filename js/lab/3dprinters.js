@@ -42,6 +42,7 @@ function fill3DPrinterQueue(object) {
 	var newInnerHTML = "";
 	
 	for (var idx in elements) {
+		console.log("1 boi")
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
 		estimated_time += elements[idx].estimated_time;
 		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
