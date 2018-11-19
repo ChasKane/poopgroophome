@@ -40,7 +40,6 @@ function fill3DPrinterQueue(object) {
 
 	var statuses = ["Waiting", "Printing", "Skipped", "Done"]
 	var newInnerHTML = "";
-	var i = 0
 	
 	for (var idx in elements) {
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
@@ -59,6 +58,7 @@ function fill3DPrinterQueue(object) {
 		}
 		newInnerHTML += "</select></tr>";
 	}
+	console.log(newInnerHTML);
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
