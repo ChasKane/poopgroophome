@@ -36,7 +36,7 @@ function fill3DPrinterQueue(object) {
 	}
 	console.log("Laser Queue: ")
 	console.log(object)
-	var elements = object.3dprint_queues;
+	var elements = object.threedprint_queues;
 
 	var statuses = ["Waiting", "Printing", "Skipped", "Done"]
 	var newInnerHTML = "";
