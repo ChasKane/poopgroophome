@@ -8,7 +8,6 @@
     
             <!-- get styls and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
@@ -19,7 +18,7 @@
         }
     </style>
 
-    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs();">
+    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs('tech_select');">
 
         
 
@@ -57,14 +56,14 @@
                                             <div class="col-sm-4">
                                                 <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
                                             </div>
-                                            <a class="btn btn-default btn-sm col-sm-2" href="../../html/lab/Laser_Form.html" role="button">Manualy Add Student</a>
+                                            <a type="button" class="btn btn-default btn-sm col-sm-2" role="button">Manualy Add Student</a>
                                         </div>
                                     </form>
                         
                                     <div id="contactTableDiv"> 
                                         
                                         <div><br><center>
-                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="get3DPrinterQueue();"> Update Table </button>
                                         </center></div>
                                         <br>
                         

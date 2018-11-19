@@ -266,17 +266,7 @@
                         <ul  class="list" id="listy">
                             <li class="list">Sample<span class="close">&times;</span></li>
                         </ul>
-                        <table class="table table-bordered table-condensed table-hover">
-                            <thead>
-                                <tr>
-                                    <td>First Name</td>
-                                    <td>Last Name</td>
-                                </tr>
-                            </thead>
-                            <tbody id="current_table_body" style="min-height: 31px">
-                                
-                            </tbody>
-                        </table>
+                        
                     </div>
                                     
                     <!-- Groups and Clubs -->
@@ -406,6 +396,8 @@
             if(this.getAttribute('href') == "#menu1") {
                 console.log("clicked")
                 //focusOn("userCard_ID")
+            } else if(this.getAttribute('href') == "#menu3") {
+                getMajors();
             }
         });
     });

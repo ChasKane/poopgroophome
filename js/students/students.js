@@ -1,6 +1,6 @@
 // for students page
 
-var url = "http://104.248.113.22/";
+ 
 
 function getStyle(id, name) {
     var element = document.getElementById(id);
