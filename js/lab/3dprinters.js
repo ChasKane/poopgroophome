@@ -82,6 +82,9 @@ function fillLabTechs(object, id) {
 	var techs = object.lab_techs;
 	var newInnerHTML = ""
 
+	console.log(object);
+	console.log(elements);
+	console.log(id);
 	for(var i=0; i < techs.length; i++) {
 		newInnerHTML += "<option>" + techs[i].name + "</option>";
 	}
