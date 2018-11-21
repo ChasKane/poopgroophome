@@ -291,7 +291,7 @@ function hashCheck() {
 
 	var elem = document.getElementById("nav_tab");
 	for(var idx in elem) {
-		if(elem[idx].classList == undefined) {
+		if(elem[idx].classList == null) {
 			continue;
 		}
 		
