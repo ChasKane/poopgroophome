@@ -282,8 +282,6 @@ $(document).ready(function() {
         href = this.getAttribute('href');        
         if(href == "#home") {
             swapStudentsHTML("main_student");
-        } else if(href == "#menu2") {
-            getCurrentStudents();
         } 
     });
 });
