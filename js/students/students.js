@@ -275,6 +275,13 @@ async function updateStudent() {
 	});
 }
 
+function gotoLaserQueue() {
+	var student_id = document.getElementById("student_profile");
+	student_id = student_id.getAttribute("student_id");
+	document.location.href = "http://104.248.113.22/html/students/students.html#student_id=" + student_id;
+}
+
+
 //-----------------------------------------
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
