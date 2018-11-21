@@ -300,10 +300,12 @@ function hashCheck() {
 		if(elem[idx].classList.contains("active")) {
 			console.log("Found an ative class");
 			elem[idx].classList.remove("active");
+			elem[idx].firstChild.setAttribute("aria-expanded", "false");
 		} 
 	}
 	elem = elem[1];
 	elem.classList.add("active");
+	elem.firstChild.setAttribute("aria-expanded", "true")
 
 }
 
