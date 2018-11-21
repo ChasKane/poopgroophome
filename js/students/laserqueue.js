@@ -293,8 +293,6 @@ function hashCheck() {
 	elem = elem.getElementsByTagName("li");
 	console.log(elem)
 	for(var idx in elem) {
-			console.log(elem.classList);
-
 		if(elem[idx].classList == undefined) {
 			continue;
 		}
@@ -308,7 +306,12 @@ function hashCheck() {
 	elem = elem[1];
 	elem.classList.add("active");
 	elem.firstChild.setAttribute("aria-expanded", "true")
+	
+
 	elem = document.getElementById("menu1");
+	elem.classList.add("active");
+	elem.classList.add("in");
+	
 	console.log(elem.classList);
 
 }
