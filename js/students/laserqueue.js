@@ -290,8 +290,9 @@ function hashCheck() {
 	}
 
 	var elem = document.getElementById("nav_tab");
+	elem = elem.getElementsByTagName("li")[1];
 	for(var idx in elem) {
-		if(elem[idx].classList == null) {
+		if(elem[idx].classList == undefined) {
 			continue;
 		}
 		
@@ -300,7 +301,6 @@ function hashCheck() {
 			elem[idx].classList.remove("active");
 		} 
 	}
-	elem = elem.getElementsByTagName("li")[1];
 	elem.classList.add("active");
 
 }
