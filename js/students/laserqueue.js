@@ -291,6 +291,10 @@ function hashCheck() {
 
 	var elem = document.getElementById("nav_tab");
 	for(var idx in elem) {
+		if(elem[idx].classList == undefined) {
+			continue;
+		}
+		
 		if(elem[idx].classList.contains("active")) {
 			console.log("Found an ative class");
 			elem[idx].classList.remove("active");
