@@ -284,6 +284,21 @@ async function addToLaserQueueButton() {
 function hashCheck() {
 	var hash = location.hash;
 	console.log(hash);
+	if(hash == "") {
+		console.log("there was no hash");
+		return;
+	}
+
+	var elem = document.getElementById("nav_tab");
+	for(var idx in elem) {
+		if(elem[idx].classList.contains("active")) {
+			console.log("Found an ative class");
+			elem[idx].classList.remove("active");
+		} 
+	}
+	elem = elem.getElementsByTagName("li")[1];
+	elem.classList.add("active");
+
 }
 
 // make sure the right elements are visible
