@@ -290,7 +290,7 @@ function hashCheck() {
 	}
 
 	var elem = document.getElementById("nav_tab");
-	elem = elem.getElementsByTagName("li")[1];
+	elem = elem.getElementsByTagName("li");
 	console.log(elem)
 	for(var idx in elem) {
 		if(elem[idx].classList == undefined) {
