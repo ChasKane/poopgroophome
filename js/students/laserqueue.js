@@ -147,7 +147,7 @@ function fillLabTechs(object, id) {
 	var newInnerHTML = ""
 
 	for(var i=0; i < techs.length; i++) {
-		newInnerHTML += "<option>" + techs[i].name + "</option>";
+		newInnerHTML += "<option tech_id='" + techs[i].tech_id + i + "'>" + techs[i].name + "</option>";
 	}
 	elements.innerHTML = newInnerHTML;
 }
@@ -271,7 +271,8 @@ async function addToLaserQueueButton() {
 
 	name = name.value;
 	estimated_time = estimated_time.value;
-	lab_tech = lab_tech.value;
+	lab_tech = lab_tech.options[lab_tech.selectedIndex].getAttribute("tech_id" + lab_tech.selectedIndex);
+	console.log(lab_tech);
 	machine_id = machine_id.value;
 
 	await addLaserQueue(name, lab_tech, machine_id, estimated_time);
