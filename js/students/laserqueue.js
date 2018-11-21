@@ -293,6 +293,8 @@ function hashCheck() {
 	elem = elem.getElementsByTagName("li");
 	console.log(elem)
 	for(var idx in elem) {
+			console.log(elem.classList);
+
 		if(elem[idx].classList == undefined) {
 			continue;
 		}
