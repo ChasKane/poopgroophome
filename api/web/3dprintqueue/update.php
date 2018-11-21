@@ -75,7 +75,7 @@ $num = $stmt->rowCount();
 $threedprint_queues = array();
 
 if($num>0){
-	$threedprint_queues["3dprint_queues"] = array();
+	$threedprint_queues["threedprintqueues"] = array();
 
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
@@ -91,7 +91,7 @@ if($num>0){
 			'club_name' => $club_name
 		);
 
-		array_push($threedprint_queues["3dprint_queues"], $threedprint_queue);
+		array_push($threedprint_queues["threedprintqueues"], $threedprint_queue);
 	}
 
 	http_response_code(200);

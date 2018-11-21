@@ -37,43 +37,86 @@
                     
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
-                                <body>
-                                    <div id="" class="well b-color-3 container-fluid">
+                            <body>
+                                <div class="well b-color-3 container-fluid" id="laser_cutting_queue" vis="block">
+                                    <div class="row content">
                                         <div><center>
-                                            <h1>Machines</h1>
+                                            <h1 class="title-color"></h1>
                                         </center></div>
-                                        <div>
-                                            <form class="form-horizontal">
-                                                <div class="from-group container-fluid">
-                                                    <label class="col-sm-2 control-label">Find:</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="userCard_ID" class="form-control" placeholder="Search" type="text" autofocus>
-                                                    </div>
-                                                    <button class="btn btn-default btn-sm col-sm-2">Manually Find Student</button>
-                                                </div>
-                                            </form>
-                                            <br><br><br>
-                                            <form class="form-horizontal">
-                                                <div class="from-group container-fluid">
-                                                    <label class="col-sm-2 control-label">Add:</label>
-                                                    <div class="col-sm-8">
-                                                        <input id="user_ID" class="form-control" placeholder="Search" type="text">
-                                                    </div>
-                                                    <button class="btn btn-default btn-sm col-sm-2">Manually Add Student</button>
-                                                </div>
-                                            </form>
-                                            <br><br><br>
-                                            <div>
-                                                <label class="col-sm-offset-3 col-sm-1" >See All</label>
-                                                <button class="btn btn-default btn-sm col-sm-2">Go</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </body>
                             
+                                        <div id="contactTableDiv"> 
+                                            
+                                            <div><br><center>
+                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                            </center></div>
+                                            <br>
+                            
+                                            
+                                            <div class="container-fluid">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-condensed table-hover">
+                                                        
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Machine</th>
+                                                                <th>Type</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tableBody">
+                                                            <tr>
+                                                                <td>The Inventor-inator</td>
+                                                                <td>Special</td>
+                                                                <td>Destroyed</td>
+                                                                <td>
+                                                                    <!-- make buttons together -->
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#deletething"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        
+                                                        
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>        
+                                </div>
+                            </body>
                         </div>
                         <div id="menu1" class="tab-pane fade">
-                            
+                            <body>
+                                <div id="" class="well b-color-3 container-fluid">
+                                    <div><center>
+                                        <h1>Inventory</h1>
+                                    </center></div>
+                                    <div>
+                                        <form class="form-horizontal">
+                                            <div class="from-group container-fluid">
+                                                <label class="col-sm-2 control-label">Quick Add:</label>
+                                                <div class="col-sm-8">
+                                                    <input id="userCard_ID" class="form-control" placeholder="Search" type="text" autofocus>
+                                                </div>
+                                                <button class="btn btn-default btn-sm col-sm-2">Add</button>
+                                            </div>
+                                        </form>
+                                        <br><br><br>
+                                        <form class="form-horizontal">
+                                            <div class="from-group container-fluid">
+                                                <label class="col-sm-2 control-label">New Inventory:</label>
+                                                <div class="col-sm-8">
+                                                    <input id="user_ID" class="form-control" placeholder="Search" type="text">
+                                                </div>
+                                                <button class="btn btn-default btn-sm col-sm-2">Add</button>
+                                            </div>
+                                        </form>
+                                        <br><br><br>
+                                       
+                                    </div>
+                                </div>
+                            </body>
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <h3>Menu 2</h3>

@@ -46,7 +46,9 @@ async function getMembers(club_name) {
 async function loadMembers(event) {
 	var targ = event.target;
 	var newHTML = "";
+	console.log(targ);
 	var members = await getMembers(targ.innerHTML);
+	console.log(members)
 	members = members.students;
 
 	for(var idx in members) {

@@ -1,6 +1,6 @@
 // for students page
 
-var url = "http://104.248.113.22/";
+ 
 
 function getStyle(id, name) {
     var element = document.getElementById(id);
@@ -15,7 +15,6 @@ function swapDisplay(div_name) {
 	var x = document.getElementById(div_name);
 	var display = x.getAttribute("vis");
     if (display == "" || display == "none") {
-    	console.log("should display "  + x);
     	x.setAttribute("vis", "block")
         x.style.display = "block";
     } else {
@@ -28,7 +27,7 @@ function checkSwap(id, display_id) {
 	var elem = document.getElementById(id);
 	if(id == display_id && elem.getAttribute("vis") == "none") {
 		swapDisplay(id);
-	} else if(elem.getAttribute("vis") == "block") {
+	} else if(id != display_id && elem.getAttribute("vis") == "block") {
 		swapDisplay(id);
 	}
 }
@@ -91,7 +90,6 @@ async function removeFromClub(studentID, clubName) {
 		"student_id" : studentID,
 		"club_name" : clubName
 	};
-	console.log(payload)
 	await $.ajax({
 		url : url + "api/web/student_club/delete.php",
 		type : "POST",
@@ -109,8 +107,6 @@ function removefromClubButton(event) {
 	
 	getStudent(student_name).then(function(result) {
 		var student_id = result.students[0].student_id;
-		console.log(student_id);
-		console.log(clubName);
 		removeFromClub(student_id, clubName).then(function() {
 			loadStudentProfile();
 		});
@@ -218,7 +214,6 @@ async function loadStudentProfile(event) {
 	if(event == undefined) {
 		student = document.getElementById("userCard_ID");
 		student = student.value;
-		console.log("It was undefined");
 	} else {
 		var targ = event.target;
 		student = targ.parentElement.getElementsByTagName("td");
@@ -252,13 +247,16 @@ async function loadStudentProfile(event) {
 	// fill in materials used
 	elem = document.getElementById("material_used");
 	elem.innerHTML = ": " +result.material_used;
+	elem.setAttribute("value", result.material_used);
 	elem = document.getElementById("soluble_used");
+	elem.setAttribute("value", result.soluble_used);
 	elem.innerHTML = ": " + result.soluble_used;
 
 	// fill in groups
 	var clubs = await getGroups(result.student_id);
 	elem = document.getElementById("groups");
 	newHTML = "";
+	console.log(result)
 	if(result == undefined) {
 		elem.innerHTML = "Oh no you arent in any clubs!";
 	} else {
@@ -273,16 +271,8 @@ async function loadStudentProfile(event) {
 	swapStudentsHTML("student_profile");
 }
 
-// {string: student_card_id,
-// string:first_name,
-// string:last_name,
-// string:major_name, 
-// string:school_email
-// }
-
-
+// add student to db from modal form
 function addStudent(event) {
-	console.log(event.target);
 	var fname = document.getElementById("add_fname");
 	var lname = document.getElementById("add_lname");
 	var email = document.getElementById("add_email");
@@ -304,7 +294,6 @@ function addStudent(event) {
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
-			console.log(responseCode)
 			$('#addStudentModal').modal('hide');
 		},
 		error : function (response, tStatus, responseCode) {
@@ -314,13 +303,91 @@ function addStudent(event) {
 	});
 }
 
+async function updateStudent() {
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var email = document.getElementById("email").value;
+	var major = document.getElementById("major_profile");
+	var mat_used = document.getElementById("material_used");
+	var sol_used = document.getElementById("soluble_used");
+
+	major = major.options[major.selectedIndex].value;
+	mat_used = mat_used.getAttribute("value");
+	sol_used = sol_used.getAttribute("value");
+
+	var payload = { 
+		"query_field" : fname
+	};
+
+	var student = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
+
+	student = student.students[0].student_id;
+	payload = {
+		"student_id" : student,
+		"first_name" : fname,
+		"last_name" : lname,
+		"major_name" : major,
+		"school_email" : email,
+		"material_used" : mat_used,
+		"soluble_used" : sol_used
+	};
+
+	$.ajax({
+		url : url + "api/web/student/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
+}
+
+//-----------------------------------------
+// Current Students
+//-----------------------------------------
+
+function getCurrentStudents() {
+	$.ajax({
+	    url : url + "api/web/labstatus/read.php",
+	    type : "POST",
+	    success : function(response, tStatus, responseCode) {
+	    	showCurrentStudents(response); 
+	    },
+	    error : function(response, tStatus, responseCode) {
+	    	return responseCode.status; 
+		}
+	});
+}
+
+function showCurrentStudents(currentStudents) {
+	currentStudents = currentStudents.lab_status;
+	var newHTML = "";
+
+	for(var idx in currentStudents) {
+		newHTML += "<tr><td>" + currentStudents[idx].first_name + "</td><td>" + currentStudents[idx].last_name + "</td><span class='close'>&times</span></tr>";
+	}
+	console.log(newHTML);
+	var elem = document.getElementById("current_table_body");
+	elem.innerHTML = newHTML;
+}
+
 //-----------------------------------------
 
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
-        activeTab = $(this).attr('href').split('-')[1];        
-        if(this.getAttribute('href') == "#home") {
+        activeTab = $(this).attr('href').split('-')[1];
+        href = this.getAttribute('href');        
+        if(href == "#home") {
             swapStudentsHTML("main_student");
-        }
+        } else if(href == "#menu2") {
+            getCurrentStudents();
+        } 
     });
 });

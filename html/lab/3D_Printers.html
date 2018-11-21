@@ -7,8 +7,8 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
     
             <!-- get styls and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
@@ -19,7 +19,7 @@
         }
     </style>
 
-    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs();">
+    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs('tech_select');">
 
         
 
@@ -36,7 +36,7 @@
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                         <body>
-                            <div id="b-color-3" class="well container-fluid">
+                            <div id="b-color-3" class="well b-color-3 container-fluid">
                                 <div class="row content">
                                     <div><center>
                                         <h1 class="title-color">3D Printer Queue</h1>
@@ -46,7 +46,7 @@
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1" for="tech_Select">Tech:</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control" id="tech_Select">
+                                                <select class="form-control" id="tech_select">
                                                 </select>
                                             </div>
                                         </div>
@@ -57,14 +57,14 @@
                                             <div class="col-sm-4">
                                                 <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
                                             </div>
-                                            <a class="btn btn-default btn-sm col-sm-2" href="../../html/lab/Laser_Form.html" role="button">Manualy Add Student</a>
+                                            <a type="button" class="btn btn-default btn-sm col-sm-2" role="button">Manualy Add Student</a>
                                         </div>
                                     </form>
                         
                                     <div id="contactTableDiv"> 
                                         
                                         <div><br><center>
-                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="get3DPrinterQueue();"> Update Table </button>
                                         </center></div>
                                         <br>
                         
@@ -108,7 +108,6 @@
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
 
         var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
@@ -176,4 +175,5 @@
             document.getElementById("userCard_ID").focus();
         }
     </script>
+    <script src="../../js/lab/3dprinters.js"></script>
 </html>
