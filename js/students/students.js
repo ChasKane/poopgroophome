@@ -162,7 +162,7 @@ async function loadStudentProfile(event) {
 	elem = document.getElementById("email");
 	elem.value = result.school_email;
 	elem = document.getElementById("student_profile");
-	elem.setAttribute("stu_id", result.student_id);
+	elem.setAttribute("student_id", result.student_id);
 
 	// fill in majors dropdown
 	getMajors("major_profile");

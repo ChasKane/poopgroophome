@@ -281,6 +281,11 @@ async function addToLaserQueueButton() {
 	laserQueueButton();
 }
 
+function hashCheck() {
+	var hash = location.hash;
+	console.log(hash);
+}
+
 // make sure the right elements are visible
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
