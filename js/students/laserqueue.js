@@ -306,7 +306,8 @@ function hashCheck() {
 	elem = elem[1];
 	elem.classList.add("active");
 	elem.firstChild.setAttribute("aria-expanded", "true")
-	$('#nav_tab a[href=#menu1]').tab('show');
+	elem = document.getElementById("menu1");
+	console.log(elem.classList);
 
 }
 
