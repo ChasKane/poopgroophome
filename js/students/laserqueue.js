@@ -281,6 +281,16 @@ async function addToLaserQueueButton() {
 	laserQueueButton();
 }
 
+function setInactive(id) {
+	var elem = document.getElementById(id);
+	if(elem.classList.contains("in")) {
+		elem.classList.remove("in");
+		elem.classList.remove("active");
+	} else {
+		return;
+	}
+}
+
 function hashCheck() {
 	var hash = location.hash;
 	console.log(hash);
@@ -303,11 +313,14 @@ function hashCheck() {
 			elem[idx].firstChild.setAttribute("aria-expanded", "false");
 		} 
 	}
+
+	// set the other three tabs to inactive
+	setInactive("home");
+
 	elem = elem[1];
 	elem.classList.add("active");
 	elem.firstChild.setAttribute("aria-expanded", "true")
 	
-
 	elem = document.getElementById("menu1");
 	elem.classList.add("active");
 	elem.classList.add("in");
