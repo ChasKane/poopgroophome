@@ -56,11 +56,6 @@
               
               .close:hover {background: #bbb;}
 
-            .right {
-                text-align: right;
-                margin-right: 1em;
-            }   
-
             table, th, td {
     			border: 1px solid black;
 			}
@@ -253,7 +248,7 @@
                                             <td>Majors</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="major_table" style="min-height: 31px">
+                                    <tbody id="major_table" current_major="" style="min-height: 31px">
                                         
                                     </tbody>
                                 </table>
@@ -261,7 +256,7 @@
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
                             <button onclick="addMajor();">Add Major</button>
                             <button onclick="getMajors();">Show Majors</button>
-                            <button onclick="gotoLaserQueue()">Go To LaserQueue</button>
+                            <button onclick="deleteMajor()">Delete Selected Major</button>
                         </div>
                         
                     </div>

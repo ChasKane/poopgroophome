@@ -19,7 +19,7 @@ function buildMajorTable(majors) {
 	majors = majors.majors
 
 	for(var idx in majors) {
-		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"<button class='right'>delete</button></td></tr>";
+		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td></tr>";
 	}
 	var elem = document.getElementById("major_table");
 	elem.innerHTML = newHTML;
@@ -30,8 +30,12 @@ function editMajor(event) {
 	var major_name = targ.innerHTML;
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
 	targ.firstChild.focus();
+	targ.parentElement.setAttribute("current_major", "major_name");
 }
 
+function deleteMajor() {
+
+}
 
 function submitMajor(event) {
 	var targ = event.target;
