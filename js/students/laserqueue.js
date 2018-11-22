@@ -242,7 +242,9 @@ async function addLaserQueueButton() {
 		return;
 	}
 
-	var student = await getStudent();
+	var student_id = hash.split("=")[1];
+	var student = await getStudent(student_id);
+	console.log(student);
 	student = student.student;
 
 	var elem = document.getElementById("student_name");
