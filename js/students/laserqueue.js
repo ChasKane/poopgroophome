@@ -245,7 +245,7 @@ async function addLaserQueueButton() {
 	var student_id = hash.split("=")[1];
 	var student = await getStudent(student_id);
 	console.log(student);
-	student = student.student;
+	student = student.students;
 
 	var elem = document.getElementById("student_name");
 	elem.value = student.first_name + " " + student.last_name;
