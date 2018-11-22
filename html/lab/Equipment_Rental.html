@@ -27,7 +27,18 @@
                 
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
-                        
+                        <div class="well b-color-3">
+                            <h1>Student</h1>
+                            <form class="form-horizontal">
+                                <div class="from-group container-fluid">
+                                    <label class="col-sm-2 control-label">Find:</label>
+                                    <div class="col-sm-8" id="swipeCard">
+                                        <input id="userCard_ID" class="form-control" placeholder="Search" type="text" autofocus>
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="">Find</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-default btn-sm" onclick="modPop('insertArg');" data-toggle="modal" data-target="#modalPop">TEST</button>
@@ -100,10 +111,5 @@
             alert(e.target.href);
         })
         
-        // focus an element
-        function focusPocus()
-        {
-            document.getElementById("userCard_ID").focus();
-        }
     </script>
 </html>
