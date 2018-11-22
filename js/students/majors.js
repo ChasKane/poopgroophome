@@ -9,7 +9,6 @@ async function getMajors() {
 			buildMajorTable(response);
 		}
 	});
-	return retval;
 	//retval = retval.then(result => result.data);
 }
 
@@ -36,7 +35,7 @@ function editMajor(event) {
 function deleteMajor() {
 	var elem = document.getElementById("major_table");
 	var payload = {
-		"data" : elem.getAttribute("current_major"); 
+		"data" : elem.getAttribute("current_major") 
 	};
 	console.log(payload);
 }
