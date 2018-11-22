@@ -38,6 +38,15 @@ function deleteMajor() {
 		"data" : elem.getAttribute("current_major") 
 	};
 	console.log(payload);
+
+	$.ajax({
+		url : url + "api/web/major/delete.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function (response, tStatus, responseCode) {
+			getMajors();
+		}
+	});
 }
 
 function submitMajor(event) {
