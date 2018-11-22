@@ -30,16 +30,22 @@ function editMajor(event) {
 	var major_name = targ.innerHTML;
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
 	targ.firstChild.focus();
-	targ.parentElement.setAttribute("current_major", "major_name");
+	targ.parentElement.parentElement.setAttribute("current_major", "major_name");
 }
 
 function deleteMajor() {
-
+	var elem = document.getElementById("major_table");
+	var payload = {
+		"data" : elem.getAttribute("current_major"); 
+	};
+	console.log(payload);
 }
 
 function submitMajor(event) {
 	var targ = event.target;
 	targ.parentElement.innerHTML = targ.value;
+	var elem = document.getElementById("major_table");
+	elem.setAttribute("current_major", targ.value);
 }
 
 
