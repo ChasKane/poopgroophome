@@ -1,5 +1,5 @@
 // js for laser queue
-var url = "http://104.248.113.22/gavin";
+var url = "http://104.248.113.22/gavin/";
 
 async function getStudent(input) {
 	payload = {

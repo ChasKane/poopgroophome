@@ -1,5 +1,5 @@
 // {material_name: "", initial_amount: NaN, date_purchased: "", num_semesters: NaN}
-var url = "http://104.248.113.22/gavin";
+var url = "http://104.248.113.22/gavin/";
 
 function getmaterials() {
 	$.ajax({
