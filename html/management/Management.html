@@ -13,6 +13,65 @@
     </head>
 
     <style>
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: rgb(204, 0, 0);
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px rgb(204, 0, 0);
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
         .custom-container {
             padding-left: 260px;
             padding-right: 50px;
@@ -144,17 +203,67 @@
                                     </p>
 
                                 </div>
-                                <div class="well b-color-3">
-                                    <h3>Lab Hours <button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button></h3>
-                                    <p>Hours: 24/7 no sleep, 24 hour service</p>
-                                </div>
                             </div>
                         </div>
                         <div id="menu3" class="tab-pane fade">
                             <div class="well b-color-3">
-                                <h1>TA Schedule</h1>
-                                wip
-                                <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                                <h1>Lab Hours</h1>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Open</th>
+                                                <th>Close</th>
+                                                <th>Lab Open</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableBod">
+                                            <tr>
+                                                <td>Sunday</td>
+                                                <td><input id="SunOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="SunClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Monday</td>
+                                                <td><input id="MonOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="MonClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tuesday</td>
+                                                <td><input id="TueOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="TueClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wednesday</td>
+                                                <td><input id="WedOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="WedClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Thursday</td>
+                                                <td><input id="ThuOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="ThuClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Friday</td>
+                                                <td><input id="FriOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="FriClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Saturday</td>
+                                                <td><input id="SatOpen" class="form-control" placeholder="time" type="text"></td>
+                                                <td><input id="SatClose" class="form-control" placeholder="time" type="text"></td>
+                                                <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div id="menu4" class="tab-pane fade">
