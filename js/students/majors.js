@@ -19,7 +19,7 @@ function buildMajorTable(majors) {
 	majors = majors.majors
 
 	for(var idx in majors) {
-		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td></tr>";
+		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td><button>delete</button></tr>";
 	}
 	var elem = document.getElementById("major_table");
 	elem.innerHTML = newHTML;
