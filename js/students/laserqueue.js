@@ -3,6 +3,22 @@
 
 var url = "http://104.248.113.22/"
 
+async function getStudent(input) {
+	payload = {
+		"query_field" : input
+	}
+
+	var retval = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
+	return retval;
+}
+
 function focusOn(element_Id) {
     var element = document.getElementById(element_Id);
     // we need to wait for the element to finish loading onto the page
@@ -209,7 +225,7 @@ function checkSwap(id, display_id) {
 
 
 // Manually add student to laser queue
-function addLaserQueueButton() {
+async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
 	name = name.value;
 	var stu_name = document.getElementById("student_name");
@@ -219,6 +235,19 @@ function addLaserQueueButton() {
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue")
+
+	var hash = location.hash;
+	if(hash == "") {
+		console.log("there was no hash");
+		return;
+	}
+
+	var student = await getStudent();
+	student = student.student;
+
+	var elem = document.getElementById("student_name");
+	elem.value = student.first_name + " " + student.last_name;
+
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {
@@ -293,7 +322,6 @@ function setInactive(id) {
 
 function hashCheck() {
 	var hash = location.hash;
-	console.log(hash);
 	if(hash == "") {
 		console.log("there was no hash");
 		return;
@@ -301,7 +329,6 @@ function hashCheck() {
 
 	var elem = document.getElementById("nav_tab");
 	elem = elem.getElementsByTagName("li");
-	console.log(elem)
 	for(var idx in elem) {
 		if(elem[idx].classList == undefined) {
 			continue;
@@ -324,9 +351,7 @@ function hashCheck() {
 	elem = document.getElementById("menu1");
 	elem.classList.add("active");
 	elem.classList.add("in");
-	
-	console.log(elem.classList);
-
+	addLaserQueueButton();
 }
 
 // make sure the right elements are visible
