@@ -35,7 +35,7 @@ function editMajor(event) {
 function deleteMajor() {
 	var elem = document.getElementById("major_table");
 	var payload = {
-		"data" : elem.getAttribute("current_major") 
+		"major_name" : elem.getAttribute("current_major") 
 	};
 	console.log(payload);
 
