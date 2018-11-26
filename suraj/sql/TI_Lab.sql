@@ -1,7 +1,7 @@
 DROP DATABASE innovate_dev_db_suraj;
 CREATE DATABASE innovate_dev_db_suraj;
 
-USE innovate_dev_db;
+USE innovate_dev_db_suraj;
 
 
 CREATE TABLE Major (
@@ -82,19 +82,6 @@ CREATE TABLE Lab_Tech (
 
 	PRIMARY KEY (tech_id)
 );
-
-
-
-CREATE TABLE Tech_Schedule (
-	tech_id int NOT NULL UNIQUE,
-	day int NOT NULL,
-	time_in TIME NOT NULL,
-	time_out TIME NOT NULL,
-
-	FOREIGN KEY (tech_id)
-		REFERENCES Lab_Tech(tech_id)
-);
-
 
 
 
@@ -278,9 +265,10 @@ CREATE TABLE 3DMaterial (
 CREATE TABLE 3DMaterial_Graph (
 	material_name VARCHAR(64) NOT NULL,
 	today DATE NOT NULL,
+	timeadded TIMESTAMP NOT NULL
 	current_amount real NOT NULL,
 
-	PRIMARY KEY (material_name, today),
+	PRIMARY KEY (timeadded),
 
 	FOREIGN KEY (material_name)
 		REFERENCES 3DMaterial(material_name)

@@ -13,12 +13,12 @@ INSERT INTO Student VALUES ("buraj_card_id", "buraj", "bingireddy", "Computer Sc
 
 INSERT INTO Student VALUES ("1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234569", "Josh", "Gonzalez", "Art Studies", "j.g@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234570", "John", "Williams", "Art Studies", "john.williams@ucf.edu", 0.0, 0.0, null);
+INSERT INTO Student VALUES ("1234569", "Josh", "Gonzalez", "Fine Arts", "j.g@ucf.edu", 0.0, 0.0, null);
+INSERT INTO Student VALUES ("1234570", "John", "Williams", "Fine Arts", "john.williams@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234571", "Joe", "Jones", "Physics", "joe.johns@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234572", "Alice", "Davis", "Computer Science", "a.davis@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234573", "Bill", "Brown", "Aerospace Engineering", "billbrown@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234574", "Bell", "Miller", "English", "bellmiller88@ucf.edu", 0.0, 0.0, null);
+INSERT INTO Student VALUES ("1234574", "Bell", "Miller", "Physics", "bellmiller88@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234575", "Katy", "Johnson", "Computer Engineering", "k.johnson@ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Lab_Status VALUES ("buraj_card_id", "2000-06-15", "2000-06-15 09:15:00", null);
@@ -74,16 +74,6 @@ INSERT INTO Lab_Inventory VALUES (null, "item12", "this is a cool item + 7", 4, 
 INSERT INTO Lab_Inventory VALUES (null, "item13", "this is a cool item + 8", 5, FALSE, FALSE);
 INSERT INTO Lab_Inventory VALUES (null, "item14", "this is a cool item + 9", 6, FALSE, FALSE);
 INSERT INTO Lab_Inventory VALUES (null, "item15", "this is a cool item + 10", 7, FALSE, FALSE);
-
-INSERT INTO Student VALUES ("1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234569", "Josh", "Gonzalez", "Art Studies", "j.g@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234570", "John", "Williams", "Art Studies", "john.williams@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234571", "Joe", "Jones", "Physics", "joe.johns@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234572", "Alice", "Davis", "Computer Science", "a.davis@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234573", "Bill", "Brown", "Aerospace Engineering", "billbrown@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234574", "Bell", "Miller", "English", "bellmiller88@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES ("1234575", "Katy", "Johnson", "Computer Engineering", "k.johnson@ucf.edu", 0.0, 0.0, null);
 
 
 INSERT INTO Laser_Appointment VALUES ("buraj_card_id", "suraj_tech_id", "2018-11-19", "2018-11-19 22:07:36", "23:59:00");
@@ -171,8 +161,22 @@ INSERT INTO Laser_Queue VALUES (null, 1, "buraj_card_id", "suraj_tech_id", CURDA
 INSERT INTO Laser_Queue VALUES (null, 1, "a", "suraj_tech_id", CURDATE(), NOW(), "00:30:05", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, "buraj_card_id", "suraj_tech_id", CURDATE(), NOW(), "00:40:00", "Waiting");
 
+INSERT INTO Laser_Queue VALUES (null, 1, "1234567", "suraj_tech_id", CURDATE(), NOW(), "01:20:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, "1234568", "1", CURDATE(), NOW(), "00:30:05", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, "1234569", "2", CURDATE(), NOW(), "00:40:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, "1234570", "3", CURDATE(), NOW(), "01:20:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, "1234571", "3", CURDATE(), NOW(), "00:30:05", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, "1234572", "2", CURDATE(), NOW(), "00:40:00", "Waiting");
+
+
+
 INSERT INTO 3DMaterial VALUES ("coolstuff", 5.0, CURDATE(), 3);
 INSERT INTO 3DMaterial VALUES ("coolstuff2", 6.0, CURDATE(), 2);
+INSERT INTO 3DMaterial Values ("ABS - Blue", 5.0, CURDATE(), 3);
+INSERT INTO 3DMaterial Values ("ABS - Green", 5.0, CURDATE(), 3);
+INSERT INTO 3DMaterial Values ("PLA", 5.0, CURDATE(), 3);
+
+
 
 INSERT INTO 3DMaterial_Graph VALUES ("coolstuff", CURDATE(), 2.0);
 INSERT INTO 3DMaterial_Graph VALUES ("coolstuff2", CURDATE(), 4.0);
