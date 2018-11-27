@@ -92,7 +92,7 @@ async function addTo3DQueueButton() {
 		"material_name" : material_name,
 		"material_amount" : material_amount,
 		"soluble_amount" : soluble_amount,
-		"soluable_name" : soluable_name,
+		"soluble_name" : soluable_name,
 		"club_name" : club_name
 	};
 
