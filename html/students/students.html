@@ -248,7 +248,7 @@
                                             <td>Majors</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="major_table" style="min-height: 31px">
+                                    <tbody id="major_table" current_major="" style="min-height: 31px">
                                         
                                     </tbody>
                                 </table>
@@ -256,7 +256,7 @@
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
                             <button onclick="addMajor();">Add Major</button>
                             <button onclick="getMajors();">Show Majors</button>
-                            <button onclick="gotoLaserQueue()">Go To LaserQueue</button>
+                            <button onclick="deleteMajor()">Delete Selected Major</button>
                         </div>
                         
                     </div>
@@ -284,7 +284,7 @@
         /*loop thru html elements*/
         z = document.getElementsByTagName("*");
 
-        for (i = 0; i < z.length; i++) 
+        for (i = 0; i < z.length; i++)
         {
             elmnt = z[i];
 

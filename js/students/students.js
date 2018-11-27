@@ -1,5 +1,5 @@
 // for students page
-
+var url = "http://104.248.113.22/gavin/";
  
 
 function getStyle(id, name) {

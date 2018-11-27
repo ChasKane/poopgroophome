@@ -1,3 +1,5 @@
+var url = "http://104.248.113.22/gavin/";
+
 async function getMajors() {
 	var retval = await $.ajax({
 		url : url + "api/web/major/read.php",
@@ -7,7 +9,6 @@ async function getMajors() {
 			buildMajorTable(response);
 		}
 	});
-	return retval;
 	//retval = retval.then(result => result.data);
 }
 
@@ -28,12 +29,31 @@ function editMajor(event) {
 	var major_name = targ.innerHTML;
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
 	targ.firstChild.focus();
+	targ.parentElement.parentElement.setAttribute("current_major", "major_name");
 }
 
+function deleteMajor() {
+	var elem = document.getElementById("major_table");
+	var payload = {
+		"major_name" : elem.getAttribute("current_major") 
+	};
+	console.log(payload);
+
+	$.ajax({
+		url : url + "api/web/major/delete.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function (response, tStatus, responseCode) {
+			getMajors();
+		}
+	});
+}
 
 function submitMajor(event) {
 	var targ = event.target;
 	targ.parentElement.innerHTML = targ.value;
+	var elem = document.getElementById("major_table");
+	elem.setAttribute("current_major", targ.value);
 }
 
 
