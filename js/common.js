@@ -1,3 +1,6 @@
+// common functions that many pages will use, will be imported by all for the url below
+var url = "http://104.248.113.22/gavin/";
+
 function swapDisplay(div_name) {
 	console.log(div_name)
 	var x = document.getElementById(div_name);
@@ -54,3 +57,31 @@ function fillLabTechs(object, id) {
 	}
 	elements.innerHTML = newInnerHTML;
 }
+
+async function getMachineID() {
+	var retval = await $.ajax({
+		url : url + "api/web/machine/read.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval
+}
+
+async function fillMachineID(id) {
+	var machines = await getMachineID();
+	machines = machines.machines;
+	var newHTML = ""
+
+	for(var idx in machines) {
+		newHTML += "<option>" + machines[idx].machine_id + "</option>";
+	}
+	var elem = document.getElementById(id);
+	elem.innerHTML = newHTML;
+	console.log(newHTML)
+} 

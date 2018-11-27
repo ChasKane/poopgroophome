@@ -1,36 +1,4 @@
-
-var url = "http://104.248.113.22/gavin/";
-
-function focusOn(element_Id) {
-    var element = document.getElementById(element_Id);
-    // we need to wait for the element to finish loading onto the page
-    // should be fairly consistent but we should test this to be sure
-    window.setTimeout(function () {
-        element.focus();
-    }, 250);
-}
-
-function swapDisplay(div_name) {
-	console.log(div_name)
-	var x = document.getElementById(div_name);
-	var display = x.getAttribute("vis");
-    if (display == "" || display == "none") {
-    	x.setAttribute("vis", "block")
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-        x.setAttribute("vis", "none")
-    }
-}
-
-function checkSwap(id, display_id) {
-	var elem = document.getElementById(id);
-	if(id == display_id && elem.getAttribute("vis") == "none") {
-		swapDisplay(id);
-	} else if(id != display_id && elem.getAttribute("vis") == "block") {
-		swapDisplay(id);
-	}
-}
+// most functions for 3dprinter page
 
 function get3DPrinterQueue() {
 	$.ajax({
@@ -44,11 +12,6 @@ function get3DPrinterQueue() {
 			console.log("there be an error");
 		}
 	});
-}
-
-function changeFunc(event) {
-	// incase we want to do something when items in 3d queue change to cutting
-	return;
 }
 
 function fill3DPrinterQueue(object) {
@@ -86,37 +49,9 @@ function fill3DPrinterQueue(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
-// gets lab techs from database
-function getLabTechs(id) {
-	$.ajax({
-		url : url + "api/web/labtech/read.php",
-		type : "POST",
-		success : function(response, tStatus, responseCode) {
-			fillLabTechs(response, id);
-		},
-		error : function(response, tStatus, responseCode) {
-			console.error(responseCode.status);
-		}
-	});
-}
-
-// fills in lab techs in element with id = passed in id
-function fillLabTechs(object, id) {
-	var elements = document.getElementById(id);
-	var techs = object.lab_techs;
-	var newInnerHTML = ""
-
-	console.log(object);
-	console.log(elements);
-	console.log(id);
-	for(var i=0; i < techs.length; i++) {
-		newInnerHTML += "<option>" + techs[i].name + "</option>";
-	}
-	elements.innerHTML = newInnerHTML;
-}
-
 function manuallyAddQueue() {
 	getLabTechs("tech_select_add");
+	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
 }
@@ -134,8 +69,8 @@ async function addTo3DQueueButton() {
 	machine_id = machine_id.value;
 
 	await add3DQueue(name, lab_tech, machine_id, estimated_time);
-	checkSwap("laser_cutting_queue", "laser_cutting_queue");
-	checkSwap("manually_add_to_queue", "laser_cutting_queue");
+	checkSwap("3d_cutting_queue", "3d_cutting_queue");
+	checkSwap("manually_add_to_queue", "3d_cutting_queue");
 	laserQueueButton();
 }
 
@@ -178,8 +113,6 @@ async function add3DQueue(student_name, tech_id, machine_id, estimated_time) {
 	});
 
 	return retval;
-}async function add3DQueue(name, tech_id, machine_id, estimated_time) {
-
 }
 
 $(document).ready(function() {
