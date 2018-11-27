@@ -13,8 +13,11 @@
             
 
             
-            <script type="text/javascript" src="/js/students/currentstudents.js"></script>
-            
+            <script src="/js/students/currentstudents.js"></script>
+            <script src="../../js/students/students.js"></script>
+            <script src="../../js/students/majors.js"></script>
+            <script src="../../js/students/groupsandclubs.js"></script>
+            <script src="../../js/common.js"></script>
             <style>
               * {
                 box-sizing: border-box;
@@ -124,7 +127,7 @@
                         </div>
                     	
                     	
-            	        <div id="student_profile" stu_id="" vis="none" style="display: none;">
+            	        <div id="student_profile" student_id="" vis="none" style="display: none;">
                             <div id="rcorners1">
                                 <form action="/action_page.php">
                 	                <label for="fname">First Name </label>
@@ -163,6 +166,8 @@
             	            </div>
             	            <button class="btn btn-default" onclick="swapStudentsHTML('main_student')">Back</button>
                             <button class="btn btn-default" onclick="updateStudent()">Submit Changes</button>
+                            <button class="btn btn-default" onclick="gotoLaserQueue()">Add Laser Queue</button>
+                            <button class="btn btn-default" onclick="goto3DQueue()">Add 3D Queue</button>
             	        </div>
 
             	        <div id="all_students" vis="none" style="display: none;">
@@ -247,7 +252,7 @@
                                             <td>Majors</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="major_table" style="min-height: 31px">
+                                    <tbody id="major_table" current_major="" style="min-height: 31px">
                                         
                                     </tbody>
                                 </table>
@@ -255,6 +260,7 @@
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
                             <button onclick="addMajor();">Add Major</button>
                             <button onclick="getMajors();">Show Majors</button>
+                            <button onclick="deleteMajor()">Delete Selected Major</button>
                         </div>
                         
                     </div>
@@ -282,7 +288,7 @@
         /*loop thru html elements*/
         z = document.getElementsByTagName("*");
 
-        for (i = 0; i < z.length; i++) 
+        for (i = 0; i < z.length; i++)
         {
             elmnt = z[i];
 
@@ -337,8 +343,5 @@
     });
 
         
-</script>       
-<script src="../../js/students/students.js"></script>
-<script src="../../js/students/majors.js"></script>
-<script src="../../js/students/groupsandclubs.js"></script>
+</script> 
 </html>

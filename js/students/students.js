@@ -1,5 +1,5 @@
 // for students page
-
+var url = "http://104.248.113.22/gavin/";
  
 
 function getStyle(id, name) {
@@ -117,23 +117,6 @@ async function loadAllStudents() {
 	swapStudentsHTML("all_students");
 }
 
-async function getStudent(input) {
-	payload = {
-		"query_field" : input
-	}
-
-	var retval = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		}
-	});
-	return retval;
-}
-
-
 function loadAddStudent() {
 	getMajors("add_major_profile");
 }
@@ -162,7 +145,7 @@ async function loadStudentProfile(event) {
 	elem = document.getElementById("email");
 	elem.value = result.school_email;
 	elem = document.getElementById("student_profile");
-	elem.setAttribute("stu_id", result.student_id);
+	elem.setAttribute("student_id", result.student_id);
 
 	// fill in majors dropdown
 	getMajors("major_profile");
@@ -274,6 +257,13 @@ async function updateStudent() {
 		}
 	});
 }
+
+function gotoLaserQueue() {
+	var student_id = document.getElementById("student_profile");
+	student_id = student_id.getAttribute("student_id");
+	document.location.href = "http://104.248.113.22/html/lab/Laser_Cutter.html#student_id=" + student_id;
+}
+
 
 //-----------------------------------------
 $(document).ready(function() {

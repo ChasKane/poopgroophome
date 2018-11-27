@@ -9,7 +9,8 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="../../js/students/laserqueue.js"></script>
+            <script src="../../js/students/laserqueue.js"></script>
+            <script src="../../js/common.js"></script>
     </head>
 
     <style>
@@ -37,14 +38,14 @@
 
     
 
-    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs('tech_select');">
+    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs('tech_select'); hashCheck();">
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
 
         <div class="custom-container col-sm-12">
 
             <div class="container-fluid">
-                <ul class="nav nav-tabs">
+                <ul id="nav_tab" class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Laser Appt</a></li>
                     <li><a data-toggle="tab" href="#menu1">Laser Queue</a></li>
                     <li><a data-toggle="tab" href="#menu2">Laser Config</a></li>

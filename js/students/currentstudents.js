@@ -1,4 +1,4 @@
-var url = "http://104.248.113.22/";
+var url = "http://104.248.113.22/gavin/";
 
 function getcurrentstudents() {
   $.ajax({
