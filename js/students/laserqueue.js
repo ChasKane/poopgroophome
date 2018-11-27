@@ -3,6 +3,22 @@
 
 var url = "http://104.248.113.22/"
 
+async function getStudent(input) {
+	payload = {
+		"query_field" : input
+	}
+
+	var retval = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
+	return retval;
+}
+
 function focusOn(element_Id) {
     var element = document.getElementById(element_Id);
     // we need to wait for the element to finish loading onto the page
@@ -147,7 +163,7 @@ function fillLabTechs(object, id) {
 	var newInnerHTML = ""
 
 	for(var i=0; i < techs.length; i++) {
-		newInnerHTML += "<option>" + techs[i].name + "</option>";
+		newInnerHTML += "<option tech_id=" + techs[i].tech_id + ">" + techs[i].name + "</option>";
 	}
 	elements.innerHTML = newInnerHTML;
 }
@@ -209,7 +225,7 @@ function checkSwap(id, display_id) {
 
 
 // Manually add student to laser queue
-function addLaserQueueButton() {
+async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
 	name = name.value;
 	var stu_name = document.getElementById("student_name");
@@ -219,6 +235,22 @@ function addLaserQueueButton() {
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue")
+
+	var hash = location.hash;
+	if(hash == "") {
+		console.log("there was no hash");
+		return;
+	}
+
+	var student_id = hash.split("=")[1];
+	var student = await getStudent(student_id);
+	console.log(student);
+	student = student.students[0];
+
+
+	var elem = document.getElementById("student_name");
+	elem.value = student.first_name + " " + student.last_name;
+
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {
@@ -271,7 +303,8 @@ async function addToLaserQueueButton() {
 
 	name = name.value;
 	estimated_time = estimated_time.value;
-	lab_tech = lab_tech.value;
+	lab_tech = lab_tech.options[lab_tech.selectedIndex].getAttribute("tech_id");
+	console.log(lab_tech);
 	machine_id = machine_id.value;
 
 	await addLaserQueue(name, lab_tech, machine_id, estimated_time);
@@ -280,8 +313,51 @@ async function addToLaserQueueButton() {
 	laserQueueButton();
 }
 
-// make sure the right elements are visible
+function setInactive(id) {
+	var elem = document.getElementById(id);
+	if(elem.classList.contains("in")) {
+		elem.classList.remove("in");
+		elem.classList.remove("active");
+	} else {
+		return;
+	}
+}
 
+function hashCheck() {
+	var hash = location.hash;
+	if(hash == "") {
+		console.log("there was no hash");
+		return;
+	}
+
+	var elem = document.getElementById("nav_tab");
+	elem = elem.getElementsByTagName("li");
+	for(var idx in elem) {
+		if(elem[idx].classList == undefined) {
+			continue;
+		}
+		
+		if(elem[idx].classList.contains("active")) {
+			console.log("Found an ative class");
+			elem[idx].classList.remove("active");
+			elem[idx].firstChild.setAttribute("aria-expanded", "false");
+		} 
+	}
+
+	// set the other three tabs to inactive
+	setInactive("home");
+
+	elem = elem[1];
+	elem.classList.add("active");
+	elem.firstChild.setAttribute("aria-expanded", "true")
+	
+	elem = document.getElementById("menu1");
+	elem.classList.add("active");
+	elem.classList.add("in");
+	addLaserQueueButton();
+}
+
+// make sure the right elements are visible
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
@@ -289,6 +365,7 @@ $(document).ready(function() {
         if(href == "#menu1") {
             checkSwap("laser_cutting_queue", "laser_cutting_queue");
 			checkSwap("manually_add_to_queue", "laser_cutting_queue");
+        	fillLaserQueue();
         }
     });
 });
