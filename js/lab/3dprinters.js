@@ -61,44 +61,61 @@ async function addTo3DQueueButton() {
 	var estimated_time = document.getElementById("estimated_time");
 	var lab_tech = document.getElementById("tech_select_add");
 	var machine_id = document.getElementById("machine_id");
+	var part_name = document.getElementById("part_name");
+	var file_path = document.getElementById("file_path");
+	var material_name = document.getElementById("material_name");
+	var soluble_name = document.getElementById("soluble_name");
+	var material_amount = document.getElementById("material_amount");
+	var soluble_amount = document.getElementById("soluble_amount");
+	var club_name = document.getElementById("club_name");
 
 	name = name.value;
 	estimated_time = estimated_time.value;
 	lab_tech = lab_tech.options[lab_tech.selectedIndex].getAttribute("tech_id");
-	console.log(lab_tech);
 	machine_id = machine_id.value;
+	part_name = part_name.value;
+	file_path = file_path.value;
+	material_name = material_name.value;
+	material_amount = parseFloat(material_amount.value);
+	soluable_name = soluable_name.value;
+	soluble_amount = parseFloat(soluble_amount.value);
+	club_name = club_name.value;
 
-	await add3DQueue(name, lab_tech, machine_id, estimated_time);
-	checkSwap("3d_cutting_queue", "3d_cutting_queue");
-	checkSwap("manually_add_to_queue", "3d_cutting_queue");
-	laserQueueButton();
-}
 
-async function add3DQueue(student_name, tech_id, machine_id, estimated_time) {
+	var student_id = await getStudent(name);
 	var payload = {
-		"query_field" : student_name
-	}
-
-	var student_id = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function (response, tStatus, responseCode) {
-			return response;
-		}
-	});
-	// student_id = student_id.student;
-	console.log("student_id: ")
-	student_id = student_id.students[0].student_id;
-	console.log(student_id)
-
-	payload = {
 		"machine_id" : machine_id,
 		"student_id" : student_id,
 		"tech_id" : tech_id,
-		"estimated_time" : estimated_time
-	}
+		"estimated_time" : estimated_time,
+		"part_name" : part_name,
+		"material_name" : material_name,
+		"material_amount" : material_amount,
+		"soluble_amount" : soluble_amount,
+		"soluable_name" : soluable_name,
+		"club_name" : club_name
+	};
 
+	await add3DQueue(payload);
+	checkSwap("3d_cutting_queue", "3d_cutting_queue");
+	checkSwap("manually_add_to_queue", "3d_cutting_queue");
+	add3DQueue();
+}
+
+// input:
+// int machine_id
+// string:student_id
+// string: tech_id
+// time:estimated_time
+// string:part_name
+// string:file_path
+// string: material_name
+// string: soluable_name 
+// float:material_amt
+// float:soluble_amt
+// string:club_name
+
+async function add3DQueue(payload) {
 	console.log(payload);
 	var retval = await $.ajax({
 		url : url + "api/web/3dprintqueue/create.php",

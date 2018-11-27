@@ -85,3 +85,19 @@ async function fillMachineID(id) {
 	elem.innerHTML = newHTML;
 	console.log(newHTML)
 } 
+
+async function getStudent(input) {
+	payload = {
+		"query_field" : input
+	}
+
+	var retval = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		}
+	});
+	return retval;
+}

@@ -117,23 +117,6 @@ async function loadAllStudents() {
 	swapStudentsHTML("all_students");
 }
 
-async function getStudent(input) {
-	payload = {
-		"query_field" : input
-	}
-
-	var retval = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		}
-	});
-	return retval;
-}
-
-
 function loadAddStudent() {
 	getMajors("add_major_profile");
 }
