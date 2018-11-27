@@ -10,6 +10,28 @@ function focusOn(element_Id) {
     }, 250);
 }
 
+function swapDisplay(div_name) {
+	console.log(div_name)
+	var x = document.getElementById(div_name);
+	var display = x.getAttribute("vis");
+    if (display == "" || display == "none") {
+    	x.setAttribute("vis", "block")
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+        x.setAttribute("vis", "none")
+    }
+}
+
+function checkSwap(id, display_id) {
+	var elem = document.getElementById(id);
+	if(id == display_id && elem.getAttribute("vis") == "none") {
+		swapDisplay(id);
+	} else if(id != display_id && elem.getAttribute("vis") == "block") {
+		swapDisplay(id);
+	}
+}
+
 function get3DPrinterQueue() {
 	$.ajax({
 		url : url + "api/web/3dprintqueue/read.php",
@@ -93,10 +115,23 @@ function fillLabTechs(object, id) {
 	elements.innerHTML = newInnerHTML;
 }
 
+function manuallyAddQueue() {
+	getLabTechs("tech_select_add");
+	checkSwap("manually_add_to_queue", "manually_add_to_queue");
+	checkSwap("manually_add_to_queue", "manually_add_to_queue");
+}
+
+function addTo3DQueueButton() {
+	return;
+}
+
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
-        activeTab = $(this).attr('href').split('-')[1];        
-        if(this.getAttribute('href') == "#home") {
+        activeTab = $(this).attr('href').split('-')[1];
+        href = this.getAttribute('href');        
+        if(href == "#menu1") {
+        	checkSwap("3d_cutting_queue", "3d_cutting_queue");
+			checkSwap("manually_add_to_queue", "3d_cutting_queue");
             focusOn("userCard_ID");
         }
     });

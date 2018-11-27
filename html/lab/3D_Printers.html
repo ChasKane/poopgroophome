@@ -32,22 +32,21 @@
                     <li class="active"><a data-toggle="tab" href="#home">3D Print Queue</a></li>
                     <li onclick="focus();"><a data-toggle="tab" href="#menu1">3D Print Material</a></li>
                 </ul>
-                
+            
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                         <body>
-                            <div id="b-color-3" class="well container-fluid">
+                            <div id="3d_cutting_queue" class="well container-fluid" vis="block">
                                 <div class="row content">
                                     <div><center>
                                         <h1 class="title-color">3D Printer Queue</h1>
                                     </center></div>
-    
+
                                     <form class="form-horizontal">
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1" for="tech_Select">Tech:</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control" id="tech_select">
-                                                </select>
+                                                <select class="form-control" id="tech_select"></select>
                                             </div>
                                         </div>
                                         <br>
@@ -57,48 +56,60 @@
                                             <div class="col-sm-4">
                                                 <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
                                             </div>
-                                            <a type="button" class="btn btn-default btn-sm col-sm-2" role="button">Manualy Add Student</a>
+                                            <a type="button" class="btn btn-default btn-sm col-sm-2" role="button" onclick="manuallyAddQueue();">Manualy Add Student</a>
                                         </div>
                                     </form>
-                        
+                    
                                     <div id="contactTableDiv"> 
-                                        
+                                    
                                         <div><br><center>
                                             <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="get3DPrinterQueue();"> Update Table </button>
                                         </center></div>
                                         <br>
-                        
-                                        
+                    
                                         <div class="container-fluid">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-condensed table-hover">
-                                                    
                                                     <thead>
                                                         <tr>
                                                             <th>Queue Position</th>
                                                             <th>Machine ID</th>
                                                             <th>Student ID</th>
-                                                            <th>Tech ID</th> <!-- waiting cutting done skipped-->
-                                                            <th>Estimated time</th> <!-- delete-->
+                                                            <th>Tech ID</th>
+                                                            <th>Estimated time</th>
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tableBody">
                                                         
                                                     </tbody>
-                                                    
-                                                    
                                                 </table>
                                             </div>
                                         </div>
                                     </div> 
                                 </div>        
                             </div>
+
+                            <div id="manually_add_to_queue"  vis="none" style="display: none;">
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
+                                <br>
+                                <label for="estimated_time">Estimated Time </label>
+                                <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30:00 for 30 minutes">
+                                <br>
+                                <label>Lab Tech </label><span></span>
+                                <select class="form-control" id="tech_select_add"></select>   
+                                <br>
+                                <label>Machine ID</label><span></span>
+                                <select class="form-control" id="machine_id"></select> 
+                                <br>
+                                <button id="add_to_queue_button" onclick="addTo3DQueueButton()">Add to queue</button>
+                            </div>
                         </body>
                     </div>
-                    <div id="menu1" class="tab-pane fade">
-                        
-                    </div>
+                <div id="menu1" class="tab-pane fade">
+                    
+                </div>
                 </div>
                 <button type="button" class="btn btn-default btn-sm" onclick="modPop('insertArg');" data-toggle="modal" data-target="#modalPop">TEST</button>
             </div>
@@ -164,11 +175,6 @@
 			// 	}
         }
 
-        $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-            
-            alert(e.target.href);
-        })
-        
         // focus an element
         function focusPocus()
         {
