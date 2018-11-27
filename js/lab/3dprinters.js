@@ -118,11 +118,68 @@ function fillLabTechs(object, id) {
 function manuallyAddQueue() {
 	getLabTechs("tech_select_add");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
-	checkSwap("manually_add_to_queue", "manually_add_to_queue");
+	checkSwap("3d_cutting_queue", "manually_add_to_queue");
 }
 
-function addTo3DQueueButton() {
-	return;
+async function addTo3DQueueButton() {
+	var name = document.getElementById("student_name");
+	var estimated_time = document.getElementById("estimated_time");
+	var lab_tech = document.getElementById("tech_select_add");
+	var machine_id = document.getElementById("machine_id");
+
+	name = name.value;
+	estimated_time = estimated_time.value;
+	lab_tech = lab_tech.options[lab_tech.selectedIndex].getAttribute("tech_id");
+	console.log(lab_tech);
+	machine_id = machine_id.value;
+
+	await add3DQueue(name, lab_tech, machine_id, estimated_time);
+	checkSwap("laser_cutting_queue", "laser_cutting_queue");
+	checkSwap("manually_add_to_queue", "laser_cutting_queue");
+	laserQueueButton();
+}
+
+async function add3DQueue(student_name, tech_id, machine_id, estimated_time) {
+	var payload = {
+		"query_field" : student_name
+	}
+
+	var student_id = await $.ajax({
+		url : url + "api/web/student/read.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function (response, tStatus, responseCode) {
+			return response;
+		}
+	});
+	// student_id = student_id.student;
+	console.log("student_id: ")
+	student_id = student_id.students[0].student_id;
+	console.log(student_id)
+
+	payload = {
+		"machine_id" : machine_id,
+		"student_id" : student_id,
+		"tech_id" : tech_id,
+		"estimated_time" : estimated_time
+	}
+
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "api/web/3dprintqueue/create.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}async function add3DQueue(name, tech_id, machine_id, estimated_time) {
+
 }
 
 $(document).ready(function() {
