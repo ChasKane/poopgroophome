@@ -125,7 +125,7 @@ function calcTime(initTime, timeAdd) {
 	var timeAddArray = timeAdd.split(":");
 	var time = [0, 0, 0];
 
-	for(var idx = 0; i < 3; i++) {
+	for(var idx = 0; idx < 3; idx++) {
 		initTimeArray[idx] = parseInt(initTimeArray[idx]);
 		timeAddArray[idx] = parseInt(timeAddArray[idx]);
 		time[idx] = initTimeArray[idx] + timeAddArray[idx];
