@@ -106,7 +106,8 @@
                                         <div id="contactTableDiv"> 
                                             
                                             <div><br><center>
-                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="getMachineList();"> Update Table </button>
+                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="addMachine();"> Add Machine </button>
                                             </center></div>
                                             <br>
                             
@@ -146,6 +147,21 @@
                                             </div>
                                         </div> 
                                     </div>        
+                                </div>
+                                <div id="add_Maching_form"  vis="none" style="display: none;">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="machine_name" name="name" placeholder="Student name..">
+                                    <br>
+                                   
+                                    <label>Soluble Name</label><span></span>
+                                    <input  class="form-control" id="type"></select> 
+                                    <br>
+                                    <label>Material Amount</label><span></span>
+                                    <input  class="form-control" id="restrictions"></select>
+                                    <br>
+                                    
+                                    
+                                    <button id="add_to_queue_button" onclick="addTo3DQueueButton()">Add to queue</button>
                                 </div>
                             </body>
                         </div>
