@@ -17,7 +17,7 @@ $stmt = null;
 $success = true;
 
 if (isset($data->query_field)) {
-	$query = $query . " WHERE student_id=:v1 OR first_name=:v1 OR last_name=:v1";
+	$query = $query . " WHERE student_pid=:v1 OR first_name=:v1 OR last_name=:v1";
 	$stmt = $db->prepare($query);
 	$success = $stmt->execute([':v1' => $data->query_field]);
 } else {
