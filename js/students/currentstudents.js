@@ -62,9 +62,9 @@ function logOutStudent(id) {
     };
 
     $.ajax({
-        url : url + "api/web/labstatus/update.php"
+        url : url + "api/web/labstatus/update.php",
         type : "POST",
-        payload : JSON.stringify(payload);
+        payload : JSON.stringify(payload),
         success : function(response, tStatus, responseCode) {
             return;
         }
