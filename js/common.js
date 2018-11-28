@@ -114,6 +114,8 @@ function hashCheck(href, func) {
 		return;
 	}
 
-	$('.nav-tabs a[href="#menu1"]').tab('show');
+	if(href != null) {
+		$('.nav-tabs a[href=' + href + ']').tab('show');
+	}
 	func();
 }
