@@ -135,19 +135,19 @@ function calcTime(initTime, timeAdd) {
 				time[idx] -= 60;
 				time[idx-1] += 1;
 				if(time[idx-1] < 10) {
-					retval[idx-1] = "0" + String(time[idx-1])
+					retval[idx-1] = "0" + String(time[idx-1]);
 				} else {
-					retval[idx-1] = String(time[idx-1])
+					retval[idx-1] = String(time[idx-1]);
 				}
 			}
 		}
 
 		if(time[idx] < 10) {
-			retval[idx] = "0" + String(time[idx])
+			retval[idx] = "0" + String(time[idx]);
 		} else {
-			retval[idx] = String(time[idx])
+			retval[idx] = String(time[idx]);
 		}
 	}
-	 = time[0] + ":" + time[1] + ":" + time[2];
+	retval = retval[0] + ":" + retval[1] + ":" + retval[2];
 	return retval;
 }
