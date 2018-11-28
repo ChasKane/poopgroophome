@@ -5,7 +5,7 @@ var url = "http://104.248.113.22";
 
 function getMachineList() {
 	$.ajax({
-		url : url + "/api/web/machine",
+		url : url + "/api/web/machine/read",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			console.log(response);
@@ -104,31 +104,31 @@ function fillMachineTable(object) {
 // }
 
 
-async function add3DQueue(payload) {
-	console.log(payload);
-	var retval = await $.ajax({
-		url : url + "api/web/3dprintqueue/create.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		},
-		error : function(response, tStatus, responseCode) {
-			console.error(responseCode.status);
-		}
-	});
+// async function add3DQueue(payload) {
+// 	console.log(payload);
+// 	var retval = await $.ajax({
+// 		url : url + "api/web/3dprintqueue/create.php",
+// 		type : "POST",
+// 		data : JSON.stringify(payload),
+// 		success : function(response, tStatus, responseCode) {
+// 			retval = response;
+// 		},
+// 		error : function(response, tStatus, responseCode) {
+// 			console.error(responseCode.status);
+// 		}
+// 	});
 
-	return retval;
-}
+// 	return retval;
+// }
 
-$(document).ready(function() {
-    $('.nav-tabs a').on('show.bs.tab', function(e){
-        activeTab = $(this).attr('href').split('-')[1];
-        href = this.getAttribute('href');        
-        if(href == "#menu1") {
-        	checkSwap("3d_cutting_queue", "3d_cutting_queue");
-			checkSwap("manually_add_to_queue", "3d_cutting_queue");
-            focusOn("userCard_ID");
-        }
-    });
-});
+// $(document).ready(function() {
+//     $('.nav-tabs a').on('show.bs.tab', function(e){
+//         activeTab = $(this).attr('href').split('-')[1];
+//         href = this.getAttribute('href');        
+//         if(href == "#menu1") {
+//         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
+// 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
+//             focusOn("userCard_ID");
+//         }
+//     });
+// });
