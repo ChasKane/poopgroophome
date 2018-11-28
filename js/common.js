@@ -119,3 +119,25 @@ function hashCheck(href, func) {
 	}
 	func();
 }
+
+function calcTime(initTime, timeAdd) {
+	var initTimeArray = initTime.split(":");
+	var timeAddArray = timeAdd(":");
+	var time = [0, 0, 0];
+
+	for(var idx = 0; i < 3; i++) {
+		initTimeArray[idx] = parseInt(initTimeArray[idx]);
+		timeAddArray[idx] = parseInt(timeAddArray[idx]);
+		var time[idx] = initTimeArray[idx] + timeAddArray[idx];
+
+		if(idx > 0) {
+			if(time[idx] > 60) {
+				time[idx] -= 60;
+				time[idx-1] += 1;
+			}
+		}
+	}
+	var retval = time[0] + ":" + time[1] + ":" + time[2];
+	console.log(retval);
+	return retval;
+}

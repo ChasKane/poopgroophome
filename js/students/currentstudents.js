@@ -11,47 +11,44 @@ function getcurrentstudents() {
     });
 }
 
-
-
-
 function printcurrentstudents(object) {
-  
-  
-  console.log(object);
-  var stuff = JSON.stringify(object);
-  var elements = object.lab_status;
+    console.log(object);
+    var stuff = JSON.stringify(object);
+    var elements = object.lab_status;
       
     
-  var ul = document.getElementById("listy");
+    var ul = document.getElementById("listy");
   
-  while(ul.firstChild) ul.removeChild(ul.firstChild);
+    while(ul.firstChild) ul.removeChild(ul.firstChild);
   
-  for (var idx in elements)
-  { 
-    var o = elements[idx].first_name ;
+    for (var idx in elements)
+    { 
+        var o = elements[idx].first_name ;
     
-    var span = document.createElement("SPAN");
-    span.className = "close";
-    span.innerHTML = "&times;";
+        var span = document.createElement("SPAN");
+        span.className = "close";
+        span.innerHTML = "&times;";
     
-    var li = document.createElement("LI");
-    li.className = "list";
-    li.appendChild(document.createTextNode(o) );
-    li.appendChild(span)
-    ul.appendChild(li); 
-  } 
-  makeclosable(); 
-  
+        var li = document.createElement("LI");
+        li.className = "list";
+        li.setAttribute("student_id", elements[idx].student_id);
+        li.appendChild(document.createTextNode(o));
+        li.appendChild(span)
+        ul.appendChild(li); 
+    } 
+    makeclosable();  
 }
 
 function makeclosable(){
-  var closebtns = document.getElementsByClassName("close");
-  var i;
+    var closebtns = document.getElementsByClassName("close");
+    var i;
 
-  for (i = 0; i < closebtns.length; i++) {
-    closebtns[i].addEventListener("click", function() {
-      this.parentElement.style.display = 'none';
-      
-    });
-  }
+    for (i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function() {
+            this.parentElement.style.display = 'none'; 
+            var id = this.getAttribute("student_id");
+            console.log(id);
+            logOutStudent(id);
+        });
+    }
 }

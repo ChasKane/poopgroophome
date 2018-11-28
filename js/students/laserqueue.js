@@ -107,8 +107,9 @@ async function laserQueueButton() {
 	 fillLaserQueue(retval);
 }
 
+// function calcTime(initTime, timeAdd)
 function fillLaserQueue(object) {
-	var estimated_time = 0;
+	var estimated_time = "00:00:00";
 	if(object == undefined) {
 		return;
 	}
@@ -122,7 +123,7 @@ function fillLaserQueue(object) {
 	
 	for (var idx in elements) {
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
-		estimated_time += elements[idx].estimated_time;
+		estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
 		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
 						"<td>" + elements[idx].student_id + "</td>" + "<td>" + elements[idx].tech_id + "</td>" + 
 						"<td>" + estimated_time + "</td>" +'<td> <div class="selection">';

@@ -77,7 +77,7 @@ async function addTo3DQueueButton() {
 	file_path = file_path.value;
 	material_name = material_name.value;
 	material_amount = parseFloat(material_amount.value);
-	soluable_name = soluable_name.value;
+	soluble_name = soluble_name.value;
 	soluble_amount = parseFloat(soluble_amount.value);
 	club_name = club_name.value;
 
