@@ -20,10 +20,10 @@ if (!isset($data->student_id)
 	return;
 }
 
-$query = "INSERT INTO Lab_Status VALUES (:v1,:v2,:v3,:v4)";
+$query = "INSERT INTO Lab_Status VALUES (:v1,CURDATE(),NOW(),null)";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute([':v1' => $data->student_id,':v2' => $data->date_selected,':v3' => $data->time_in,':v4' => $data->time_out])) {
+if (!$stmt->execute([':v1' => $data->student_id])) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
