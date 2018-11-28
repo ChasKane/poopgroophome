@@ -12,10 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->student_id)
-	|| !isset($data->date_selected)
-	|| !isset($data->time_in)
-	|| !isset($data->time_out)) {
+if (!isset($data->student_id)) {
 	http_response_code(400);
 	return;
 }
