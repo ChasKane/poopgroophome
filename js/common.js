@@ -128,7 +128,7 @@ function calcTime(initTime, timeAdd) {
 	for(var idx = 0; i < 3; i++) {
 		initTimeArray[idx] = parseInt(initTimeArray[idx]);
 		timeAddArray[idx] = parseInt(timeAddArray[idx]);
-		var time[idx] = initTimeArray[idx] + timeAddArray[idx];
+		time[idx] = initTimeArray[idx] + timeAddArray[idx];
 
 		if(idx > 0) {
 			if(time[idx] > 60) {
