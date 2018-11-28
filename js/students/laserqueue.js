@@ -234,23 +234,6 @@ async function addLaserQueueButton() {
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue")
-
-	var hash = location.hash;
-	if(hash == "") {
-		console.log("there was no hash");
-		return;
-	}
-
-	var student_id = hash.split("=")[1];
-	console.log(student_id);
-	var student = await getStudent(student_id);
-	console.log(student);
-	student = student.students[0];
-
-
-	var elem = document.getElementById("student_name");
-	elem.value = student.first_name + " " + student.last_name;
-
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {

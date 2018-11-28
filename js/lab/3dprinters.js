@@ -49,7 +49,7 @@ function fill3DPrinterQueue(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
-function manuallyAddQueue() {
+async function manuallyAddQueue() {
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");

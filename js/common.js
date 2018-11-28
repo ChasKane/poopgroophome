@@ -97,11 +97,8 @@ async function getStudent(input) {
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
-			console.log(response);
-			console.log(responseCode.status)
 		}
 	});
-	console.log(retval);
 	return retval;
 }
 
@@ -118,6 +115,16 @@ function hashCheck(href, func) {
 		$('.nav-tabs a[href="' + href + '"]').tab('show');
 	}
 	func();
+	student_id = hash.split("=")[1];
+	fillStudentName(student_id);
+}
+
+async function fillStudentName(student_id) {
+	var student = await getStudent(student_id);
+	student = student.students[0];
+
+	var elem = document.getElementById("student_name");
+	elem.value = student.first_name + " " + student.last_name;
 }
 
 function calcTime(initTime, timeAdd) {
