@@ -32,7 +32,7 @@ function fillMachineTable(object) {
 	for (var idx in elements) {
 		console.log("1 mech")
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
-		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].type + "</td>" + 
+		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + "<td>" + elements[idx].type + "</td>" +
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
 		
@@ -48,6 +48,45 @@ function fillMachineTable(object) {
 	}
 	console.log(newInnerHTML);
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
+}
+
+async function updateMachine(newStatus, position) {
+	console.log("Changing status")
+	var payload = {
+		"status" : newStatus,
+		"queue_pos" : position
+	};
+
+	var retval;
+	retval = await $.ajax({
+		url : url + "api/web/laserqueue/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+			console.log(response);
+		}
+
+	});
+	fillLaserQueue(retval)
+	return retval;
+}
+
+// might have issue <><><><><><><><><><><><><><><>
+function changeFunc(event) {
+	// console.log(event.target.getAttribute("oldvalue"))
+	var targ = event.target;
+	console.log(targ.value);
+
+    if(confirm("Change to "+ targ.value +"?")) {
+        targ.setAttribute("oldValue", targ.value);
+        var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[0];
+        updateMachine(targ.value, elem.innerHTML)
+        // tell firebase to notify next 2 people
+    } else {
+        console.log(targ.getAttribute("oldvalue"));
+        targ.value = targ.getAttribute("oldvalue");
+    }
 }
 
 // function manuallyAddQueue() {
