@@ -32,7 +32,7 @@ function fillMachineTable(object) {
 	for (var idx in elements) {
 		console.log("1 mech")
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
-		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + "<td>" + elements[idx].type + "</td>" +
+		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
 		
