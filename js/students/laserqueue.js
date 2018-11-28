@@ -241,6 +241,7 @@ async function addLaserQueueButton() {
 	}
 
 	var student_id = hash.split("=")[1];
+	console.log(student_id);
 	var student = await getStudent(student_id);
 	console.log(student);
 	student = student.students[0];
@@ -320,42 +321,6 @@ function setInactive(id) {
 		return;
 	}
 }
-
-// function hashCheck() {
-// 	var hash = location.hash;
-// 	if(hash == "") {
-// 		console.log("there was no hash");
-// 		return;
-// 	}
-
-// 	 $('.nav-tabs a[href="#menu1"]').tab('show');
-
-// // 	var elem = document.getElementById("nav_tab");
-// // 	elem = elem.getElementsByTagName("li");
-// // 	for(var idx in elem) {
-// // 		if(elem[idx].classList == undefined) {
-// // 			continue;
-// // 		}
-		
-// // 		if(elem[idx].classList.contains("active")) {
-// // 			console.log("Found an ative class");
-// // 			elem[idx].classList.remove("active");
-// // 			elem[idx].firstChild.setAttribute("aria-expanded", "false");
-// // 		} 
-// // 	}
-
-// // 	// set the other three tabs to inactive
-// // 	setInactive("home");
-
-// // 	elem = elem[1];
-// // 	elem.classList.add("active");
-// // 	elem.firstChild.setAttribute("aria-expanded", "true")
-	
-// // 	elem = document.getElementById("menu1");
-// // 	elem.classList.add("active");
-// // 	elem.classList.add("in");
-// // 	addLaserQueueButton();
-// 	}
 
 // make sure the right elements are visible
 $(document).ready(function() {
