@@ -23,7 +23,7 @@ function fillMachineTable(object) {
 	}
 	console.log("Machine list: ")
 	console.log(object)
-	var elements = object.threedprintqueues;
+	var elements = object.machines;
 
 	var statuses = ["Working", "Broken", "Maintenance"]
 	var newInnerHTML = "";
