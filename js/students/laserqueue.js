@@ -355,7 +355,7 @@ function hashCheck() {
 // 	elem.classList.add("active");
 // 	elem.classList.add("in");
 // 	addLaserQueueButton();
-// }
+	}
 
 // make sure the right elements are visible
 $(document).ready(function() {
