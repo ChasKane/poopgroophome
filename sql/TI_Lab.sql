@@ -1,5 +1,5 @@
-DROP DATABASE innovate_dev_db_suraj;
-CREATE DATABASE innovate_dev_db_suraj;
+DROP DATABASE innovate_dev_db;
+CREATE DATABASE innovate_dev_db;
 
 USE innovate_dev_db;
 
