@@ -55,6 +55,7 @@ function makeclosable(){
     }
 }
 
+// logs out student with given id
 function logOutStudent(id) {
     var payload = {
         "student_id" : id
