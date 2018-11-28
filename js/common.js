@@ -98,6 +98,7 @@ async function getStudent(input) {
 		success : function(response, tStatus, responseCode) {
 			retval = response;
 			console.log(response);
+			console.log(responseCode.status)
 		}
 	});
 	console.log(retval);
