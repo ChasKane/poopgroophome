@@ -1,6 +1,8 @@
 //meep
 // most functions for machines tab
 
+var url = "http://104.248.113.22";
+
 function getMachineList() {
 	$.ajax({
 		url : url + "api/web/machine",
