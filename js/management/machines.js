@@ -50,16 +50,16 @@ function fillMachineTable(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
-async function updateMachine(newStatus, position) {
+async function updateMachine(newStatus, id) {
 	console.log("Changing status")
 	var payload = {
-		"status" : newStatus,
-		"queue_pos" : position
+        "machine_id" : id,
+		"status" : newStatus
 	};
 
 	var retval;
 	retval = await $.ajax({
-		url : url + "api/web/laserqueue/update.php",
+		url : url + "api/web/machine/updatestatus.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
@@ -80,7 +80,7 @@ function changeFunc(event) {
 
     if(confirm("Change to "+ targ.value +"?")) {
         targ.setAttribute("oldValue", targ.value);
-        var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[0];
+        var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[2];
         updateMachine(targ.value, elem.innerHTML)
         // tell firebase to notify next 2 people
     } else {
