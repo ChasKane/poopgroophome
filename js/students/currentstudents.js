@@ -1,13 +1,15 @@
 var url = "http://104.248.113.22/gavin/";
 
 function getcurrentstudents() {
-  $.ajax({
-    url : url + "api/web/labstatus/read.php",
-    type : "POST",
-    success : function(response, tStatus, responseCode) {
-    printcurrentstudents(response); },
-    error : function(response, tStatus, responseCode) {
-    return responseCode.status; }
+    $.ajax({
+        url : url + "api/web/labstatus/read.php",
+        type : "POST",
+        success : function(response, tStatus, responseCode) {
+            printcurrentstudents(response); 
+        },
+        error : function(response, tStatus, responseCode) {
+            return responseCode.status; 
+        }
     });
 }
 
@@ -53,8 +55,17 @@ function makeclosable(){
     }
 }
 
-function logOutStudent() {
+function logOutStudent(id) {
+    var payload = {
+        "student_id" : id
+    };
+
     $.ajax({
         url : url + "api/web/labstatus/update.php"
+        type : "POST",
+        payload : JSON.stringify(payload);
+        success : function(response, tStatus, responseCode) {
+            return;
+        }
     })
 }
