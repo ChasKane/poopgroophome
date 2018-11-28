@@ -265,7 +265,7 @@ function gotoLaserQueue() {
 function goto3DQueue() {
 	var student_id = document.getElementById("student_profile");
 	student_id = student_id.getAttribute("student_id");
-	document.location.href = url + "html/lab/Laser_Cutter.html#student_id=" + student_id;
+	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
 //-----------------------------------------
