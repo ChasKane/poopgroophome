@@ -124,7 +124,7 @@ function calcTime(initTime, timeAdd) {
 	var initTimeArray = initTime.split(":");
 	var timeAddArray = timeAdd.split(":");
 	var time = [0, 0, 0];
-
+	var retval = ["", "", ""];
 	for(var idx = 0; idx < 3; idx++) {
 		initTimeArray[idx] = parseInt(initTimeArray[idx]);
 		timeAddArray[idx] = parseInt(timeAddArray[idx]);
@@ -134,10 +134,20 @@ function calcTime(initTime, timeAdd) {
 			if(time[idx] > 60) {
 				time[idx] -= 60;
 				time[idx-1] += 1;
+				if(time[idx-1] < 10) {
+					retval[idx-1] = "0" + String(time[idx-1])
+				} else {
+					retval[idx-1] = String(time[idx-1])
+				}
 			}
 		}
+
+		if(time[idx] < 10) {
+			retval[idx] = "0" + String(time[idx])
+		} else {
+			retval[idx] = String(time[idx])
+		}
 	}
-	var retval = time[0] + ":" + time[1] + ":" + time[2];
-	console.log(retval);
+	 = time[0] + ":" + time[1] + ":" + time[2];
 	return retval;
 }

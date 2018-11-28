@@ -52,3 +52,9 @@ function makeclosable(){
         });
     }
 }
+
+function logOutStudent() {
+    $.ajax({
+        url : url + "api/web/labstatus/update.php"
+    })
+}
