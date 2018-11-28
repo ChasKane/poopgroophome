@@ -265,7 +265,7 @@ CREATE TABLE 3DMaterial (
 CREATE TABLE 3DMaterial_Graph (
 	material_name VARCHAR(64) NOT NULL,
 	today DATE NOT NULL,
-	timeadded TIMESTAMP NOT NULL
+	timeadded TIMESTAMP NOT NULL,
 	current_amount real NOT NULL,
 
 	PRIMARY KEY (timeadded),
