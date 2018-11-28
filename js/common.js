@@ -97,8 +97,10 @@ async function getStudent(input) {
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
+			console.log(response);
 		}
 	});
+	console.log(retval);
 	return retval;
 }
 
