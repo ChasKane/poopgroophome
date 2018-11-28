@@ -101,3 +101,16 @@ async function getStudent(input) {
 	});
 	return retval;
 }
+
+// checks to see if there is a hash in the url then simulates a click on the 
+// element with given href then calls the passed in function to fill in the form
+function hashCheck(href, func) {
+	var hash = location.hash;
+	if(hash == "") {
+		console.log("there was no hash");
+		return;
+	}
+
+	$('.nav-tabs a[href="#menu1"]').tab('show');
+	func();
+}
