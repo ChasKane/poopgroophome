@@ -68,7 +68,7 @@ async function updateMachine(newStatus, id) {
 		}
 
 	});
-	fillLaserQueue(retval)
+	fillMachineTable(retval)
 	return retval;
 }
 
