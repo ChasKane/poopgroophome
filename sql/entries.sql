@@ -1,4 +1,4 @@
-USE innovate_dev_db_suraj;
+USE innovate_dev_db;
 
 INSERT INTO Major VALUES ("Computer Science");
 INSERT INTO Major VALUES ("a");
