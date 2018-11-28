@@ -1,6 +1,6 @@
 USE innovate_dev_db;
 
-INSERT INTO Major VALUES ("Computer Science");
+
 INSERT INTO Major VALUES ("Computer Engineering");
 INSERT INTO Major VALUES ("Mechanical Engineering");
 INSERT INTO Major VALUES ("Aerospace Engineering");
@@ -9,7 +9,6 @@ INSERT INTO Major VALUES ("Architecture");
 INSERT INTO Major VALUES ("Physics");
 INSERT INTO Major VALUES ("Buisness");
 
-INSERT INTO Student VALUES ("buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Student VALUES ("1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
@@ -21,7 +20,6 @@ INSERT INTO Student VALUES ("1234573", "Bill", "Brown", "Aerospace Engineering",
 INSERT INTO Student VALUES ("1234574", "Bell", "Miller", "Physics", "bellmiller88@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES ("1234575", "Katy", "Johnson", "Computer Engineering", "k.johnson@ucf.edu", 0.0, 0.0, null);
 
-INSERT INTO Lab_Status VALUES ("buraj_card_id", "2000-06-15", "2000-06-15 09:15:00", null);
 
 INSERT INTO Lab_Status VALUES ("1234567", CURDATE(), NOW(), null);
 INSERT INTO Lab_Status VALUES ("1234568", CURDATE(), NOW(), null);
