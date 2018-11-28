@@ -59,7 +59,7 @@ async function updateMachine(newStatus, id) {
 
 	var retval;
 	retval = await $.ajax({
-		url : url + "api/web/machine/updatestatus.php",
+		url : url + "/api/web/machine/updatestatus.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
