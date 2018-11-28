@@ -122,7 +122,7 @@ function hashCheck(href, func) {
 
 function calcTime(initTime, timeAdd) {
 	var initTimeArray = initTime.split(":");
-	var timeAddArray = timeAdd(":");
+	var timeAddArray = timeAdd.split(":");
 	var time = [0, 0, 0];
 
 	for(var idx = 0; i < 3; i++) {
