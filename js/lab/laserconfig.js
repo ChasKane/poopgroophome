@@ -50,7 +50,7 @@ function deleteConfig(event) {
 	$.ajax({
 		url : url + "api/web/laserconfig/delete.php",
 		type : "POST",
-		data : JSON.stringify(payload);
+		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			console.log("success");
 		}
