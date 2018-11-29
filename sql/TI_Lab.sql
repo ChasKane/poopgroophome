@@ -205,7 +205,7 @@ CREATE TABLE Machine (
 	type VARCHAR(64) NOT NULL,
 	restrictions TEXT,
 	date_added DATETIME NOT NULL,
-	status VARCHAR(64) DEFAULT 'working' CHECK (status IN ('working', 'broken', 'maintenance')),
+	status VARCHAR(64) DEFAULT 'Working' CHECK (status IN ('Working', 'Broken', 'Maintenance')) NOT NULL,
 
 	PRIMARY KEY (machine_id)
 );

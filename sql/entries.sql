@@ -37,7 +37,7 @@ INSERT INTO Lab_Hours VALUES ("00:00:00", "18:00:00", "00:00:00", "18:00:00", "0
 
 INSERT INTO Appointment_Hours VALUES ("18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00");
 
-INSERT INTO Machine VALUES (null, "machine_name", "machine_type", "has some restrictions", "1970-01-01 00:00:00", null);
+INSERT INTO Machine VALUES (null, "machine_name", "machine_type", "has some restrictions", "1970-01-01 00:00:00", "Working");
 
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 
