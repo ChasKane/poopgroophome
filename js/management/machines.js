@@ -29,7 +29,7 @@ function fillMachineTable(object) {
 	var newInnerHTML = "";
     var i = 0;
     var status;
-    var edit_icon = "glyphicon glyphicon-pencil"
+    var edit_icon = "btn btn-default btn-xs glyphicon glyphicon-pencil"
 	
 	for (var idx in elements) {
         console.log("1 mech")
@@ -57,7 +57,7 @@ function fillMachineTable(object) {
 	}
 	console.log(newInnerHTML);
     document.getElementById("tableBody").innerHTML = newInnerHTML; 
-    document.getElementsByName("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
+    //document.getElementsByName("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
 }
 
 async function updateMachine(newStatus, id) {
