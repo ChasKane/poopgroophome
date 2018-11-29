@@ -140,28 +140,40 @@ async function editConfirmButton() {
 	var machine_type = document.getElementById("machine_type").value;
     var restrictions = document.getElementById("restrictions").value;
     var machine_id = document.getElementById("mach_id").getAttribute("lookup").value;
-    var obj = getMachineID2();//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    var machines = obj.machines;
+    var machines;
 
-    for (var idx in machines)
-    {
-        if (machines[idx].machine_id == machine_id)
-        {
-            var payload = {
-                "machine_id" : machine_id,
-                "name" : name,
-                "type" : machine_type,
-                "restrictions" : restrictions,
-                "date_added" : machines[idx].date_added,
-                "status" : machines[idx].status
-            };
-        
-            var retval = await editMDataSend(payload);
-            checkSwap("machine_list_block", "machine_list_block");
-            checkSwap("edit_Maching_form", "machine_list_block");
-            fillMachineTable(retval);
-        }
-    }
+    $.ajax({
+		url : url + "api/web/machine/read.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+            console.log(response);
+            machines = response.machines;
+			for (var idx in machines)
+            {
+                if (machines[idx].machine_id == machine_id)
+                {
+                    var payload = {
+                        "machine_id" : machine_id,
+                        "name" : name,
+                        "type" : machine_type,
+                        "restrictions" : restrictions,
+                        "date_added" : machines[idx].date_added,
+                        "status" : machines[idx].status
+                    };
+                
+                    var retval = await editMDataSend(payload);
+                    checkSwap("machine_list_block", "machine_list_block");
+                    checkSwap("edit_Maching_form", "machine_list_block");
+                    fillMachineTable(retval);
+                }
+            }
+		},
+		error : function() {
+			console.log("there be an error");
+		}
+    });
+
+    
 }
 
 function editCancelButton() {
