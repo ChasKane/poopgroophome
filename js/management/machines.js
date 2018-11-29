@@ -145,7 +145,7 @@ async function editConfirmButton() {
     $.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
-		success : function(response, tStatus, responseCode) {
+		success : async function(response, tStatus, responseCode) {
             console.log(response);
             machines = response.machines;
 			for (var idx in machines)
