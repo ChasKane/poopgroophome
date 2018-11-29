@@ -48,8 +48,7 @@ function makeclosable(){
     for (i = 0; i < closebtns.length; i++) {
         closebtns[i].addEventListener("click", function() {
             this.parentElement.style.display = 'none'; 
-            var id = this.getAttribute("student_id");
-            console.log(id);
+            var id = this.parentElement.getAttribute("student_id");
             logOutStudent(id);
         });
     }
@@ -62,7 +61,7 @@ function logOutStudent(id) {
     };
 
     $.ajax({
-        url : url + "api/web/labstatus/update.php",
+        url : url + "api/web/labstatus/delete.php",
         type : "POST",
         payload : JSON.stringify(payload),
         success : function(response, tStatus, responseCode) {
