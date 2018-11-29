@@ -12,8 +12,6 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-
-
 $query = "SELECT * FROM Lab_Tech";
 $stmt = $db->prepare($query);
 
