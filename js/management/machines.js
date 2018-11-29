@@ -105,10 +105,10 @@ async function addToMListButton() {
 		"restrictions" : restrictions
 	};
 
-	await addMachineToList(payload);
+	var retval = await addMachineToList(payload);
 	checkSwap("machine_list_block", "machine_list_block");
-	checkSwap("add_Maching_form", "machine_list_block");
-	addMachineToList();
+    checkSwap("add_Maching_form", "machine_list_block");
+    fillMachineTable(retval);
 }
 
 function addCancelButton() {
