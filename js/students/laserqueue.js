@@ -324,7 +324,7 @@ $(document).ready(function() {
         if(href == "#menu1") {
             checkSwap("laser_cutting_queue", "laser_cutting_queue");
 			checkSwap("manually_add_to_queue", "laser_cutting_queue");
-        	fillLaserQueue();
+        	laserQueueButton();
         }
     });
 });

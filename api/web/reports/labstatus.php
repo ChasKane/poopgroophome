@@ -12,24 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->material_name)
-	|| !isset($data->initial_amount)
-	|| !isset($data->date_purchased)
-	|| !isset($data->num_semesters)) {
-	http_response_code(400);
-	return;
-}
-
-$query = "INSERT INTO 3DMaterial VALUES (:v1,:v2,:v3,:v4)";
-$stmt = $db->prepare($query);
-
-if (!$stmt->execute([':v1' => $data->material_name,':v2' => $data->initial_amount,':v3' => $data->date_purchased,':v4' => $data->num_semesters])) {
-	http_response_code(503);
-	echo json_encode($stmt->errorInfo());
-	return;
-}
-
-$query = "SELECT material_name FROM 3DMaterial";
+$query = "SELECT * FROM Lab_Status JOIN Student ON Lab_Status.student_id=Student.student_id";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -40,19 +23,24 @@ if (!$stmt->execute()) {
 
 $num = $stmt->rowCount();
 
-$threedmaterials = array();
+$lab_status_array = array();
+$lab_status_array["lab_status"] = array();
 
 if($num>0){
-	$threedmaterials["threedmaterials"] = array();
-
+	
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-		$threedmaterial = array(
-			'material_name' => $material_name,
+		$lab_status = array(
+			'student_id' => $student_id,
+			'first_name' => $first_name,
+			'last_name' => $last_name,
+			'date_added' => $date_added,
+			'time_in' => $time_in,
+			'time_out' => $time_out
 		);
 
-		array_push($threedmaterials["threedmaterials"], $threedmaterial);
+		array_push($lab_status_array["lab_status"], $lab_status);
 	}
 
 	http_response_code(200);
@@ -60,6 +48,6 @@ if($num>0){
 	http_response_code(204);
 }
 
-echo json_encode($threedmaterials);
+echo json_encode($lab_status_array);
 
 ?>
