@@ -136,9 +136,9 @@ function editMachine2(machine_id, obj) {
 }
 
 async function editConfirmButton() {
-	var name = document.getElementById("machine_name").value;
-	var machine_type = document.getElementById("machine_type").value;
-    var restrictions = document.getElementById("restrictions").value;
+	var name = document.getElementById("machine_name").innerHTML;
+	var machine_type = document.getElementById("machine_type").innerHTML;
+    var restrictions = document.getElementById("restrictions").innerHTML;
     var machine_id = document.getElementById("mach_id").getAttribute("lookup");
     var machines;
 
