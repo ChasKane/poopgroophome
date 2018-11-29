@@ -41,7 +41,7 @@ function fillMachineTable(object) {
         }
 
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-		newInnerHTML += "<td>" + elements[idx].name + "<span id=edit_icon class="+ edit_icon +" onclick=editMachine("+ elements[idx].machine_id +");></span></td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
+		newInnerHTML += "<td>" + elements[idx].name + "<span name=edit_icon class="+ edit_icon +" onclick=editMachine("+ elements[idx].machine_id +");></span></td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
 		
@@ -57,7 +57,7 @@ function fillMachineTable(object) {
 	}
 	console.log(newInnerHTML);
     document.getElementById("tableBody").innerHTML = newInnerHTML; 
-    document.getElementsById("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
+    document.getElementsByName("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
 }
 
 async function updateMachine(newStatus, id) {
