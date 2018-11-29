@@ -24,8 +24,8 @@ function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		success : function(response, tStatus, responseCode) {
 			return response;
 		},
-		error : function(response, tStatus, responseCode) {
-			console.error(responseCode.status);
+		error : function() {
+			console.log("there be an error");
 		}
 	});
 }
