@@ -142,6 +142,12 @@ async function editConfirmButton() {
     var machine_id = document.getElementById("mach_id").getAttribute("lookup");
     var machines;
 
+    if (name == undefined || machine_type == undefined || restrictions == undefined)
+    {
+        alert("One or more fields unfilled.")
+        return;
+    }
+
     $.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
