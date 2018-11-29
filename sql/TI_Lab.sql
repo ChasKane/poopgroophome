@@ -47,8 +47,6 @@ CREATE TABLE Lab_Status (
 	time_in DATETIME NOT NULL,
 	time_out DATETIME,
 
-	PRIMARY KEY (student_id, time_in),
-
 	FOREIGN KEY (student_id)
 		REFERENCES Student(student_id)
 );
@@ -193,7 +191,7 @@ CREATE TABLE Machine (
 	type VARCHAR(64) NOT NULL,
 	restrictions TEXT,
 	date_added DATETIME NOT NULL,
-	status VARCHAR(64) DEFAULT 'Working' CHECK (status IN ('Working', 'Broken', 'Maintenance')) NOT NULL,
+	status VARCHAR(64) DEFAULT 'Working' CHECK (status IN ('Working', 'Broken', 'Maintenance')),
 
 	PRIMARY KEY (machine_id)
 );
