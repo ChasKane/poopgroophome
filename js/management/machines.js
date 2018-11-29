@@ -39,7 +39,7 @@ function fillMachineTable(object) {
         } else {
             status = elements[idx].status;
         }
-        
+
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
 		newInnerHTML += '<td>' + elements[idx].name + '<button type"button" class="btn btn-default btn-xs" onclick="editMachine('+ elements[idx].machine_id +');"><span name=edit_icon class="glyphicon glyphicon-pencil"></span></button></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
 						'<td>' + elements[idx].restrictions + '</td>' + '<td>' + elements[idx].date_added + '</td>' + 
@@ -115,6 +115,7 @@ function editMachine(machine_id) {
             document.getElementById("restrictions_edit").setAttribute("placholder", machines[idx].restrictions);
         }
     }
+    console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEHHH???");
     
 	checkSwap("edit_Maching_form", "edit_Maching_form");
 	checkSwap("machine_list_block", "edit_Maching_form");
