@@ -27,11 +27,19 @@ function fillMachineTable(object) {
 
 	var statuses = ["Working", "Broken", "Maintenance"]
 	var newInnerHTML = "";
-	var i = 0
+    var i = 0;
+    var status;
 	
 	for (var idx in elements) {
-		console.log("1 mech")
-		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
+        console.log("1 mech")
+        if (elements[idx].status == null)
+        {
+            status = statuses[0];
+        } else {
+            status = elements[idx].status;
+        }
+
+		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
 		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
