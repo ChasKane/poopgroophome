@@ -253,15 +253,15 @@ INSERT INTO Laser_Queue VALUES (null, 1, 8, 3, CURDATE(), NOW(), "00:40:00", "Wa
 
 
 
-INSERT INTO 3DMaterial VALUES ("coolstuff", 5.0, VURDATE(), 3);
+INSERT INTO 3DMaterial VALUES ("coolstuff", 5.0, CURDATE(), 3);
 INSERT INTO 3DMaterial VALUES ("coolstuff2", 6.0, CURDATE(), 2);
 INSERT INTO 3DMaterial Values ("ABS - Blue", 250.0, "2018-09-01", 3);
 INSERT INTO 3DMaterial Values ("ABS - Green", 300.0, CURDATE(), 3);
 INSERT INTO 3DMaterial Values ("PLA", 500.0, CURDATE(), 3);
 
-INSERT INTO 3DMaterial_Graph VALUES ("coolstuff", CURTIME(), CURTIME(), 2.0);
+INSERT INTO 3DMaterial_Graph VALUES ("coolstuff", CURDATE(), CURTIME(), 2.0);
 Select SLEEP(1);
-INSERT INTO 3DMaterial_Graph VALUES ("coolstuff2", CURTIME(), CURTIME(), 4.0);
+INSERT INTO 3DMaterial_Graph VALUES ("coolstuff2", CURDATE(), CURTIME(), 4.0);
 Select SLEEP(1);
 INSERT INTO 3DMaterial_Graph VALUES ("ABS - Blue", "2018-09-01", CURTIME(), 247.0);
 Select SLEEP(1);

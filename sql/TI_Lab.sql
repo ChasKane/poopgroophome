@@ -264,6 +264,7 @@ CREATE TABLE 3DMaterial (
 CREATE TABLE 3DMaterial_Graph (
 	material_name VARCHAR(64) NOT NULL,
 	today DATE NOT NULL,
+	time_used TIME NOT NULL,
 	current_amount real NOT NULL,
 
 	PRIMARY KEY (material_name, today),

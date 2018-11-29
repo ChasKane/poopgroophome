@@ -63,8 +63,8 @@ INSERT INTO Laser_Queue VALUES (null, 1, "buraj_card_id", "suraj_tech_id", CURDA
 INSERT INTO 3DMaterial VALUES ("coolstuff", 5.0, CURDATE(), 3);
 INSERT INTO 3DMaterial VALUES ("coolstuff2", 6.0, CURDATE(), 2);
 
-INSERT INTO 3DMaterial_Graph VALUES ("coolstuff", CURDATE(), 2.0);
-INSERT INTO 3DMaterial_Graph VALUES ("coolstuff2", CURDATE(), 4.0);
+INSERT INTO 3DMaterial_Graph VALUES ("coolstuff", CURDATE(), CURTIME(), 2.0);
+INSERT INTO 3DMaterial_Graph VALUES ("coolstuff2", CURDATE(), CURTIME(), 4.0);
 
 INSERT INTO Message VALUES (null, "message1", "is this a message?");
 INSERT INTO Message VALUES (null, "message2", "it cannot be a message");
