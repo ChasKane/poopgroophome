@@ -17,8 +17,8 @@ function getMachineList() {
 	});
 }
 
-async function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-	var retval = await $.ajax({
+function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	$.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
