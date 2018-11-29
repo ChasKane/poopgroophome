@@ -17,22 +17,18 @@ function getMachineList() {
 	});
 }
 
-function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    var result;
-    
+function editMachine(machine_id) {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     $.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
             console.log(response);
-			result = response;
+			editMachine2(machine_id, response);
 		},
 		error : function() {
 			console.log("there be an error");
 		}
     });
-    
-    return result;
 }
 
 function fillMachineTable(object) {
@@ -117,8 +113,7 @@ function changeFunc(event) {
     }
 }
 
-function editMachine(machine_id) {
-    var obj = getMachineID2(); //AAAAAAAAAAAAAA
+function editMachine2(machine_id, obj) {
     console.log(obj);
     var machines = obj.machines;
 
