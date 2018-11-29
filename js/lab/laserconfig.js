@@ -40,7 +40,7 @@ function configSwap(id) {
 
 function deleteConfig(event) {
 	var targ = event.target;
-	targ = targ.parentElement;
+	targ = targ.parentElement.parentElement;
 	var config_id = targ.getAttribute("config_id");
 
 	var payload = {
@@ -55,6 +55,7 @@ function deleteConfig(event) {
 			console.log("success");
 		}
 	})
+	getLaserConfigs();
 }
 
 function addConfig() {
