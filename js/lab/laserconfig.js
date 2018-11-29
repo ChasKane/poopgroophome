@@ -14,13 +14,14 @@ function fillLaserConfig(configs) {
 	var newHTML = "";
 
 	for(var idx in configs) {
-		newHTML += "<tr><td>" + configs[idx].material + "</td>";
+		newHTML += "<tr config_id='" + configs[idx].config_id + "'><td>" + configs[idx].material + "</td>";
 		newHTML += "<td>" + configs[idx].task + "</td>";
 		newHTML += "<td>" + configs[idx].thickness + "</td>";
 		newHTML += "<td>" + configs[idx].power + "</td>";
 		newHTML += "<td>" + configs[idx].speed + "</td>";
 		newHTML += "<td>" + configs[idx].ppi + "</td>";
 		newHTML += "<td>" + configs[idx].notes + "</td>";
+		newHTML += "<td><button onclick='deleteConfig(event);'>X</button></td>";
 		newHTML += "</tr>";
 	}
 	var elem = document.getElementById("configBody");
@@ -35,6 +36,20 @@ function configSwap(id) {
 		checkSwap("config_table", "add_config");
 		checkSwap("add_config", "add_config");
 	}
+}
+
+function deleteConfig(event) {
+	var targ = event.target;
+	targ = targ.parentElement;
+	var config_id = targ.getAttribute("config_id");
+
+	$.ajax({
+		url : url + "api/web/laserconfig/delete.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+			console.log("success");
+		}
+	})
 }
 
 function addConfig() {
@@ -65,6 +80,9 @@ function addConfig() {
 			return;
 		}
 	});
+	checkSwap("config_table", "config_table");
+	checkSwap("add_config", "config_table");
+	getLaserConfigs();
 }
 
 $(document).ready(function() {
