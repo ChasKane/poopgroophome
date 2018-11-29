@@ -22,6 +22,7 @@ function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		url : url + "api/web/machine/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
+            console.log(response);
 			return response;
 		},
 		error : function() {
