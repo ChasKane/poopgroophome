@@ -244,3 +244,38 @@ async function addMachineToList(payload) {
 
 	return retval;
 }
+
+function editDeleteButton() {
+    var machine_id = document.getElementById("mach_id").getAttribute("lookup");
+    var name = document.getElementById("machine_name_edit").value;
+
+    if(confirm("Delete "+ name +" machine?")) {
+        var payload = {
+            "machine_id" : machine_id
+        };
+
+        var retval = await deleteMachineFromList(payload);
+        checkSwap("machine_list_block", "machine_list_block");
+        checkSwap("edit_Maching_form", "machine_list_block");
+        fillMachineTable(retval);
+    } else {
+        console.log("Failed to delete.");
+    }
+}
+
+async function deleteMachineFromList(payload) {
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "api/web/machine/delete.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}
