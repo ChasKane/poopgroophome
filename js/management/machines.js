@@ -107,11 +107,11 @@ function editMachine(machine_id) {
     {
         if (machines[idx].machine_id == machine_id)
         {
-            document.getElementById("mach_id").value = machines[idx].machine_id;
+            document.getElementById("mach_id").innerHTML = machines[idx].machine_id;
             document.getElementById("mach_id").setAttribute("lookup", machines[idx].machine_id);
-            document.getElementById("machine_name_edit").value = machines[idx].name;
-            document.getElementById("machine_type_edit").value = machines[idx].type;
-            document.getElementById("restrictions_edit").value = machines[idx].restrictions;
+            document.getElementById("machine_name_edit").setAttribute("placeholder", machines[idx].name);
+            document.getElementById("machine_type_edit").setAttribute("placeholder", machines[idx].type);
+            document.getElementById("restrictions_edit").setAttribute("placholder", machines[idx].restrictions);
         }
     }
     
