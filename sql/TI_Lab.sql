@@ -1,3 +1,5 @@
+
+
 DROP DATABASE innovate_dev_db;
 CREATE DATABASE innovate_dev_db;
 
@@ -82,20 +84,6 @@ CREATE TABLE Lab_Tech (
 
 	PRIMARY KEY (tech_id)
 );
-
-
-
-CREATE TABLE Tech_Schedule (
-	tech_id int NOT NULL UNIQUE,
-	day int NOT NULL,
-	time_in TIME NOT NULL,
-	time_out TIME NOT NULL,
-
-	FOREIGN KEY (tech_id)
-		REFERENCES Lab_Tech(tech_id)
-);
-
-
 
 
 CREATE TABLE Lab_Inventory (
@@ -287,7 +275,7 @@ CREATE TABLE 3DMaterial_Graph (
 );
 
 CREATE TABLE Laser_Configuration (
-  config_id int NOT NULL AUTO_INCREMENT,
+  	config_id int NOT NULL AUTO_INCREMENT,
 	material VARCHAR(64) NOT NULL,
 	tech_id int NOT NULL,
 	thickness real NOT NULL,
