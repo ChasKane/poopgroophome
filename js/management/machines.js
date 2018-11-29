@@ -150,6 +150,7 @@ async function editConfirmButton() {
             machines = response.machines;
 			for (var idx in machines)
             {
+                console.log(machines[idx].machine_id);
                 if (machines[idx].machine_id == machine_id)
                 {
                     var payload = {
