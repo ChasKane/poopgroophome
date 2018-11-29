@@ -43,9 +43,14 @@ function deleteConfig(event) {
 	targ = targ.parentElement;
 	var config_id = targ.getAttribute("config_id");
 
+	var payload = {
+		"config_id" : config_id
+	};
+
 	$.ajax({
 		url : url + "api/web/laserconfig/delete.php",
 		type : "POST",
+		data : JSON.stringify(payload);
 		success : function(response, tStatus, responseCode) {
 			console.log("success");
 		}
