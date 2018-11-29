@@ -40,7 +40,7 @@ function fillMachineTable(object) {
         }
 
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-		newInnerHTML += "<td>" + elements[idx].name + "</td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
+		newInnerHTML += "<td>" + elements[idx].name + "<span class="+'glyphicon glyphicon-pencil'+" onclick="+'editMachine('+ elements[idx].machine_id +');'+"></span></td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
 		
@@ -97,6 +97,77 @@ function changeFunc(event) {
     }
 }
 
+function editMachine(machine_id) {
+    var obj = getMachineID();
+    var machines = obj.machines;
+
+    for (var idx in machines)
+    {
+        if (machines[idx].machine_id == machine_id)
+        {
+            document.getElementById("mach_id").value = machines[idx].machine_id;
+            document.getElementById("mach_id").setAttribute("lookup", machines[idx].machine_id);
+            document.getElementById("machine_name_edit").value = machines[idx].name;
+            document.getElementById("machine_type_edit").value = machines[idx].type;
+            document.getElementById("restrictions_edit").value = machines[idx].restrictions;
+        }
+    }
+    
+	checkSwap("edit_Maching_form", "edit_Maching_form");
+	checkSwap("machine_list_block", "edit_Maching_form");
+}
+
+async function editConfirmButton() {
+	var name = document.getElementById("machine_name").value;
+	var machine_type = document.getElementById("machine_type").value;
+    var restrictions = document.getElementById("restrictions").value;
+    var machine_id = document.getElementById("mach_id").getAttribute("lookup").value;
+    var obj = getMachineID();
+    var machines = obj.machines;
+
+    for (var idx in machines)
+    {
+        if (machines[idx].machine_id == machine_id)
+        {
+            var payload = {
+                "machine_id" : machine_id,
+                "name" : name,
+                "type" : machine_type,
+                "restrictions" : restrictions,
+                "date_added" : machines[idx].date_added,
+                "status" : machines[idx].status
+            };
+        
+            var retval = await editMDataSend(payload);
+            checkSwap("machine_list_block", "machine_list_block");
+            checkSwap("edit_Maching_form", "machine_list_block");
+            fillMachineTable(retval);
+        }
+    }
+}
+
+function editCancelButton() {
+    checkSwap("machine_list_block", "machine_list_block");
+	checkSwap("edit_Maching_form", "machine_list_block");
+}
+
+async function editMDataSend(payload) {
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "/api/web/machine/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}
+
 function addMachine() {
 	checkSwap("add_Maching_form", "add_Maching_form");
 	checkSwap("machine_list_block", "add_Maching_form");
@@ -141,15 +212,3 @@ async function addMachineToList(payload) {
 
 	return retval;
 }
-
-// $(document).ready(function() {
-//     $('.nav-tabs a').on('show.bs.tab', function(e){
-//         activeTab = $(this).attr('href').split('-')[1];
-//         href = this.getAttribute('href');        
-//         if(href == "#menu1") {
-//         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
-// 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
-//             focusOn("userCard_ID");
-//         }
-//     });
-// });

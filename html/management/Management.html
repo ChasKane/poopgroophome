@@ -184,6 +184,25 @@
                                     <button id="add_to_list_button" onclick="addToMListButton()">Add Machine</button>
                                     <button id="cancel_add_button" onclick="addCancelButton()">Cancel</button>
                                 </div>
+                                <div id="edit_Maching_form"  vis="none" style="display: none;">
+                                    <label>ID</label>
+                                    <div id="mach_id" lookup="" class="form-control"></div>
+                                    <br>
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="machine_name_edit" name="name" placeholder="Machine name..">
+                                    <br>
+                                   
+                                    <label>Machine type</label><span></span>
+                                    <input class="form-control" type="text" id="machine_type_edit" name="type" placeholder="Machine Type"> 
+                                    <br>
+                                    <label>Machine Restrictions</label><span></span>
+                                    <input  class="form-control" id="restrictions_edit" placeholder="Restrictions">
+                                    <br>
+                                    
+                                    
+                                    <button id="add_to_list_button" onclick="editConfirmButton()">Add Machine</button>
+                                    <button id="cancel_add_button" onclick="editCancelButton()">Cancel</button>
+                                </div>
                             </body>
                         </div>
                         <div id="menu1" class="tab-pane fade">
