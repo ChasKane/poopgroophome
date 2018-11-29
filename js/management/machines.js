@@ -41,8 +41,8 @@ function fillMachineTable(object) {
         }
 
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-		newInnerHTML += '<td>' + elements[idx].name + '<span name=edit_icon class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="editMachine("'+ elements[idx].machine_id +'");"></span></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td>" '+
-						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
+		newInnerHTML += '<td>' + elements[idx].name + '<span name=edit_icon class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="editMachine('+ elements[idx].machine_id +');"></span></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
+						'<td>' + elements[idx].restrictions + '</td>' + '<td>' + elements[idx].date_added + '</td>' + 
 						'<td> <div class="selection">';
 		
 		newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
