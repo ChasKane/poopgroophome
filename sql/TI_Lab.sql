@@ -267,7 +267,7 @@ CREATE TABLE 3DMaterial_Graph (
 	time_used TIME NOT NULL,
 	current_amount real NOT NULL,
 
-	PRIMARY KEY (material_name, today),
+	PRIMARY KEY (material_name, today, time_used),
 
 	FOREIGN KEY (material_name)
 		REFERENCES 3DMaterial(material_name)
