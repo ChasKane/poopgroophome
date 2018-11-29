@@ -9,18 +9,6 @@ function getLaserConfigs() {
 	});
 }
 
-// $laser_configuration = array(
-//       'config_id' => $config_id,
-// 			'material' => $material,
-// 			'tech_id' => $tech_id,
-// 			'thickness' => $thickness,
-// 			'task' => $task,
-// 			'power' => $power,
-// 			'speed' => $speed,
-// 			'ppi' => $ppi,
-// 			'notes' => $notes
-// 		);
-
 function fillLaserConfig(configs) {
 	configs = configs.laser_configurations;
 	var newHTML = "";
@@ -50,7 +38,33 @@ function configSwap(id) {
 }
 
 function addConfig() {
-	return;
+	var material = document.getElementById("material").value;
+	var task = document.getElementById("task").value;
+	var thickness = document.getElementById("thickness").value;
+	var power = document.getElementById("power").value;
+	var speed = document.getElementById("speed").value;
+	var ppi = document.getElementById("ppi").value;
+	var notes = document.getElementById("notes").value;
+
+	var payload = {
+		"material" : material,
+		"task" : task,
+		"thickness" : thickness,
+		"power" : power,
+		"speed" : speed,
+		"ppi" : ppi,
+		"notes" : notes,
+		"tech_id" : 1
+	};
+
+	$.ajax({
+		url : url + "api/web/laserconfig/create.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			return;
+		}
+	});
 }
 
 $(document).ready(function() {
@@ -59,6 +73,8 @@ $(document).ready(function() {
         href = this.getAttribute('href');        
         if(href == "#menu2") {
         	getLaserConfigs();
+        	checkSwap("config_table", "config_table");
+			checkSwap("add_config", "config_table");
         }
     });
 });
