@@ -139,7 +139,7 @@ async function editConfirmButton() {
 	var name = document.getElementById("machine_name").value;
 	var machine_type = document.getElementById("machine_type").value;
     var restrictions = document.getElementById("restrictions").value;
-    var machine_id = document.getElementById("mach_id").getAttribute("lookup").value;
+    var machine_id = document.getElementById("mach_id").getAttribute("lookup");
     var machines;
 
     $.ajax({
