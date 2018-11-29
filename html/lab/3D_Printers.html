@@ -48,8 +48,8 @@
     </style>
     
     
-    <body onload="includeHTML('../../html/Menu_Bar.html');">
-    <!--Deleted menu bar from here      loadFire(); getLabTechs('tech_select');-->
+    <body>
+    <!--Deleted menu bar from here    onload="includeHTML('../../html/Menu_Bar.html');"  loadFire(); getLabTechs('tech_select');-->
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
 
@@ -375,6 +375,9 @@
                 }
             }
         }
+
+        window.onload = loadFire();
+        window.onload = getLabTechs('tech_select');
 
         // Pop up function for confirmations and alerts
         function modPop(arg)
