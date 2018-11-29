@@ -39,9 +39,9 @@ function fillMachineTable(object) {
         } else {
             status = elements[idx].status;
         }
-
+        
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-		newInnerHTML += '<td>' + elements[idx].name + '<span name=edit_icon class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="editMachine('+ elements[idx].machine_id +');"></span></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
+		newInnerHTML += '<td>' + elements[idx].name + '<button type"button" class="btn btn-default btn-xs" onclick="editMachine('+ elements[idx].machine_id +');"><span name=edit_icon class="glyphicon glyphicon-pencil"></span></button></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
 						'<td>' + elements[idx].restrictions + '</td>' + '<td>' + elements[idx].date_added + '</td>' + 
 						'<td> <div class="selection">';
 		
@@ -61,7 +61,7 @@ function fillMachineTable(object) {
 }
 
 async function updateMachine(newStatus, id) {
-	console.log("Changing status")
+	console.log("Changing status");
 	var payload = {
         "machine_id" : id,
 		"status" : newStatus
@@ -78,7 +78,7 @@ async function updateMachine(newStatus, id) {
 		}
 
 	});
-	fillMachineTable(retval)
+	fillMachineTable(retval);
 	return retval;
 }
 
@@ -107,7 +107,7 @@ function editMachine(machine_id) {
     {
         if (machines[idx].machine_id == machine_id)
         {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             document.getElementById("mach_id").innerHTML = machines[idx].machine_id;
             document.getElementById("mach_id").setAttribute("lookup", machines[idx].machine_id);
             document.getElementById("machine_name_edit").setAttribute("placeholder", machines[idx].name);
