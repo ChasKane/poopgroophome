@@ -61,7 +61,7 @@ function logOutStudent(id) {
     };
 
     $.ajax({
-        url : url + "api/web/labstatus/delete.php",
+        url : url + "api/web/labstatus/update.php",
         type : "POST",
         data : JSON.stringify(payload),
         success : function(response, tStatus, responseCode) {
