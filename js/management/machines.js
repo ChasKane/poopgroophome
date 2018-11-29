@@ -142,7 +142,7 @@ async function editConfirmButton() {
     var machine_id = document.getElementById("mach_id").getAttribute("lookup");
     var machines;
 
-    if (name == undefined || machine_type == undefined || restrictions == undefined)
+    if (name == undefined || machine_type == undefined || restrictions == undefined ||name == "" || machine_type == "" || restrictions == "")
     {
         alert("One or more fields unfilled.")
         return;
