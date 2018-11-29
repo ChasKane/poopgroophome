@@ -57,7 +57,7 @@ function fillMachineTable(object) {
 	}
 	console.log(newInnerHTML);
     document.getElementById("tableBody").innerHTML = newInnerHTML; 
-    document.getElementById("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
+    document.getElementsById("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
 }
 
 async function updateMachine(newStatus, id) {
