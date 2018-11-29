@@ -29,7 +29,7 @@ function fillMachineTable(object) {
 	var newInnerHTML = "";
     var i = 0;
     var status;
-    var edit_icon = "btn btn-default btn-xs glyphicon glyphicon-pencil"
+    var edit_icon = ""
 	
 	for (var idx in elements) {
         console.log("1 mech")
@@ -41,7 +41,7 @@ function fillMachineTable(object) {
         }
 
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-		newInnerHTML += "<td>" + elements[idx].name + "<span name=edit_icon class="+ edit_icon +" onclick=editMachine("+ elements[idx].machine_id +");></span></td>" + "<td>" + elements[idx].type + "</td>" + "<td>" + elements[idx].machine_id + "</td>" +
+		newInnerHTML += '<td>' + elements[idx].name + '<span name=edit_icon class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="editMachine("'+ elements[idx].machine_id +'");"></span></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td>" '+
 						"<td>" + elements[idx].restrictions + "</td>" + "<td>" + elements[idx].date_added + "</td>" + 
 						'<td> <div class="selection">';
 		
