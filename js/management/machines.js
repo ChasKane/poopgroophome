@@ -89,76 +89,50 @@ function changeFunc(event) {
     }
 }
 
-// function manuallyAddQueue() {
-// 	getLabTechs("tech_select_add");
-// 	fillMachineID("machine_id");
-// 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
-// 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
-// }
+function addMachine() {
+	checkSwap("add_Maching_form", "add_Maching_form");
+	checkSwap("machine_list_block", "add_Maching_form");
+}
 
-// async function addTo3DQueueButton() {
-// 	var name = document.getElementById("student_name");
-// 	var estimated_time = document.getElementById("estimated_time");
-// 	var lab_tech = document.getElementById("tech_select_add");
-// 	var machine_id = document.getElementById("machine_id");
-// 	var part_name = document.getElementById("part_name");
-// 	var file_path = document.getElementById("file_path");
-// 	var material_name = document.getElementById("material_name");
-// 	var soluble_name = document.getElementById("soluble_name");
-// 	var material_amount = document.getElementById("material_amount");
-// 	var soluble_amount = document.getElementById("soluble_amount");
-// 	var club_name = document.getElementById("club_name");
+async function addToMListButton() {
+	var name = document.getElementById("machine_name").value;
+	var machine_type = document.getElementById("machine_type").value;
+	var restrictions = document.getElementById("restrictions").value;
 
-// 	name = name.value;
-// 	estimated_time = estimated_time.value;
-// 	lab_tech = lab_tech.options[lab_tech.selectedIndex].getAttribute("tech_id");
-// 	machine_id = machine_id.value;
-// 	part_name = part_name.value;
-// 	file_path = file_path.value;
-// 	material_name = material_name.value;
-// 	material_amount = parseFloat(material_amount.value);
-// 	soluable_name = soluable_name.value;
-// 	soluble_amount = parseFloat(soluble_amount.value);
-// 	club_name = club_name.value;
+	var payload = {
+		"name" : name,
+		"type" : machine_type,
+		"restrictions" : restrictions
+	};
+
+	await addMachineToList(payload);
+	checkSwap("machine_list_block", "machine_list_block");
+	checkSwap("add_Maching_form", "machine_list_block");
+	addMachineToList();
+}
+
+function addCancelButton() {
+    checkSwap("machine_list_block", "machine_list_block");
+	checkSwap("add_Maching_form", "machine_list_block");
+}
 
 
-// 	var student_id = await getStudent(name);
-// 	var payload = {
-// 		"machine_id" : machine_id,
-// 		"student_id" : student_id,
-// 		"tech_id" : tech_id,
-// 		"estimated_time" : estimated_time,
-// 		"part_name" : part_name,
-// 		"material_name" : material_name,
-// 		"material_amount" : material_amount,
-// 		"soluble_amount" : soluble_amount,
-// 		"soluble_name" : soluable_name,
-// 		"club_name" : club_name
-// 	};
+async function addMachineToList(payload) {
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "/api/web/machine/create.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
 
-// 	await add3DQueue(payload);
-// 	checkSwap("3d_cutting_queue", "3d_cutting_queue");
-// 	checkSwap("manually_add_to_queue", "3d_cutting_queue");
-// 	add3DQueue();
-// }
-
-
-// async function add3DQueue(payload) {
-// 	console.log(payload);
-// 	var retval = await $.ajax({
-// 		url : url + "api/web/3dprintqueue/create.php",
-// 		type : "POST",
-// 		data : JSON.stringify(payload),
-// 		success : function(response, tStatus, responseCode) {
-// 			retval = response;
-// 		},
-// 		error : function(response, tStatus, responseCode) {
-// 			console.error(responseCode.status);
-// 		}
-// 	});
-
-// 	return retval;
-// }
+	return retval;
+}
 
 // $(document).ready(function() {
 //     $('.nav-tabs a').on('show.bs.tab', function(e){

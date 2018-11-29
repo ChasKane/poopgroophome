@@ -100,7 +100,7 @@
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <body>
-                                <div class="well b-color-3 container-fluid" id="laser_cutting_queue" vis="block">
+                                <div class="well b-color-3 container-fluid" id="machine_list_block" vis="block">
                                     <div class="row content">
                                         <div><center>
                                             <h1 class="title-color">Machines</h1>
@@ -152,21 +152,22 @@
                                         </div> 
                                     </div>        
                                 </div>
-                                <!-- <div id="add_Maching_form"  vis="none" style="display: none;">
+                                <div id="add_Maching_form"  vis="none" style="display: none;">
                                     <label for="name">Name</label>
-                                    <input class="form-control" type="text" id="machine_name" name="name" placeholder="Student name..">
+                                    <input class="form-control" type="text" id="machine_name" name="name" placeholder="Machine name..">
                                     <br>
                                    
-                                    <label>Soluble Name</label><span></span>
-                                    <input  class="form-control" id="type"></select> 
+                                    <label>Machine type</label><span></span>
+                                    <input class="form-control" type="text" id="machine_type" name="type" placeholder="Machine Type"> 
                                     <br>
-                                    <label>Material Amount</label><span></span>
-                                    <input  class="form-control" id="restrictions"></select>
+                                    <label>Machine Restrictions</label><span></span>
+                                    <input  class="form-control" id="restrictions" placeholder="Restrictions">
                                     <br>
                                     
                                     
-                                    <button id="add_to_queue_button" onclick="addTo3DQueueButton()">Add to queue</button>
-                                </div> -->
+                                    <button id="add_to_list_button" onclick="addToMListButton()">Add Machine</button>
+                                    <button id="cancel_add_button" onclick="addCancelButton()">Cancel</button>
+                                </div>
                             </body>
                         </div>
                         <div id="menu1" class="tab-pane fade">
