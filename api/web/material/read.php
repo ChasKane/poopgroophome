@@ -91,7 +91,7 @@ if (isset($data->material_name)) {
 	$num = $stmt->rowCount();
 
 	if($num>0){
-		$threedmaterials["materialnames"] = array();
+		$threedmaterials["threedmaterials"] = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			extract($row);
@@ -100,7 +100,7 @@ if (isset($data->material_name)) {
 				'material_name' => $material_name
 			);
 
-			array_push($threedmaterials["materialnames"], $threedmaterial);
+			array_push($threedmaterials["threedmaterials"], $threedmaterial);
 		}
 
 		http_response_code(200);
