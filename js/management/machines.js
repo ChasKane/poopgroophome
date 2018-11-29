@@ -1,11 +1,11 @@
 //meep
 // most functions for machines tab
 
-var url = "http://104.248.113.22";
+var url = "http://104.248.113.22/";
 
 function getMachineList() {
 	$.ajax({
-		url : url + "/api/web/machine/read.php",
+		url : url + "api/web/machine/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			console.log(response);
@@ -69,7 +69,7 @@ async function updateMachine(newStatus, id) {
 
 	var retval;
 	retval = await $.ajax({
-		url : url + "/api/web/machine/updatestatus.php",
+		url : url + "api/web/machine/updatestatus.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
@@ -156,7 +156,7 @@ function editCancelButton() {
 async function editMDataSend(payload) {
 	console.log(payload);
 	var retval = await $.ajax({
-		url : url + "/api/web/machine/update.php",
+		url : url + "api/web/machine/update.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
@@ -201,7 +201,7 @@ function addCancelButton() {
 async function addMachineToList(payload) {
 	console.log(payload);
 	var retval = await $.ajax({
-		url : url + "/api/web/machine/create.php",
+		url : url + "api/web/machine/create.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
