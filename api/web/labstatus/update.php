@@ -12,18 +12,15 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->student_id)
-	|| !isset($data->date_selected)
-	|| !isset($data->time_in)
-	|| !isset($data->time_out)) {
+if (!isset($data->student_id)) {
 	http_response_code(400);
 	return;
 }
 
-$query = "UPDATE Lab_Status SET student_id=:v1 WHERE student_id=:v1";
+$query = "UPDATE Lab_Status SET time_out=NOW() WHERE student_id=:v1";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute([':v1' => $data->student_id,':v2' => $data->date_selected,':v3' => $data->time_in,':v4' => $data->time_out])) {
+if (!$stmt->execute([':v1' => $data->student_id])) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
