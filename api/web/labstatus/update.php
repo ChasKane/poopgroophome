@@ -17,7 +17,7 @@ if (!isset($data->student_id)) {
 	return;
 }
 
-$query = "UPDATE Lab_Status SET time_out=NOW() WHERE student_id=:v1 AND date_added=CURDATE() AND time_out=NULL";
+$query = "UPDATE Lab_Status SET time_out=NOW() WHERE student_id=:v1 AND date_added=CURDATE() AND time_out IS NULL";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->student_id])) {
