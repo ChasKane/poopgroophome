@@ -6,7 +6,6 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/database.php';
-include_once '../objects/3dprint_queue.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -46,15 +45,16 @@ if ($data->status == "Done") {
 		return;
 	}
 
-	$query = "UPDATE 3DMaterial_Graph SET current_amount=current_amount-:v1 WHERE material_name=:v2";
+	// $query = "UPDATE 3DMaterial_Graph SET current_amount=current_amount-:v1 WHERE material_name=:v2";
+	$query = "INSERT INTO 3DMaterial_Graph VALUES (:v1, CURDATE(), CURTIME(), :v2)"
 	$stmt = $db->prepare($query);
-	if (!$stmt->execute([':v1' => $data->material_amt, ':v2' => $data->material_name])) {
+	if (!$stmt->execute([':v1' => $data->material_name, ':v2' => $data->material_amt])) {
 		http_response_code(503);
 		echo json_encode($stmt->errorInfo());
 		return;
 	}
 
-	if (!$stmt->execute([':v1' => $data->soluble_amt, ':v2' => $data->soluble_name])) {
+	if (!$stmt->execute([':v1' => $data->soluble_name, ':v2' => $data->soluble_amt])) {
 		http_response_code(503);
 		echo json_encode($stmt->errorInfo());
 		return;

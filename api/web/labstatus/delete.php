@@ -12,15 +12,12 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->student_id)
-	|| !isset($data->date_selected)
-	|| !isset($data->time_in)
-	|| !isset($data->time_out)) {
+if (!isset($data->student_id)) {
 	http_response_code(400);
 	return;
 }
 
-$query = "DELETE FROM Lab_Status WHERE student_id=:v1";
+$query = "DELETE FROM Lab_Status WHERE student_id=:v1 AND date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->student_id])) {

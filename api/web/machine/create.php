@@ -19,7 +19,7 @@ if (!isset($data->name)
 	return;
 }
 
-$query = "INSERT INTO Machine VALUES (null,:v1,:v2,:v3,NOW(),'working')";
+$query = "INSERT INTO Machine VALUES (null,:v1,:v2,:v3,NOW(),'Working')";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->name,':v2' => $data->type,':v3' => $data->restrictions])) {

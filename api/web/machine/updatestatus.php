@@ -12,33 +12,25 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->material_name)) {
+if (!isset($data->machine_id)
+	|| !isset($data->status)) {
 	http_response_code(400);
 	return;
 }
 
-$query = "DELETE FROM 3DMaterial_Graph WHERE material_name=:v1";
+$query = "UPDATE Machine SET status=:v2 WHERE machine_id=:v1";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute([':v1' => $data->material_name])) {
+if (!$stmt->execute([':v1' => $data->machine_id,':v2' => $data->status])) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
 }
 
-$query = "DELETE FROM 3DMaterial WHERE material_name=:v1";
+$query = "SELECT * FROM Machine";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute([':v1' => $data->material_name])) {
-	http_response_code(503);
-	echo json_encode($stmt->errorInfo());
-	return;
-}
-
-$query = "SELECT material_name FROM 3DMaterial";
-$stmt = $db->prepare($query);
-
-if (!$stmt->execute([':v1' => $data->material_name])) {
+if (!$stmt->execute()) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
@@ -46,27 +38,30 @@ if (!$stmt->execute([':v1' => $data->material_name])) {
 
 $num = $stmt->rowCount();
 
-$threedmaterials = array();
+$machines = array();
+$machines["machines"] = array();
 
-if($num>0){
-	$threedmaterials["3dmaterials"] = array();
-
+if($num > 0) {
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-		$threedmaterial = array(
-			'material_name' => $material_name,
+		$machine=array(
+			"machine_id" => $machine_id,
+			"name" => $name,
+			"type" => $type,
+			"restrictions" => $restrictions,
+			"date_added" => $date_added,
+			"status" => $status
 		);
 
-		array_push($threedmaterials["3dmaterials"], $threedmaterial);
+		array_push($machines["machines"], $machine);
 	}
 
 	http_response_code(200);
 } else {
 	http_response_code(204);
-	return;
 }
 
-echo json_encode($threedmaterials);
+echo json_encode($machines);
 
 ?>

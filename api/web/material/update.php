@@ -43,7 +43,7 @@ $num = $stmt->rowCount();
 $threedmaterials = array();
 
 if($num>0){
-	$threedmaterials["3dmaterials"] = array();
+	$threedmaterials["threedmaterials"] = array();
 
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
@@ -55,7 +55,7 @@ if($num>0){
 			'num_semesters' => $num_semesters
 		);
 
-		array_push($threedmaterials["3dmaterials"], $threedmaterial);
+		array_push($threedmaterials["threedmaterials"], $threedmaterial);
 	}
 
 	http_response_code(200);
@@ -64,7 +64,7 @@ if($num>0){
 	return;
 }
 
-$query = "SELECT today,current_amount FROM 3DMaterial_Graph WHERE material_name=:v1";
+$query = "SELECT today,time_used,current_amount FROM 3DMaterial_Graph WHERE material_name=:v1";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->material_name])) {
@@ -83,6 +83,7 @@ if($num>0){
 
 		$graph = array(
 			'today' => $today,
+			'time_used' => $time_used,
 			'current_amount' => $current_amount
 		);
 

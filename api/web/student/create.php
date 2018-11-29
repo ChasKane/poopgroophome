@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->student_id)
+if (!isset($data->student_pid)
 	|| !isset($data->first_name)
 	|| !isset($data->last_name)
 	|| !isset($data->major_name)
@@ -21,10 +21,10 @@ if (!isset($data->student_id)
 	return;
 }
 
-$query = "INSERT INTO Student VALUES (:v1,:v2,:v3,:v4,:v5,0.0,0.0,null)";
+$query = "INSERT INTO Student VALUES (null,:v1,:v2,:v3,:v4,:v5,0.0,0.0,null)";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute([':v1' => $data->student_id,':v2' => $data->first_name,':v3' => $data->last_name,':v4' => $data->major_name,':v5' => $data->school_email])) {
+if (!$stmt->execute([':v1' => $data->student_pid,':v2' => $data->first_name,':v3' => $data->last_name,':v4' => $data->major_name,':v5' => $data->school_email])) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
