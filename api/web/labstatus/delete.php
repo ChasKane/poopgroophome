@@ -17,7 +17,7 @@ if (!isset($data->student_id)) {
 	return;
 }
 
-$query = "DELETE FROM Lab_Status WHERE student_id=:v1";
+$query = "DELETE FROM Lab_Status WHERE student_id=:v1 AND date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->student_id])) {

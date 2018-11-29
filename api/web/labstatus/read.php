@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT * FROM Lab_Status JOIN Student ON Lab_Status.student_id=Student.student_id";
+$query = "SELECT * FROM Lab_Status JOIN Student ON Lab_Status.student_id=Student.student_id WHERE Lab_Status.date_added=CURDATE() AND Lab_Status.time_out IS NULL";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
