@@ -245,7 +245,7 @@ async function addMachineToList(payload) {
 	return retval;
 }
 
-function editDeleteButton() {
+async function editDeleteButton() {
     var machine_id = document.getElementById("mach_id").getAttribute("lookup");
     var name = document.getElementById("machine_name_edit").value;
 
