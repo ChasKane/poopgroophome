@@ -306,6 +306,16 @@ function setInactive(id) {
 	}
 }
 
+function laserQueueSwap(id) {
+	if(id == "laser_cutting_queue") {
+		checkSwap("laser_cutting_queue", "laser_cutting_queue");
+		checkSwap("manually_add_to_queue", "laser_cutting_queue");
+	} else if(id == "manually_add_to_queue") {
+		checkSwap("laser_cutting_queue", "manually_add_to_queue");
+		checkSwap("manually_add_to_queue", "manually_add_to_queue");
+	}
+}
+
 // make sure the right elements are visible
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){

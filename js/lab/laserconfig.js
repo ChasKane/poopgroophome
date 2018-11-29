@@ -23,19 +23,34 @@ function getLaserConfigs() {
 
 function fillLaserConfig(configs) {
 	configs = configs.laser_configurations;
-	var newhtml = "";
+	var newHTML = "";
 
 	for(var idx in configs) {
-		newhtml += "<tr><td>" + configs[idx].material + "</td>";
-		newhtml += "<td>" + configs[idx].thickness + "</td>";
-		newhtml += "<td>" + configs[idx].power + "</td>";
-		newhtml += "<td>" + configs[idx].speed + "</td>";
-		newhtml += "<td>" + configs[idx].ppi + "</td>";
-		newhtml += "<td>" + configs[idx].notes + "</td>";
-		newhtml += "</tr>";
+		newHTML += "<tr><td>" + configs[idx].material + "</td>";
+		newHTML += "<td>" + configs[idx].task + "</td>";
+		newHTML += "<td>" + configs[idx].thickness + "</td>";
+		newHTML += "<td>" + configs[idx].power + "</td>";
+		newHTML += "<td>" + configs[idx].speed + "</td>";
+		newHTML += "<td>" + configs[idx].ppi + "</td>";
+		newHTML += "<td>" + configs[idx].notes + "</td>";
+		newHTML += "</tr>";
 	}
 	var elem = document.getElementById("configBody");
-	elem.innerHTML = elem;
+	elem.innerHTML = newHTML;
+}
+
+function configSwap(id) {
+	if(id == "config_table") {
+		checkSwap("config_table", "config_table");
+		checkSwap("add_config", "config_table");
+	} else if(id == "add_config"){
+		checkSwap("config_table", "add_config");
+		checkSwap("add_config", "add_config");
+	}
+}
+
+function addConfig() {
+	return;
 }
 
 $(document).ready(function() {
