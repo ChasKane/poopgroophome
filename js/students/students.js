@@ -1,5 +1,5 @@
 // for students page
-
+var url = "http://104.248.113.22/gavin/";
  
 
 function getStyle(id, name) {
@@ -11,8 +11,9 @@ function getStyle(id, name) {
 // gweneral functions
 //-------------------------------------
 function swapDisplay(div_name) {
-	console.log(div_name)
+	// given an id it will switch the display style from block to none or the reverse
 	var x = document.getElementById(div_name);
+	// attribute i set to keep track of the value of style.display
 	var display = x.getAttribute("vis");
     if (display == "" || display == "none") {
     	x.setAttribute("vis", "block")
@@ -24,6 +25,9 @@ function swapDisplay(div_name) {
 }
 
 function checkSwap(id, display_id) {
+	// given an id and another id that should be visible, if they are the same make sure to show
+	// display_id with swap
+	// otherwise make sure other id's style.display = "none"
 	var elem = document.getElementById(id);
 	if(id == display_id && elem.getAttribute("vis") == "none") {
 		swapDisplay(id);
@@ -49,102 +53,38 @@ function focusOn(element_Id) {
     }, 350);
 }
 
-async function getMajors() {
-	var retval = await $.ajax({
+// gets majors and loads them onto html of element id passed in
+function getMajors(id) {
+	$.ajax({
 		url : url + "api/web/major/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
-			retval = response;
+			loadMajors(response, id)
 		}
 	});
 	return retval;
-	//retval = retval.then(result => result.data);
 }
 
-//-------------------------------------
-// club functions
-//-------------------------------------
-async function getGroups(student_id) {
-	payload = {
-		"student_id" : student_id
-	}
+function loadMajors(majors, id) {
+	majors = majors.majors;
+	var element = document.getElementById(id);
+	var newHTML = "";
 
-	var retval = await $.ajax({
-		url : url + "api/web/student_club/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		},
-		error : function(response, tStatus, responseCode) {
-			if(responseCode == 404) {
-				return null;
-			}
-		}  
-	});
-	return retval;
-}
-
-async function removeFromClub(studentID, clubName) {
-	payload = {
-		"student_id" : studentID,
-		"club_name" : clubName
-	};
-	await $.ajax({
-		url : url + "api/web/student_club/delete.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
+	for(var idx in majors) {
+		if(majors[idx].major_name == result.major_name) {
+			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
+		} else {
+			newHTML += "<option value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
 		}
-	});
-}
-
-function removefromClubButton(event) {
-	var student_name = document.getElementById("fname").value;
-	var eventTarg = event.target;
-	var clubName = eventTarg.parentElement.getAttribute("club");
-	
-	getStudent(student_name).then(function(result) {
-		var student_id = result.students[0].student_id;
-		removeFromClub(student_id, clubName).then(function() {
-			loadStudentProfile();
-		});
-	});
-}
-
-async function addToClub(student_id, club_name) {
-	payload = {
-		"student_id" : student_id,
-		"club_name" : club_name
 	}
-
-	await $.ajax({
-		url : url + "api/web/student_club/delete.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		}
-	});
+	element.innerHTML = newHTML;
 }
 
-function addToClubButton(event) {
-	var student_name = document.getElementById("name").innerHTML;
-	var eventTarg = event.target;
-	var club_name = eventTarg.getAttribute("club");
-	
-	getStudent(student_name).then(function(result) {
-		var student_id = result.student_id;
-		removeFromClub(student_id, club_name).then(function() {
-			loadStudentProfile();
-		});
-	});
-}
 
 //-------------------------------------
 // student functions
 //-------------------------------------
+// returns json of all students in db
 async function getAllStudents() {
 	var retval = await $.ajax({
 		url : url + "api/web/student/read.php",
@@ -156,11 +96,13 @@ async function getAllStudents() {
 	return retval;
 }
 
+// loads students into table on the page
 async function loadAllStudents() {
 	var students = await getAllStudents();
 	var newHTML = "";
 	students = students.students;
 
+	// for each student add a table row and 4 columns for each piece of information
 	for(var idx in students) {
 		newHTML += "<tr id='row" + idx + "' ondblclick='loadStudentProfile(event)'>";
 		newHTML += "<td ondbclick='loadStudentProfile(event)'>" + students[idx].first_name + "</td>";
@@ -170,43 +112,16 @@ async function loadAllStudents() {
 		newHTML += "</tr>"
 	}
 	var element = document.getElementById("all_students_body");
+	// store the newly made html in the actuaal element on the page
 	element.innerHTML = newHTML;
 	swapStudentsHTML("all_students");
 }
 
-async function getStudent(input) {
-	payload = {
-		"query_field" : input
-	}
-
-	var retval = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-		}
-	});
-	return retval;
-}
-
 function loadAddStudent() {
-	getMajors().then(function(result) {
-		var majors = result.majors;
-		var element = document.getElementById("add_major_profile");
-		var newHTML = "";
-
-		for(var idx in majors) {
-			if(majors[idx].major_name == result.major_name) {
-				newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
-			} else {
-				newHTML += "<option value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
-			}
-		}
-		element.innerHTML = newHTML;
-	});
+	getMajors("add_major_profile");
 }
 
+// loads a students information from db onto the page to be edited/viewed
 async function loadStudentProfile(event) {
 	var student;
 	// if there was no event then assume info wll be on mains students page
@@ -229,20 +144,11 @@ async function loadStudentProfile(event) {
 	elem.value = result.last_name;
 	elem = document.getElementById("email");
 	elem.value = result.school_email;
+	elem = document.getElementById("student_profile");
+	elem.setAttribute("student_id", result.student_id);
 
-	// fill in majors dropbown
-	var majors = await getMajors();
-	majors = majors.majors;
-	var newHTML = "";
-	for(var idx in majors) {
-		if(majors[idx].major_name == result.major_name) {
-			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
-		} else {
-			newHTML += "<option value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
-		}
-	}
-	elem = document.getElementById("major_profile");
-	elem.innerHTML = newHTML;
+	// fill in majors dropdown
+	getMajors("major_profile");
 
 	// fill in materials used
 	elem = document.getElementById("material_used");
@@ -303,6 +209,7 @@ function addStudent(event) {
 	});
 }
 
+// collects updated information and sends it to the db
 async function updateStudent() {
 	var fname = document.getElementById("fname").value;
 	var lname = document.getElementById("lname").value;
@@ -310,13 +217,15 @@ async function updateStudent() {
 	var major = document.getElementById("major_profile");
 	var mat_used = document.getElementById("material_used");
 	var sol_used = document.getElementById("soluble_used");
+	var student_id = document.getElementById("student_profile");
+	student_id = student_id.getAttribute("stu_id");
 
 	major = major.options[major.selectedIndex].value;
 	mat_used = mat_used.getAttribute("value");
 	sol_used = sol_used.getAttribute("value");
 
 	var payload = { 
-		"query_field" : fname
+		"query_field" : student_id
 	};
 
 	var student = await $.ajax({
@@ -349,45 +258,20 @@ async function updateStudent() {
 	});
 }
 
-//-----------------------------------------
-// Current Students
-//-----------------------------------------
-
-function getCurrentStudents() {
-	$.ajax({
-	    url : url + "api/web/labstatus/read.php",
-	    type : "POST",
-	    success : function(response, tStatus, responseCode) {
-	    	showCurrentStudents(response); 
-	    },
-	    error : function(response, tStatus, responseCode) {
-	    	return responseCode.status; 
-		}
-	});
+function gotoLaserQueue() {
+	var student_id = document.getElementById("student_profile");
+	student_id = student_id.getAttribute("student_id");
+	document.location.href = "http://104.248.113.22/html/lab/Laser_Cutter.html#student_id=" + student_id;
 }
 
-function showCurrentStudents(currentStudents) {
-	currentStudents = currentStudents.lab_status;
-	var newHTML = "";
-
-	for(var idx in currentStudents) {
-		newHTML += "<tr><td>" + currentStudents[idx].first_name + "</td><td>" + currentStudents[idx].last_name + "</td><span class='close'>&times</span></tr>";
-	}
-	console.log(newHTML);
-	var elem = document.getElementById("current_table_body");
-	elem.innerHTML = newHTML;
-}
 
 //-----------------------------------------
-
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
         href = this.getAttribute('href');        
         if(href == "#home") {
             swapStudentsHTML("main_student");
-        } else if(href == "#menu2") {
-            getCurrentStudents();
         } 
     });
 });

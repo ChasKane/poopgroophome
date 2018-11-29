@@ -13,8 +13,11 @@
             
 
             
-            <script type="text/javascript" src="/js/students/currentstudents.js"></script>
-            
+            <script src="/js/students/currentstudents.js"></script>
+            <script src="../../js/students/students.js"></script>
+            <script src="../../js/students/majors.js"></script>
+            <script src="../../js/students/groupsandclubs.js"></script>
+            <script src="../../js/common.js"></script>
             <style>
               * {
                 box-sizing: border-box;
@@ -56,79 +59,6 @@
               
               .close:hover {background: #bbb;}
 
-
-
-            /* set color of navigation */
-            .sidenav {
-                background-color:rgb(204, 0, 0);
-                height: 100%;
-                width: 240px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                overflow-x: hidden;
-            }
-            
-            .nav-selections {
-                font-size: x-large;
-            }
-
-            .nav-sub-selections {
-                font-size: large;
-            }
-
-            /* .main {
-                margin-left: 160px;
-                padding: 0px 10px;
-            } */
-
-            @media screen and (max-height: 450px) {
-                .sidenav {padding-top: 15px;}
-            }
-
-            /*Mehoy*/
-            .b-color-1 {
-                background-color:rgb(204, 0, 0);
-            }
-
-            .b-color-2 {
-                background-color:rgb(199, 199, 199);
-            }
-            
-            .b-color-3 {
-                background-color:rgb(255, 255, 255);
-            }
-
-            .b-color-4 {
-                background-color:rgb(199, 199, 199);
-            }
-
-            .color-1 {
-                color:rgb(204, 0, 0);
-            }
-
-            .color-2 {
-                color:rgb(199, 199, 199);
-            }
-
-            .color-3 {
-                color:rgb(255, 255, 255);
-            }
-
-            .color-4 {
-                color:rgb(199, 199, 199);
-            }
-
-            .hidden {
-                display: "none";
-            }
-
-            .custom-container-fluid {
-                padding-left: 260px;
-                padding-right: 50px;
-            }
-
             table, th, td {
     			border: 1px solid black;
 			}
@@ -150,7 +80,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Students</a></li>
                     <li><a data-toggle="tab" href="#menu1" onclick="getcurrentstudents();">Current Students</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Groups and Clubs</a></li>
+                    <li><a data-toggle="tab" href="#menu2" onclick="loadClubTable()">Groups and Clubs</a></li>
                     <li><a data-toggle="tab" href="#menu3">Majors</a></li>
                 </ul>
                     
@@ -197,7 +127,7 @@
                         </div>
                     	
                     	
-            	        <div id="student_profile" vis="none" style="display: none;">
+            	        <div id="student_profile" student_id="" vis="none" style="display: none;">
                             <div id="rcorners1">
                                 <form action="/action_page.php">
                 	                <label for="fname">First Name </label>
@@ -236,6 +166,8 @@
             	            </div>
             	            <button class="btn btn-default" onclick="swapStudentsHTML('main_student')">Back</button>
                             <button class="btn btn-default" onclick="updateStudent()">Submit Changes</button>
+                            <button class="btn btn-default" onclick="gotoLaserQueue()">Add Laser Queue</button>
+                            <button class="btn btn-default" onclick="goto3DQueue()">Add 3D Queue</button>
             	        </div>
 
             	        <div id="all_students" vis="none" style="display: none;">
@@ -272,7 +204,7 @@
                                     
                     <!-- Groups and Clubs -->
                     <div id="menu2" class="tab-pane fade">
-                        <div class="well b-color-3">
+                        <div class="well b-color-3 container-fluid">
                             <h3>Groups/Clubs</h3>
                             <div class="col-xs-6">
                                 <div class="table-responsive">
@@ -320,7 +252,7 @@
                                             <td>Majors</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="major_table" style="min-height: 31px">
+                                    <tbody id="major_table" current_major="" style="min-height: 31px">
                                         
                                     </tbody>
                                 </table>
@@ -328,6 +260,7 @@
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
                             <button onclick="addMajor();">Add Major</button>
                             <button onclick="getMajors();">Show Majors</button>
+                            <button onclick="deleteMajor()">Delete Selected Major</button>
                         </div>
                         
                     </div>
@@ -355,7 +288,7 @@
         /*loop thru html elements*/
         z = document.getElementsByTagName("*");
 
-        for (i = 0; i < z.length; i++) 
+        for (i = 0; i < z.length; i++)
         {
             elmnt = z[i];
 
@@ -410,8 +343,5 @@
     });
 
         
-</script>       
-<script src="../../js/students/students.js"></script>
-<script src="../../js/students/majors.js"></script>
-<script src="../../js/students/groupsandclubs.js"></script>
+</script> 
 </html>
