@@ -339,10 +339,10 @@
         var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
 
         /*function that includes html*/
-        function includeHTML(arg)
+        window.onload = function includeHTML()
         {
             var z, i, elmnt, file, xhttp, id;
-            file = arg
+            file = '../../html/Menu_Bar.html'
 
             /*loop thru html elements*/
             z = document.getElementsByTagName("*");
