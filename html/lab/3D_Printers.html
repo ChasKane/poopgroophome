@@ -347,6 +347,8 @@
             /*loop thru html elements*/
             z = document.getElementsByTagName("*");
 
+            getLabTechs('tech_select');
+
             console.log("in includeHTML");
             for (i = 0; i < z.length; i++) 
             {
@@ -375,8 +377,6 @@
                 }
             }
         }
-
-        window.onload = getLabTechs('tech_select')
 
         // Pop up function for confirmations and alerts
         function modPop(arg)
