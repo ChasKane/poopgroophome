@@ -107,6 +107,7 @@ function editMachine(machine_id) {
     {
         if (machines[idx].machine_id == machine_id)
         {
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             document.getElementById("mach_id").innerHTML = machines[idx].machine_id;
             document.getElementById("mach_id").setAttribute("lookup", machines[idx].machine_id);
             document.getElementById("machine_name_edit").setAttribute("placeholder", machines[idx].name);
