@@ -17,7 +17,7 @@ function getMachineList() {
 	});
 }
 
-function editMachine(machine_id) {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+function editMachine(machine_id) {
     $.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
@@ -43,7 +43,6 @@ function fillMachineTable(object) {
 	var newInnerHTML = "";
     var i = 0;
     var status;
-    var edit_icon = ""
 	
 	for (var idx in elements) {
         console.log("1 mech")
@@ -71,7 +70,6 @@ function fillMachineTable(object) {
 	}
 	console.log(newInnerHTML);
     document.getElementById("tableBody").innerHTML = newInnerHTML; 
-    //document.getElementsByName("edit_icon").setAttribute("class", "glyphicon glyphicon-pencil");
 }
 
 async function updateMachine(newStatus, id) {
@@ -96,7 +94,7 @@ async function updateMachine(newStatus, id) {
 	return retval;
 }
 
-// might have issue <><><><><><><><><><><><><><><>
+// might have issue <><><><><><><><><><><><><><><> but none found yet
 function changeFunc(event) {
 	// console.log(event.target.getAttribute("oldvalue"))
 	var targ = event.target;
@@ -106,7 +104,6 @@ function changeFunc(event) {
         targ.setAttribute("oldValue", targ.value);
         var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[2];
         updateMachine(targ.value, elem.innerHTML)
-        // tell firebase to notify next 2 people
     } else {
         console.log(targ.getAttribute("oldvalue"));
         targ.value = targ.getAttribute("oldvalue");
@@ -121,7 +118,7 @@ function editMachine2(machine_id, obj) {
     {
         if (machines[idx].machine_id == machine_id)
         {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            console.log("setting att.");
             document.getElementById("mach_id").innerHTML = machines[idx].machine_id;
             document.getElementById("mach_id").setAttribute("lookup", machines[idx].machine_id);
             document.getElementById("machine_name_edit").setAttribute("placeholder", machines[idx].name);
