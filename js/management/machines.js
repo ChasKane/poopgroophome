@@ -114,6 +114,7 @@ function changeFunc(event) {
 
 function editMachine(machine_id) {
     var obj = getMachineID2(); //AAAAAAAAAAAAAA
+    console.log(obj);
     var machines = obj.machines;
 
     for (var idx in machines)
@@ -128,7 +129,7 @@ function editMachine(machine_id) {
             document.getElementById("restrictions_edit").setAttribute("placholder", machines[idx].restrictions);
         }
     }
-    console.log(obj);
+    
     
 	checkSwap("edit_Maching_form", "edit_Maching_form");
 	checkSwap("machine_list_block", "edit_Maching_form");
