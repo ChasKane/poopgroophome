@@ -9,10 +9,23 @@ function getMachineList() {
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			console.log(response);
-			fillMachineTable(response);
+            fillMachineTable(response);
 		},
 		error : function() {
 			console.log("there be an error");
+		}
+	});
+}
+
+async function getMachineID2() {
+	var retval = await $.ajax({
+		url : url + "api/web/machine/read.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+			return response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
 		}
 	});
 }
@@ -100,7 +113,7 @@ function changeFunc(event) {
 }
 
 function editMachine(machine_id) {
-    var obj = getMachineID();
+    var obj = getMachineID2();
     var machines = obj.machines;
 
     for (var idx in machines)
@@ -126,7 +139,7 @@ async function editConfirmButton() {
 	var machine_type = document.getElementById("machine_type").value;
     var restrictions = document.getElementById("restrictions").value;
     var machine_id = document.getElementById("mach_id").getAttribute("lookup").value;
-    var obj = getMachineID();
+    var obj = getMachineID2();
     var machines = obj.machines;
 
     for (var idx in machines)
