@@ -43,7 +43,7 @@ $num = $stmt->rowCount();
 $threedmaterials = array();
 
 if($num>0){
-	$threedmaterials["3dmaterials"] = array();
+	$threedmaterials["threedmaterials"] = array();
 
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
@@ -52,7 +52,7 @@ if($num>0){
 			'material_name' => $material_name,
 		);
 
-		array_push($threedmaterials["3dmaterials"], $threedmaterial);
+		array_push($threedmaterials["threedmaterials"], $threedmaterial);
 	}
 
 	http_response_code(200);
