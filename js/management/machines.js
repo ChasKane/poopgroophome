@@ -115,7 +115,7 @@ function editMachine(machine_id) {
             document.getElementById("restrictions_edit").setAttribute("placholder", machines[idx].restrictions);
         }
     }
-    console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEHHH???");
+    console.log(obj.machines);
     
 	checkSwap("edit_Maching_form", "edit_Maching_form");
 	checkSwap("machine_list_block", "edit_Maching_form");
