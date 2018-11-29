@@ -18,17 +18,21 @@ function getMachineList() {
 }
 
 function getMachineID2() {//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-	$.ajax({
+    var result;
+    
+    $.ajax({
 		url : url + "api/web/machine/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
             console.log(response);
-			return response;
+			result = response;
 		},
 		error : function() {
 			console.log("there be an error");
 		}
-	});
+    });
+    
+    return result;
 }
 
 function fillMachineTable(object) {
