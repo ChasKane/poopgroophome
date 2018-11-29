@@ -161,6 +161,7 @@ async function editConfirmButton() {
                         "status" : machines[idx].status
                     };
                 
+                    console.log("here i am");
                     var retval = await editMDataSend(payload);
                     checkSwap("machine_list_block", "machine_list_block");
                     checkSwap("edit_Maching_form", "machine_list_block");
