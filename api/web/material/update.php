@@ -64,7 +64,7 @@ if($num>0){
 	return;
 }
 
-$query = "SELECT today,current_amount FROM 3DMaterial_Graph WHERE material_name=:v1";
+$query = "SELECT today,time_used,current_amount FROM 3DMaterial_Graph WHERE material_name=:v1";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute([':v1' => $data->material_name])) {
@@ -83,6 +83,7 @@ if($num>0){
 
 		$graph = array(
 			'today' => $today,
+			'time_used' => $time_used,
 			'current_amount' => $current_amount
 		);
 

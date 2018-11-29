@@ -1,3 +1,5 @@
+
+
 DROP DATABASE innovate_dev_db;
 CREATE DATABASE innovate_dev_db;
 
@@ -45,8 +47,6 @@ CREATE TABLE Lab_Status (
 	time_in DATETIME NOT NULL,
 	time_out DATETIME,
 
-	PRIMARY KEY (student_id, time_in),
-
 	FOREIGN KEY (student_id)
 		REFERENCES Student(student_id)
 );
@@ -82,20 +82,6 @@ CREATE TABLE Lab_Tech (
 
 	PRIMARY KEY (tech_id)
 );
-
-
-
-CREATE TABLE Tech_Schedule (
-	tech_id int NOT NULL UNIQUE,
-	day int NOT NULL,
-	time_in TIME NOT NULL,
-	time_out TIME NOT NULL,
-
-	FOREIGN KEY (tech_id)
-		REFERENCES Lab_Tech(tech_id)
-);
-
-
 
 
 CREATE TABLE Lab_Inventory (
@@ -205,7 +191,7 @@ CREATE TABLE Machine (
 	type VARCHAR(64) NOT NULL,
 	restrictions TEXT,
 	date_added DATETIME NOT NULL,
-	status VARCHAR(64) DEFAULT 'working' CHECK (status IN ('working', 'broken', 'maintenance')),
+	status VARCHAR(64) DEFAULT 'Working' CHECK (status IN ('Working', 'Broken', 'Maintenance')),
 
 	PRIMARY KEY (machine_id)
 );
@@ -278,16 +264,15 @@ CREATE TABLE 3DMaterial (
 CREATE TABLE 3DMaterial_Graph (
 	material_name VARCHAR(64) NOT NULL,
 	today DATE NOT NULL,
+	time_used TIME NOT NULL,
 	current_amount real NOT NULL,
-
-	PRIMARY KEY (material_name, today),
 
 	FOREIGN KEY (material_name)
 		REFERENCES 3DMaterial(material_name)
 );
 
 CREATE TABLE Laser_Configuration (
-  config_id int NOT NULL AUTO_INCREMENT,
+  	config_id int NOT NULL AUTO_INCREMENT,
 	material VARCHAR(64) NOT NULL,
 	tech_id int NOT NULL,
 	thickness real NOT NULL,
