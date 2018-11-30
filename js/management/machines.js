@@ -367,8 +367,38 @@ async function addFAQToList(payload) {
 
 function editFAQ(faq_id) {
     document.getElementById("FAQ_edit_form").setAttribute("lookup", faq_id);
+    editFAQGetFiller(faq_id);
     checkSwap("FAQ_edit_form", "FAQ_edit_form");
 	checkSwap("FAQ_list", "FAQ_edit_form");
+}
+
+function editFAQGetFiller(question_id) {
+    $.ajax({
+		url : url + "api/web/faq/read.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+            console.log(response);
+			editFAQFillHolder(question_id, response);
+		},
+		error : function() {
+			console.log("there be an error");
+		}
+    });
+}
+
+function editFAQFillHolder(obj) {
+    console.log(obj);
+    var faqs = obj.faqs;
+
+    for (var idx in faqs)
+    {
+        if (faqs[idx].question_id == question_id)
+        {
+            console.log("setting att.");
+            document.getElementById("edit_question").setAttribute("placeholder", faqs[idx].question);
+            document.getElementById("edit_answer").setAttribute("placeholder", faqs[idx].answer);
+        }
+    }
 }
 
 function editFAQCancelButton() {
