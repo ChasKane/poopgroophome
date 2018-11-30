@@ -285,7 +285,7 @@ async function deleteMachineFromList(payload) {
 
 function getFAQList() {
 	$.ajax({
-		url : url + "api/web/machine/read.php",
+		url : url + "api/web/faq/read.php",
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			console.log(response);
