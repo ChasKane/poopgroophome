@@ -386,7 +386,7 @@ function editFAQGetFiller(question_id) {
     });
 }
 
-function editFAQFillHolder(obj) {
+function editFAQFillHolder(question_id, obj) {
     console.log(obj);
     var faqs = obj.faqs;
 
