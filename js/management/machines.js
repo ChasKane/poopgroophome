@@ -313,7 +313,7 @@ function fillFAQList(object) {
         console.log("meep?")
         
 
-		newInnerHTML += '<a id="faq'+ (i++) + '" class="list-group-item active">';
+		newInnerHTML += '<a id="faq'+ (i++) + '" class="list-group-item">';
 		newInnerHTML += '<h4 class="list-group-item-heading">'+elements[idx].question+'<button type="button" class="btn btn-default btn-xs" onclick="editFAQ('+elements[idx].question_id+');"><span class="glyphicon glyphicon-pencil"></span></button></h4>'+
         '<p class="list-group-item-text">'+elements[idx].answer+'</p>';
 
