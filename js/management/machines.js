@@ -366,7 +366,7 @@ async function addFAQToList(payload) {
 }
 
 function editFAQ(faq_id) {
-    document.getElementById("mach_id").setAttribute("lookup", faq_id);
+    document.getElementById("FAQ_edit_form").setAttribute("lookup", faq_id);
     checkSwap("FAQ_edit_form", "FAQ_edit_form");
 	checkSwap("FAQ_list", "FAQ_edit_form");
 }
@@ -379,7 +379,7 @@ function editFAQCancelButton() {
 async function editFAQButton() {
 	var question = document.getElementById("edit_question").value;
     var answer = document.getElementById("edit_answer").value;
-    var question_id = document.getElementById("edit_answer").getAttribute("lookup");
+    var question_id = document.getElementById("FAQ_edit_form").getAttribute("lookup");
     
     if (question == undefined || answer == undefined ||question == "" || answer == "")
     {
