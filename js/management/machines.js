@@ -467,7 +467,7 @@ async function editFAQDataSend(payload) {
 
 async function editFAQDeleteButton() {
     var question_id = document.getElementById("FAQ_edit_form").getAttribute("lookup");
-    var name = document.getElementById("edit_question").value;
+    var name = document.getElementById("edit_question").getAttribute("placeholder");
 
     if(confirm('Delete "'+ name +'" question?')) {
         var payload = {
@@ -500,8 +500,3 @@ async function deleteFAQFromList(payload) {
 	return retval;
 }
 
-//Load when page is loaded
-window.onload = function fistToLoad() {
-    getMachineList();
-    getFAQList();
-}
