@@ -282,3 +282,99 @@ async function deleteMachineFromList(payload) {
 
 	return retval;
 }
+
+function getFAQList() {
+	$.ajax({
+		url : url + "api/web/machine/read.php",
+		type : "POST",
+		success : function(response, tStatus, responseCode) {
+			console.log(response);
+            fillFAQList(response);
+		},
+		error : function() {
+			console.log("there be an error");
+		}
+	});
+}
+
+function fillFAQList(object) {
+    if(object == undefined) {
+		return;
+	}
+	console.log("FAQ list: ")
+	console.log(object)
+	//var elements = object.machines;
+
+
+	// var newInnerHTML = "";
+    // var i = 0;
+	
+	// for (var idx in elements) {
+    //     console.log("1 mech")
+    //     if (elements[idx].status == null)
+    //     {
+    //         status = statuses[0];
+    //     } else {
+    //         status = elements[idx].status;
+    //     }
+
+	// 	newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
+	// 	newInnerHTML += '<td>' + elements[idx].name + '<button type"button" class="btn btn-default btn-xs" onclick="editMachine('+ elements[idx].machine_id +');"><span name=edit_icon class="glyphicon glyphicon-pencil"></span></button></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
+	// 					'<td>' + elements[idx].restrictions + '</td>' + '<td>' + elements[idx].date_added + '</td>' + 
+	// 					'<td> <div class="selection">';
+		
+	// 	newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
+	// 	for (var idx2 in statuses) {
+	// 		if(statuses[idx2] == elements[idx].status){
+	// 			newInnerHTML += "<option value='" + statuses[idx2] + "' selected>" + statuses[idx2] + "</option>";
+	// 		} else {
+	// 			newInnerHTML += "<option value='" + statuses[idx2] + "'>" + statuses[idx2] + "</option>";
+	// 		}
+	// 	}
+	// 	newInnerHTML += "</select></tr>";
+	// }
+	// console.log(newInnerHTML);
+    // document.getElementById("tableBody").innerHTML = newInnerHTML; 
+}
+
+function addFAQ() {
+	checkSwap("FAQ_add_form", "FAQ_add_form");
+	checkSwap("FAQ_list", "FAQ_add_form");
+}
+
+function addFAQCancelButton() {
+    checkSwap("FAQ_list", "FAQ_list");
+	checkSwap("FAQ_add_form", "FAQ_list");
+}
+
+async function addToFAQButton() {
+	var question = document.getElementById("add_question").value;
+	var answer = document.getElementById("add_answer").value;
+
+	var payload = {
+		"question" : question,
+		"answer" : answer
+	};
+
+	var retval = await addFAQToList(payload);
+	checkSwap("FAQ_list", "FAQ_list");
+	checkSwap("FAQ_add_form", "FAQ_list");
+    fillFAQList(retval);
+}
+
+async function addFAQToList(payload) {
+    console.log(payload);
+	var retval = await $.ajax({
+		url : url + "api/web/faq/add.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}
