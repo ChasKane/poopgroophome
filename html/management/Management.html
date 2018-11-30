@@ -97,7 +97,7 @@
         }
     </style>
 
-    <body onload="includeHTML('../../html/Menu_Bar.html');">
+    <body>
 
         <div class="custom-container">
     
@@ -433,8 +433,9 @@
 
         //Load when page is loaded
         window.onload = function fistToLoad() {
-        getMachineList();
-        getFAQList();
-}
+            includeHTML('../../html/Menu_Bar.html');
+            getMachineList();
+            getFAQList();
+        }
     </script>
 </html>
