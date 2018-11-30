@@ -499,3 +499,9 @@ async function deleteFAQFromList(payload) {
 
 	return retval;
 }
+
+//Load when page is loaded
+window.onload = function fistToLoad() {
+    getMachineList();
+    getFAQList();
+}
