@@ -351,7 +351,7 @@ async function addToFAQButton() {
 async function addFAQToList(payload) {
     console.log(payload);
 	var retval = await $.ajax({
-		url : url + "api/web/faq/add.php",
+		url : url + "api/web/faq/create.php",
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
