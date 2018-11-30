@@ -303,38 +303,24 @@ function fillFAQList(object) {
 	}
 	console.log("FAQ list: ")
 	console.log(object)
-	//var elements = object.machines;
+	var elements = object.faqs;
 
 
-	// var newInnerHTML = "";
-    // var i = 0;
+	var newInnerHTML = "";
+    var i = 0;
 	
-	// for (var idx in elements) {
-    //     console.log("1 mech")
-    //     if (elements[idx].status == null)
-    //     {
-    //         status = statuses[0];
-    //     } else {
-    //         status = elements[idx].status;
-    //     }
+	for (var idx in elements) {
+        console.log("meep?")
+        
 
-	// 	newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ status +">";
-	// 	newInnerHTML += '<td>' + elements[idx].name + '<button type"button" class="btn btn-default btn-xs" onclick="editMachine('+ elements[idx].machine_id +');"><span name=edit_icon class="glyphicon glyphicon-pencil"></span></button></td>'+'<td>' + elements[idx].type + '</td>'+'<td>' + elements[idx].machine_id + '</td> '+
-	// 					'<td>' + elements[idx].restrictions + '</td>' + '<td>' + elements[idx].date_added + '</td>' + 
-	// 					'<td> <div class="selection">';
-		
-	// 	newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
-	// 	for (var idx2 in statuses) {
-	// 		if(statuses[idx2] == elements[idx].status){
-	// 			newInnerHTML += "<option value='" + statuses[idx2] + "' selected>" + statuses[idx2] + "</option>";
-	// 		} else {
-	// 			newInnerHTML += "<option value='" + statuses[idx2] + "'>" + statuses[idx2] + "</option>";
-	// 		}
-	// 	}
-	// 	newInnerHTML += "</select></tr>";
-	// }
-	// console.log(newInnerHTML);
-    // document.getElementById("tableBody").innerHTML = newInnerHTML; 
+		newInnerHTML += '<a id="faq'+ (i++) + '" class="list-group-item active">';
+		newInnerHTML += '<h4 class="list-group-item-heading">'+elements[idx].question+'<button type="button" class="btn btn-default btn-xs" onclick="editFAQ('+elements[idx].question_id+');"><span class="glyphicon glyphicon-pencil"></span></button></h4>'+
+        '<p class="list-group-item-text">'+elements[idx].answer+'</p>';
+
+		newInnerHTML += "</a>";
+	}
+	console.log(newInnerHTML);
+    document.getElementById("FAQ_listy").innerHTML = newInnerHTML; 
 }
 
 function addFAQ() {
