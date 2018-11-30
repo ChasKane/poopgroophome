@@ -373,7 +373,7 @@ function editFAQ(faq_id) {
 
 function editFAQCancelButton() {
     checkSwap("FAQ_list", "FAQ_list");
-	checkSwap("FAQ_add_form", "FAQ_list");
+	checkSwap("FAQ_edit_form", "FAQ_list");
 }
 
 async function editFAQButton() {
@@ -407,7 +407,7 @@ async function editFAQButton() {
                     console.log("here i am");
                     var retval = await editFAQDataSend(payload);
                     checkSwap("FAQ_list", "FAQ_list");
-                    checkSwap("FAQ_add_form", "FAQ_list");
+                    checkSwap("FAQ_edit_form", "FAQ_list");
                     fillFAQList(retval);
                 }
             }
