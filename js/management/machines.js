@@ -434,3 +434,38 @@ async function editFAQDataSend(payload) {
 
 	return retval;
 }
+
+async function editFAQDeleteButton() {
+    var question_id = document.getElementById("FAQ_edit_form").getAttribute("lookup");
+    var name = document.getElementById("edit_question").value;
+
+    if(confirm('Delete "'+ name +'" question?')) {
+        var payload = {
+            "question_id" : question_id
+        };
+
+        var retval = await deleteFAQFromList(payload);
+        checkSwap("FAQ_list", "FAQ_list");
+        checkSwap("FAQ_edit_form", "FAQ_list");
+        fillFAQList(retval);
+    } else {
+        console.log("Failed to delete.");
+    }
+}
+
+async function deleteFAQFromList(payload) {
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "api/web/faq/delete.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}
