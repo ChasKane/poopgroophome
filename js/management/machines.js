@@ -364,3 +364,73 @@ async function addFAQToList(payload) {
 
 	return retval;
 }
+
+function editFAQ(faq_id) {
+    document.getElementById("mach_id").setAttribute("lookup", faq_id);
+    checkSwap("FAQ_edit_form", "FAQ_edit_form");
+	checkSwap("FAQ_list", "FAQ_edit_form");
+}
+
+function editFAQCancelButton() {
+    checkSwap("FAQ_list", "FAQ_list");
+	checkSwap("FAQ_add_form", "FAQ_list");
+}
+
+async function editFAQButton() {
+	var question = document.getElementById("edit_question").value;
+    var answer = document.getElementById("edit_answer").value;
+    var question_id = document.getElementById("edit_answer").getAttribute("lookup");
+    
+    if (question == undefined || answer == undefined ||question == "" || answer == "")
+    {
+        alert("One or more fields unfilled.")
+        return;
+    }
+
+    $.ajax({
+		url : url + "api/web/faq/read.php",
+		type : "POST",
+		success : async function(response, tStatus, responseCode) {
+            console.log(response);
+            faqs = response.faqs;
+			for (var idx in faqs)
+            {
+                console.log(faqs[idx].question_id, question_id);
+                if (faqs[idx].question_id == question_id)
+                {
+                    var payload = {
+                        "question_id" : question_id,
+                        "question" : question,
+                        "answer" : answer
+                    };
+                
+                    console.log("here i am");
+                    var retval = await editFAQDataSend(payload);
+                    checkSwap("FAQ_list", "FAQ_list");
+                    checkSwap("FAQ_add_form", "FAQ_list");
+                    fillFAQList(retval);
+                }
+            }
+		},
+		error : function() {
+			console.log("there be an error");
+		}
+    });
+}
+
+async function editFAQDataSend(payload) {
+	console.log(payload);
+	var retval = await $.ajax({
+		url : url + "api/web/faq/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+		},
+		error : function(response, tStatus, responseCode) {
+			console.error(responseCode.status);
+		}
+	});
+
+	return retval;
+}
