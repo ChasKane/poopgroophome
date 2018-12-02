@@ -35,10 +35,10 @@ function editMajor(event) {
 
 function deleteMajorButton(event) {
 	var targ = event.target;
-	var major_name = targ.parentElement.parentElement.getElementsByTagName("td")[0].value;
+	var major_name = targ.parentElement.parentElement.getElementsByTagName("td")[0].innerHTML;
 
 	var payload = {
-		"major_name" : elem.getAttribute("current_major") 
+		"major_name" : major_name
 	};
 	console.log(payload);
 
