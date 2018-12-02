@@ -388,9 +388,9 @@
 
     //Load on page load
     window.onload = function fistToLoad() {
+        loadDropNow();//have dropdown active upon loading page
         includeHTML('../../html/Menu_Bar.html'); 
         loadClubTable();
-        loadDropNow();//have dropdown active upon loading page
         getMajors("major_profile");
         getMajors("add_major_profile");
     }
