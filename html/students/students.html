@@ -97,7 +97,7 @@
                                         <label class="col-sm-2 control-label">Find:</label>
                                         <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
                                             <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" autofocus>
-                                            <ul class="dropdown-menu"><!--Dropdown list-->
+                                            <ul id="dropdown_students" class="dropdown-menu"><!--Dropdown list-->
                                                 <li><a href="#">Hoopla</a></li>
                                                 <li><a href="#">Hoooopla</a></li>
                                                 <li><a href="#">HOOOOOOOOPLA</a></li>
@@ -333,6 +333,10 @@
   		// return;
     	   
     }
+
+    function loadDropNow() {
+    document.getElementById("dropdown_students").classList.toggle("show");
+    }
         
     $(document).ready(function() {
         $('.nav-tabs a').on('show.bs.tab', function(e){
@@ -351,6 +355,7 @@
     window.onload = function fistToLoad() {
             includeHTML('../../html/Menu_Bar.html'); 
             loadClubTable();
+            loadDropNow();
         }
 
         
