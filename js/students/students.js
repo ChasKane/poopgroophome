@@ -288,6 +288,7 @@ function keyAccept(e, id, func) {
 	var str = document.getElementById(id).value;
 	if(e.keyCode == 13) {
 		if(str.includes(";")){
+			console.log("should be calling func")
 			func();
 		}
 		return false;
