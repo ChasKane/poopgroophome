@@ -27,7 +27,7 @@ if (!$stmt->execute([':v1' => $data->major_name])) {
 }
 
 if ($stmt->rowCount() > 0) {
-	http_response_code(409);
+	http_response_code(202);
 	return;
 }
 
