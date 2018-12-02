@@ -346,6 +346,12 @@
         });
     });
 
+    $("#userCard_ID").submit(function(e) {
+        console.log("submitted")
+        console.log(e);
+        return false;
+    });
+
     //Load on page load
     window.onload = function fistToLoad() {
         includeHTML('../../html/Menu_Bar.html'); 

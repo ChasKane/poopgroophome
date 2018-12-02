@@ -127,7 +127,7 @@ function loadAddStudent() {
 async function loadStudentProfile(event) {
 	var student;
 	var searchBar = document.getElementById("userCard_ID");
-	// if there was no event then assume info wll be on mains students page
+	// if there was no event then assume info wll be on main students page
 	// otherwise info will be a row in all students table
 	if(event == undefined) {
 		student = student.value;
@@ -282,12 +282,16 @@ function goto3DQueue() {
 async function fillDropdown() {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById("userCard_ID");
+	if(input.value.charAt(0) == "%") {
+		return;
+	}
+
 	var students = await getStudent(input.value);
 	var newHTML = "";
 	students = students.students;
 
 	for (var idx = 0; idx < 5 && idx < students.length; idx++) {
-		newHTML += "<li><a student_id='" + students[idx].first_name + "' onclick='fillSearchBar(event)'>" + students[idx].first_name + " " + students[idx].first_name + "</a></li>"
+		newHTML += "<li><a student_id='" + students[idx].first_name + "' onclick='fillSearchBar(event)'>" + students[idx].last_name + " " + students[idx].first_name + "</a></li>"
 	}
 
 	dropdown.innerHTML = newHTML;
