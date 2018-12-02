@@ -29,7 +29,7 @@ if($num>0){
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-		$lab_hours = array(
+		$stuff = array(
 			'sunday_open' => $sunday_open,
 			'sunday_close' => $sunday_close,
 			'monday_open' => $monday_open,
@@ -46,7 +46,7 @@ if($num>0){
 			'saturday_close' => $saturday_close
 		);
 
-		$lab_hours["lab_hours"] = $lab_hours;
+		$lab_hours["lab_hours"] = $stuff;
 	}
 
 	http_response_code(200);
