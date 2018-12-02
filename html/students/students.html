@@ -374,7 +374,6 @@
             activeTab = $(this).attr('href').split('-')[1];        
             if(this.getAttribute('href') == "#menu1") {
                 console.log("clicked")
-                loadDropNow();//have dropdown active upon loading page
                 //focusOn("userCard_ID")
             } else if(this.getAttribute('href') == "#menu3") {
                 getMajorsTable();
@@ -391,6 +390,7 @@
     window.onload = function fistToLoad() {
         includeHTML('../../html/Menu_Bar.html'); 
         loadClubTable();
+        loadDropNow();//have dropdown active upon loading page
         getMajors("major_profile");
         getMajors("add_major_profile");
     }
