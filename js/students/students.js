@@ -295,10 +295,8 @@ async function fillDropdown(e) {
 
 	// ignores input if reading card and submits form when the enter key has been pressed
 	if(input.value.charAt(0) == "%" || key == 37) {
-		console.log("ignored");
 		return false;
 	}
-	console.log
 	var students = await getStudent(input.value);
 	var newHTML = "";
 	students = students.students;
@@ -319,6 +317,7 @@ function cardSwipeFind() {
 	str = str.split(" ")[0];
 	str = str.substring(str.length - 7, str.length)
 	input.setAttribute("student_id", str);
+	loadStudentProfile();
 	return;
 }
 
@@ -328,8 +327,6 @@ function fillSearchBar(event) {
 
 	var searchBar = document.getElementById("userCard_ID");
 	searchBar.value = target.innerHTML;
-	searchBar.setAttribute("student_id", target.getAttribute("student_id"));
-	loadStudentProfile();
 }
 
 //-----------------------------------------
