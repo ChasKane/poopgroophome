@@ -326,7 +326,7 @@ function cardSwipeFind() {
 	var str = input.value;
 	str = parseID(str);
 	fillStudentName(str);
-	laserQueueSwap(manually_add_to_queue);
+	laserQueueSwap("manually_add_to_queue");
 	return false;
 }
 
@@ -339,6 +339,11 @@ $(document).ready(function() {
             checkSwap("laser_cutting_queue", "laser_cutting_queue");
 			checkSwap("manually_add_to_queue", "laser_cutting_queue");
         	laserQueueButton();
+        }
+        if(href != "#menu1") {
+        	// clear form
+        	document.getElementById("student_name").value = "";
+        	document.getElementById("estimated_time").value = "";
         }
     });
 });

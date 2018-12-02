@@ -117,7 +117,6 @@ function hashCheck(href, func) {
 
 	func();
 	student_id = hash.split("=")[1];
-	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
 	fillStudentName(student_id);
 }
 
@@ -129,6 +128,7 @@ async function fillStudentName(student_id) {
 	}
 	student = student.students[0];
 
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student.student_id);
 	var elem = document.getElementById("student_name");
 	elem.value = student.first_name + " " + student.last_name;
 }
