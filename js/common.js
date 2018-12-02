@@ -160,3 +160,28 @@ function calcTime(initTime, timeAdd) {
 	retval = retval[0] + ":" + retval[1] + ":" + retval[2];
 	return retval;
 }
+
+function parseID(str) {
+	try {
+		console.log(str)
+		str = str.split("^")[2];
+		str = str.split(" ")[0];
+		str = str.substring(str.length - 7, str.length)
+	} catch(e) {
+		console.log(e);
+	}
+	return str;
+}
+
+function keyAccept(e, id, func) {
+	var str = document.getElementById(id).value;
+	if(e.keyCode == 13) {
+		if(str.includes(";")){
+			console.log("should be calling funcP")
+			func();
+		}
+		return false;
+	} else {
+		return true;
+	}
+}

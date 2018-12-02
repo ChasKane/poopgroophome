@@ -321,6 +321,15 @@ function laserQueueSwap(id) {
 	}
 }
 
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	fillStudentName(str);
+	laserQueueSwap(manually_add_to_queue);
+	return false;
+}
+
 // make sure the right elements are visible
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){

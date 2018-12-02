@@ -285,22 +285,9 @@ function goto3DQueue() {
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
-function keyAccept(e, id, func) {
-	var str = document.getElementById(id).value;
-	if(e.keyCode == 13) {
-		if(str.includes(";")){
-			console.log("should be calling funcP")
-			func();
-		}
-		return false;
-	} else {
-		return true;
-	}
-}
-
-async function fillDropdown(e) {
+async function fillDropdown(e, input_id) {
 	var dropdown = document.getElementById("dropdown");
-	var input = document.getElementById("userCard_ID");
+	var input = document.getElementById(input_id);
 	var key = e.keyCode;
 
 	// ignores input if reading card and submits form when the enter key has been pressed
@@ -317,18 +304,6 @@ async function fillDropdown(e) {
 
 	dropdown.innerHTML = newHTML;
 	return false;
-}
-
-function parseID(str) {
-	try {
-		console.log(str)
-		str = str.split("^")[2];
-		str = str.split(" ")[0];
-		str = str.substring(str.length - 7, str.length)
-	} catch(e) {
-		console.log(e);
-	}
-	return str;
 }
 
 function cardSwipeFind() {
