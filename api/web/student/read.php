@@ -22,7 +22,7 @@ if (isset($data->query_field)) {
 
 	if (count($boom) == 2) {
 		$query = $query . " WHERE first_name=:v1 AND last_name=:v2";
-		$stmt->prepare($query);
+		$stmt = $db->prepare($query);
 		$success = $stmt->execute([':v1' => $boom[0], ':v2' => $boom[1]]);
 	} else {
 		$data->query_field = '%' . $data->query_field . '%';
