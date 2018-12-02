@@ -350,8 +350,9 @@ function cardSwipeAdd() {
 	console.log(str)
 	str = str.split(" ")[0];
 	console.log(str)
-	var f_name = name.split("/")[1];
-	var l_name = name.split("/")[0];
+	var f_name = str.split("/")[1];
+	var l_name = str.split("/")[0];
+	conso
 
 	document.getElementById("add_fname").value = f_name;
 	document.getElementById("add_lname").value = l_name;
