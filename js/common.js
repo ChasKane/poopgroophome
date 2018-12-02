@@ -143,7 +143,7 @@ function calcTime(initTime, timeAdd) {
 		time[idx] = initTimeArray[idx] + timeAddArray[idx];
 
 		if(idx > 0) {
-			if(time[idx] > 60) {
+			if(time[idx] >= 60) {
 				time[idx] -= 60;
 				time[idx-1] += 1;
 				if(time[idx-1] < 10) {
@@ -213,7 +213,7 @@ async function fillDropdown(e, input_id) {
 	students = students.students;
 
 	for (var idx = 0; idx < 5 && idx < students.length; idx++) {
-		newHTML += "<li><a student_id='" + students[idx].student_id + "' onclick='fillSearchBar(event)'>" + students[idx].last_name + " " + students[idx].first_name + "</a></li>"
+		newHTML += "<li><a student_id='" + students[idx].student_id + "' onclick='fillSearchBar(event)'>" + students[idx].first_name + " " + students[idx].last_name + "</a></li>"
 	}
 
 	dropdown.innerHTML = newHTML;
