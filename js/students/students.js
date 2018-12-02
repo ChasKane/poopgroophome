@@ -278,7 +278,8 @@ function goto3DQueue() {
 }
 
 function keyAccept(e) {
-	if(e.keyCode == 13) {
+	var str = document.getElementById("userCard_ID").value;
+	if(e.keyCode == 13 && str.includes(";")) {
 		cardSwipeFind();
 		return false;
 	} else {
