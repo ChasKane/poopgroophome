@@ -230,8 +230,25 @@ async function addLaserQueueButton() {
 	var stu_name = document.getElementById("student_name");
 	stu_name = name.value;
 
+	if(href)
+
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
+	checkSwap("laser_cutting_queue", "manually_add_to_queue");
+	checkSwap("manually_add_to_queue", "manually_add_to_queue")
+}
+
+async function laserQueueHash() {
+	var hash = window.location.hash;
+	var student_id = hash.split("=");
+
+	console.log(student_id);
+	var student = getStudent(hash);
+	student = student.students;
+	console.log(student);
+
+	document.getElementById("manually_add_to_queue").setAttribute(hash);
+	document.getElementById("student_name").value = student.first_name + " " + student.last_name;
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue")
 }
