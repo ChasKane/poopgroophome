@@ -25,10 +25,10 @@ if (isset($data->query_field)) {
 		$stmt = $db->prepare($query);
 		$success = $stmt->execute([':v1' => $boom[0], ':v2' => $boom[1]]);
 	} else {
-		$data->query_field = '%' . $data->query_field . '%';
-		$query = $query . " WHERE student_pid=:v1 OR student_id=:v1 OR first_name=:v1 OR last_name=:v1";
+		$partial_match = '%' . $data->query_field . '%';
+		$query = $query . " WHERE student_pid=:v1 OR student_id=:v1 OR first_name LIKE :v2 OR last_name LIKE :v2";
 		$stmt = $db->prepare($query);
-		$success = $stmt->execute([':v1' => $data->query_field]);
+		$success = $stmt->execute([':v1' => $data->query_field, ':v2' => $partial_match]);
 	}
 } else {
 	$stmt = $db->prepare($query);
