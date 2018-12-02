@@ -150,5 +150,10 @@ $(document).ready(function() {
 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
             focusOn("userCard_ID");
         }
+        if(href != "#menu1") {
+        	// clear form
+        	clearInput3D();
+        	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
+        }
     });
 });

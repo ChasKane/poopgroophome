@@ -238,20 +238,24 @@ async function laserQueueHash() {
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {
-	var payload = {
-		"query_field" : student_name
-	}
-
-	var student_id = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function (response, tStatus, responseCode) {
-			return response;
+	var student_id;
+	if(location.hash != "") {
+		student_id = document.getElementById("manually_add_to_queue").getAttribute("student_id");
+	} else {
+		var payload = {
+			"query_field" : student_info
 		}
-	});
-	// student_id = student_id.student;
-	console.log("student_id: ")
+
+		student_id = await $.ajax({
+			url : url + "api/web/student/read.php",
+			type : "POST",
+			data : JSON.stringify(payload),
+			success : function (response, tStatus, responseCode) {
+				return response;
+			}
+		});
+	}
+		// student_id = student_id.student;
 	student_id = student_id.students[0].student_id;
 	console.log(student_id)
 
@@ -340,6 +344,7 @@ $(document).ready(function() {
         	// clear form
         	document.getElementById("student_name").value = "";
         	document.getElementById("estimated_time").value = "";
+        	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
 });
