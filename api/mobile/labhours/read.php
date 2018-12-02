@@ -24,6 +24,7 @@ if (!$stmt->execute([])) {
 $num = $stmt->rowCount();
 
 $lab_hours = array();
+$lab_hours["lab_hours"] = array();
 
 if($num>0){
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -54,6 +55,6 @@ if($num>0){
 	http_response_code(204);
 }
 
-echo json_encode($lab_hourss);
+echo json_encode($lab_hours);
 
 ?>
