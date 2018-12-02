@@ -136,7 +136,7 @@ $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
         href = this.getAttribute('href');        
-        if(href == "#menu1") {
+        if(href == "#home") {
         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
             focusOn("userCard_ID");
