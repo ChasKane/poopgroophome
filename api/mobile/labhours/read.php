@@ -23,11 +23,9 @@ if (!$stmt->execute([])) {
 
 $num = $stmt->rowCount();
 
-$lab_hourss = array();
+$lab_hours = array();
 
 if($num>0){
-	$lab_hourss["lab_hourss"] = array();
-
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
@@ -48,7 +46,7 @@ if($num>0){
 			'saturday_close' => $saturday_close
 		);
 
-		array_push($lab_hourss["lab_hourss"], $lab_hours);
+		$lab_hours["lab_hours"] $lab_hours;
 	}
 
 	http_response_code(200);
