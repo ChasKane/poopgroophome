@@ -352,11 +352,9 @@ function cardSwipeAdd() {
 	console.log(str)
 	var f_name = str.split("/")[1];
 	var l_name = str.split("/")[0];
-	f_name = f_name.toLowerCase();
-	f_name.charAt(0) = f_name.charAt(0).toUpperCase();
-	l_name = l_name.toLowerCase();
-	l_name.charAt(0) = l_name.charAt(0).toUpperCase();
-
+	f_name = f_name.charAt(0) + f_name.substring(1, f_name.length).toLowerCase();
+	l_name = l_name.charAt(0) + l_name.substring(1, l_name.length).toLowerCase();
+	
 
 	document.getElementById("add_fname").value = f_name;
 	document.getElementById("add_lname").value = l_name;
