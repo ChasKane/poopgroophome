@@ -281,7 +281,7 @@ function goto3DQueue() {
 
 function keyAccept(e) {
 	if(e.keyCode == 13) {
-		cardSwipeLoad();
+		cardSwipeFind();
 		return false;
 	} else {
 		return true;
@@ -311,13 +311,14 @@ async function fillDropdown(e) {
 	return false;
 }
 
-function cardSwipeLoad() {
+function cardSwipeFind() {
 	var input = document.getElementById("userCard_ID");
 	var str = input.value;
 
-	str = str.split("^")[1];
+	str = str.split("^")[2];
 	str = str.split(" ")[0];
-	str = str.substring(str.length - 8, str.length)
+	str = str.substring(str.length - 7, str.length)
+	input.setAttribute("student_id", str);
 	return;
 }
 
@@ -328,6 +329,7 @@ function fillSearchBar(event) {
 	var searchBar = document.getElementById("userCard_ID");
 	searchBar.value = target.innerHTML;
 	searchBar.setAttribute("student_id", target.getAttribute("student_id"));
+	loadStudentProfile();
 }
 
 //-----------------------------------------
