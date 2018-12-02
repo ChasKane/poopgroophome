@@ -280,7 +280,6 @@ function goto3DQueue() {
 }
 
 function keyAccept(e) {
-	console.log(e.keyCode);
 	if(e.keyCode == 13) {
 		return false;
 	} else {
@@ -295,9 +294,7 @@ async function fillDropdown(e) {
 
 	// ignores input if reading card and submits form when the enter key has been pressed
 	if(input.value.charAt(0) == "%") {
-		if(key == 13) {
-			cardSwipeLoad();
-		}
+		console.log("ignored");
 		return false;
 	}
 
