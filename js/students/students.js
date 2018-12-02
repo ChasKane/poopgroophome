@@ -126,15 +126,18 @@ function loadAddStudent() {
 // loads a students information from db onto the page to be edited/viewed
 async function loadStudentProfile(event) {
 	var student;
+	var searchBar = document.getElementById("userCard_ID");
 	// if there was no event then assume info wll be on mains students page
 	// otherwise info will be a row in all students table
 	if(event == undefined) {
-		student = document.getElementById("userCard_ID");
 		student = student.value;
-	} else {
+	} else if(searchBar.getAttribute("student_id") == ""){
 		var targ = event.target;
 		student = targ.parentElement.getElementsByTagName("td");
 		student = student[0].textContent;
+	} else {
+		student = searchBar.getAttribute("student_id");
+		searchBar.setAttribute("student_id", "");
 	}
 	
 	// fill in student info
@@ -274,6 +277,29 @@ function goto3DQueue() {
 	var student_id = document.getElementById("student_profile");
 	student_id = student_id.getAttribute("student_id");
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
+}
+
+async function fillDropdown() {
+	var dropdown = document.getElementById("dropdown");
+	var input = document.getElementById("userCard_ID");
+	var students = await getStudent(input);
+	var newHTML = "";
+	students = students.students;
+
+	for (var idx = 0; idx < 5 && idx < students.length; idx++) {
+		newHTML += "<li><a student_id='" + students[idx].first_name + "' onclick='fillSearchBar(event)'>" + students[idx].first_name + " " + students[idx].first_name + "</a></li>"
+	}
+
+	dropdown.innerHTML = newHTML;
+}
+
+function fillSearchBar(event) {
+	var target = event.target;
+	var student_id = target.getAttribute("student_id");
+
+	var searchBar = document.getElementById("userCard_ID");
+	searchBar.value = target.innerHTML;
+	searchBar.setAttribute("student_id", target.getAttribute("student_id"));
 }
 
 //-----------------------------------------
