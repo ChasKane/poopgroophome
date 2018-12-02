@@ -139,6 +139,10 @@ async function loadStudentProfile(event) {
 	
 	// fill in student info
 	result = await getStudent(student);
+	if(result == undefined) {
+		alert("There are no students of that name/id");
+		return
+	}
 	result = result.students[0];
 	var elem = document.getElementById("fname");
 	elem.value = result.first_name; 
@@ -189,7 +193,7 @@ function addStudent(event) {
 
 	console.log(student_id.value);
 	var payload = {
-		"student_id" : student_id.value,
+		"student_pid" : student_id.value,
 		"first_name" : fname.value,
 		"last_name" : lname.value,
 		"major_name" : major.value,
