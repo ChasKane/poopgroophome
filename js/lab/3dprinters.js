@@ -45,7 +45,6 @@ function fill3DPrinterQueue(object) {
 		}
 		newInnerHTML += "</select></tr>";
 	}
-	console.log(newInnerHTML);
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
@@ -115,19 +114,6 @@ async function addTo3DQueueButton() {
 	add3DQueue();
 }
 
-// input:
-// int machine_id
-// string:student_id
-// string: tech_id
-// time:estimated_time
-// string:part_name
-// string:file_path
-// string: material_name
-// string: soluable_name 
-// float:material_amt
-// float:soluble_amt
-// string:club_name
-
 async function add3DQueue(payload) {
 	console.log(payload);
 	var retval = await $.ajax({
@@ -143,6 +129,16 @@ async function add3DQueue(payload) {
 	});
 
 	return retval;
+}
+
+
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	fillStudentName(str);
+	manuallyAddQueue();
+	return false;
 }
 
 $(document).ready(function() {

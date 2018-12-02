@@ -2,7 +2,6 @@
 var url = "http://104.248.113.22/gavin/";
 
 function swapDisplay(div_name) {
-	console.log(div_name)
 	var x = document.getElementById(div_name);
 	var display = x.getAttribute("vis");
     if (display == "" || display == "none") {

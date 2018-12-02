@@ -33,12 +33,8 @@ async function getlaserqueue() {
 		success : function(response, tStatus, responseCode) {
 			console.log(response)
 			retval = response;
-		},
-		error : function() {
-			console.log("there be an error")
 		}
 	});
-	console.log(retval)
 	return retval;
 }
 
