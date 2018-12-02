@@ -56,7 +56,7 @@ function deleteMajorButton(event) {
 
 		});
 	} catch(error) {
-		if status == 409 {
+		if (status == 409) {
 			alert("Major not deleted: There are students in the Major.");
 		}
 	}
