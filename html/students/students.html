@@ -70,7 +70,7 @@
 
         </style>
     </head>
-    <body onload="includeHTML('../../html/Menu_Bar.html');">
+    <body>
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
     
@@ -341,6 +341,12 @@
             }
         });
     });
+
+    //Load on page load
+    window.onload = function fistToLoad() {
+            includeHTML('../../html/Menu_Bar.html'); 
+            loadClubTable();
+        }
 
         
 </script> 
