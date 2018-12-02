@@ -46,7 +46,7 @@ if($num>0){
 			'saturday_close' => $saturday_close
 		);
 
-		$lab_hours["lab_hours"] $lab_hours;
+		$lab_hours["lab_hours"] = $lab_hours;
 	}
 
 	http_response_code(200);
