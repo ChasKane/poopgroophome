@@ -54,6 +54,19 @@ function manuallyAddQueue() {
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
+	clearInput3D();
+}
+
+function clearInput3D() {
+	document.getElementById("student_name").value = "";
+	document.getElementById("estimated_time").value = "";
+	document.getElementById("part_name").value = "";
+	document.getElementById("file_path").value = "";
+	document.getElementById("material_name").value = "";
+	document.getElementById("soluble_name").value = "";
+	document.getElementById("material_amount").value = "";
+	document.getElementById("soluble_amount").value = "";
+	document.getElementById("club_name").value = "";
 }
 
 async function addTo3DQueueButton() {
