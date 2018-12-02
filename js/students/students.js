@@ -285,27 +285,6 @@ function goto3DQueue() {
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
-async function fillDropdown(e, input_id) {
-	var dropdown = document.getElementById("dropdown");
-	var input = document.getElementById(input_id);
-	var key = e.keyCode;
-
-	// ignores input if reading card and submits form when the enter key has been pressed
-	if(input.value.charAt(0) == "%" || key == 37) {
-		return false;
-	}
-	var students = await getStudent(input.value);
-	var newHTML = "";
-	students = students.students;
-
-	for (var idx = 0; idx < 5 && idx < students.length; idx++) {
-		newHTML += "<li><a student_id='" + students[idx].first_name + "' onclick='fillSearchBar(event)'>" + students[idx].last_name + " " + students[idx].first_name + "</a></li>"
-	}
-
-	dropdown.innerHTML = newHTML;
-	return false;
-}
-
 function cardSwipeFind() {
 	var input = document.getElementById("userCard_ID");
 	var str = input.value;
