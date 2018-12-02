@@ -47,7 +47,6 @@
         }
     </style>
     
-    
     <body>
     <!--Deleted menu bar from here    onload="includeHTML('../../html/Menu_Bar.html');"  loadFire(); getLabTechs('tech_select');-->
 
@@ -82,7 +81,10 @@
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1 control-label">Add:</label>
                                             <div class="col-sm-4">
-                                                <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
+                                                <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                                <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
+                                                    
+                                                </ul>
                                             </div>
                                             <a type="button" class="btn btn-default btn-sm col-sm-2" role="button" onclick="manuallyAddQueue();">Manualy Add Student</a>
                                         </div>
@@ -118,7 +120,7 @@
                                 </div>        
                             </div>
 
-                            <div id="manually_add_to_queue"  vis="none" style="display: none;">
+                            <div id="manually_add_to_queue" vis="none" student_id="" style="display: none;">
                                 <label for="name">Name</label>
                                 <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
                                 <br>
@@ -147,7 +149,7 @@
                                 <input  class="form-control" id="material_amount"></select> 
                                 <br>
                                 <label>Soluble Amount</label><span></span>
-                                <input  class="form-control" id="soluble_name"></select> 
+                                <input  class="form-control" id="soluble_amount"></select> 
                                 <br>
                                 <label>Club Name</label><span></span>
                                 <input  class="form-control" id="club_name"></select> 
@@ -341,6 +343,7 @@
         /*function that includes html and loads in on page load*/
         window.onload = function includeHTML()
         {
+            hashCheck(null, manuallyAddQueue);
             var z, i, elmnt, file, xhttp, id;
             file = '../../html/Menu_Bar.html'
 
@@ -402,7 +405,6 @@
     </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
-   
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
    

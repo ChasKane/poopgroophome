@@ -10,6 +10,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <script src="../../js/students/laserqueue.js"></script>
+            <script src="../../js/lab/laserconfig.js"></script>
             <script src="../../js/common.js"></script>
     </head>
 
@@ -35,8 +36,6 @@
             padding-right: 50px;
         }
     </style>
-
-    
 
     <body>
 
@@ -125,8 +124,8 @@
                     </div>
                     <div id="menu1" class="tab-pane fade">
                         <body>
-                            <div class="well b-color-3 container-fluid" id="laser_cutting_queue" vis="block">
-                                <div class="row content">
+                            <div class="well b-color-3 container-fluid">
+                                <div class="row content" vis="block" id="laser_cutting_queue">
                                     <div><center>
                                         <h1 class="title-color">Laser Cutting Queue</h1>
                                     </center></div>
@@ -144,7 +143,11 @@
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1 control-label">Add:</label>
                                             <div class="col-sm-4">
-                                                <input id="userCard_ID" class="form-control" placeholder="Search" type="text">
+                                                <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+
+                                                <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
+                                                
+                                                </ul>
                                             </div>
                                             <button type="button" class="btn btn-default btn-sm col-sm-2" onclick="addLaserQueueButton();">Manualy Add Student</button>
                                         </div>
@@ -181,35 +184,83 @@
                                             </div>
                                         </div>
                                     </div> 
-                                </div>        
+                                </div>
+                                <div id="manually_add_to_queue"  vis="none" student_id="" style="display: none;">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
+                                    <br>
+                                    <label for="estimated_time">Estimated Time </label>
+                                    <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30:00 for 30 minutes">
+                                    <br>
+                                    <label>Lab Tech </label><span></span>
+                                    <select class="form-control" id="tech_select_add"></select>   
+                                    <br>
+                                    <label>Machine ID</label><span></span>
+                                    <select class="form-control" id="machine_id"></select> 
+                                    <br>
+                                    <button id="add_to_queue_button" onclick="addToLaserQueueButton()">Add to queue</button>
+                                    <button onclick="laserQueueSwap('laser_cutting_queue')">Back</button>
+                                </div>      
                             </div>
                         </body>
 
-                        <div id="manually_add_to_queue"  vis="none" style="display: none;">
-                            <label for="name">Name</label>
-                            <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
-                            <br>
-                            <label for="estimated_time">Estimated Time </label>
-                            <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30:00 for 30 minutes">
-                            <br>
-                            <label>Lab Tech </label><span></span>
-                            <select class="form-control" id="tech_select_add"></select>   
-                            <br>
-                            <label>Machine ID</label><span></span>
-                            <select class="form-control" id="machine_id"></select> 
-                            <br>
-                            <button id="add_to_queue_button" onclick="addToLaserQueueButton()">Add to queue</button>
-                        </div>
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                            <div class="well b-color-3">
-                                <center>
-                                    <h1 class="title-color">Laser Cutting Configuration</h1>
-                                    <div>
-                                        <button>Add Config</button>
-                                    </div>
-                                </center>
+                        <div class="well b-color-3">
+                            <center id="config_table" vis="block">
+                                <h1 class="title-color">Laser Cutting Configuration</h1>
+                                <div>
+                                    <button onclick="getLaserConfigs();">Update Config</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        
+                                        <thead>
+                                            <tr>
+                                                <th>Material</th>
+                                                <th>Type</th>
+                                                <th>Thickness</th>
+                                                <th>Power</th>
+                                                <th>Speed</th> <!-- waiting cutting done skipped-->
+                                                <th>PPI</th> <!-- delete-->
+                                                <th>Notes</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="configBody">
+                                            
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                                <button onclick="configSwap('add_config');">Add Config</button>
+                            </center>
+                            <div id="add_config" vis="none" style="display: none;">
+                                <label>Material</label>
+                                <input class="form-control" type="text" id="material" placeholder="Material name..">
+                                <br>
+                                <label>Task</label>
+                                <input class="form-control" type="text" id="task" placeholder="Task: cut/engrave">
+                                <br>
+                                <label>Thickness</label><span></span>
+                                <input class="form-control" id="thickness"></input>   
+                                <br>
+                                <label>Power</label><span></span>
+                                <input class="form-control" id="power"></input> 
+                                <br>
+                                <label>Speed</label><span></span>
+                                <input class="form-control" id="speed"></input> 
+                                <br>
+                                <label>PPI</label><span></span>
+                                <input class="form-control" id="ppi"></input> 
+                                <br>
+                                <label>Notes</label><span></span>
+                                <input class="form-control" id="notes"></input> 
+                                <br>
+                                <button onclick="addConfig()">Add Configuration</button>
+                                <button onclick="configSwap('config_table')">Back</button>
                             </div>
+                        </div>
                     </div>
                     <div id="menu3" class="tab-pane fade">
                             <div class="well b-color-3">
@@ -303,7 +354,9 @@
         window.onload = function fistToLoad() {
             includeHTML('../../html/Menu_Bar.html');
             getLabTechs('tech_select'); 
-            hashCheck();
+            getLabTechs("tech_select_add");
+            fillMachineID("machine_id");
+            hashCheck("#menu1", laserQueueHash);
             laserQueueButton();
         }
     </script>

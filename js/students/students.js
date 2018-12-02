@@ -1,6 +1,4 @@
 // for students page
-var url = "http://104.248.113.22/gavin/";
- 
 
 function getStyle(id, name) {
     var element = document.getElementById(id);
@@ -62,16 +60,18 @@ function getMajors(id) {
 			loadMajors(response, id)
 		}
 	});
-	return retval;
 }
 
 function loadMajors(majors, id) {
 	majors = majors.majors;
 	var element = document.getElementById(id);
+	var id = document.getElementById("student_profile");
 	var newHTML = "";
 
+	id = id.getAttribute("student_id");
+
 	for(var idx in majors) {
-		if(majors[idx].major_name == result.major_name) {
+		if(id != "" && majors[idx].major_name == result.major_name) {
 			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
 		} else {
 			newHTML += "<option value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
@@ -119,24 +119,38 @@ async function loadAllStudents() {
 
 function loadAddStudent() {
 	getMajors("add_major_profile");
+	var str = document.getElementById("user_ID").value;
+	if(str.charAt(0) == "%") {
+		document.getElementById("user_ID").value = "";
+	} else {
+		var elemIds = ["add_fname", "add_lname", "add_email", "add_student_id"]
+		for(var i = 0; i < elemIds.length; i++) {
+			document.getElementById(elemIds[i]).value = "";
+		}
+	}
 }
 
 // loads a students information from db onto the page to be edited/viewed
 async function loadStudentProfile(event) {
 	var student;
-	// if there was no event then assume info wll be on mains students page
+	var searchBar = document.getElementById("userCard_ID");
+	// if there was no event then assume info wll be on main students page
 	// otherwise info will be a row in all students table
 	if(event == undefined) {
-		student = document.getElementById("userCard_ID");
-		student = student.value;
-	} else {
+		student = searchBar.getAttribute("student_id");
+		searchBar.setAttribute("student_id", "")	
+	} else{
 		var targ = event.target;
 		student = targ.parentElement.getElementsByTagName("td");
 		student = student[0].textContent;
-	}
+	} 
 	
 	// fill in student info
 	result = await getStudent(student);
+	if(result == undefined) {
+		alert("There are no students of that name/id");
+		return false;
+	}
 	result = result.students[0];
 	var elem = document.getElementById("fname");
 	elem.value = result.first_name; 
@@ -175,6 +189,7 @@ async function loadStudentProfile(event) {
 
 	// show student profile
 	swapStudentsHTML("student_profile");
+	return false;
 }
 
 // add student to db from modal form
@@ -187,7 +202,7 @@ function addStudent(event) {
 
 	console.log(student_id.value);
 	var payload = {
-		"student_id" : student_id.value,
+		"student_pid" : student_id.value,
 		"first_name" : fname.value,
 		"last_name" : lname.value,
 		"major_name" : major.value,
@@ -261,9 +276,56 @@ async function updateStudent() {
 function gotoLaserQueue() {
 	var student_id = document.getElementById("student_profile");
 	student_id = student_id.getAttribute("student_id");
-	document.location.href = "http://104.248.113.22/html/lab/Laser_Cutter.html#student_id=" + student_id;
+	document.location.href = url + "html/lab/Laser_Cutter.html#student_id=" + student_id;
 }
 
+function goto3DQueue() {
+	var student_id = document.getElementById("student_profile");
+	student_id = student_id.getAttribute("student_id");
+	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
+}
+
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	input.setAttribute("student_id", str);
+	loadStudentProfile();
+	
+	return false;
+}
+
+function cardSwipeAdd() {
+	var input = document.getElementById("user_ID");
+	var str = input.value;
+	var id = parseID(str);
+	
+	str = str.split("^")[1];
+	console.log(str)
+	str = str.split(" ")[0];
+	console.log(str)
+	var f_name = str.split("/")[1];
+	var l_name = str.split("/")[0];
+	f_name = f_name.charAt(0) + f_name.substring(1, f_name.length).toLowerCase();
+	l_name = l_name.charAt(0) + l_name.substring(1, l_name.length).toLowerCase();
+	
+
+	document.getElementById("add_fname").value = f_name;
+	document.getElementById("add_lname").value = l_name;
+	document.getElementById("add_student_id").value = id;
+	loadAddStudent();
+	$("#addStudentModal").modal();
+	console.log("what")
+	return;
+}
+
+function fillSearchBar(event) {
+	var target = event.target;
+	var student_id = target.getAttribute("student_id");
+
+	var searchBar = document.getElementById("userCard_ID");
+	searchBar.value = target.innerHTML;
+}
 
 //-----------------------------------------
 $(document).ready(function() {
