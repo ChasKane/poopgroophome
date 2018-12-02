@@ -332,7 +332,7 @@ function cardSwipeFind() {
 	input.setAttribute("student_id", str);
 	loadStudentProfile();
 	
-	return;
+	return false;
 }
 
 function cardSwipeAdd() {
@@ -350,7 +350,8 @@ function cardSwipeAdd() {
 	document.getElementById("add_lname").value = l_name;
 	document.getElementById("add_student_id").value = id;
 	loadAddStudent();
-	$("#addStudentModal").modal()
+	$("#addStudentModal").modal();
+	console.log("what")
 	return;
 }
 
