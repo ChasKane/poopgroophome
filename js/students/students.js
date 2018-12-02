@@ -279,6 +279,15 @@ function goto3DQueue() {
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
+function keyAccept(e) {
+	console.log(e.keyCode);
+	if(e.keyCode == 13) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 async function fillDropdown(e) {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById("userCard_ID");
