@@ -130,15 +130,13 @@ async function loadStudentProfile(event) {
 	// if there was no event then assume info wll be on main students page
 	// otherwise info will be a row in all students table
 	if(event == undefined) {
-		student = student.value;
-	} else if(searchBar.getAttribute("student_id") == ""){
+		student = searchBar.getAttribute("student_id");
+		searchBar.setAttribute("student_id", "")	
+	} else{
 		var targ = event.target;
 		student = targ.parentElement.getElementsByTagName("td");
 		student = student[0].textContent;
-	} else {
-		student = searchBar.getAttribute("student_id");
-		searchBar.setAttribute("student_id", "");
-	}
+	} 
 	
 	// fill in student info
 	result = await getStudent(student);
