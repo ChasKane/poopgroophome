@@ -350,6 +350,8 @@
         window.onload = function fistToLoad() {
             includeHTML('../../html/Menu_Bar.html');
             getLabTechs('tech_select'); 
+            getLabTechs("tech_select_add");
+            fillMachineID("machine_id");
             hashCheck("#menu1", laserQueueHash);
             laserQueueButton();
         }
