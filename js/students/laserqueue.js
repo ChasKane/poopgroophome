@@ -222,10 +222,14 @@ function checkSwap(id, display_id) {
 // Manually add student to laser queue
 async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
+	var student_id = name.getAttribute("student_id");
+	name.setAttribute("student_id", "");
 	name = name.value;
+
 	var stu_name = document.getElementById("student_name");
 	stu_name = name.value;
 
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
@@ -238,24 +242,7 @@ async function laserQueueHash() {
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {
-	var student_id;
-	if(location.hash != "") {
-		student_id = document.getElementById("manually_add_to_queue").getAttribute("student_id");
-	} else {
-		var payload = {
-			"query_field" : student_info
-		}
-
-		student_id = await $.ajax({
-			url : url + "api/web/student/read.php",
-			type : "POST",
-			data : JSON.stringify(payload),
-			success : function (response, tStatus, responseCode) {
-				return response;
-			}
-		});
-		student_id = student_id.students[0].student_id;
-	}
+	var student_id = document.getElementById("manually_add_to_queue").getAttribute("student_id");
 
 	payload = {
 		"machine_id" : machine_id,

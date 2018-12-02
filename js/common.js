@@ -189,6 +189,16 @@ function keyAccept(e, id, func) {
 	}
 }
 
+function fillSearchBar(event) {
+	var target = event.target;
+	var student_id = target.getAttribute("student_id");
+
+	var searchBar = document.getElementById("userCard_ID");
+	searchBar.value = target.innerHTML;
+	searchBar.setAttribute("student_id", student_id);
+}
+
+
 async function fillDropdown(e, input_id) {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById(input_id);
