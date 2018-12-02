@@ -109,7 +109,7 @@
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Add:</label>
                                         <div class="col-sm-8">
-                                            <input id="user_ID" class="form-control" placeholder="Search" type="text">
+                                            <input id="user_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);">
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">Manually Add Student</button>
                                     </div>
@@ -271,8 +271,9 @@
                 </div>
                 <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">TEST</button>
             </div>
-                
         </div>
+
+        <!--Modal pop up, just leave it here-->
         <div class="modal fade" id="addStudentModal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -296,9 +297,7 @@
                             <br>
                             <label for="major">Major</label> &nbsp;<span></span><span></span>
                             <select  class="form-control" id="add_major_profile" name="major">
-                              <option value="australia">Australia</option>
-                              <option value="canada">Canada</option>
-                              <option value="usa">USA</option>
+                              <!-- Will be filled in with majors on page load-->
                             </select>
                         </form>
                     </div>
@@ -393,6 +392,7 @@
         includeHTML('../../html/Menu_Bar.html'); 
         loadClubTable();
         getMajors("major_profile");
+        getMajors("add_major_profile");
     }
 </script> 
 </html>

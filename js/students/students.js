@@ -119,8 +119,12 @@ async function loadAllStudents() {
 
 function loadAddStudent() {
 	getMajors("add_major_profile");
-	var id = document.getElementById("student_profile");
-	id.setAttribute("student_id", "");
+	var str = document.getElementById("user_ID").value;
+	if(str.charAt(0) == "%") {
+		console.log("This was a swipe");
+	} else {
+		console.log("No swipte");
+	}
 }
 
 // loads a students information from db onto the page to be edited/viewed
