@@ -117,7 +117,7 @@ function hashCheck(href, func) {
 
 	func();
 	student_id = hash.split("=")[1];
-	document.getElementById("manually_add_to_queue").setAttribute("id", student_id);
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
 	fillStudentName(student_id);
 }
 
