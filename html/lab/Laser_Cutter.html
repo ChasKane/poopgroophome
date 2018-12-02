@@ -28,7 +28,7 @@
         }
 
         .Done {
-            background-color: green;
+            background-color: lightgreen;
         }
 
         .custom-container {
@@ -37,9 +37,7 @@
         }
     </style>
 
-    
-
-    <body onload="includeHTML('../../html/Menu_Bar.html'); getLabTechs('tech_select'); hashCheck('#menu1', addLaserQueueButton)">
+    <body>
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
 
@@ -343,5 +341,13 @@
                 }
             });
         });
+
+        //Load on page load
+        window.onload = function fistToLoad() {
+            includeHTML('../../html/Menu_Bar.html');
+            getLabTechs('tech_select'); 
+            hashCheck();
+            laserQueueButton();
+        }
     </script>
 </html>
