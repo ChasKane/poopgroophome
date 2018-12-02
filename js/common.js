@@ -123,6 +123,10 @@ function hashCheck(href, func) {
 
 async function fillStudentName(student_id) {
 	var student = await getStudent(student_id);
+	if(student == undefined) {
+		alert("This student does not currently exist");
+		return;
+	}
 	student = student.students[0];
 
 	var elem = document.getElementById("student_name");
