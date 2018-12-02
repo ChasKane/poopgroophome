@@ -60,16 +60,18 @@ function getMajors(id) {
 			loadMajors(response, id)
 		}
 	});
-	return retval;
 }
 
 function loadMajors(majors, id) {
 	majors = majors.majors;
 	var element = document.getElementById(id);
+	var id = document.getElementById("student_profile");
 	var newHTML = "";
 
+	id = id.getAttribute("student_id");
+
 	for(var idx in majors) {
-		if(majors[idx].major_name == result.major_name) {
+		if(id != "" && majors[idx].major_name == result.major_name) {
 			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
 		} else {
 			newHTML += "<option value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
@@ -117,6 +119,8 @@ async function loadAllStudents() {
 
 function loadAddStudent() {
 	getMajors("add_major_profile");
+	var id = document.getElementById("student_profile");
+	id.setAttribute("student_id", "");
 }
 
 // loads a students information from db onto the page to be edited/viewed
