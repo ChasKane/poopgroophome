@@ -52,7 +52,7 @@ function fillLabTechs(object, id) {
 	var newInnerHTML = ""
 
 	for(var i=0; i < techs.length; i++) {
-		newInnerHTML += "<option>" + techs[i].name + "</option>";
+		newInnerHTML += "<option tech_id=" + techs[i].tech_id + ">" + techs[i].name + "</option>";
 	}
 	elements.innerHTML = newInnerHTML;
 }
