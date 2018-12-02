@@ -49,8 +49,7 @@ function deleteMajorButton(event) {
 			getMajors();
 		},
 		error : function(response, tStatus, responseCode) {
-			console.log(responseCode.status)
-			if(responseCode.status == 202) {
+			if(response.status == 202) {
 				alert("There are Students in " + major_name);
 			}
 		}

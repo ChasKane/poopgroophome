@@ -115,7 +115,7 @@
                                      
                                      <label class="col-sm-2 control-label" >See All:</label>
                                      <div class="col-sm-8">
-                                     <button type="button" class="btn btn-default" onclick="loadAllStudents();">Go</button> 
+                                     <button type="button" class="btn btn-default" onclick="loadAllStudents(); getMajors('major_profile');">Go</button> 
                                      </div>
                                   </div>
                                   
@@ -343,8 +343,9 @@
 
     //Load on page load
     window.onload = function fistToLoad() {
-            includeHTML('../../html/Menu_Bar.html'); 
-            loadClubTable();
-        }
+        includeHTML('../../html/Menu_Bar.html'); 
+        loadClubTable();
+        getMajors("major_profile");
+    }
 </script> 
 </html>
