@@ -46,9 +46,13 @@ async function getMembers(club_name) {
 async function loadMembers(event) {
 	var targ = event.target;
 	var newHTML = "";
-	console.log(targ);
+	var element = document.getElementById("member_table_body");
 	var members = await getMembers(targ.innerHTML);
-	console.log(members)
+	
+	if(members == undefined) {
+		element.innerHTML = "<tr><td>(No Members)</td></tr>";
+		return;
+	}
 	members = members.students;
 
 	for(var idx in members) {
