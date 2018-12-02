@@ -320,9 +320,13 @@ async function fillDropdown(e) {
 }
 
 function parseID(str) {
-	str = str.split("^")[2];
-	str = str.split(" ")[0];
-	str = str.substring(str.length - 7, str.length)
+	try {
+		str = str.split("^")[2];
+		str = str.split(" ")[0];
+		str = str.substring(str.length - 7, str.length)
+	} catch(e) {
+		console.log(e);
+	}
 	return str;
 }
 
