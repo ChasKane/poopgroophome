@@ -117,7 +117,7 @@
                                 </div>        
                             </div>
 
-                            <div id="manually_add_to_queue"  vis="none" style="display: none;">
+                            <div id="manually_add_to_queue"  vis="none" student_id="" style="display: none;">
                                 <label for="name">Name</label>
                                 <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
                                 <br>
@@ -340,6 +340,7 @@
         /*function that includes html and loads in on page load*/
         window.onload = function includeHTML()
         {
+            hashCheck(null, manuallyAddQueue);
             var z, i, elmnt, file, xhttp, id;
             file = '../../html/Menu_Bar.html'
 

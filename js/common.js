@@ -114,8 +114,10 @@ function hashCheck(href, func) {
 	if(href !== null) {
 		$('.nav-tabs a[href="' + href + '"]').tab('show');
 	}
+
 	func();
 	student_id = hash.split("=")[1];
+	document.getElementById("manually_add_to_queue").setAttribute("id", student_id);
 	fillStudentName(student_id);
 }
 
