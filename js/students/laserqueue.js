@@ -254,10 +254,8 @@ async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) 
 				return response;
 			}
 		});
+		student_id = student_id.students[0].student_id;
 	}
-		// student_id = student_id.student;
-	student_id = student_id.students[0].student_id;
-	console.log(student_id)
 
 	payload = {
 		"machine_id" : machine_id,
