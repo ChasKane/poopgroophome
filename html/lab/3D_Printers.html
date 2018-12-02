@@ -80,10 +80,12 @@
 
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1 control-label">Add:</label>
-                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
-                                            <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
-                                                
-                                            </ul>
+                                            <div class="col-sm-4">
+                                                <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                                <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
+                                                    
+                                                </ul>
+                                            </div>
                                             <a type="button" class="btn btn-default btn-sm col-sm-2" role="button" onclick="manuallyAddQueue();">Manualy Add Student</a>
                                         </div>
                                     </form>
