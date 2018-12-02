@@ -20,7 +20,7 @@ if (!isset($data->major_name)) {
 $query = "SELECT * FROM Student WHERE major_name=:v1";
 $stmt = $db->prepare($query);
 
-if (!$stmt->execute()) {
+if (!$stmt->execute([':v1' => $data->major_name])) {
 	http_response_code(503);
 	echo json_encode($stmt->errorInfo());
 	return;
