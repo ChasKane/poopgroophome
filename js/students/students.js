@@ -279,11 +279,17 @@ function goto3DQueue() {
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
-async function fillDropdown() {
+async function fillDropdown(e) {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById("userCard_ID");
+	var key = e.keyCode;
+
+	// ignores input if reading card and submits form when the enter key has been pressed
 	if(input.value.charAt(0) == "%") {
-		return;
+		if(key == 13) {
+			cardSwipeLoad();
+		}
+		return false;
 	}
 
 	var students = await getStudent(input.value);
@@ -295,6 +301,11 @@ async function fillDropdown() {
 	}
 
 	dropdown.innerHTML = newHTML;
+	return false;
+}
+
+function cardSwipeLoad() {
+	return;
 }
 
 function fillSearchBar(event) {
