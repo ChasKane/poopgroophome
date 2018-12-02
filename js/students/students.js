@@ -321,6 +321,7 @@ async function fillDropdown(e) {
 
 function parseID(str) {
 	try {
+		console.log(str)
 		str = str.split("^")[2];
 		str = str.split(" ")[0];
 		str = str.substring(str.length - 7, str.length)
@@ -331,7 +332,7 @@ function parseID(str) {
 }
 
 function cardSwipeFind() {
-	var input = document.getElementById("user_ID");
+	var input = document.getElementById("userCard_ID");
 	var str = input.value;
 	str = parseID(str);
 	input.setAttribute("student_id", str);
