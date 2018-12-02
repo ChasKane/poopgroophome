@@ -226,8 +226,7 @@ async function addLaserQueueButton() {
 	name.setAttribute("student_id", "");
 	name = name.value;
 
-	var stu_name = document.getElementById("student_name");
-	stu_name = name.value;
+	document.getElementById("student_name").value = name;
 
 	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
 	getLabTechs("tech_select_add");
@@ -258,6 +257,7 @@ async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) 
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
+			document.getElementById("manually_add_to_queue").setAttribute("student_id", "");
 		},
 		error : function(response, tStatus, responseCode) {
 			console.error(responseCode.status);
