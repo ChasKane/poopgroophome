@@ -281,6 +281,7 @@ function goto3DQueue() {
 
 function keyAccept(e) {
 	if(e.keyCode == 13) {
+		cardSwipeLoad();
 		return false;
 	} else {
 		return true;
@@ -293,11 +294,11 @@ async function fillDropdown(e) {
 	var key = e.keyCode;
 
 	// ignores input if reading card and submits form when the enter key has been pressed
-	if(input.value.charAt(0) == "%") {
+	if(input.value.charAt(0) == "%" || key == 37) {
 		console.log("ignored");
 		return false;
 	}
-
+	console.log
 	var students = await getStudent(input.value);
 	var newHTML = "";
 	students = students.students;
@@ -311,6 +312,12 @@ async function fillDropdown(e) {
 }
 
 function cardSwipeLoad() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+
+	str = str.split("^")[1];
+	str = str.split(" ")[0];
+	str = str.substring(str.length - 8, str.length)
 	return;
 }
 
