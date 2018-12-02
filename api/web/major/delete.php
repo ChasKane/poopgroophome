@@ -17,6 +17,20 @@ if (!isset($data->major_name)) {
 	return;
 }
 
+$query = "SELECT * FROM Student WHERE major_name=:v1";
+$stmt = $db->prepare($query);
+
+if (!$stmt->execite()) {
+	http_response_code(503);
+	echo json_encode($stmt->errorInfo());
+	return;
+}
+
+if ($stmt->rowCount() > 0) {
+	http_response_code(409);
+	return;
+}
+
 $query = "DELETE FROM Major WHERE major_name=:v1";
 $stmt = $db->prepare($query);
 
