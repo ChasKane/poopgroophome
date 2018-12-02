@@ -277,11 +277,11 @@ function goto3DQueue() {
 	document.location.href = url + "html/lab/3D_Printers.html#student_id=" + student_id;
 }
 
-function keyAccept(e) {
-	var str = document.getElementById("userCard_ID").value;
+function keyAccept(e, id, func) {
+	var str = document.getElementById(id).value;
 	if(e.keyCode == 13) {
 		if(str.includes(";")){
-			cardSwipeFind();
+			func();
 		}
 		return false;
 	} else {
@@ -310,15 +310,37 @@ async function fillDropdown(e) {
 	return false;
 }
 
-function cardSwipeFind() {
-	var input = document.getElementById("userCard_ID");
-	var str = input.value;
-
+function parseID(str) {
 	str = str.split("^")[2];
 	str = str.split(" ")[0];
 	str = str.substring(str.length - 7, str.length)
+	return str;
+}
+
+function cardSwipeFind() {
+	var input = document.getElementById("user_ID");
+	var str = input.value;
+	str = parseID(str);
 	input.setAttribute("student_id", str);
 	loadStudentProfile();
+	
+	return;
+}
+
+function cardSwipeAdd() {
+	var input = document.getElementById("user_ID");
+	var str = input.value;
+	var id = parseID(str);
+	
+	str = str.split("^")[1];
+	str = str.split(" ")[0];
+	
+	var f_name = name.split("/")[1];
+	var l_name = name.split("/")[0];
+
+
+	loadAddStudent();
+	
 	return;
 }
 
