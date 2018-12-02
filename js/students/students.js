@@ -288,7 +288,7 @@ function keyAccept(e, id, func) {
 	var str = document.getElementById(id).value;
 	if(e.keyCode == 13) {
 		if(str.includes(";")){
-			console.log("should be calling func")
+			console.log("should be calling funcP")
 			func();
 		}
 		return false;
@@ -350,6 +350,7 @@ function cardSwipeAdd() {
 	document.getElementById("add_lname").value = l_name;
 	document.getElementById("add_student_id").value = id;
 	loadAddStudent();
+	$("#addStudentModal").modal()
 	return;
 }
 
