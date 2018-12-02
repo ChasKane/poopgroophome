@@ -282,7 +282,7 @@ function goto3DQueue() {
 async function fillDropdown() {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById("userCard_ID");
-	var students = await getStudent(input);
+	var students = await getStudent(input.value);
 	var newHTML = "";
 	students = students.students;
 
