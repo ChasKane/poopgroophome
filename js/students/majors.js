@@ -40,16 +40,26 @@ function deleteMajorButton(event) {
 	var payload = {
 		"major_name" : major_name
 	};
-	console.log(payload);
+	var status;
 
-	$.ajax({
-		url : url + "api/web/major/delete.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function (response, tStatus, responseCode) {
-			getMajors();
+	try {
+		$.ajax({
+			url : url + "api/web/major/delete.php",
+			type : "POST",
+			data : JSON.stringify(payload),
+			success : function (response, tStatus, responseCode) {
+				getMajors();
+			},
+			error : function(response, tStatus, responseCode) {
+				status = responseCode.status;
+			}
+
+		});
+	} catch(error) {
+		if status == 409 {
+			alert("Major not deleted: There are students in the Major.");
 		}
-	});
+	}
 }
 
 function deleteMajor() {
@@ -64,7 +74,9 @@ function deleteMajor() {
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function (response, tStatus, responseCode) {
-			getMajors();
+			if(responseCode.status == 200) {
+				getMajors();
+			}
 		}
 	});
 }
