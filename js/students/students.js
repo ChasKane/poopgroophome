@@ -149,7 +149,7 @@ async function loadStudentProfile(event) {
 	result = await getStudent(student);
 	if(result == undefined) {
 		alert("There are no students of that name/id");
-		return
+		return false;
 	}
 	result = result.students[0];
 	var elem = document.getElementById("fname");
@@ -189,6 +189,7 @@ async function loadStudentProfile(event) {
 
 	// show student profile
 	swapStudentsHTML("student_profile");
+	return false;
 }
 
 // add student to db from modal form
@@ -341,8 +342,9 @@ function cardSwipeAdd() {
 	var id = parseID(str);
 	
 	str = str.split("^")[1];
+	console.log(str)
 	str = str.split(" ")[0];
-	
+	console.log(str)
 	var f_name = name.split("/")[1];
 	var l_name = name.split("/")[0];
 
