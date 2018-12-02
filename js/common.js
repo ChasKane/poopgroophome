@@ -213,7 +213,7 @@ async function fillDropdown(e, input_id) {
 	students = students.students;
 
 	for (var idx = 0; idx < 5 && idx < students.length; idx++) {
-		newHTML += "<li><a student_id='" + students[idx].first_name + "' onclick='fillSearchBar(event)'>" + students[idx].last_name + " " + students[idx].first_name + "</a></li>"
+		newHTML += "<li><a student_id='" + students[idx].student_id + "' onclick='fillSearchBar(event)'>" + students[idx].last_name + " " + students[idx].first_name + "</a></li>"
 	}
 
 	dropdown.innerHTML = newHTML;
