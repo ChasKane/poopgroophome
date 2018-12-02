@@ -121,9 +121,12 @@ function loadAddStudent() {
 	getMajors("add_major_profile");
 	var str = document.getElementById("user_ID").value;
 	if(str.charAt(0) == "%") {
-		console.log("This was a swipe");
+		document.getElementById("user_ID").value = "";
 	} else {
-		console.log("No swipte");
+		var elemIds = ["add_fname", "add_lname", "add_email", "add_student_id"]
+		for(var i = 0; i < elemIds.length; i++) {
+			document.getElementById(elemIds[i]).value = "";
+		}
 	}
 }
 
@@ -342,9 +345,10 @@ function cardSwipeAdd() {
 	var f_name = name.split("/")[1];
 	var l_name = name.split("/")[0];
 
-
+	document.getElementById("add_fname").value = f_name;
+	document.getElementById("add_lname").value = l_name;
+	document.getElementById("add_student_id").value = id;
 	loadAddStudent();
-	
 	return;
 }
 
