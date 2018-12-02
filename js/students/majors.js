@@ -1,6 +1,6 @@
 var url = "http://104.248.113.22/gavin/";
 
-async function getMajors() {
+async function getMajorsTable() {
 	var retval = await $.ajax({
 		url : url + "api/web/major/read.php",
 		type : "POST",
