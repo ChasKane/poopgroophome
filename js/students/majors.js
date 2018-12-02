@@ -19,7 +19,7 @@ function buildMajorTable(majors) {
 
 	for(var idx in majors) {
 		newHTML += "<tr><td id='_" + idx + "' ondblclick='editMajor(event);' onfocusout='submitMajor(event)'>" + majors[idx].major_name +"</td>";
-		newHTML += "<td style='text-align : center;'><button>X</button></td></tr>";
+		newHTML += "<td style='text-align : center;'><button onclick='deleteMajorButton(event)'>X</button></td></tr>";
 	}
 	var elem = document.getElementById("major_table");
 	elem.innerHTML = newHTML;
@@ -31,6 +31,25 @@ function editMajor(event) {
 	targ.innerHTML = '<input id="-' + major_name + '" class="form-control" placeholder="Search" type="text" value="' + major_name + '" autofocus>'
 	targ.firstChild.focus();
 	targ.parentElement.parentElement.setAttribute("current_major", "major_name");
+}
+
+function deleteMajorButton(event) {
+	var targ = event.target;
+	var major_name = targ.parentElement.parentElement.getElementsByTagName("td")[0].value;
+
+	var payload = {
+		"major_name" : elem.getAttribute("current_major") 
+	};
+	console.log(payload);
+
+	$.ajax({
+		url : url + "api/web/major/delete.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function (response, tStatus, responseCode) {
+			getMajors();
+		}
+	});
 }
 
 function deleteMajor() {
