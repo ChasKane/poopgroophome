@@ -95,6 +95,9 @@ if ($data->status == "Cutting") {
 
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+	echo json_encode($row->student_id);
+	return;
+
 	$query = "INSERT INTO Notification VALUES (:v1, 1, NOW(), false)";
 	$stmt = $db->prepare($query);
 	if (!$stmt->execute([':v1' => $row->student_id])) {
@@ -117,6 +120,6 @@ if ($data->status == "Cutting") {
 	$response = $curl->pushNotification($app_token, $row->title, $row->body);
 }
 
-echo json_encode($laser_queues);
+// echo json_encode($laser_queues);
 
 ?>
