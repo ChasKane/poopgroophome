@@ -81,8 +81,36 @@ if ($data->status == "Cutting") {
 				return;
 			}
 
+			$query = "SELECT student_id FROM Laser_Queue WHERE date_added=CURDATE() AND queue_pos=(SELECT MIN(queue_pos) FROM Laser_Queue WHERE date_added=CURDATE() AND queue_pos > :v1)";
+			$stmt = $db->prepare($query);
+			if (!$stmt->execute([':v1' => $data->queue_pos])) {
+				http_response_code(503);
+				echo json_encode($stmt->errorInfo());
+				return;
+			}
+
+			$student_id = $stmt->fetch(PDO::FETCH_ASSOC)->student_id;
+
+			$query = "INSERT INTO Notification VALUES (:v1, 1, NOW(), false)";
+			$stmt = $db->prepare($query);
+			if (!$stmt->execute([':v1' => $student_id])) {
+				http_response_code(503);
+				echo json_encode($stmt->errorInfo());
+				return;
+			}
+
+			$query = "SELECT title,body FROM Message WHERE message_id=1";
+			$stmt = $db->prepare($query);
+			if (!$stmt->execute()) {
+				http_response_code(503);
+				echo json_encode($stmt->errorInfo());
+				return;
+			}
+
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 			$curl = new CURL();
-			$response = $curl->pushNotification($app_token, "ti lab", "you're up");
+			$response = $curl->pushNotification($app_token, $row->title, $row->body);
 		}
 	} else {
 		echo json_encode($stmt->errorInfo());
