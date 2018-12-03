@@ -78,7 +78,7 @@ if ($data->status == "Cutting") {
 		http_response_code(503);
 	}
 
-	$row = $stmt->fetch(PDO::FETCH_ASSOC));
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	extract($row);
 
 	if (empty($app_token)) {
