@@ -16,7 +16,6 @@ $query = "SELECT student_id,first_name,last_name,major_name,school_email,materia
 $stmt = null;
 $success = true;
 
-
 if (isset($data->query_field)) {
 	$boom = explode(" ", $data->query_field);
 
