@@ -93,12 +93,11 @@ if ($data->status == "Cutting") {
 		return;
 	}
 
-	$row = $stmt->fetch(PDO::FETCH_ASSOC)
-	$student_id = $row->student_id;
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	$query = "INSERT INTO Notification VALUES (:v1, 1, NOW(), false)";
 	$stmt = $db->prepare($query);
-	if (!$stmt->execute([':v1' => $student_id])) {
+	if (!$stmt->execute([':v1' => $row->student_id])) {
 		http_response_code(503);
 		echo json_encode($stmt->errorInfo());
 		return;
