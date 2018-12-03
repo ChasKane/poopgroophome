@@ -101,7 +101,7 @@ if ($data->status == "Cutting") {
 
 			$query = "SELECT title,body FROM Message WHERE message_id=1";
 			$stmt = $db->prepare($query);
-			if (!stmt->execute()) {
+			if (!$stmt->execute()) {
 				http_response_code(503);
 				echo json_encode($stmt->errorInfo());
 				return;
