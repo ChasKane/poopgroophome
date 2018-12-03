@@ -73,7 +73,7 @@ if ($data->status == "Cutting") {
 	$query = "SELECT app_token FROM Student WHERE student_id=(SELECT student_id FROM Laser_Queue WHERE date_added=CURDATE() AND queue_pos=(SELECT MIN(queue_pos) FROM Laser_Queue WHERE date_added=CURDATE() AND queue_pos > :v1))";
 	$stmt = $db->prepare($query);
 
-	if (!$stmt->execute([":v1" => $data->queue_pos])) {
+	if (!$stmt->execute([':v1' => $data->queue_pos])) {
 		echo json_encode($stmt->errorInfo());
 		http_response_code(503);
 	}
