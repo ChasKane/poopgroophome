@@ -189,8 +189,8 @@
                                     <label for="name">Name</label>
                                     <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
                                     <br>
-                                    <label for="estimated_time">Estimated Time </label>
-                                    <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30:00 for 30 minutes">
+                                    <label for="estimated_time">Estimated Time (hh:mm)</label>
+                                    <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30 for 30 minutes">
                                     <br>
                                     <label>Lab Tech </label><span></span>
                                     <select class="form-control" id="tech_select_add"></select>   
@@ -342,9 +342,15 @@
                 if(this.getAttribute('href') == "#menu1") {
                     console.log("clicked")
                     focusOn("userCard_ID")
+                    //loadDropNow();
                 }
             });
         });
+
+        // wip
+        function loadDropNow() {
+            document.getElementById("dropdown").classList.toggle("show");
+        }
 
         //Load on page load
         window.onload = function fistToLoad() {
