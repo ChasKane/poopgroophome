@@ -206,18 +206,18 @@ INSERT INTO Lab_Inventory VALUES (null, "item13", "this is a cool item + 8", 5, 
 INSERT INTO Lab_Inventory VALUES (null, "item14", "this is a cool item + 9", 6, FALSE, FALSE);
 INSERT INTO Lab_Inventory VALUES (null, "item15", "this is a cool item + 10", 7, FALSE, FALSE);
 
-INSERT INTO Laser_Appointment VALUES (1, 1, "2000-06-15", "00:00:00", "23:59:00");
+INSERT INTO Laser_Appointment VALUES (1, 1, "2000-06-15", "00:08:05", "23:59:00");
 
 
-INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 2, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 3, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 5, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 6, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 7, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 8, "2019-01-01 00:00:00", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 9, "2019-01-01 00:00:00", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 2, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 3, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 5, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 6, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 7, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 8, "2019-01-01 00:08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 9, "2019-01-01 00:08:05", null, FALSE);
 
 
 INSERT INTO Session VALUES (1, "2000-06-15 09:15:00");
@@ -227,16 +227,16 @@ INSERT INTO FAQ VALUES (null, "Is the lab open on sundays?", "No, the lab is clo
 INSERT INTO FAQ VALUES (null, "Are you open game days", "We are typically not open on game days. Always ask to make sure.");
 INSERT INTO FAQ VALUES (null, "Do you guys supply material?", "No, we do not. Everyone brings their own materials.");
 
-INSERT INTO Lab_Hours VALUES ("00:00:00", "18:00:00", "00:00:00", "18:00:00", "00:00:00", "18:00:00", "00:00:00", "18:00:00", "00:00:00", "18:00:00", "00:00:00", "18:00:00", "00:00:00", "18:00:00");
+INSERT INTO Lab_Hours VALUES ("00:08:05", "00:20:05", "00:08:05", "00:20:05", "00:08:05", "00:20:05", "00:08:05", "00:20:05", "00:08:05", "00:20:05", "00:08:05", "00:20:05", "00:08:05", "00:20:05");
 
 
-INSERT INTO Appointment_Hours VALUES ("18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00", "18:00:00", "22:00:00");
+INSERT INTO Appointment_Hours VALUES ("00:20:05", "22:00:00", "00:20:05", "22:00:00", "00:20:05", "22:00:00", "00:20:05", "22:00:00", "00:20:05", "22:00:00", "00:20:05", "22:00:00", "00:20:05", "22:00:00");
 
 
-INSERT INTO Machine VALUES (null, "machine_fancy_laser", "Laser Cutter", "has some restrictions", "2010-01-01 00:00:00", "Working");
-INSERT INTO Machine VALUES (null, "machine_fancy_laser", "Laser Cutter", "has some restrictions", "2018-09-01 00:00:00", "Working");
-INSERT INTO Machine VALUES (null, "Fortus 270", "3D Printer", "Only use ABS material", "2016-01-01 00:00:00", "Working");
-INSERT INTO Machine VALUES (null, "Dimension", "3D Printer", "  ", "2016-01-01 00:00:00", "Working");
+INSERT INTO Machine VALUES (null, "machine_fancy_laser", "Laser Cutter", "has some restrictions", "2010-01-01 00:08:05", "Working");
+INSERT INTO Machine VALUES (null, "machine_fancy_laser", "Laser Cutter", "has some restrictions", "2018-09-01 00:08:05", "Working");
+INSERT INTO Machine VALUES (null, "Fortus 270", "3D Printer", "Only use ABS material", "2016-01-01 00:08:05", "Working");
+INSERT INTO Machine VALUES (null, "Dimension", "3D Printer", "  ", "2016-01-01 00:08:05", "Working");
 
 
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
