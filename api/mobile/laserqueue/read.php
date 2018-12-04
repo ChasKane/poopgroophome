@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT queue_pos,machine_id,student_id,tech_id,date_added,estimated_time,time_added,status FROM Laser_Queue WHERE date_added=CURDATE()";
+$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
