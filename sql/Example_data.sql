@@ -226,6 +226,12 @@ INSERT INTO Session VALUES (1, "2000-06-15 09:15:00");
 INSERT INTO FAQ VALUES (null, "Is the lab open on sundays?", "No, the lab is closed on sundays.");
 INSERT INTO FAQ VALUES (null, "Are you open game days", "We are typically not open on game days. Always ask to make sure.");
 INSERT INTO FAQ VALUES (null, "Do you guys supply material?", "No, we do not. Everyone brings their own materials.");
+INSERT INTO FAQ VALUES (null, "Is the lab open on sundays?", "No, the lab is closed on sundays.");
+INSERT INTO FAQ VALUES (null, "Are you open game days", "We are typically not open on game days. Always ask to make sure.");
+INSERT INTO FAQ VALUES (null, "Do you guys supply material?", "No, we do not. Everyone brings their own materials.");
+INSERT INTO FAQ VALUES (null, "Is the lab open on sundays?", "No, the lab is closed on sundays.");
+INSERT INTO FAQ VALUES (null, "Are you open game days", "We are typically not open on game days. Always ask to make sure.");
+INSERT INTO FAQ VALUES (null, "Do you guys supply material?", "No, we do not. Everyone brings their own materials.");
 
 INSERT INTO Lab_Hours VALUES ("08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05");
 
