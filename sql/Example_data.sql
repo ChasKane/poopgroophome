@@ -249,7 +249,7 @@ INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00", "Wai
 
 INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 2, 1, CURDATE(), NOW(), "00:30:05", "Waiting");
-INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "40:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "00:40:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 3, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 3, 2, CURDATE(), NOW(), "00:30:05", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "00:40:00", "Waiting");
