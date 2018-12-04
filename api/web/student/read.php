@@ -17,9 +17,18 @@ $stmt = null;
 $success = true;
 
 if (isset($data->query_field)) {
-	$query = $query . " WHERE student_pid=:v1 OR student_id=:v1 OR first_name=:v1 OR last_name=:v1";
-	$stmt = $db->prepare($query);
-	$success = $stmt->execute([':v1' => $data->query_field]);
+	$boom = explode(" ", $data->query_field);
+
+	if (count($boom) == 2) {
+		$query = $query . " WHERE first_name=:v1 AND last_name=:v2";
+		$stmt = $db->prepare($query);
+		$success = $stmt->execute([':v1' => $boom[0], ':v2' => $boom[1]]);
+	} else {
+		$partial_match = '%' . $data->query_field . '%';
+		$query = $query . " WHERE student_pid=:v1 OR student_id=:v1 OR first_name LIKE :v2 OR last_name LIKE :v2";
+		$stmt = $db->prepare($query);
+		$success = $stmt->execute([':v1' => $data->query_field, ':v2' => $partial_match]);
+	}
 } else {
 	$stmt = $db->prepare($query);
 	$success = $stmt->execute();

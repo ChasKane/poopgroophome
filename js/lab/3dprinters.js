@@ -45,7 +45,6 @@ function fill3DPrinterQueue(object) {
 		}
 		newInnerHTML += "</select></tr>";
 	}
-	console.log(newInnerHTML);
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
@@ -54,6 +53,19 @@ function manuallyAddQueue() {
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
+	clearInput3D();
+}
+
+function clearInput3D() {
+	document.getElementById("student_name").value = "";
+	document.getElementById("estimated_time").value = "";
+	document.getElementById("part_name").value = "";
+	document.getElementById("file_path").value = "";
+	document.getElementById("material_name").value = "";
+	document.getElementById("soluble_name").value = "";
+	document.getElementById("material_amount").value = "";
+	document.getElementById("soluble_amount").value = "";
+	document.getElementById("club_name").value = "";
 }
 
 async function addTo3DQueueButton() {
@@ -77,7 +89,7 @@ async function addTo3DQueueButton() {
 	file_path = file_path.value;
 	material_name = material_name.value;
 	material_amount = parseFloat(material_amount.value);
-	soluable_name = soluable_name.value;
+	soluble_name = soluble_name.value;
 	soluble_amount = parseFloat(soluble_amount.value);
 	club_name = club_name.value;
 
@@ -102,19 +114,6 @@ async function addTo3DQueueButton() {
 	add3DQueue();
 }
 
-// input:
-// int machine_id
-// string:student_id
-// string: tech_id
-// time:estimated_time
-// string:part_name
-// string:file_path
-// string: material_name
-// string: soluable_name 
-// float:material_amt
-// float:soluble_amt
-// string:club_name
-
 async function add3DQueue(payload) {
 	console.log(payload);
 	var retval = await $.ajax({
@@ -132,14 +131,29 @@ async function add3DQueue(payload) {
 	return retval;
 }
 
+
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	fillStudentName(str);
+	manuallyAddQueue();
+	return false;
+}
+
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
         href = this.getAttribute('href');        
-        if(href == "#menu1") {
+        if(href == "#home") {
         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
             focusOn("userCard_ID");
+        }
+        if(href != "#menu1") {
+        	// clear form
+        	clearInput3D();
+        	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
 });

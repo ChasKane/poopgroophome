@@ -45,7 +45,7 @@ if (isset($data->student_id)) {
 
 	echo json_encode($clubs);
 } else if (isset($data->club_name)) {
-	$query = "SELECT student_id,first_name,last_name FROM Student WHERE student_id=(SELECT student_id FROM Student_Club WHERE club_name=:v1)";
+	$query = "SELECT student_id,first_name,last_name FROM Student WHERE student_id IN (SELECT student_id FROM Student_Club WHERE club_name=:v1)";
 	$stmt = $db->prepare($query);
 
 	if (!$stmt->execute([':v1' => $data->club_name])) {

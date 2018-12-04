@@ -10,10 +10,8 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            
-
-            
-            <script src="/js/students/currentstudents.js"></script>
+                 
+            <script src="../../js/students/currentstudents.js"></script>
             <script src="../../js/students/students.js"></script>
             <script src="../../js/students/majors.js"></script>
             <script src="../../js/students/groupsandclubs.js"></script>
@@ -70,7 +68,7 @@
 
         </style>
     </head>
-    <body onload="includeHTML('../../html/Menu_Bar.html');">
+    <body>
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
     
@@ -95,10 +93,13 @@
                                 <form class="form-horizontal">
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Find:</label>
-                                        <div class="col-sm-8" id="swipeCard">
-                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" autofocus>
+                                        <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
+                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                            <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
+                                                
+                                            </ul>
                                         </div>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile();">Manually Find Student</button>
+                                        <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
                                     </div>
                                 </form>
                                 <br><br><br>
@@ -106,7 +107,7 @@
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Add:</label>
                                         <div class="col-sm-8">
-                                            <input id="user_ID" class="form-control" placeholder="Search" type="text">
+                                            <input id="user_ID" class="form-control" placeholder="Search" type="text" autocomplete="off" onkeypress="return keyAccept(event, 'user_ID', cardSwipeAdd);">
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">Manually Add Student</button>
                                     </div>
@@ -117,7 +118,7 @@
                                      
                                      <label class="col-sm-2 control-label" >See All:</label>
                                      <div class="col-sm-8">
-                                     <button type="button" class="btn btn-default" onclick="loadAllStudents();">Go</button> 
+                                     <button type="button" class="btn btn-default" onclick="loadAllStudents(); getMajors('major_profile');">Go</button> 
                                      </div>
                                   </div>
                                   
@@ -141,9 +142,7 @@
                 	                <br>
                 	                <label for="major">Major</label> &nbsp;<span></span><span></span>
                 	                <select  class="form-control" id="major_profile" name="major">
-                                        <option value="australia">Australia</option>
-                	                    <option value="canada">Canada</option>
-                	                    <option value="usa">USA</option>
+                                        <!--Filled in at runtime-->
                 	                </select>
                 	                <br>
                 	                <br>
@@ -250,6 +249,7 @@
                                     <thead>
                                         <tr>
                                             <td>Majors</td>
+                                            <td style="width: 80px">Delete</td>
                                         </tr>
                                     </thead>
                                     <tbody id="major_table" current_major="" style="min-height: 31px">
@@ -267,7 +267,42 @@
                 </div>
                 <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">TEST</button>
             </div>
-                
+        </div>
+
+        <!--Modal pop up, just leave it here-->
+        <div class="modal fade" id="addStudentModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 id="addStudentHeader" class="modal-title">TEST</h2>
+                    </div>
+                    <div id="addStudentBody" align="center" class="modal-body">
+                        <form action="/action_page.php">
+                            <label for="fname">First Name </label>
+                            <input class="form-control" type="text" id="add_fname" name="firstname" placeholder="Your name..">
+                            <br>
+                            <label for="lname">Last Name </label>
+                            <input class="form-control" type="text" id="add_lname" name="lastname" placeholder="Your last name..">
+                            <br>
+                            <label for="email">School Email </label><span></span>
+                            <input class="form-control" type="text" id="add_email" name="schoolemail" placeholder="Your school email..">
+                            <br>
+                            <label for="student_id">Student ID</label><span></span>
+                            <input class="form-control" type="text" id="add_student_id" name="student_id" placeholder="Your Student ID">
+                            <br>
+                            <label for="major">Major</label> &nbsp;<span></span><span></span>
+                            <select  class="form-control" id="add_major_profile" name="major">
+                              <!-- Will be filled in with majors on page load-->
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="addStudentButton" type="button" class="btn btn-default" onclick="addStudent(event);">Submit</button> 
+                        <button id="addStudentClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     
@@ -328,6 +363,11 @@
   		// return;
     	   
     }
+
+    //wip
+    function loadDropNow() {
+        document.getElementById("dropdown").classList.toggle("show");
+    }
         
     $(document).ready(function() {
         $('.nav-tabs a').on('show.bs.tab', function(e){
@@ -337,11 +377,23 @@
                 console.log("clicked")
                 //focusOn("userCard_ID")
             } else if(this.getAttribute('href') == "#menu3") {
-                getMajors();
+                getMajorsTable();
             }
+        });
+
+        $("#userCard_ID").submit(function(e) {
+            console.log("prvented");
+            e.preventDefault();
         });
     });
 
-        
+    //Load on page load
+    window.onload = function fistToLoad() {
+        //loadDropNow();//have dropdown active upon loading page
+        includeHTML('../../html/Menu_Bar.html'); 
+        loadClubTable();
+        getMajors("major_profile");
+        getMajors("add_major_profile");
+    }
 </script> 
 </html>

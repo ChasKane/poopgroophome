@@ -33,12 +33,8 @@ async function getlaserqueue() {
 		success : function(response, tStatus, responseCode) {
 			console.log(response)
 			retval = response;
-		},
-		error : function() {
-			console.log("there be an error")
 		}
 	});
-	console.log(retval)
 	return retval;
 }
 
@@ -107,8 +103,9 @@ async function laserQueueButton() {
 	 fillLaserQueue(retval);
 }
 
+// function calcTime(initTime, timeAdd)
 function fillLaserQueue(object) {
-	var estimated_time = 0;
+	var estimated_time = "00:00:00";
 	if(object == undefined) {
 		return;
 	}
@@ -122,7 +119,7 @@ function fillLaserQueue(object) {
 	
 	for (var idx in elements) {
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
-		estimated_time += elements[idx].estimated_time;
+		estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
 		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
 						"<td>" + elements[idx].student_id + "</td>" + "<td>" + elements[idx].tech_id + "</td>" + 
 						"<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
@@ -225,49 +222,26 @@ function checkSwap(id, display_id) {
 // Manually add student to laser queue
 async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
+	var student_id = name.getAttribute("student_id");
+	name.setAttribute("student_id", "");
 	name = name.value;
-	var stu_name = document.getElementById("student_name");
-	stu_name = name.value;
 
+	document.getElementById("student_name").value = name;
+
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue")
+}
 
-	var hash = location.hash;
-	if(hash == "") {
-		console.log("there was no hash");
-		return;
-	}
-
-	var student_id = hash.split("=")[1];
-	var student = await getStudent(student_id);
-	console.log(student);
-	student = student.students[0];
-
-
-	var elem = document.getElementById("student_name");
-	elem.value = student.first_name + " " + student.last_name;
-
+async function laserQueueHash() {
+	checkSwap("laser_cutting_queue", "manually_add_to_queue");
+	checkSwap("manually_add_to_queue", "manually_add_to_queue")
 }
 
 async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) {
-	var payload = {
-		"query_field" : student_name
-	}
-
-	var student_id = await $.ajax({
-		url : url + "api/web/student/read.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function (response, tStatus, responseCode) {
-			return response;
-		}
-	});
-	// student_id = student_id.student;
-	console.log("student_id: ")
-	student_id = student_id.students[0].student_id;
-	console.log(student_id)
+	var student_id = document.getElementById("manually_add_to_queue").getAttribute("student_id");
 
 	payload = {
 		"machine_id" : machine_id,
@@ -283,6 +257,7 @@ async function addLaserQueue(student_name, tech_id, machine_id, estimated_time) 
 		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			retval = response;
+			document.getElementById("manually_add_to_queue").setAttribute("student_id", "");
 		},
 		error : function(response, tStatus, responseCode) {
 			console.error(responseCode.status);
@@ -321,38 +296,23 @@ function setInactive(id) {
 	}
 }
 
-function hashCheck() {
-	var hash = location.hash;
-	if(hash == "") {
-		console.log("there was no hash");
-		return;
+function laserQueueSwap(id) {
+	if(id == "laser_cutting_queue") {
+		checkSwap("laser_cutting_queue", "laser_cutting_queue");
+		checkSwap("manually_add_to_queue", "laser_cutting_queue");
+	} else if(id == "manually_add_to_queue") {
+		checkSwap("laser_cutting_queue", "manually_add_to_queue");
+		checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	}
+}
 
-	var elem = document.getElementById("nav_tab");
-	elem = elem.getElementsByTagName("li");
-	for(var idx in elem) {
-		if(elem[idx].classList == undefined) {
-			continue;
-		}
-		
-		if(elem[idx].classList.contains("active")) {
-			console.log("Found an ative class");
-			elem[idx].classList.remove("active");
-			elem[idx].firstChild.setAttribute("aria-expanded", "false");
-		} 
-	}
-
-	// set the other three tabs to inactive
-	setInactive("home");
-
-	elem = elem[1];
-	elem.classList.add("active");
-	elem.firstChild.setAttribute("aria-expanded", "true")
-	
-	elem = document.getElementById("menu1");
-	elem.classList.add("active");
-	elem.classList.add("in");
-	addLaserQueueButton();
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	fillStudentName(str);
+	laserQueueSwap("manually_add_to_queue");
+	return false;
 }
 
 // make sure the right elements are visible
@@ -363,7 +323,13 @@ $(document).ready(function() {
         if(href == "#menu1") {
             checkSwap("laser_cutting_queue", "laser_cutting_queue");
 			checkSwap("manually_add_to_queue", "laser_cutting_queue");
-        	fillLaserQueue();
+        	laserQueueButton();
+        }
+        if(href != "#menu1") {
+        	// clear form
+        	document.getElementById("student_name").value = "";
+        	document.getElementById("estimated_time").value = "";
+        	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
 });

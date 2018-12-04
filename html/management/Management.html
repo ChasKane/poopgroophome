@@ -10,6 +10,11 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            <!--Get js for this page-->
+            <script src="../../js/common.js"></script>
+            <script src="../../js/management/machines.js"></script>
+            
     </head>
 
     <style>
@@ -17,6 +22,7 @@
         position: relative;
         display: inline-block;
         width: 60px;
+        min-width: 60px;
         height: 34px;
         }
 
@@ -43,6 +49,7 @@
         content: "";
         height: 26px;
         width: 26px;
+        min-width: 26px;
         left: 4px;
         bottom: 4px;
         background-color: white;
@@ -76,9 +83,21 @@
             padding-left: 260px;
             padding-right: 50px;
         }
+
+        .Broken {
+            background-color: red;
+        }
+
+        .Maintenance {
+            background-color: yellow;
+        }
+
+        .Working {
+            background-color: lightgreen;
+        }
     </style>
 
-    <body onload="includeHTML('../../html/Menu_Bar.html');">
+    <body>
 
         <div class="custom-container">
     
@@ -97,7 +116,7 @@
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <body>
-                                <div class="well b-color-3 container-fluid" id="laser_cutting_queue" vis="block">
+                                <div class="well b-color-3 container-fluid" id="machine_list_block" vis="block">
                                     <div class="row content">
                                         <div><center>
                                             <h1 class="title-color">Machines</h1>
@@ -106,7 +125,8 @@
                                         <div id="contactTableDiv"> 
                                             
                                             <div><br><center>
-                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
+                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="getMachineList();"> Update Table </button>
+                                                <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="addMachine();"> Add Machine </button>
                                             </center></div>
                                             <br>
                             
@@ -119,33 +139,56 @@
                                                             <tr>
                                                                 <th>Machine</th>
                                                                 <th>Type</th>
+                                                                <th>ID</th>
                                                                 <th>Restrictions</th>
                                                                 <th>Date Added</th>
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBody">
-                                                            <tr>
-                                                                <td>The Inventor-inator</td>
-                                                                <td>Special</td>
-                                                                <td>must only make non-biological things</td>
-                                                                <td>12/2/2018</td>
-                                                                <td>Destroyed</td>
-                                                                <td>
-                                                                    <!-- make buttons together -->
-                                                                    <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#deletething"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                            
                                                         </tbody>
-                                                        
-                                                        
                                                     </table>
                                                 </div>
                                             </div>
                                         </div> 
                                     </div>        
+                                </div>
+                                <div id="add_Maching_form"  vis="none" style="display: none;">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="machine_name" name="name" placeholder="Machine name..">
+                                    <br>
+                                   
+                                    <label>Machine type</label><span></span>
+                                    <input class="form-control" type="text" id="machine_type" name="type" placeholder="Machine Type"> 
+                                    <br>
+                                    <label>Machine Restrictions</label><span></span>
+                                    <input  class="form-control" id="restrictions" placeholder="Restrictions">
+                                    <br>
+                                    
+                                    
+                                    <button id="add_to_list_button" onclick="addToMListButton()">Add Machine</button>
+                                    <button id="cancel_add_button" onclick="addCancelButton()">Cancel</button>
+                                </div>
+                                <div id="edit_Maching_form"  vis="none" style="display: none;">
+                                    <label>ID</label>
+                                    <div id="mach_id" lookup=""></div>
+                                    <br>
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="machine_name_edit" name="name" placeholder="Machine name..">
+                                    <br>
+                                   
+                                    <label>Machine type</label><span></span>
+                                    <input class="form-control" type="text" id="machine_type_edit" name="type" placeholder="Machine Type"> 
+                                    <br>
+                                    <label>Machine Restrictions</label><span></span>
+                                    <input  class="form-control" id="restrictions_edit" placeholder="Restrictions">
+                                    <br>
+                                    
+                                    
+                                    <button id="edit_confirm_button" onclick="editConfirmButton()">Edit Machine</button>
+                                    <button id="delete_machine_button" onclick="editDeleteButton()">Delete</button>
+                                    <button id="cancel_add_button" onclick="editCancelButton()">Cancel</button>
                                 </div>
                             </body>
                         </div>
@@ -177,10 +220,10 @@
                                                     <input id="user_ID" class="form-control" placeholder="Search" type="text">
                                                 </div>
                                                 <label class="col-sm-1">Rent
-                                                    <input type="checkbox">
+                                                    <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
                                                 </label>
                                                 <label class="col-sm-1">TC
-                                                    <input type="checkbox">
+                                                    <td><label class="switch"><input type="checkbox" checked><span class="slider round"></span></label></td>
                                                 </label>
                                                 <button class="btn btn-default btn-sm col-sm-2">Add</button>
                                             </div>
@@ -212,14 +255,39 @@
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <div class="well b-color-3">
-                                    <h1>FAQ & Lab Hours</h1>
+                                    <h1>FAQ <button type="button" class="btn btn-default btn-xs" onclick="getFAQList();"><span class="glyphicon glyphicon-refresh"></span> Refresh</button></h1>
                                     
-                                <div class="well b-color-3">
-                                    <h3>FAQ <button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</button></h3>
-                                    <p>
-                                        1. Do you like chickens double d???<br>Yes Ed, I do.
-                                    </p>
+                                <div class="container" id="FAQ_list" vis="block">
+                                    <h2>FAQ <button type="button" class="btn btn-default btn-xs" onclick="addFAQ();"><span class="glyphicon glyphicon-plus"></span></button></h2>
+                                    <div id="FAQ_listy" class="list-group">
+                                      No Data fetched.
+                                    </div>
+                                </div>
 
+                                <div id="FAQ_add_form" vis="none" style="display: none;">                             
+                                    <label>Question</label><span></span>
+                                    <input class="form-control" type="text" id="add_question" name="type" placeholder="Question"> 
+                                    <br>
+                                    <label>Answer</label><span></span>
+                                    <textarea class="form-control" rows="5" id="add_answer"></textarea>
+                                    <br>
+                                    
+                                    
+                                    <button id="add_to_list_button" onclick="addToFAQButton()">Add FAQ</button>
+                                    <button id="cancel_add_button" onclick="addFAQCancelButton()">Cancel</button>
+                                </div>
+                                <div id="FAQ_edit_form" lookup="" vis="none" style="display: none;">                             
+                                    <label>Question</label><span></span>
+                                    <input class="form-control" type="text" id="edit_question" name="type" placeholder="Question"> 
+                                    <br>
+                                    <label>Answer</label><span></span>
+                                    <textarea class="form-control" rows="5" id="edit_answer"></textarea>
+                                    <br>
+                                    
+                                    
+                                    <button id="add_to_list_button" onclick="editFAQButton()">Edit FAQ</button>
+                                    <button id="delete_machine_button" onclick="editFAQDeleteButton()">Delete</button>
+                                    <button id="cancel_add_button" onclick="editFAQCancelButton()">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -361,6 +429,13 @@
         function focusPocus()
         {
             document.getElementById("userCard_ID").focus();
+        }
+
+        //Load when page is loaded
+        window.onload = function fistToLoad() {
+            includeHTML('../../html/Menu_Bar.html');
+            getMachineList();
+            getFAQList();
         }
     </script>
 </html>
