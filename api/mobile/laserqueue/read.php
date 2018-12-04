@@ -38,7 +38,8 @@ if($num > 0) {
 			"date_added" => $date_added,
 			"time_added" => $time_added,
 			"estimated_time" => $estimated_time,
-			"status" => $status
+			"status" => $status,
+			"first_name" => $first_name
 		);
 
 		array_push($laser_queues["laser_queues"], $laser_queue);
