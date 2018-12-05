@@ -155,12 +155,12 @@ async function loadStudentProfile(event) {
 		$("#searchStudentModal").modal();
 		return;
 	}
-	result = result.students[0];
 	fillStudentProfile(result);
 	return false;
 }
 
 async function fillStudentProfile(student) {
+	student = student.students[0];
 	var elem = document.getElementById("fname");
 	elem.value = student.first_name; 
 	elem = document.getElementById("lname");
