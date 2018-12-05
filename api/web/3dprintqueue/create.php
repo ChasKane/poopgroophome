@@ -39,7 +39,7 @@ if (!$stmt->execute([':v2' => $data->machine_id,':v3' => $data->student_id,':v4'
 	return;
 }
 
-$query = "SELECT queue_pos,machine_id,student_id,tech_id,estimated_time,status,part_name,club_name FROM 3DPrint_Queue";
+$query = "SELECT * FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -66,7 +66,8 @@ if($num>0){
 			'estimated_time' => $estimated_time,
 			'status' => $status,
 			'part_name' => $part_name,
-			'club_name' => $club_name
+			'club_name' => $club_name,
+			'first_name' => $first_name
 		);
 
 		array_push($threedprint_queues["threedprintqueues"], $threedprint_queue);
