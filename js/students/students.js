@@ -140,16 +140,20 @@ async function loadStudentProfile(event) {
 		student = searchBar.getAttribute("student_id");
 		searchBar.setAttribute("student_id", "")	
 	} else{
-		var targ = event.target;
-		student = targ.parentElement.getElementsByTagName("td");
-		student = student[0].textContent;
+		student = searchBar.value;
 	} 
 	
 	// fill in student info
 	result = await getStudent(student);
 	if(result == undefined) {
+		searchBar.value = "";
 		alert("There are no students of that name/id");
 		return false;
+	} else if(result.students.length > 1) {
+		var student_search = document.getElementById("student_search")
+		student_search.value = student;
+		$("searchStudentModal").modal();
+		return;
 	}
 	result = result.students[0];
 	var elem = document.getElementById("fname");
