@@ -226,11 +226,12 @@ async function fillModalTable(input_id, func) {
 	var input = document.getElementById(input_id);
 	var students = await getStudent(input.value);
 	var newHTML = "";
-	students = students.students;
-
-	if(students.length == 0) {
+	
+	if(students == undefined) {
 		newHTML += "<tr><td>There are no students with that name or ID.</td></tr>"
 	}
+
+	students = students.students;
 
 	for (var idx in students) {
 		newHTML += "<tr><td student_id='" + students[idx].student_id + "' onclick='foundStudent(event)'>" + students[idx].first_name + " " + students[idx].last_name + "</td></tr>"
