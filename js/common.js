@@ -229,6 +229,8 @@ async function fillModalTable(input_id, func) {
 	
 	if(students == undefined) {
 		newHTML += "<tr><td>There are no students with that name or ID.</td></tr>"
+		dropdown.innerHTML = newHTML;
+		return;
 	}
 
 	students = students.students;
