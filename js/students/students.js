@@ -156,47 +156,11 @@ async function loadStudentProfile(event) {
 		return;
 	}
 	result = result.students[0];
-	var elem = document.getElementById("fname");
-	elem.value = result.first_name; 
-	elem = document.getElementById("lname");
-	elem.value = result.last_name;
-	elem = document.getElementById("email");
-	elem.value = result.school_email;
-	elem = document.getElementById("student_profile");
-	elem.setAttribute("student_id", result.student_id);
-
-	// fill in majors dropdown
-	getMajors("major_profile");
-
-	// fill in materials used
-	elem = document.getElementById("material_used");
-	elem.innerHTML = ": " +result.material_used;
-	elem.setAttribute("value", result.material_used);
-	elem = document.getElementById("soluble_used");
-	elem.setAttribute("value", result.soluble_used);
-	elem.innerHTML = ": " + result.soluble_used;
-
-	// fill in groups
-	var clubs = await getGroups(result.student_id);
-	elem = document.getElementById("groups");
-	newHTML = "";
-	console.log(result)
-	if(result == undefined) {
-		elem.innerHTML = "Oh no you arent in any clubs!";
-	} else {
-		for(var x in result.clubs) {
-			newHTML += "<p club='" + result.clubs[x].club_name + "'>" + result.clubs[x].club_name;
-			newHTML += "<button onclick='removefromClubButton(event)'>X</button></p> ";
-		}
-		elem.innerHTML = newHTML;
-	}
-
-	// show student profile
-	swapStudentsHTML("student_profile");
+	fillStudentProfile(result);
 	return false;
 }
 
-function fillStudentProfile(student) {
+async function fillStudentProfile(student) {
 	var elem = document.getElementById("fname");
 	elem.value = student.first_name; 
 	elem = document.getElementById("lname");
