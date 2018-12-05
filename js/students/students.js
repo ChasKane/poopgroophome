@@ -340,7 +340,7 @@ async function foundStudent(event) {
 	document.getElementById("student_search").value = "";
 	
 	$("#searchStudentModal").modal("hide");
-	fillStudentProfile(target.getAttribute("student_id"));
+	fillStudentProfile(await getStudent(target.getAttribute("student_id")));
 }
 
 //-----------------------------------------
