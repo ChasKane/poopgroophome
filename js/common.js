@@ -220,7 +220,7 @@ async function fillDropdown(e, input_id) {
 	return false;
 }
 
-async function fillModalTable(input_id) {
+async function fillModalTable(input_id, func) {
 	var dropdown = document.getElementById("student_table");
 	var input = document.getElementById(input_id);
 	var students = await getStudent(input.value);
@@ -228,7 +228,7 @@ async function fillModalTable(input_id) {
 	students = students.students;
 
 	for (var idx in students.length) {
-		newHTML += "<tr><td student_id='" + students[idx].student_id + "' onclick='fillSearchBar(event)'>" + students[idx].first_name + " " + students[idx].last_name + "</td></tr>"
+		newHTML += "<tr><td student_id='" + students[idx].student_id + "' onclick='" + func(event) + "'>" + students[idx].first_name + " " + students[idx].last_name + "</td></tr>"
 	}
 
 	dropdown.innerHTML = newHTML;

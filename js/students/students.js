@@ -152,7 +152,7 @@ async function loadStudentProfile(event) {
 	} else if(result.students.length > 1) {
 		var student_search = document.getElementById("student_search")
 		student_search.value = student;
-		$("searchStudentModal").modal();
+		$("#searchStudentModal").modal();
 		return;
 	}
 	result = result.students[0];
@@ -194,6 +194,46 @@ async function loadStudentProfile(event) {
 	// show student profile
 	swapStudentsHTML("student_profile");
 	return false;
+}
+
+function fillStudentProfile(student) {
+	var elem = document.getElementById("fname");
+	elem.value = student.first_name; 
+	elem = document.getElementById("lname");
+	elem.value = student.last_name;
+	elem = document.getElementById("email");
+	elem.value = student.school_email;
+	elem = document.getElementById("student_profile");
+	elem.setAttribute("student_id", student.student_id);
+
+	// fill in majors dropdown
+	getMajors("major_profile");
+
+	// fill in materials used
+	elem = document.getElementById("material_used");
+	elem.innerHTML = ": " + student.material_used;
+	elem.setAttribute("value", student.material_used);
+	elem = document.getElementById("soluble_used");
+	elem.setAttribute("value", student.soluble_used);
+	elem.innerHTML = ": " + student.soluble_used;
+
+	// fill in groups
+	var clubs = await getGroups(student.student_id);
+	elem = document.getElementById("groups");
+	newHTML = "";
+	console.log(result)
+	if(result == undefined) {
+		elem.innerHTML = "Oh no you arent in any clubs!";
+	} else {
+		for(var x in result.clubs) {
+			newHTML += "<p club='" + result.clubs[x].club_name + "'>" + student.clubs[x].club_name;
+			newHTML += "<button onclick='removefromClubButton(event)'>X</button></p> ";
+		}
+		elem.innerHTML = newHTML;
+	}
+
+	// show student profile
+	swapStudentsHTML("student_profile");
 }
 
 // add student to db from modal form
@@ -329,6 +369,11 @@ function fillSearchBar(event) {
 
 	var searchBar = document.getElementById("userCard_ID");
 	searchBar.value = target.innerHTML;
+}
+
+async function foundStudent(event) {
+	var student_name = document.getElementById("student_search").value;
+	console.log(event)
 }
 
 //-----------------------------------------
