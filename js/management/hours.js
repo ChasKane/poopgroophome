@@ -7,7 +7,7 @@ function loadHours(){
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			console.log(response);
-			fillHoursTable(respose);
+			fillHoursTable(response);
 		},
 		error : function() {
 			console.log("there be an error");
