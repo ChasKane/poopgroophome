@@ -36,20 +36,20 @@ function updateHours(){
 	
 
 	var payload = {
-		"sunday_open" : sunopen,
-		"sunday_close" : sunclose,
-		"monday_open" : monopen,
-		"monday_close" : monclose,
-		"tuesday_open" : tueopen,
-		"tuesday_close" : tueclose,
-		"wednesday_open" : wedopen,
-		"wednesday_close" : wedclose,
-		"thursday_open" : thuropen,
-		"thursday_close" : thurclose,
-		"friday_open" : friopen,
-		"friday_close" : friclose,
-		"saturday_open" : satopen,
-		"saturday_close" : satclose
+		"sunday_open" : encodetoMilitary(sunopen),
+		"sunday_close" : encodetoMilitary(sunclose),
+		"monday_open" : encodetoMilitary(monopen),
+		"monday_close" : encodetoMilitary(monclose),
+		"tuesday_open" : encodetoMilitary(tueopen),
+		"tuesday_close" : encodetoMilitary(tueclose),
+		"wednesday_open" : encodetoMilitary(wedopen),
+		"wednesday_close" : encodetoMilitary(wedclose),
+		"thursday_open" : encodetoMilitary(thuropen),
+		"thursday_close" : encodetoMilitary(thurclose),
+		"friday_open" : encodetoMilitary(friopen),
+		"friday_close" : encodetoMilitary(friclose),
+		"saturday_open" : encodetoMilitary(satopen),
+		"saturday_close" : encodetoMilitary(satclose)
 
 	};
 
@@ -60,7 +60,6 @@ function updateHours(){
 
 		success : function(response, tStatus, responseCode) {
 			retval = response;
-			alert("Hours have been updated.");
 			loadHours();
 		},
 		error : function (response, tStatus, responseCode) {
@@ -75,22 +74,79 @@ function fillHoursTable(object){
 
 	console.log(object)
 	var elements = object.lab_hourss;
-	document.getElementById("SunOpen").value = elements[0].sunday_open;
-	document.getElementById("SunClose").value = elements[0].sunday_close;
-	document.getElementById("MonOpen").value = elements[0].monday_open;
-	document.getElementById("MonClose").value = elements[0].monday_close;
-	document.getElementById("TueOpen").value = elements[0].tuesday_open;
-	document.getElementById("TueClose").value = elements[0].tuesday_close;
-	document.getElementById("WedOpen").value = elements[0].wednesday_open;
-	document.getElementById("WedClose").value = elements[0].wednesday_close;
-	document.getElementById("ThuOpen").value = elements[0].thursday_open;
-	document.getElementById("ThuClose").value = elements[0].thursday_close;
-	document.getElementById("FriOpen").value = elements[0].friday_open;
-	document.getElementById("FriClose").value = elements[0].friday_close;
-	document.getElementById("SatOpen").value = elements[0].saturday_open;
-	document.getElementById("SatClose").value = elements[0].saturday_close;
+	document.getElementById("SunOpen").value = decodefromMilitary(elements[0].sunday_open);
+	document.getElementById("SunClose").value = decodefromMilitary(elements[0].sunday_close);
+	document.getElementById("MonOpen").value = decodefromMilitary(elements[0].monday_open);
+	document.getElementById("MonClose").value = decodefromMilitary(elements[0].monday_close);
+	document.getElementById("TueOpen").value = decodefromMilitary(elements[0].tuesday_open);
+	document.getElementById("TueClose").value = decodefromMilitary(elements[0].tuesday_close);
+	document.getElementById("WedOpen").value = decodefromMilitary(elements[0].wednesday_open);
+	document.getElementById("WedClose").value = decodefromMilitary(elements[0].wednesday_close);
+	document.getElementById("ThuOpen").value = decodefromMilitary(elements[0].thursday_open);
+	document.getElementById("ThuClose").value = decodefromMilitary(elements[0].thursday_close);
+	document.getElementById("FriOpen").value = decodefromMilitary(elements[0].friday_open);
+	document.getElementById("FriClose").value = decodefromMilitary(elements[0].friday_close);
+	document.getElementById("SatOpen").value = decodefromMilitary(elements[0].saturday_open);
+	document.getElementById("SatClose").value = decodefromMilitary(elements[0].saturday_close);
 	
 
 }
 
 
+
+function decodefromMilitary(time){
+    //var time = "12:23:39";
+    var timeValue = "";
+    var time = time.split(':');
+    var hours = time[0];
+    var hourstemp = 0;
+    var minutes = time[1];
+    var seconds = time[2];
+    
+    if (hours > 12)
+    {
+      hourstemp =  hours - 12;
+      if( hourstemp <10 && hourstemp >0)
+        timeValue = "0" + hourstemp;
+ 
+      else if(hourstemp == 0)
+        timeValue =  "00"; 
+ 
+      else
+      	timeValue = hourstemp;
+    }
+
+    else 
+      timeValue = hours; 
+
+    timeValue += ":" + minutes;
+
+    if(hours>= 12)
+      timeValue += " P.M.";
+
+    else 
+      timeValue += " A.M.";
+
+    return timeValue;
+}
+
+function encodetoMilitary(time)
+{
+	timeString = "";
+    if (time.substring(6, 9) == "P.M")
+    {
+    hours = Number(time.substring(0, 2) ) + 12;
+    timeString += hours;
+    }
+    else
+	{
+    hours = time.substring(0, 2) 
+    timeString += hours;
+    }
+    
+    timeString += time.substring(2, 5) 
+    timeString += ":00"
+    
+    return timeString;
+
+}

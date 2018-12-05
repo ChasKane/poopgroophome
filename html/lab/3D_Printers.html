@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+    <title>TI Innovation Lab</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- get styls and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script src="../../js/lab/3dprinters.js"></script>
+    
+    <script src="../../js/common.js"></script> 
+    <script src="../../js/utils.js"></script> 
+    <script src="../../js/lab/material.js"></script>
+
+    </head>
+        <style>
+        .custom-container-fluid {
+            padding-left: 260px;
+            padding-right: 50px;
+        }
+        .Waiting {
+            background-color: red;
+        }
+        .Cutting {
+            background-color: yellow;
+        }
+        .Skipped {
+            background-color: grey;
+        }
+        .Done {
+            background-color: lightgreen;
+        }
+        .custom-container {
+            padding-left: 260px;
+            padding-right: 50px;
+        }
+    </style>
+    
+    <body>
+    <!--Deleted menu bar from here    onload="includeHTML('../../html/Menu_Bar.html');"  loadFire(); getLabTechs('tech_select');-->
+
+        <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
+
+        <div class="custom-container">
+    
+            <div class="container-fluid col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">3D Print Queue</a></li>
+                    <li ><a data-toggle="tab" href="#menu1" onclick="getmaterials();">3D Print Material</a></li>
+                </ul>
+            
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <body>
+                            <div id="3d_cutting_queue" class="well b-color-3 container-fluid" vis="block">
+                                <div class="row content">
+                                    <div><center>
+                                        <h1 class="title-color">3D Printer Queue</h1>
+                                    </center></div>
+
+                                    <form class="form-horizontal">
+                                        <div class="from-group container-fluid">
+                                            <label class="col-sm-1">Tech:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="tech_select"></select>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="from-group container-fluid">
+                                            <label class="col-sm-1 control-label">Add:</label>
+                                            <div class="col-sm-4">
+                                                <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                                <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
+                                                    
+                                                </ul>
+                                            </div>
+                                            <a type="button" class="btn btn-default btn-sm col-sm-2" role="button" onclick="manuallyAddQueue();">Manualy Add Student</a>
+                                        </div>
+                                    </form>
+                    
+                                    <div id="contactTableDiv"> 
+                                    
+                                        <div><br><center>
+                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="get3DPrinterQueue();"> Update Table </button>
+                                        </center></div>
+                                        <br>
+                    
+                                        <div class="container-fluid">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-condensed table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Queue Position</th>
+                                                            <th>Machine ID</th>
+                                                            <th>Student ID</th>
+                                                            <th>Tech ID</th>
+                                                            <th>Estimated time</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tableBody">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>        
+                            </div>
+
+                            <div id="manually_add_to_queue" vis="none" student_id="" style="display: none;">
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" id="student_name" name="name" placeholder="Student name..">
+                                <br>
+                                <label for="estimated_time">Estimated Time </label>
+                                <input class="form-control" type="text" id="estimated_time" name="estimated_time" placeholder="Estimated time format: 00:30:00 for 30 minutes">
+                                <br>
+                                <label>Lab Tech </label><span></span>
+                                <select class="form-control" id="tech_select_add"></select>   
+                                <br>
+                                <label>Machine ID</label><span></span>
+                                <select class="form-control" id="machine_id"></select> 
+                                <br>
+                                <label>Part Name</label><span></span>
+                                <input  class="form-control" id="part_name"></select> 
+                                <br>
+                                <label>File Path</label><span></span>
+                                <input  class="form-control" id="file_path"></select> 
+                                <br>
+                                <label>Material Name</label><span></span>
+                                <input  class="form-control" id="material_name"></select> 
+                                <br>
+                                <label>Soluble Name</label><span></span>
+                                <input  class="form-control" id="soluble_name"></select> 
+                                <br>
+                                <label>Material Amount</label><span></span>
+                                <input  class="form-control" id="material_amount"></select> 
+                                <br>
+                                <label>Soluble Amount</label><span></span>
+                                <input  class="form-control" id="soluble_amount"></select> 
+                                <br>
+                                <label>Club Name</label><span></span>
+                                <input  class="form-control" id="club_name"></select> 
+                                <br>
+                                
+                                
+                                <button id="add_to_queue_button" onclick="addTo3DQueueButton()">Add to queue</button>
+                            </div>
+                        </body>
+                    </div>
+
+
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="well b-color-3">
+                            <h1>Material Tracking</h1>
+                            <button type="button"  class="btn btn-default btn-sm" onclick="getmaterials();"> get materials </button>
+                            <p></p>
+                            <select id="selectmaterial">
+                            </select>
+                            <form class="form-horizontal">
+                                <div class="from-group container-fluid">
+                                  
+                                  <div style="width:75%;">
+                                  <canvas id="canvas"></canvas>
+                                  </div>
+                                  <br>
+                                  <br>
+                                  <button id="randomizeData">Randomize Data</button>
+                                  <button id="addDataset">Add Dataset</button>
+                                  <button id="removeDataset">Remove Dataset</button>
+                                  <button id="addData">Add Data</button>
+                                  <button id="removeData">Remove Data</button>
+                                  <script>
+                                  
+                                    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                                    var config = {
+                                      type: 'line',
+                                      data: {
+                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                        datasets: [{
+                                          label: 'My First dataset',
+                                          backgroundColor: window.chartColors.red,
+                                          borderColor: window.chartColors.red,
+                                          data: [
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor()
+                                          ],
+                                          fill: false,
+                                        }, {
+                                          label: 'My Second dataset',
+                                          fill: false,
+                                          backgroundColor: window.chartColors.blue,
+                                          borderColor: window.chartColors.blue,
+                                          data: [
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor(),
+                                            randomScalingFactor()
+                                          ],
+                                        }]
+                                      },
+                                      options: {
+                                        responsive: true,
+                                        title: {
+                                          display: true,
+                                          text: 'Chart.js Line Chart'
+                                        },
+                                        tooltips: {
+                                          mode: 'index',
+                                          intersect: false,
+                                        },
+                                        hover: {
+                                          mode: 'nearest',
+                                          intersect: true
+                                        },
+                                        scales: {
+                                          xAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Month'
+                                            }
+                                          }],
+                                          yAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Value'
+                                            }
+                                          }]
+                                        }
+                                      }
+                                    };
+                                    window.onload = function() {
+                                      var ctx = document.getElementById('canvas').getContext('2d');
+                                      window.myLine = new Chart(ctx, config);
+                                    };
+                                    document.getElementById('randomizeData').addEventListener('click', function() {
+                                      config.data.datasets.forEach(function(dataset) {
+                                        dataset.data = dataset.data.map(function() {
+                                          return randomScalingFactor();
+                                        });
+                                      });
+                                      window.myLine.update();
+                                    });
+                                    var colorNames = Object.keys(window.chartColors);
+                                    document.getElementById('addDataset').addEventListener('click', function() {
+                                      var colorName = colorNames[config.data.datasets.length % colorNames.length];
+                                      var newColor = window.chartColors[colorName];
+                                      var newDataset = {
+                                        label: 'Dataset ' + config.data.datasets.length,
+                                        backgroundColor: newColor,
+                                        borderColor: newColor,
+                                        data: [],
+                                        fill: false
+                                      };
+                                      for (var index = 0; index < config.data.labels.length; ++index) {
+                                        newDataset.data.push(randomScalingFactor());
+                                      }
+                                      config.data.datasets.push(newDataset);
+                                      window.myLine.update();
+                                    });
+                                    document.getElementById('addData').addEventListener('click', function() {
+                                      if (config.data.datasets.length > 0) {
+                                        var month = MONTHS[config.data.labels.length % MONTHS.length];
+                                        config.data.labels.push(month);
+                                        config.data.datasets.forEach(function(dataset) {
+                                          dataset.data.push(randomScalingFactor());
+                                        });
+                                        window.myLine.update();
+                                      }
+                                    });
+                                    document.getElementById('removeDataset').addEventListener('click', function() {
+                                      config.data.datasets.splice(0, 1);
+                                      window.myLine.update();
+                                    });
+                                    document.getElementById('removeData').addEventListener('click', function() {
+                                      config.data.labels.splice(-1, 1); // remove the label first
+                                      config.data.datasets.forEach(function(dataset) {
+                                        dataset.data.pop();
+                                      });
+                                      window.myLine.update();
+                                    });
+                                    
+                                    
+                                    
+                                  </script>
+
+
+
+
+
+
+                                </div>
+                            </form>
+                            <div class="well b-color-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+         <script defer>
+        var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+        /*function that includes html and loads in on page load*/
+        window.onload = function includeHTML()
+        {
+            hashCheck(null, manuallyAddQueue);
+            var z, i, elmnt, file, xhttp, id;
+            file = '../../html/Menu_Bar.html'
+            /*loop thru html elements*/
+            z = document.getElementsByTagName("*");
+            getLabTechs('tech_select');
+            get3DPrinterQueue();
+            console.log("in includeHTML");
+            for (i = 0; i < z.length; i++) 
+            {
+                elmnt = z[i];
+                if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
+                {
+                    /*make http req*/
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function()
+                    {
+                        if (this.readyState == 4)
+                        {
+                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                            /*edit attrib, call again*/
+                            elmnt.setAttribute("content-include-html", "nope");
+                            includeHTML();
+                            elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                        }
+                    }
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    
+                    return;
+                }
+            }
+        }
+        // Pop up function for confirmations and alerts
+        function modPop(arg)
+        {
+            var i, j;
+        
+            
+            //  if (true)
+            //  {
+                    // document.getElementById("popViewTitle").innerHTML = "Hello There";
+                    // document.getElementById("popViewBod").innerHTML = "<p></p>";
+                    // document.getElementById("popBottomButt").innerHTML = "Close";
+            //      return;
+            //  }
+        }
+        // focus an element
+        function focusPocus()
+        {
+            document.getElementById("userCard_ID").focus();
+        }
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
+   
+</html>
