@@ -23,15 +23,14 @@ if (!$stmt->execute([])) {
 
 $num = $stmt->rowCount();
 
-$lab_hourss = array();
+$lab_hours = array();
+$lab_hours["lab_hours"] = array();
 
 if($num>0){
-	$lab_hourss["lab_hourss"] = array();
-
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-		$lab_hours = array(
+		$stuff = array(
 			'sunday_open' => $sunday_open,
 			'sunday_close' => $sunday_close,
 			'monday_open' => $monday_open,
@@ -48,7 +47,7 @@ if($num>0){
 			'saturday_close' => $saturday_close
 		);
 
-		array_push($lab_hourss["lab_hourss"], $lab_hours);
+		$lab_hours["lab_hours"] = $stuff;
 	}
 
 	http_response_code(200);
@@ -56,6 +55,6 @@ if($num>0){
 	http_response_code(204);
 }
 
-echo json_encode($lab_hourss);
+echo json_encode($lab_hours);
 
 ?>

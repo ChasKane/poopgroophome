@@ -296,20 +296,20 @@ INSERT INTO 3DMaterial_Graph VALUES ("ABS - Blue", "2018-09-30", CURTIME(), 122.
 INSERT INTO 3DMaterial_Graph VALUES ("ABS - Blue", "2018-09-30", CURTIME(), 120.8);
 
 
-
+INSERT INTO Message VALUES (null, "ti lab", "you're up");
 INSERT INTO Message VALUES (null, "message1", "is this a message?");
 INSERT INTO Message VALUES (null, "message2", "it cannot be a message");
 INSERT INTO Message VALUES (null, "message3", "it is a message");
 INSERT INTO Message VALUES (null, "message4", "'message', a haiku by message");
 
-INSERT INTO Notification VALUES (1, 1, NOW(), false);
 INSERT INTO Notification VALUES (1, 2, NOW(), false);
 INSERT INTO Notification VALUES (1, 3, NOW(), false);
 INSERT INTO Notification VALUES (1, 4, NOW(), false);
-INSERT INTO Notification VALUES (2, 1, NOW(), false);
+INSERT INTO Notification VALUES (1, 5, NOW(), false);
 INSERT INTO Notification VALUES (2, 2, NOW(), false);
 INSERT INTO Notification VALUES (2, 3, NOW(), false);
 INSERT INTO Notification VALUES (2, 4, NOW(), false);
+INSERT INTO Notification VALUES (2, 5, NOW(), false);
 
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "cut", 100, 1, 1000, "keep an eye out");
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "engrave", 100, 100, 1000, "keep an eye out");

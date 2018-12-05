@@ -363,6 +363,11 @@
   		// return;
     	   
     }
+
+    //wip
+    function loadDropNow() {
+        document.getElementById("dropdown").classList.toggle("show");
+    }
         
     $(document).ready(function() {
         $('.nav-tabs a').on('show.bs.tab', function(e){
@@ -384,6 +389,7 @@
 
     //Load on page load
     window.onload = function fistToLoad() {
+        //loadDropNow();//have dropdown active upon loading page
         includeHTML('../../html/Menu_Bar.html'); 
         loadClubTable();
         getMajors("major_profile");
