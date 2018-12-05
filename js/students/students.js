@@ -337,8 +337,10 @@ function fillSearchBar(event) {
 
 async function foundStudent(event) {
 	var target = event.target;
-	var student_name = document.getElementById("student_search").value;
-	console.log(event)
+	document.getElementById("student_search").value = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillStudentProfile(target.getAttribute("student_id"));
 }
 
 //-----------------------------------------
