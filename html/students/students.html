@@ -94,10 +94,7 @@
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Find:</label>
                                         <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
-                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
-                                            <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
-                                                
-                                            </ul>
+                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
                                     </div>
@@ -317,7 +314,7 @@
                     <div id="searchDB" align="center" class="modal-body">
                         <form 0>
                             <label for="fname">First Name </label>
-                            <input class="form-control" type="text" id="student_search" name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search');">
+                            <input class="form-control" type="text" id="student_search" name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search', foundStudent);">
                             <br>
                         </form>
                     

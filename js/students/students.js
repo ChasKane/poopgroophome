@@ -153,6 +153,7 @@ async function loadStudentProfile(event) {
 		var student_search = document.getElementById("student_search")
 		student_search.value = student;
 		$("#searchStudentModal").modal();
+		document.getElementById("student_search").focus()
 		return;
 	}
 	fillStudentProfile(result);
