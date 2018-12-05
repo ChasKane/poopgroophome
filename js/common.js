@@ -227,7 +227,7 @@ async function fillModalTable(input_id, func) {
 	var newHTML = "";
 	students = students.students;
 
-	for (var idx in students.length) {
+	for (var idx in students) {
 		newHTML += "<tr><td student_id='" + students[idx].student_id + "' onclick='" + func(event) + "'>" + students[idx].first_name + " " + students[idx].last_name + "</td></tr>"
 	}
 
