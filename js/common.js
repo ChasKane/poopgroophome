@@ -189,6 +189,7 @@ function keyAccept(e, id, func) {
 	}
 }
 
+// To be deleted once we finish migrating to modal
 function fillSearchBar(event) {
 	var target = event.target;
 	var student_id = target.getAttribute("student_id");
@@ -198,7 +199,7 @@ function fillSearchBar(event) {
 	searchBar.setAttribute("student_id", student_id);
 }
 
-
+// To be deleted once we finish migrating to modal
 async function fillDropdown(e, input_id) {
 	var dropdown = document.getElementById("dropdown");
 	var input = document.getElementById(input_id);
@@ -219,12 +220,17 @@ async function fillDropdown(e, input_id) {
 	dropdown.innerHTML = newHTML;
 	return false;
 }
+
 async function fillModalTable(input_id, func) {
 	var dropdown = document.getElementById("student_table");
 	var input = document.getElementById(input_id);
 	var students = await getStudent(input.value);
 	var newHTML = "";
 	students = students.students;
+
+	if(students.length == 0) {
+		newHTML += "<tr><td>There are no students with that name or ID.</td></tr>"
+	}
 
 	for (var idx in students) {
 		newHTML += "<tr><td student_id='" + students[idx].student_id + "' onclick='foundStudent(event)'>" + students[idx].first_name + " " + students[idx].last_name + "</td></tr>"
