@@ -336,6 +336,7 @@ function fillSearchBar(event) {
 }
 
 async function foundStudent(event) {
+	var target = event.target;
 	var student_name = document.getElementById("student_search").value;
 	console.log(event)
 }
