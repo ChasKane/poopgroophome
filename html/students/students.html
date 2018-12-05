@@ -94,7 +94,7 @@
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Find:</label>
                                         <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
-                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
                                             <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
                                                 
                                             </ul>
@@ -299,6 +299,40 @@
                     </div>
                     <div class="modal-footer">
                         <button id="addStudentButton" type="button" class="btn btn-default" onclick="addStudent(event);">Submit</button> 
+                        <button id="addStudentClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!--Modal pop up, just leave it here-->
+        <div class="modal fade" id="searchStudentModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title">Search</h2>
+                    </div>
+                    <div id="searchDB" align="center" class="modal-body">
+                        <form 0>
+                            <label for="fname">First Name </label>
+                            <input class="form-control" type="text" id="student_search" name="firstname" placeholder="Your name.." onkeypress="fillModalTable('student_search');">
+                            <br>
+                        </form>
+                    
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Student Name</td>
+                                </tr>
+                            </thead>
+                            <tbody id="student_table" style="min-height: 31px">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
                         <button id="addStudentClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
