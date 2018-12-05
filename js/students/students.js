@@ -186,11 +186,11 @@ async function fillStudentProfile(student) {
 	elem = document.getElementById("groups");
 	newHTML = "";
 	console.log(result)
-	if(result == undefined) {
+	if(clubs == undefined) {
 		elem.innerHTML = "Oh no you arent in any clubs!";
 	} else {
-		for(var x in result.clubs) {
-			newHTML += "<p club='" + result.clubs[x].club_name + "'>" + student.clubs[x].club_name;
+		for(var x in clubs) {
+			newHTML += "<p club='" + clubs[x].club_name + "'>" + clubs[x].club_name;
 			newHTML += "<button onclick='removefromClubButton(event)'>X</button></p> ";
 		}
 		elem.innerHTML = newHTML;
