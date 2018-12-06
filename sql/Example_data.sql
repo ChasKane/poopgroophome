@@ -207,10 +207,10 @@ INSERT INTO Lab_Inventory VALUES (null, "item15", "this is a cool item + 10", 7,
 INSERT INTO Laser_Appointment VALUES (1, 1, "2000-06-15", "08:05", "23:59:00");
 
 
-INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 08:05", null, TRUE);
 INSERT INTO Rented_Inventory VALUES (1, 2, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 3, "2019-01-01 08:05", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 08:05", null, TRUE);
 INSERT INTO Rented_Inventory VALUES (1, 5, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 6, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 7, "2019-01-01 08:05", null, FALSE);
