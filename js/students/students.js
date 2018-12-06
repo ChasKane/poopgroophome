@@ -37,6 +37,9 @@ function checkSwap(id, display_id) {
 // fairly specific function
 // turns visibility off on all elements on student page other than id passed in
 function swapStudentsHTML(id) {
+	if(id == 'main_student') {
+		document.getElementById("main_student").value = "";
+	}
 	checkSwap("student_profile", id);
 	checkSwap("main_student", id);
 	checkSwap("all_students", id);
@@ -353,6 +356,7 @@ $(document).ready(function() {
         href = this.getAttribute('href');        
         if(href == "#home") {
             swapStudentsHTML("main_student");
+            document.getElementById("userCard_ID").value = "";
         } 
     });
     $('#searchStudentModal').on('shown.bs.modal', function () {
