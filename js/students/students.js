@@ -65,7 +65,7 @@ function getMajors(id) {
 	});
 }
 
-await function loadMajors(majors, id) {
+async function loadMajors(majors, id) {
 	majors = majors.majors;
 	var element = document.getElementById(id);
 	var id = document.getElementById("student_profile");
