@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+            <title>TI Innovation Lab</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+            <!-- get styles and stuff from bootstrap //Load first, so that any changes to style are done after this load//-->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            
+            
+            <style>
+              * {
+                box-sizing: border-box;
+              }
+              
+              ul.list {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+              }
+              
+              ul li.list {
+                border: 1px solid #ddd;
+                margin-top: -1px; /* Prevent double borders */
+                background-color: #f6f6f6;
+                padding: 12px;
+                text-decoration: none;
+                font-size: 18px;
+                color: black;
+                display: block;
+                position: relative;
+              }
+              
+              ul li.list:hover {
+                background-color: #eee;
+              }
+              
+              .close {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                right: 0%;
+                padding: 12px 16px;
+                transform: translate(0%, -50%);
+              }
+              
+              .close:hover {background: #bbb;}
+            </style>
+                        
+            
+    </head>
+
+    <body onload="includeHTML('html/Menu_Bar.html');">
+
+        <div class="main container">
+        <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
+        <center><img style="padding-left:20%;"src="back.png" alt="" width="90%"></center>
+        <p> </p>
+        </div>
+
+    </body>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
+<script>
+    
+    
+  var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+
+        /*function that includes html*/
+        function includeHTML(arg)
+        {
+            var z, i, elmnt, file, xhttp, id;
+            file = arg
+
+            /*loop thru html elements*/
+            z = document.getElementsByTagName("*");
+
+            for (i = 0; i < z.length; i++) 
+            {
+                elmnt = z[i];
+
+                if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
+                {
+                    /*make http req*/
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function()
+                    {
+                        if (this.readyState == 4)
+                        {
+                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                            /*edit attrib, call again*/
+                            elmnt.setAttribute("content-include-html", "nope");
+                            includeHTML();
+                            elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                        }
+                    }
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    
+                    return;
+                }
+            }
+        }
+
+        // Pop up function for confirmations and alerts
+        function modPop(arg)
+    {
+      var i, j;
+    
+      
+      //  if (true)
+      //  {
+          // document.getElementById("popViewTitle").innerHTML = "Hello There";
+          // document.getElementById("popViewBod").innerHTML = "<p></p>";
+          // document.getElementById("popBottomButt").innerHTML = "Close";
+      //    return;
+      //  }
+        }
+        
+        // focus an element
+        function focusPocus()
+        {
+            document.getElementById("userCard_ID").focus();
+        }
+        
+</script>       
+
+</html>
