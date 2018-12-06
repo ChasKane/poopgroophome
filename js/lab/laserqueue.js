@@ -68,8 +68,7 @@ async function updatequeue(newStatus, position) {
 		}
 
 	});
-	fillLaserQueue(retval)
-	return retval;
+	fillLaserQueue(await getlaserqueue())
 }
 
 function changeFunc(event) {
