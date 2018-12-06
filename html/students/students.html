@@ -107,26 +107,28 @@
                                         <label class="col-sm-2 control-label">Find:</label>
                                         <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
                                             <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
                                     </div>
                                 </form>
                                 <br><br><br>
-                                <form class="form-horizontal">
-                                    <div class="from-group container-fluid">
-                                        <label class="col-sm-2 control-label">Add:</label>
-                                        <div class="col-sm-8">
-                                            <input id="user_ID" class="form-control" placeholder="Search" type="text" autocomplete="off" onkeypress="return keyAccept(event, 'user_ID', cardSwipeAdd);">
+                                <form >
+                                    <div >
+                                        <label class="col-sm-1 control-label">Add:</label>
+                                        <div class="col-sm-2 dropdown" >
+                                            <input id="user_ID" class="form-control" placeholder="Search" type="text" autocomplete="off" 
+                                            onkeypress="return keyAccept(event, 'user_ID', cardSwipeAdd);">
                                         </div>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">Manually Add Student</button>
-                                    </div>
+                                    <button type="button" class="btn btn-default btn-sm" onclick="loadAddStudent();" data-toggle="modal" data-target="#addStudentModal">Manually Add Student</button>
+                                </div>
                                 </form>
                                 <br><br><br>
-                                <form class="form-horizontal">
-                                  <div class="from-group container-fluid">
+                                <form >
+                                  <div >
                                      
-                                     <label class="col-sm-2 control-label" >See All:</label>
-                                     <div class="col-sm-8">
+                                     <label class="col-sm-1 control-label" >See All:</label>
+                                     <div class="col-sm-2">
                                      <button type="button" class="btn btn-default" onclick="loadAllStudents(); getMajors('major_profile');">Go</button> 
                                      </div>
                                   </div>

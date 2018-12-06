@@ -1,5 +1,6 @@
 USE innovate_dev_db;
 
+INSERT INTO Major VALUES ("");
 INSERT INTO Major VALUES ("Computer Science");
 INSERT INTO Major VALUES ("a");
 INSERT INTO Major VALUES ("Computer Engineering");
@@ -11,6 +12,7 @@ INSERT INTO Major VALUES ("Mathemathics");
 INSERT INTO Major VALUES ("Industrial Engineering");
 
 --
+INSERT INTO Student VALUES (null, null, "N/A", "N/A", "N/A", "N/A", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "a", "a", "a", "a", "a@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 
