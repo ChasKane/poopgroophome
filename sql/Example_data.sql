@@ -2,7 +2,6 @@ USE innovate_dev_db;
 
 INSERT INTO Major VALUES ("");
 INSERT INTO Major VALUES ("Computer Science");
-INSERT INTO Major VALUES ("a");
 INSERT INTO Major VALUES ("Computer Engineering");
 INSERT INTO Major VALUES ("Aerospace Engineering");
 INSERT INTO Major VALUES ("Mechanical Engineering");
@@ -14,7 +13,7 @@ INSERT INTO Major VALUES ("Industrial Engineering");
 --
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "", "N/A", "", "", "N/A", 0.0, 0.0, null);
-INSERT INTO Student VALUES (null, "a", "a", "a", "a", "a@ucf.edu", 0.0, 0.0, null);
+INSERT INTO Student VALUES (null, "a", "a", "a", "Computer Science", "a@ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Student VALUES (null, "1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
@@ -151,9 +150,6 @@ INSERT INTO Lab_Status VALUES (13, CURDATE(), NOW(), null);
 INSERT INTO Lab_Status VALUES (14, CURDATE(), NOW(), null);
 INSERT INTO Lab_Status VALUES (15, CURDATE(), NOW(), null);
 
-
-INSERT INTO Club VALUES ("P O O P B O I S");
-
 INSERT INTO Club VALUES ("ASME");
 INSERT INTO Club VALUES ("AIAA");
 INSERT INTO Club VALUES ("Senior Design Aerospace");
@@ -161,12 +157,12 @@ INSERT INTO Club VALUES ("Robotics Club");
 INSERT INTO Club VALUES ("SAE Baja");
 INSERT INTO Club VALUES ("SAE Formula");
 
-
-INSERT INTO Student_Club VALUES (1, "P O O P B O I S");
 INSERT INTO Student_Club VALUES (1, "ASME");
 INSERT INTO Student_Club VALUES (1, "AIAA");
 INSERT INTO Student_Club VALUES (1, "Senior Design Aerospace");
 INSERT INTO Student_Club VALUES (1, "Robotics Club");
+INSERT INTO Student_Club VALUES (1, "SAE Baja");
+INSERT INTO Student_Club VALUES (1, "SAE Formula");
 
 INSERT INTO Student_Club VALUES (3, "ASME");
 INSERT INTO Student_Club VALUES (3, "AIAA");
