@@ -305,12 +305,12 @@ INSERT INTO 3DMaterial_Graph VALUES ("ABS - Blue", "2018-09-30", CURTIME(), 122.
 INSERT INTO 3DMaterial_Graph VALUES ("ABS - Blue", "2018-09-30", CURTIME(), 120.8);
 
 
-INSERT INTO Message VALUES (null, "ti lab", "you're up");
+INSERT INTO Message VALUES (null, "TI Lab", "You're up soon. Please come to the lab.");
 INSERT INTO Message VALUES (null, "message1", "is this a message?");
 INSERT INTO Message VALUES (null, "message2", "it cannot be a message");
 INSERT INTO Message VALUES (null, "message3", "it is a message");
 INSERT INTO Message VALUES (null, "message4", "'message', a haiku by message");
-INSERT INTO Message VALUES (null, "TI Lab", "You're up soon. Please come to the lab.");
+INSERT INTO Message VALUES (null, "TI Lab", "This is an example notification.");
 
 INSERT INTO Notification VALUES (1, 2, NOW(), false);
 INSERT INTO Notification VALUES (1, 3, NOW(), false);
