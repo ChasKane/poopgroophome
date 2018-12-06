@@ -46,7 +46,7 @@ function deleteMajorButton(event) {
 		type : "POST",
 		data : JSON.stringify(payload),
 		success : function (response, tStatus, responseCode) {
-			getMajors();
+			getMajorsTable();
 		},
 		error : function(response, tStatus, responseCode) {
 			if(response.status == 202) {
