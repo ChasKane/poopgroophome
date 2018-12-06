@@ -353,6 +353,6 @@ $(document).ready(function() {
         }
     });
     $('#searchStudentModal').on('shown', function () {
-    	$("#student_search").first().focus();
+    	$("#student_search").focus();
  	});
 });
