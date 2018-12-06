@@ -15,7 +15,7 @@ function get3DPrinterQueue() {
 }
 
 function fill3DPrinterQueue(object) {
-	var estimated_time = 0;
+	var estimated_time = "00:00:00";
 	if(object == undefined) {
 		return;
 	}
@@ -30,7 +30,6 @@ function fill3DPrinterQueue(object) {
 	for (var idx in elements) {
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
 		estimated_time += calcTime(estimated_time, elements[idx].estimated_time);
-		// arb
 		newInnerHTML += "<td>" + elements[idx].machine_id + "</td>" + 
 						"<td>" + elements[idx].student_name + "</td>" + 
 						"<td>" + elements[idx].tech_name + "</td>" + 
