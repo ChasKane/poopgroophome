@@ -68,18 +68,18 @@
 
                             <div>
                     
-                                <body id="TableBody" ><center>
+                                <body id="TableBody" >
                     
                     
                                     <div id="3DPrintTableDiv" >
-                                        <h2 class="text-center">List</h2><br>
-                                        <button>Add Appt</button><br>
+                                        
+                                        <button type="button" class = "btn btn-default btn-sm">Add Apptionment </button><br>
                     
                                         <div>
                                             <br>
-                                            <button type="button" id="fillTableButton" class="buttons" onclick="fillTable();"> Update Scedual </button>
+                                            <button type="button" class = "btn btn-default btn-sm" id="fillTableButton" class="buttons" onclick="fillTable();"> Update Schedule </button> 
                                         </div>
-                    
+                                        <br></br>
                     
                                         <div class="container-fluid">
                                             <div class="table-responsive">
@@ -125,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </center></body>
+                               </body>
                             </div>
                         </div>
                     </div>
@@ -135,13 +135,13 @@
                     <div id="menu1" class="tab-pane fade">
                         <body>
                             <div class="well b-color-3 container-fluid">
-                                <div class="row content" vis="block" id="laser_cutting_queue">
+                            
                                     
                             <div id="toplabel">
                                 <p> Laser Queue <p>
                                 <hr> 
                             </div>
-    
+                            <div class="row content" vis="block" id="laser_cutting_queue">
                                     <form class="form-horizontal">
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1" for="tech_Select">Tech:</label>
@@ -153,7 +153,7 @@
                                         <br>
 
                                         <div class="from-group container-fluid">
-                                            <label class="col-sm-1 control-label">Add:</label>
+                                            <label class="col-sm-1 ">Student:</label>
                                             <div class="col-sm-4">
                                                 <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
 
@@ -163,15 +163,12 @@
                                             </div>
                                             <button type="button" class="btn btn-default btn-sm col-sm-2" onclick="addLaserQueueButton();">Manualy Add Student</button>
                                         </div>
+                                         <br>
+                                        <button type="button" id="fillTableButton"  class="btn btn-default btn-sm"onclick="laserQueueButton();" style="margin-left:2%;"> Update Table </button>
+                                         <br></br>
                                     </form>
                         
                                     <div id="contactTableDiv"> 
-                                        
-                                        <div><br><center>
-                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
-                                        </center></div>
-                                        <br>
-                        
                                         
                                         <div class="container-fluid">
                                             <div class="table-responsive">
@@ -180,7 +177,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Queue Position</th>
-                                                            <th>Machine ID</th>
+                                                            <th>Machine</th>
                                                             <th>Student ID</th>
                                                             <th>Tech ID</th> <!-- waiting cutting done skipped-->
                                                             <th>Estimated time</th> <!-- delete-->
@@ -343,17 +340,17 @@
 
         // Pop up function for confirmations and alerts
         function modPop(arg)
-		{
-			var i, j;
-		
-			
-			// 	if (true)
-			// 	{
-					// document.getElementById("popViewTitle").innerHTML = "Hello There";
-					// document.getElementById("popViewBod").innerHTML = "<p></p>";
-					// document.getElementById("popBottomButt").innerHTML = "Close";
-			// 		return;
-			// 	}
+        {
+            var i, j;
+        
+            
+            //  if (true)
+            //  {
+                    // document.getElementById("popViewTitle").innerHTML = "Hello There";
+                    // document.getElementById("popViewBod").innerHTML = "<p></p>";
+                    // document.getElementById("popBottomButt").innerHTML = "Close";
+            //      return;
+            //  }
         }
 
         $(document).ready(function() {
