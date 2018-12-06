@@ -47,9 +47,9 @@
 
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
 
-        <div class="custom-container col-sm-12">
+        <div class="custom-container">
 
-            <div class="container-fluid">
+            <div class="container-fluid col-sm-12 lineup">
                 <ul id="nav_tab" class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Laser Appt</a></li>
                     <li><a data-toggle="tab" href="#menu1">Laser Queue</a></li>
@@ -179,6 +179,7 @@
                                                             <th>Queue Position</th>
                                                             <th>Machine</th>
                                                             <th>Student ID</th>
+                                                            <th>Student Name</th>
                                                             <th>Tech ID</th> <!-- waiting cutting done skipped-->
                                                             <th>Estimated time</th> <!-- delete-->
                                                             <th>Status</th>
@@ -217,15 +218,16 @@
 
                     <div id="menu2" class="tab-pane fade">
                         <div class="well b-color-3">
-                            <center id="config_table" vis="block">
+                            <div id="config_table" vis="block">
                                                                     
                             <div id="toplabel">
                                 <p> Laser Configurations and Settings <p>
                                 <hr> 
                             </div>
                                 <div>
-                                    <button onclick="getLaserConfigs();">Update Config</button>
+                                    <button class="btn btn-default btn-sm" onclick="getLaserConfigs();">Update Config</button>
                                 </div>
+                                <br>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-condensed table-hover">
                                         
@@ -247,8 +249,8 @@
                                         
                                     </table>
                                 </div>
-                                <button onclick="configSwap('add_config');">Add Config</button>
-                            </center>
+                                <button class="btn btn-default btn-sm" onclick="configSwap('add_config');">Add Config</button>
+                            </div>
                             <div id="add_config" vis="none" style="display: none;">
                                 <label>Material</label>
                                 <input class="form-control" type="text" id="material" placeholder="Material name..">
