@@ -9,8 +9,8 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src="../../js/students/laserqueue.js"></script>
             <script src="../../js/lab/laserqueue.js"></script>
+            <script src="../../js/lab/laserconfig.js"></script>
             <script src="../../js/common.js"></script>
     </head>
 
@@ -155,7 +155,7 @@
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1 ">Student:</label>
                                             <div class="col-sm-4">
-                                                  <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" autofocus>
+                                                <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" autofocus>
 
                                                 <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
                                                 
@@ -176,7 +176,6 @@
                                                     
                                                     <thead>
                                                         <tr>
-                                                            
                                                             <th>Machine</th>
                                                             <th>Student Name</th>
                                                             <th>Tech Name</th> <!-- waiting cutting done skipped-->
@@ -294,8 +293,8 @@
             </div>
         </div>
     </body>
-
-     <!--Modal pop up, just leave it here-->
+    
+    <!--Modal pop up, just leave it here-->
     <div class="modal fade" id="searchStudentModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -327,7 +326,6 @@
             </div>
         </div>
     </div>
-    
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
