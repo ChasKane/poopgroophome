@@ -85,8 +85,8 @@
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
     
       
-        <div class="custom-container-fluid col-sm-12">
-            <div class="row content">
+        <div class="custom-container-fluid">
+            <div class="container-fluid col-sm-12 lineup">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Students</a></li>
                     <li><a data-toggle="tab" href="#menu1" onclick="getcurrentstudents();">Current Students</a></li>
@@ -99,19 +99,15 @@
                     <div id="home" class="tab-pane fade in active">
                         <div id="main_student" class="well b-color-3 container-fluid" vis="block">
                             <div id="toplabel">
-                                <p> Students  <p>
-                                <hr> 
-                            </div>
-                            <div >
-                                <form >
-                                    <div >
-                                        <label class="col-sm-1 control-label">Find:</label>
-                                        <div class="col-sm-2 dropdown" id="swipeCard"><!--Dropdown search-->
-                                            <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" 
-                                            placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" 
-                                            autocomplete="off" student_id="" autofocus>
-                                            
-                                            <ul class="dropdown-menu" id="dropdown"><!--Dropdown list--></ul>
+                            <p> Students  <p>
+                            <hr> </div>
+                            <div>
+                                <form class="form-horizontal">
+                                    <div class="from-group container-fluid">
+                                        <label class="col-sm-2 control-label">Find:</label>
+                                        <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
+                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
                                     </div>
@@ -328,95 +324,128 @@
             </div>
         </div>
     </body>
+
+    <!--Modal pop up, just leave it here-->
+    <div class="modal fade" id="searchStudentModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Search</h2>
+                </div>
+                <div id="searchDB" align="center" class="modal-body">
+                    <form 0>
+                        <label for="fname">First Name </label>
+                        <input class="form-control" type="text" id="student_search" name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search', foundStudent);">
+                        <br>
+                    </form>
+                
+                    <table class="table table-bordered table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <td>Student Name</td>
+                            </tr>
+                        </thead>
+                        <tbody id="student_table" style="min-height: 31px">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="addStudentClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
-<script>
-    
-    
+    <script>
+
+
     var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
 
-    /*function that includes html*/
-    function includeHTML(arg)
-    {
-        var z, i, elmnt, file, xhttp, id;
-        file = arg
-
-        /*loop thru html elements*/
-        z = document.getElementsByTagName("*");
-
-        for (i = 0; i < z.length; i++)
+        /*function that includes html*/
+        function includeHTML(arg)
         {
-            elmnt = z[i];
+            var z, i, elmnt, file, xhttp, id;
+            file = arg
 
-            if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
+            /*loop thru html elements*/
+            z = document.getElementsByTagName("*");
+
+            for (i = 0; i < z.length; i++)
             {
-                /*make http req*/
-                xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function()
+                elmnt = z[i];
+
+                if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
                 {
-                    if (this.readyState == 4)
+                    /*make http req*/
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function()
                     {
-                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                        if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
-                        /*edit attrib, call again*/
-                        elmnt.setAttribute("content-include-html", "nope");
-                        includeHTML();
-                        elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                        if (this.readyState == 4)
+                        {
+                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
+                            /*edit attrib, call again*/
+                            elmnt.setAttribute("content-include-html", "nope");
+                            includeHTML();
+                            elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
+                        }
                     }
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    
+                    return;
                 }
-                xhttp.open("GET", file, true);
-                xhttp.send();
-                
-                return;
             }
         }
-    }
 
-        // Pop up function for confirmations and alerts
-    function modPop(arg) {   
-        // document.getElementById("popViewTitle").innerHTML = "Add Student";
-        // var newInnerHTML = ""; 
-        // newInnerHTML += ""
+            // Pop up function for confirmations and alerts
+        function modPop(arg) {   
+            // document.getElementById("popViewTitle").innerHTML = "Add Student";
+            // var newInnerHTML = ""; 
+            // newInnerHTML += ""
 
 
-        // document.getElementById("popViewBod").innerHTML = newInnerHTML;
-        // document.getElementById("popBottomButt").innerHTML = "Close";
-        // return;
-           
-    }
+            // document.getElementById("popViewBod").innerHTML = newInnerHTML;
+            // document.getElementById("popBottomButt").innerHTML = "Close";
+            // return;
+               
+        }
 
-    //wip
-    function loadDropNow() {
-        document.getElementById("dropdown").classList.toggle("show");
-    }
-        
-    $(document).ready(function() {
-        $('.nav-tabs a').on('show.bs.tab', function(e){
-            console.log(e.href);
-            activeTab = $(this).attr('href').split('-')[1];        
-            if(this.getAttribute('href') == "#menu1") {
-                console.log("clicked")
-                //focusOn("userCard_ID")
-            } else if(this.getAttribute('href') == "#menu3") {
-                getMajorsTable();
-            }
+        //wip
+        function loadDropNow() {
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+            
+        $(document).ready(function() {
+            $('.nav-tabs a').on('show.bs.tab', function(e){
+                console.log(e.href);
+                activeTab = $(this).attr('href').split('-')[1];        
+                if(this.getAttribute('href') == "#menu1") {
+                    console.log("clicked")
+                    //focusOn("userCard_ID")
+                } else if(this.getAttribute('href') == "#menu3") {
+                    getMajorsTable();
+                }
+            });
+
+            $("#userCard_ID").submit(function(e) {
+                console.log("prvented");
+                e.preventDefault();
+            });
         });
 
-        $("#userCard_ID").submit(function(e) {
-            console.log("prvented");
-            e.preventDefault();
-        });
-    });
-
-    //Load on page load
-    window.onload = function fistToLoad() {
-        //loadDropNow();//have dropdown active upon loading page
-        includeHTML('../../html/Menu_Bar.html'); 
-        loadClubTable();
-        getMajors("major_profile");
-        getMajors("add_major_profile");
-    }
-</script> 
+        //Load on page load
+        window.onload = function fistToLoad() {
+            //loadDropNow();//have dropdown active upon loading page
+            includeHTML('../../html/Menu_Bar.html'); 
+            loadClubTable();
+            getMajors("major_profile");
+            getMajors("add_major_profile");
+        }
+    </script> 
 </html>

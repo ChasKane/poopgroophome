@@ -140,48 +140,59 @@ async function loadStudentProfile(event) {
 		student = searchBar.getAttribute("student_id");
 		searchBar.setAttribute("student_id", "")	
 	} else{
-		var targ = event.target;
-		student = targ.parentElement.getElementsByTagName("td");
-		student = student[0].textContent;
+		student = searchBar.value;
 	} 
 	
 	// fill in student info
 	result = await getStudent(student);
 	if(result == undefined) {
+		searchBar.value = "";
 		alert("There are no students of that name/id");
 		return false;
+	} else if(result.students.length > 1) {
+		var student_search = document.getElementById("student_search")
+		student_search.value = student;
+		$("#searchStudentModal").modal();
+		document.getElementById("student_search").focus();
+		fillModalTable('student_search', foundStudent);
+		return;
 	}
-	result = result.students[0];
+	fillStudentProfile(result);
+	return false;
+}
+
+async function fillStudentProfile(student) {
+	student = student.students[0];
 	var elem = document.getElementById("fname");
-	elem.value = result.first_name; 
+	elem.value = student.first_name; 
 	elem = document.getElementById("lname");
-	elem.value = result.last_name;
+	elem.value = student.last_name;
 	elem = document.getElementById("email");
-	elem.value = result.school_email;
+	elem.value = student.school_email;
 	elem = document.getElementById("student_profile");
-	elem.setAttribute("student_id", result.student_id);
+	elem.setAttribute("student_id", student.student_id);
 
 	// fill in majors dropdown
 	getMajors("major_profile");
 
 	// fill in materials used
 	elem = document.getElementById("material_used");
-	elem.innerHTML = ": " +result.material_used;
-	elem.setAttribute("value", result.material_used);
+	elem.innerHTML = ": " + student.material_used;
+	elem.setAttribute("value", student.material_used);
 	elem = document.getElementById("soluble_used");
-	elem.setAttribute("value", result.soluble_used);
-	elem.innerHTML = ": " + result.soluble_used;
+	elem.setAttribute("value", student.soluble_used);
+	elem.innerHTML = ": " + student.soluble_used;
 
 	// fill in groups
-	var clubs = await getGroups(result.student_id);
+	var clubs = await getGroups(student.student_id);
 	elem = document.getElementById("groups");
 	newHTML = "";
 	console.log(result)
-	if(result == undefined) {
+	if(clubs == undefined) {
 		elem.innerHTML = "Oh no you arent in any clubs!";
 	} else {
-		for(var x in result.clubs) {
-			newHTML += "<p club='" + result.clubs[x].club_name + "'>" + result.clubs[x].club_name;
+		for(var x in clubs) {
+			newHTML += "<p club='" + clubs[x].club_name + "'>" + clubs[x].club_name;
 			newHTML += "<button onclick='removefromClubButton(event)'>X</button></p> ";
 		}
 		elem.innerHTML = newHTML;
@@ -189,7 +200,6 @@ async function loadStudentProfile(event) {
 
 	// show student profile
 	swapStudentsHTML("student_profile");
-	return false;
 }
 
 // add student to db from modal form
@@ -325,6 +335,14 @@ function fillSearchBar(event) {
 
 	var searchBar = document.getElementById("userCard_ID");
 	searchBar.value = target.innerHTML;
+}
+
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillStudentProfile(await getStudent(target.getAttribute("student_id")));
 }
 
 //-----------------------------------------

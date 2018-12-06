@@ -116,8 +116,10 @@ function fillLaserQueue(object) {
 	var statuses = ["Waiting", "Cutting", "Skipped", "Done"]
 	var newInnerHTML = "";
 	var i = 0
+	var student;
 	
 	for (var idx in elements) {
+		student = await
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
 		estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
 		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
