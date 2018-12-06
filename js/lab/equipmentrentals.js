@@ -1,5 +1,10 @@
 
-function getRentedEquipment() {
+function getRentedEquipment(student) {
+	student = student.students[0];
+	var payload = {
+		student : student.student_id
+	}
+
 	$.ajax({
 		url : url + "api/web/rentedinventory/read.php",
 		type : "POST",
@@ -24,4 +29,28 @@ function updateRentalTable(rented_equipment) {
 	}
 
 	elem.innerHTML = newHTML;
+}
+
+function findStudent() {
+	var name = document.getElementById("userCard_ID");
+	name = name.value;
+
+	var students = await getStudent(name);
+	if(students == undefined || students.students.length > 1) {
+		document.getElementById("student_search").value = name;
+		fillModalTable("student_search");
+		$("#searchStudentModal").modal("show");
+		return;
+	} else {
+		getRentedEquipment(students);
+	}
+}
+
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	document.getElementById("student_table").innerHTML = "";
+	
+	$("#searchStudentModal").modal("hide");
+	getRentedEquipment(await getStudent(target.getAttribute("student_id")));
 }

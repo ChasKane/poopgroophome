@@ -54,6 +54,29 @@ function fill3DPrinterQueue(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
+async function updateQueue(newStatus, position) {
+	console.log("Changing status")
+	var payload = {
+		"status" : newStatus,
+		"queue_pos" : position
+	};
+
+	try {
+		retval = await $.ajax({
+			url : url + "api/web/laserqueue/update.php",
+			type : "POST",
+			data : JSON.stringify(payload),
+			success : function(response, tStatus, responseCode) {
+				console.log(response);
+			}
+
+		});
+	} catch(e) {
+		console.log(e);
+	}
+	fill3DPrinterQueue(await get3DPrinterQueue());
+}
+
 async function manuallyAddQueue() {
 	var name = document.getElementById("userCard_ID");
 	name = name.value;

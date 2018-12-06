@@ -57,18 +57,20 @@ async function updatequeue(newStatus, position) {
 		"queue_pos" : position
 	};
 
-	var retval;
-	retval = await $.ajax({
-		url : url + "api/web/laserqueue/update.php",
-		type : "POST",
-		data : JSON.stringify(payload),
-		success : function(response, tStatus, responseCode) {
-			retval = response;
-			console.log(response);
-		}
+	try {
+		retval = await $.ajax({
+			url : url + "api/web/laserqueue/update.php",
+			type : "POST",
+			data : JSON.stringify(payload),
+			success : function(response, tStatus, responseCode) {
+				console.log(response);
+			}
 
-	});
-	fillLaserQueue(await getlaserqueue())
+		});
+	} catch(e) {
+		console.log(e);
+	}
+	fillLaserQueue(await getlaserqueue());
 }
 
 function changeFunc(event) {
