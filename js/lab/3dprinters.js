@@ -62,11 +62,7 @@ async function manuallyAddQueue() {
 		fillAddLaserQueue(students);
 	}
 
-	getLabTechs("tech_select_add");
-	fillMachineID("machine_id");
-	checkSwap("manually_add_to_queue", "manually_add_to_queue");
-	checkSwap("3d_cutting_queue", "manually_add_to_queue");
-	clearInput3D();
+	fillStudentProfile(students);
 }
 
 async function fillStudentProfile(student) {
@@ -77,7 +73,6 @@ async function fillStudentProfile(student) {
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
-	clearInput3D();
 }
 
 function clearInput3D() {
