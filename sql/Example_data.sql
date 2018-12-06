@@ -248,6 +248,10 @@ INSERT INTO Machine VALUES (null, "Dimension", "3D Printer", "  ", "2016-01-01 0
 
 
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 3, 1, CURDATE(), NOW(), "01:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 4, 1, CURDATE(), NOW(), "01:30", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "03:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+
 
 INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 2, 1, CURDATE(), NOW(), "00:30:05", "Waiting");
@@ -314,10 +318,10 @@ INSERT INTO Notification VALUES (1, 2, NOW(), false);
 INSERT INTO Notification VALUES (1, 3, NOW(), false);
 INSERT INTO Notification VALUES (1, 4, NOW(), false);
 INSERT INTO Notification VALUES (1, 5, NOW(), false);
-INSERT INTO Notification VALUES (2, 2, NOW(), false);
-INSERT INTO Notification VALUES (2, 3, NOW(), false);
-INSERT INTO Notification VALUES (2, 4, NOW(), false);
-INSERT INTO Notification VALUES (2, 5, NOW(), false);
+INSERT INTO Notification VALUES (3, 2, NOW(), false);
+INSERT INTO Notification VALUES (3, 3, NOW(), false);
+INSERT INTO Notification VALUES (3, 4, NOW(), false);
+INSERT INTO Notification VALUES (3, 5, NOW(), false);
 
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "cut", 100, 1, 1000, "keep an eye out");
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "engrave", 100, 100, 1000, "keep an eye out");
