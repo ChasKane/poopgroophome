@@ -47,7 +47,7 @@ if($num>0){
 
 	http_response_code(200);
 } else {
-	http_response_code(404);
+	http_response_code(204);
 }
 
 echo json_encode($notifications);
