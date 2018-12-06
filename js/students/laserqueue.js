@@ -116,10 +116,8 @@ function fillLaserQueue(object) {
 	var statuses = ["Waiting", "Cutting", "Skipped", "Done"]
 	var newInnerHTML = "";
 	var i = 0
-	var student;
 	
 	for (var idx in elements) {
-		student = await
 		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
 		estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
 		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
@@ -224,13 +222,24 @@ function checkSwap(id, display_id) {
 // Manually add student to laser queue
 async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
-	var student_id = name.getAttribute("student_id");
-	name.setAttribute("student_id", "");
 	name = name.value;
 
-	document.getElementById("student_name").value = name;
+	var students = await getStudent(name);
+	if(students == undefined || students.students.length > 1) {
+		document.getElementById("student_search").value = name;
+		fillModalTable("student_search");
+		$("#searchStudentModal").modal("show");
+		return;
+	} else {
+		fillAddLaserQueue(students);
+	}
+}
 
-	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
+async function fillAddLaserQueue(student) {
+	student = student.students[0];
+
+	document.getElementById("student_name").value = student.first_name + " " + student.last_name;
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student.student_id);
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
@@ -317,6 +326,15 @@ function cardSwipeFind() {
 	return false;
 }
 
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	document.getElementById("student_table").innerHTML = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillAddLaserQueue(await getStudent(target.getAttribute("student_id")));
+}
+
 // make sure the right elements are visible
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
@@ -334,4 +352,7 @@ $(document).ready(function() {
         	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
+    $('#searchStudentModal').on('shown.bs.modal', function () {
+    	$("#student_search").focus();
+ 	});
 });
