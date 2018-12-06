@@ -10,6 +10,15 @@ function getRentedEquipment(student) {
 		type : "POST",
 		success : function(response, tStatus, responseCode) {
 			updateRentalTable(response);
+		},
+		error : function() {
+			var elem = document.getElementById("tableBody");
+			var newHTML = "<tr><th>None</th>";
+			newHTML += "<th>None</th>";
+			newHTML += "<th>None</th>";
+			newHTML += "<th>None</th>";
+			newHTML += "</tr>";
+			elem.innerHTML = newHTML;
 		}
 	});
 }
