@@ -38,7 +38,8 @@ if($num>0){
 
 		$notification = array(
 			'title' => $title,
-			'body' => $body
+			'body' => $body,
+			'time_sent' => $time_sent
 		);
 
 		array_push($notifications["notifications"], $notification);

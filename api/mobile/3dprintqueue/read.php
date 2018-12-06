@@ -55,7 +55,7 @@ if (isset($data->queue_pos)) {
 	return;
 }
 
-$query = "SELECT * FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
+$query = "SELECT *,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) FROM (3DPrint_Queue as pq) WHERE pq.queue_pos < 3DPrint_Queue.queue_pos) AS total_time FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -74,12 +74,17 @@ if($num>0){
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
+		if ($total_time == null) {
+			$total_time = "00:00:00";
+		}
+
 		$threedprint_queue = array(
 			'queue_pos' => $queue_pos,
 			'machine_id' => $machine_id,
 			'student_id' => $student_id,
 			'tech_id' => $tech_id,
 			'estimated_time' => $estimated_time,
+			'total_time' => $total_time,
 			'status' => $status,
 			'part_name' => $part_name,
 			'club_name' => $club_name,

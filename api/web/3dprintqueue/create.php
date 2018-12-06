@@ -30,6 +30,10 @@ if (!isset($data->machine_id)
 	return;
 }
 
+if ($data->student_id == "") {
+	$data->student_id = null;
+}
+
 $query = "INSERT INTO 3DPrint_Queue VALUES (null,:v2,:v3,:v4,CURDATE(),CURTIME(),:v7,'Waiting',:v9,:v10,:v11,:v12,:v13,:v14,:v15)";
 $stmt = $db->prepare($query);
 
