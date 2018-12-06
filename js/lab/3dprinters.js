@@ -15,7 +15,7 @@ function get3DPrinterQueue() {
 }
 
 function fill3DPrinterQueue(object) {
-	var estimated_time = 0;
+	var estimated_time = "00:00:00";
 	if(object == undefined) {
 		return;
 	}
@@ -28,12 +28,18 @@ function fill3DPrinterQueue(object) {
 	var i = 0
 	
 	for (var idx in elements) {
-		console.log("1 boi")
-		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
-		estimated_time += elements[idx].estimated_time;
-		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
-						"<td>" + elements[idx].student_id + "</td>" + "<td>" + elements[idx].tech_id + "</td>" + 
-						"<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
+		newInnerHTML += "<tr pos=" + elements[idx].queue_pos + " class="+ elements[idx].status +">";
+		newInnerHTML += "<td>" + elements[idx].machine_id + "</td>";
+		newInnerHTML += "<td>" + elements[idx].student_name + "</td>"; 
+		newInnerHTML += "<td>" + elements[idx].tech_name + "</td>";
+		if(elements[idx].status == "Waiting" || elements[idx].status == "Printing") {
+			estimated_time = calcTime(estimated_time, elements[idx].estimated_time);  
+			newInnerHTML += "<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
+		} else if(elements[idx].status == "Skipped") {
+			newInnerHTML += "<td>Skipped</td>" +'<td> <div class="selection">';
+		} else {
+			newInnerHTML += "<td>Done</td>" +'<td> <div class="selection">';
+		}
 		
 		newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
 		for (var idx2 in statuses) {
@@ -48,12 +54,54 @@ function fill3DPrinterQueue(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
-function manuallyAddQueue() {
+async function updateQueue(newStatus, position) {
+	console.log("Changing status")
+	var payload = {
+		"status" : newStatus,
+		"queue_pos" : position
+	};
+
+	try {
+		retval = await $.ajax({
+			url : url + "api/web/laserqueue/update.php",
+			type : "POST",
+			data : JSON.stringify(payload),
+			success : function(response, tStatus, responseCode) {
+				console.log(response);
+			}
+
+		});
+	} catch(e) {
+		console.log(e);
+	}
+	fill3DPrinterQueue(await get3DPrinterQueue());
+}
+
+async function manuallyAddQueue() {
+	var name = document.getElementById("userCard_ID");
+	name = name.value;
+
+	var students = await getStudent(name);
+	if(students == undefined || students.students.length > 1) {
+		document.getElementById("student_search").value = name;
+		fillModalTable("student_search");
+		$("#searchStudentModal").modal("show");
+		return;
+	} else {
+		fillAddLaserQueue(students);
+	}
+
+	fillStudentProfile(students);
+}
+
+async function fillStudentProfile(student) {
+	student = student.students[0];
+
+	document.getElementById("student_name").value = student.first_name + " " + student.last_name;
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
 	checkSwap("3d_cutting_queue", "manually_add_to_queue");
-	clearInput3D();
 }
 
 function clearInput3D() {
@@ -141,6 +189,14 @@ function cardSwipeFind() {
 	return false;
 }
 
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillStudentProfile(await getStudent(target.getAttribute("student_id")));
+}
+
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
@@ -148,6 +204,7 @@ $(document).ready(function() {
         if(href == "#home") {
         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
+			document.getElementById("userCard_ID").value = "";
             focusOn("userCard_ID");
         }
         if(href != "#menu1") {
@@ -156,4 +213,8 @@ $(document).ready(function() {
         	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
+
+    $('#searchStudentModal').on('shown.bs.modal', function () {
+    	$("#student_search").focus();
+ 	});
 });

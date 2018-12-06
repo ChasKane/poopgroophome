@@ -354,4 +354,7 @@ $(document).ready(function() {
             swapStudentsHTML("main_student");
         } 
     });
+    $('#searchStudentModal').on('shown.bs.modal', function () {
+    	$("#student_search").focus();
+ 	});
 });
