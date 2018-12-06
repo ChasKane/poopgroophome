@@ -160,7 +160,7 @@ INSERT INTO Club VALUES ("SAE Formula");
 INSERT INTO Student_Club VALUES (1, "ASME");
 INSERT INTO Student_Club VALUES (1, "AIAA");
 INSERT INTO Student_Club VALUES (1, "Senior Design Aerospace");
-INSERT INTO Student_Club VALUES (1, "Robotics Club")
+INSERT INTO Student_Club VALUES (1, "Robotics Club");
 INSERT INTO Student_Club VALUES (1, "SAE Baja");
 INSERT INTO Student_Club VALUES (1, "SAE Formula");
 
