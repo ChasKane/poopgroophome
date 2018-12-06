@@ -177,7 +177,7 @@ async function fillStudentProfile(student) {
 
 	// fill in majors dropdown
 	getMajors("major_profile");
-	document.getElementById("major_profile").value = student.major_name;
+	$("#major_profile").val(student.major_name);
 
 	// fill in materials used
 	elem = document.getElementById("material_used");
