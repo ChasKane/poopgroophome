@@ -56,7 +56,7 @@ if (isset($data->queue_pos)) {
 	return;
 }
 
-$query = "SELECT * FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
+$query = "SELECT * FROM 3DPrint_Queue JOIN Student ON 3DPrint_Queue.student_id=Student.student_id JOIN Lab_Tech ON 3DPrint_Queue.tech_id=Lab_Tech.tech_id";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -79,6 +79,8 @@ if($num>0){
 			'queue_pos' => $queue_pos,
 			'machine_id' => $machine_id,
 			'student_id' => $student_id,
+			'student_name' => $first_name . " " . $last_name,
+			'tech_name' => $name,
 			'tech_id' => $tech_id,
 			'estimated_time' => $estimated_time,
 			'status' => $status,
