@@ -102,11 +102,11 @@
                             <p> Students  <p>
                             <hr> </div>
                             <div>
-                                <form class="form-horizontal">
-                                    <div class="from-group container-fluid">
-                                        <label class="col-sm-2 control-label">Find:</label>
-                                        <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
-                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                <form >
+                                    <div >
+                                        <label class="col-sm-1 control-label">Find:</label>
+                                        <div class="col-sm-2 dropdown" id="swipeCard"><!--Dropdown search-->
+                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeyup="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off">
 
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
@@ -189,7 +189,7 @@
                                 <table class="table table-bordered table-condensed table-hover">
                                     <thead>
                                         <tr>
-                                        <td>First Name</td>
+                                            <td>First Name</td>
                                             <td>Last Name</td>
                                             <td>Email</td>
                                             <td>Major</td>
@@ -336,7 +336,7 @@
                 <div id="searchDB" align="center" class="modal-body">
                     <form 0>
                         <label for="fname">First Name </label>
-                        <input class="form-control" type="text" id="student_search" name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search', foundStudent);">
+                        <input class="form-control" type="text" autofocus id="student_search" name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search');">
                         <br>
                     </form>
                 
