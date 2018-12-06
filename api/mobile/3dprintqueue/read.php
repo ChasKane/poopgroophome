@@ -55,15 +55,6 @@ if (isset($data->queue_pos)) {
 	return;
 }
 
-$query = "SELECT *,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) FROM (3DPrint_Queue as pq) WHERE pq.queue_pos < 3DPrint_Queue.queue_pos) AS total_time FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
-$stmt = $db->prepare($query);
-
-if (!$stmt->execute()) {
-	http_response_code(503);
-	echo json_encode($stmt->errorInfo());
-	return;
-}
-
 $query = "SELECT SEC_TO_TIME(SUM(SEC_TO_TIME(estimated_time))) AS overall_wait_time FROM Laser_Queue";
 $stmt = $db->prepare($query);
 
@@ -75,6 +66,15 @@ if (!$stmt->execute()) {
 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 extract($row);
+
+$query = "SELECT *,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) FROM (3DPrint_Queue as pq) WHERE pq.queue_pos < 3DPrint_Queue.queue_pos) AS total_time FROM 3DPrint_Queue JOIN Student WHERE 3DPrint_Queue.student_id=Student.student_id";
+$stmt = $db->prepare($query);
+
+if (!$stmt->execute()) {
+	http_response_code(503);
+	echo json_encode($stmt->errorInfo());
+	return;
+}
 
 $num = $stmt->rowCount();
 

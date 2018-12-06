@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS total_time FROM (Laser_Queue as lq) WHERE lq.queue_pos < Laser_Queue.queue_pos) AS personal_wait_time FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
+$query = "SELECT SEC_TO_TIME(SUM(SEC_TO_TIME(estimated_time))) AS overall_wait_time FROM Laser_Queue";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -21,7 +21,7 @@ if (!$stmt->execute()) {
 	return;
 }
 
-$query = "SELECT SEC_TO_TIME(SUM(SEC_TO_TIME(estimated_time))) AS overall_wait_time FROM Laser_Queue";
+$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS total_time FROM (Laser_Queue as lq) WHERE lq.queue_pos < Laser_Queue.queue_pos) AS personal_wait_time FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
