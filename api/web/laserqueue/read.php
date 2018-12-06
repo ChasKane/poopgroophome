@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
+$query = "SELECT queue_pos,machine_id,Laser_Queue.student_id,Laser_Queue.tech_id,date_added,estimated_time,time_added,status,first_name,last_name,name FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id JOIN Lab_Tech ON Laser_Queue.tech_id=Lab_Tech.tech_id AND date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -39,7 +39,8 @@ if($num > 0) {
 			"time_added" => $time_added,
 			"estimated_time" => $estimated_time,
 			"status" => $status,
-			"first_name" => $first_name
+			"student_name" => $first_name . " " . $last_name,
+			"tech_name" => $name
 		);
 
 		array_push($laser_queues["laser_queues"], $laser_queue);

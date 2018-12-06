@@ -217,15 +217,16 @@
 
                     <div id="menu2" class="tab-pane fade">
                         <div class="well b-color-3">
-                            <center id="config_table" vis="block">
+                            <div id="config_table" vis="block">
                                                                     
                             <div id="toplabel">
                                 <p> Laser Configurations and Settings <p>
                                 <hr> 
                             </div>
                                 <div>
-                                    <button onclick="getLaserConfigs();">Update Config</button>
+                                    <button class="btn btn-default btn-sm" onclick="getLaserConfigs();">Update Config</button>
                                 </div>
+                                <br>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-condensed table-hover">
                                         
@@ -247,8 +248,8 @@
                                         
                                     </table>
                                 </div>
-                                <button onclick="configSwap('add_config');">Add Config</button>
-                            </center>
+                                <button class="btn btn-default btn-sm" onclick="configSwap('add_config');">Add Config</button>
+                            </div>
                             <div id="add_config" vis="none" style="display: none;">
                                 <label>Material</label>
                                 <input class="form-control" type="text" id="material" placeholder="Material name..">

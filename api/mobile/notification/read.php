@@ -17,7 +17,7 @@ if (!isset($data->school_email)) {
 	return;
 }
 
-$query = "SELECT * FROM Message JOIN Notification WHERE Message.message_id=Notification.message_id AND seen=false AND student_id=(SELECT student_id FROM Student WHERE school_email=:v1)";
+$query = "SELECT * FROM Message JOIN Notification WHERE Message.message_id=Notification.message_id AND seen=false AND student_id=(SELECT student_id FROM Student WHERE school_email=:v1 ORDER BY time_sent DESC)";
 // $query = "SELECT * FROM Message JOIN Notification ON Message.message_id=Notification.message_id WHERE seen=false AND student_id=(SELECT student_id FROM Student WHERE school_email"
 $stmt = $db->prepare($query);
 
@@ -47,7 +47,7 @@ if($num>0){
 
 	http_response_code(200);
 } else {
-	http_response_code(404);
+	http_response_code(204);
 }
 
 echo json_encode($notifications);

@@ -55,7 +55,7 @@ if (isset($data->queue_pos)) {
 	return;
 }
 
-$query = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS overall_wait_time FROM Laser_Queue";
+$query = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS overall_wait_time FROM 3DPrint_Queue";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
