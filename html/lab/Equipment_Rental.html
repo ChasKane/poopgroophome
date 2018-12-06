@@ -9,15 +9,21 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="../../js/common.js"></script>
+            <script src="../../js/lab/equipmentrentals.js"></script>
     </head>
 
     <body>
 
         
 
-        <div class="main container">
+        <div class="main">
     
             <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
+            <div class="custom-container-fluid">
+                <div class="container-fluid col-sm-12 lineup">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Equipment Rental</a></li>
 
             <div class="container-fluid col-sm-offset-2 col-sm-10">
                 <ul class="nav nav-tabs">
@@ -29,6 +35,8 @@
                     <div id="home" class="tab-pane fade in active">
                         <div class="well b-color-3">
                             <h1>Student</h1>
+                            
+                            <!-- template for search bar, might move/remove, need to rename id's -->
                             <form class="form-horizontal">
                                 <div class="from-group container-fluid">
                                     <label class="col-sm-2 control-label">Find:</label>
@@ -38,10 +46,29 @@
                                     <button type="button" class="btn btn-default btn-sm" onclick="">Find</button>
                                 </div>
                             </form>
+
+                            <div class="container-fluid">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        
+                                        <thead>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>Item ID</th>
+                                                <th>Sacrificed</th>
+                                                <th>Loaned Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableBody">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!--<button type="button" class="btn btn-default btn-sm" onclick="modPop('insertArg');" data-toggle="modal" data-target="#modalPop">TEST</button>-->
                 </div>
-                <!--<button type="button" class="btn btn-default btn-sm" onclick="modPop('insertArg');" data-toggle="modal" data-target="#modalPop">TEST</button>-->
             </div>
         </div>
     </body>
@@ -113,8 +140,8 @@
 
         //Load on page load
         window.onload = function fistToLoad() {
-            includeHTML('../../html/Menu_Bar.html'); 
-            getLabTechs();
+            includeHTML('../../html/Menu_Bar.html');
+            getRentedEquipment();
         }
         
     </script>
