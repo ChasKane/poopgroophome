@@ -14,6 +14,7 @@ INSERT INTO Major VALUES ("Industrial Engineering");
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "", "N/A", "", "", "N/A", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "a", "a", "a", "Computer Science", "a@ucf.edu", 0.0, 0.0, null);
+-- INSERT INTO Student VALUES (null, "1234567", "John", "Doe", "Mathematics", "johndoe@knights.ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Student VALUES (null, "1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
@@ -207,10 +208,10 @@ INSERT INTO Lab_Inventory VALUES (null, "item15", "this is a cool item + 10", 7,
 INSERT INTO Laser_Appointment VALUES (1, 1, "2000-06-15", "08:05", "23:59:00");
 
 
-INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 1, "2019-01-01 08:05", null, TRUE);
 INSERT INTO Rented_Inventory VALUES (1, 2, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 3, "2019-01-01 08:05", null, FALSE);
-INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 08:05", null, FALSE);
+INSERT INTO Rented_Inventory VALUES (1, 4, "2019-01-01 08:05", null, TRUE);
 INSERT INTO Rented_Inventory VALUES (1, 5, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 6, "2019-01-01 08:05", null, FALSE);
 INSERT INTO Rented_Inventory VALUES (1, 7, "2019-01-01 08:05", null, FALSE);
@@ -243,17 +244,17 @@ INSERT INTO Machine VALUES (null, "Fortus 270", "3D Printer", "Only use ABS mate
 INSERT INTO Machine VALUES (null, "Dimension", "3D Printer", "  ", "2016-01-01 08:05", "Working");
 
 
-INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
-INSERT INTO 3DPrint_Queue VALUES (null, 1, 3, 1, CURDATE(), NOW(), "01:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 7, 1, CURDATE(), NOW(), "02:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 8, 1, CURDATE(), NOW(), "01:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 4, 1, CURDATE(), NOW(), "01:30", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "03:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 
 
-INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, 4, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 2, 1, CURDATE(), NOW(), "00:30:05", "Waiting");
-INSERT INTO Laser_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "00:40:00", "Waiting");
-INSERT INTO Laser_Queue VALUES (null, 1, 3, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
-INSERT INTO Laser_Queue VALUES (null, 1, 3, 2, CURDATE(), NOW(), "00:30:05", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "00:40:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, 8, 1, CURDATE(), NOW(), "01:20:00", "Waiting");
+INSERT INTO Laser_Queue VALUES (null, 1, 6, 2, CURDATE(), NOW(), "00:30:05", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "00:40:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 6, 3, CURDATE(), NOW(), "01:20:00", "Waiting");
 INSERT INTO Laser_Queue VALUES (null, 1, 7, 3, CURDATE(), NOW(), "00:30:05", "Waiting");
