@@ -244,8 +244,8 @@ INSERT INTO Machine VALUES (null, "Fortus 270", "3D Printer", "Only use ABS mate
 INSERT INTO Machine VALUES (null, "Dimension", "3D Printer", "  ", "2016-01-01 08:05", "Working");
 
 
-INSERT INTO 3DPrint_Queue VALUES (null, 1, 1, 1, CURDATE(), NOW(), "02:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
-INSERT INTO 3DPrint_Queue VALUES (null, 1, 3, 1, CURDATE(), NOW(), "01:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 7, 1, CURDATE(), NOW(), "02:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
+INSERT INTO 3DPrint_Queue VALUES (null, 1, 8, 1, CURDATE(), NOW(), "01:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 4, 1, CURDATE(), NOW(), "01:30", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 INSERT INTO 3DPrint_Queue VALUES (null, 1, 5, 1, CURDATE(), NOW(), "03:00", "Waiting", "part_name", "path/to/file.txt", 1.0, 1.0, "coolstuff", "coolstuff2", "P O O P B O I S");
 
