@@ -12,7 +12,7 @@ INSERT INTO Major VALUES ("Mathemathics");
 INSERT INTO Major VALUES ("Industrial Engineering");
 
 --
-INSERT INTO Student VALUES (0, "", "N/A", "", "N/A", "N/A", 0.0, 0.0, null);
+INSERT INTO Student VALUES (0, "", "N/A", "", "", "N/A", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "a", "a", "a", "a", "a@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 
