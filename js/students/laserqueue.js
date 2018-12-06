@@ -227,7 +227,7 @@ async function addLaserQueueButton() {
 	name = name.value;
 
 	var students = getStudent(name);
-	if(students == undefined || students.students.length > 1) {
+	if(students == undefined && students.students.length > 1) {
 		document.getElementById("student_search").value = name;
 		fillModalTable("student_search");
 		$("#searchStudentModal").modal("show");
