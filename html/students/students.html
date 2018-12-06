@@ -34,7 +34,7 @@
               
               ul.list {
                 list-style-type: none;
-                padding-left: 200px;
+                padding-left: 5%;
                 padding-top: 20px;
                 margin: 0;
                 width: 100%;
@@ -106,7 +106,11 @@
                                     <div >
                                         <label class="col-sm-1 control-label">Find:</label>
                                         <div class="col-sm-2 dropdown" id="swipeCard"><!--Dropdown search-->
+<<<<<<< HEAD
                                             <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeyup="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off">
+=======
+                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+>>>>>>> master
 
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
@@ -251,7 +255,7 @@
                                 </div>
                             </div>
                             <br>
-                            <button onclick="loadClubTable()">Get Groups</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="loadClubTable()">Get Groups</button>
                         </div>
                     </div>
                         
@@ -277,9 +281,10 @@
                                 </table>
                             </div>
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
-                            <button onclick="addMajor();">Add Major</button>
-                            <button onclick="getMajors();">Show Majors</button>
-                            <button onclick="deleteMajor()">Delete Selected Major</button>
+                            <br></br>
+                            <button type="button" class="btn btn-default btn-sm" onclick="addMajor();">Add Major</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="getMajors();">Show Majors</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="deleteMajor()">Delete Selected Major</button>
                         </div>
                         
                     </div>
