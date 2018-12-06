@@ -34,8 +34,8 @@
               
               ul.list {
                 list-style-type: none;
-                padding-left: 5%;
-                padding-top: 20px;
+                padding-left: 3%;
+                padding-top: 15px;
                 margin: 0;
                 width: 100%;
               }
@@ -105,10 +105,14 @@
                                 <form >
                                     <div >
                                         <label class="col-sm-1 control-label">Find:</label>
+<<<<<<< HEAD
                                         <div class="col-sm-2 dropdown" id="swipeCard"><!--Dropdown search-->
 <<<<<<< HEAD
                                             <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeyup="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off">
 =======
+=======
+                                        <div class="col-sm-3 dropdown" id="swipeCard"><!--Dropdown search-->
+>>>>>>> master
                                             <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
 >>>>>>> master
 
@@ -120,7 +124,7 @@
                                 <form >
                                     <div >
                                         <label class="col-sm-1 control-label">Add:</label>
-                                        <div class="col-sm-2 dropdown" >
+                                        <div class="col-sm-3 dropdown" >
                                             <input id="user_ID" class="form-control" placeholder="Search" type="text" autocomplete="off" 
                                             onkeypress="return keyAccept(event, 'user_ID', cardSwipeAdd);">
                                         </div>
@@ -226,8 +230,11 @@
                             <div id="toplabel">
                             <p> Groups and Clubs <p>
                             <hr> </div>
+
                             <div class="col-xs-6">
+                                <p>Click to view members: </p>
                                 <div class="table-responsive">
+                                    <p></p>
                                     <table class="table table-bordered table-condensed table-hover">
                                         <thead>
                                             <tr>
@@ -242,6 +249,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="table-responsive">
+                                    <br> </br>
                                     <table class="table table-bordered table-condensed table-hover">
                                         <thead>
                                             <tr>
@@ -253,9 +261,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            
                             <br>
-                            <button type="button" class="btn btn-default btn-sm" onclick="loadClubTable()">Get Groups</button>
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="loadClubTable()">Get Groups</button> -->
+                            </div>
                         </div>
                     </div>
                         
@@ -267,12 +276,21 @@
                             <p> Majors <p>
                             <hr> </div>
                             <p id="menu3_text"></p>
+<<<<<<< HEAD
                             <div class="table-responsive">
                                 <table style="max-width:500px;"class="table table-bordered table-condensed table-hover">
                                     <thead>
                                         <tr>
                                             <td>Majors</td>
                                             <td style="width:80px">Delete</td>
+=======
+                            <div  class="table-responsive">
+                                <table  style="max-width:280px;" class="table table-bordered table-condensed table-hover">
+                                    <thead>
+                                        <tr >
+                                            <td  >Majors</td>
+                                            <td style="width: 80px">Delete</td>
+>>>>>>> master
                                         </tr>
                                     </thead>
                                     <tbody id="major_table" current_major="" style="min-height: 31px">
@@ -284,7 +302,7 @@
                             <br></br>
                             <button type="button" class="btn btn-default btn-sm" onclick="addMajor();">Add Major</button>
                             <button type="button" class="btn btn-default btn-sm" onclick="getMajors();">Show Majors</button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="deleteMajor()">Delete Selected Major</button>
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="deleteMajor()">Delete Selected Major</button>-->
                         </div>
                         
                     </div>
