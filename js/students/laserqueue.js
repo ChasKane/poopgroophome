@@ -232,8 +232,7 @@ async function addLaserQueueButton() {
 		fillModalTable("student_search");
 		$("#searchStudentModal").modal("show");
 		return;
-	} else if(students)
-	else {
+	} else {
 		fillAddLaserQueue(students);
 	}
 }
