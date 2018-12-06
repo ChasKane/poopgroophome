@@ -355,6 +355,6 @@ $(document).ready(function() {
         } 
     });
     $('#searchStudentModal').on('shown', function () {
-    	$("#searchStudentModal input").first().focus();
+    	$("#student_search").first().focus();
  	});
 });
