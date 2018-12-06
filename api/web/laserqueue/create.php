@@ -20,6 +20,10 @@ if (!isset($data->machine_id)
 	return;
 }
 
+if ($data->student_id == "") {
+	$data->student_id = null;
+}
+
 $query = "INSERT INTO Laser_Queue VALUES (null,:v1,:v2,:v3,CURDATE(),CURTIME(),:v4,'Waiting')";
 $stmt = $db->prepare($query);
 

@@ -16,25 +16,31 @@
 
     <style>
         .Waiting {
-            background-color: red;
+            background-color: #ffad99;
         }
-
         .Cutting {
-            background-color: yellow;
+            background-color: #ffffcc;
         }
-
         .Skipped {
-            background-color: grey;
+            background-color: #d6d6c2;
         }
-
         .Done {
-            background-color: lightgreen;
+            background-color: #80ff80;
         }
 
         .custom-container {
             padding-left: 260px;
             padding-right: 50px;
         }
+
+        #toplabel{
+                  display: block;
+                  font-size: 1.6em;
+                  margin-top: .8em;
+                  margin-bottom: 1em;
+                  margin-left: 0;
+                  margin-right: 0;
+              }
     </style>
 
     <body>
@@ -54,25 +60,26 @@
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                         <div id="meep" class="well b-color-3">
-                            <div>
-                                <center>
-                                    <h1 class="title-color">Laser Cutting Appointments</h1>
-                                </center>
+
+                            <div id="toplabel">
+                                <p> Laser Cutting Appointments  <p>
+                                <hr> 
                             </div>
+
                             <div>
                     
-                                <body id="TableBody" ><center>
+                                <body id="TableBody" >
                     
                     
                                     <div id="3DPrintTableDiv" >
-                                        <h2 class="text-center">List</h2><br>
-                                        <button>Add Appt</button><br>
+                                        
+                                        <button type="button" class = "btn btn-default btn-sm">Add Apptionment </button><br>
                     
                                         <div>
                                             <br>
-                                            <button type="button" id="fillTableButton" class="buttons" onclick="fillTable();"> Update Scedual </button>
+                                            <button type="button" class = "btn btn-default btn-sm" id="fillTableButton" class="buttons" onclick="fillTable();"> Update Schedule </button> 
                                         </div>
-                    
+                                        <br></br>
                     
                                         <div class="container-fluid">
                                             <div class="table-responsive">
@@ -118,18 +125,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                </center></body>
+                               </body>
                             </div>
                         </div>
                     </div>
+                    
+
+
                     <div id="menu1" class="tab-pane fade">
                         <body>
                             <div class="well b-color-3 container-fluid">
-                                <div class="row content" vis="block" id="laser_cutting_queue">
-                                    <div><center>
-                                        <h1 class="title-color">Laser Cutting Queue</h1>
-                                    </center></div>
-    
+                            
+                                    
+                            <div id="toplabel">
+                                <p> Laser Queue <p>
+                                <hr> 
+                            </div>
+                            <div class="row content" vis="block" id="laser_cutting_queue">
                                     <form class="form-horizontal">
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1" for="tech_Select">Tech:</label>
@@ -141,7 +153,7 @@
                                         <br>
 
                                         <div class="from-group container-fluid">
-                                            <label class="col-sm-1 control-label">Add:</label>
+                                            <label class="col-sm-1 ">Student:</label>
                                             <div class="col-sm-4">
                                                 <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
 
@@ -151,15 +163,12 @@
                                             </div>
                                             <button type="button" class="btn btn-default btn-sm col-sm-2" onclick="addLaserQueueButton();">Manualy Add Student</button>
                                         </div>
+                                         <br>
+                                        <button type="button" id="fillTableButton"  class="btn btn-default btn-sm"onclick="laserQueueButton();" style="margin-left:2%;"> Update Table </button>
+                                         <br></br>
                                     </form>
                         
                                     <div id="contactTableDiv"> 
-                                        
-                                        <div><br><center>
-                                            <button type="button" id="fillTableButton" class="btn btn-default btn-sm" onclick="laserQueueButton();"> Update Table </button>
-                                        </center></div>
-                                        <br>
-                        
                                         
                                         <div class="container-fluid">
                                             <div class="table-responsive">
@@ -168,7 +177,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Queue Position</th>
-                                                            <th>Machine ID</th>
+                                                            <th>Machine</th>
                                                             <th>Student ID</th>
                                                             <th>Student Name</th>
                                                             <th>Tech ID</th> <!-- waiting cutting done skipped-->
@@ -206,10 +215,15 @@
                         </body>
 
                     </div>
+
                     <div id="menu2" class="tab-pane fade">
                         <div class="well b-color-3">
                             <center id="config_table" vis="block">
-                                <h1 class="title-color">Laser Cutting Configuration</h1>
+                                                                    
+                            <div id="toplabel">
+                                <p> Laser Configurations and Settings <p>
+                                <hr> 
+                            </div>
                                 <div>
                                     <button onclick="getLaserConfigs();">Update Config</button>
                                 </div>
@@ -265,7 +279,11 @@
                     </div>
                     <div id="menu3" class="tab-pane fade">
                             <div class="well b-color-3">
-                                <h2>LIVE Laser Cutting</h2>
+                                                                    
+                            <div id="toplabel">
+                                <p> Live Laser Cut <p>
+                                <hr> 
+                            </div>
                                 <div class="well b-color-3">
                                     [Insert Cam Feed HERE]
                                 </div>
@@ -323,17 +341,17 @@
 
         // Pop up function for confirmations and alerts
         function modPop(arg)
-		{
-			var i, j;
-		
-			
-			// 	if (true)
-			// 	{
-					// document.getElementById("popViewTitle").innerHTML = "Hello There";
-					// document.getElementById("popViewBod").innerHTML = "<p></p>";
-					// document.getElementById("popBottomButt").innerHTML = "Close";
-			// 		return;
-			// 	}
+        {
+            var i, j;
+        
+            
+            //  if (true)
+            //  {
+                    // document.getElementById("popViewTitle").innerHTML = "Hello There";
+                    // document.getElementById("popViewBod").innerHTML = "<p></p>";
+                    // document.getElementById("popBottomButt").innerHTML = "Close";
+            //      return;
+            //  }
         }
 
         $(document).ready(function() {
