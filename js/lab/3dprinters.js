@@ -48,7 +48,31 @@ function fill3DPrinterQueue(object) {
 	document.getElementById("tableBody").innerHTML = newInnerHTML; 
 }
 
-function manuallyAddQueue() {
+async function manuallyAddQueue() {
+	var name = document.getElementById("userCard_ID");
+	name = name.value;
+
+	var students = await getStudent(name);
+	if(students == undefined || students.students.length > 1) {
+		document.getElementById("student_search").value = name;
+		fillModalTable("student_search");
+		$("#searchStudentModal").modal("show");
+		return;
+	} else {
+		fillAddLaserQueue(students);
+	}
+
+	getLabTechs("tech_select_add");
+	fillMachineID("machine_id");
+	checkSwap("manually_add_to_queue", "manually_add_to_queue");
+	checkSwap("3d_cutting_queue", "manually_add_to_queue");
+	clearInput3D();
+}
+
+async function fillStudentProfile(student) {
+	student = student.students[0];
+
+	document.getElementById("student_name").value = student.first_name + " " + student.last_name;
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("manually_add_to_queue", "manually_add_to_queue");
@@ -141,6 +165,14 @@ function cardSwipeFind() {
 	return false;
 }
 
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillStudentProfile(await getStudent(target.getAttribute("student_id")));
+}
+
 $(document).ready(function() {
     $('.nav-tabs a').on('show.bs.tab', function(e){
         activeTab = $(this).attr('href').split('-')[1];
@@ -156,4 +188,8 @@ $(document).ready(function() {
         	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
+
+    $('#searchStudentModal').on('shown.bs.modal', function () {
+    	$("#student_search").focus();
+ 	});
 });
