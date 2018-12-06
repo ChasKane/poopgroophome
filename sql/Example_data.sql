@@ -14,7 +14,7 @@ INSERT INTO Major VALUES ("Industrial Engineering");
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "", "N/A", "", "", "N/A", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "a", "a", "a", "Computer Science", "a@ucf.edu", 0.0, 0.0, null);
-INSERT INTO Student VALUES (null, "1234567", "John", "Doe", "Mathematics", "johndoe@knights.ucf.edu", 0.0, 0.0, null);
+-- INSERT INTO Student VALUES (null, "1234567", "John", "Doe", "Mathematics", "johndoe@knights.ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Student VALUES (null, "1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
