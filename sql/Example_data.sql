@@ -310,6 +310,7 @@ INSERT INTO Message VALUES (null, "message1", "is this a message?");
 INSERT INTO Message VALUES (null, "message2", "it cannot be a message");
 INSERT INTO Message VALUES (null, "message3", "it is a message");
 INSERT INTO Message VALUES (null, "message4", "'message', a haiku by message");
+INSERT INTO Message VALUES (null, "TI Lab", "You're up soon. Please come to the lab.");
 
 INSERT INTO Notification VALUES (1, 2, NOW(), false);
 INSERT INTO Notification VALUES (1, 3, NOW(), false);
@@ -320,10 +321,10 @@ INSERT INTO Notification VALUES (3, 3, NOW(), false);
 INSERT INTO Notification VALUES (3, 4, NOW(), false);
 INSERT INTO Notification VALUES (3, 5, NOW(), false);
 
-INSERT INTO Notification VALUES (4, 2, NOW(), false);
-INSERT INTO Notification VALUES (4, 3, NOW(), false);
-INSERT INTO Notification VALUES (4, 4, NOW(), false);
-INSERT INTO Notification VALUES (4, 5, NOW(), false);
+INSERT INTO Notification VALUES (4, 6, NOW(), false);
+INSERT INTO Notification VALUES (4, 6, NOW(), false);
+INSERT INTO Notification VALUES (4, 6, NOW(), false);
+INSERT INTO Notification VALUES (4, 6, NOW(), false);
 
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "cut", 100, 1, 1000, "keep an eye out");
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "engrave", 100, 100, 1000, "keep an eye out");
