@@ -224,13 +224,24 @@ function checkSwap(id, display_id) {
 // Manually add student to laser queue
 async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
-	var student_id = name.getAttribute("student_id");
-	name.setAttribute("student_id", "");
 	name = name.value;
 
-	document.getElementById("student_name").value = name;
+	var students = getStudent(name);
+	if(students == undefined || students.students.length > 1) {
+		document.getElementById("student_search").value = name;
+		fillModalTable("student_search");
+		$("#searchStudentModal").modal("show");
+		return;
+	} else {
+		fillAddLaserQueue(students);
+	}
+}
 
-	document.getElementById("manually_add_to_queue").setAttribute("student_id", student_id);
+async function fillAddLaserQueue(student) {
+	student = student.students[0];
+
+	document.getElementById("student_name").value = student.first_name + " " + student.last_name;
+	document.getElementById("manually_add_to_queue").setAttribute("student_id", student.student_id);
 	getLabTechs("tech_select_add");
 	fillMachineID("machine_id");
 	checkSwap("laser_cutting_queue", "manually_add_to_queue");
@@ -315,6 +326,15 @@ function cardSwipeFind() {
 	fillStudentName(str);
 	laserQueueSwap("manually_add_to_queue");
 	return false;
+}
+
+async function foundStudent(event) {
+	var target = event.target;
+	document.getElementById("student_search").value = "";
+	document.getElementById("student_table").innerHTML = "";
+	
+	$("#searchStudentModal").modal("hide");
+	fillAddLaserQueue(await getStudent(target.getAttribute("student_id")));
 }
 
 // make sure the right elements are visible
