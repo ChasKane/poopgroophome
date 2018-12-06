@@ -352,7 +352,7 @@ $(document).ready(function() {
         	document.getElementById("manually_add_to_queue").setAttribute("student_id", "")
         }
     });
-    $('#searchStudentModal').on('shown', function () {
+    $('#searchStudentModal').on('shown.bs.modal', function () {
     	$("#student_search").focus();
  	});
 });
