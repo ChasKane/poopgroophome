@@ -31,7 +31,7 @@ function updateRentalTable(rented_equipment) {
 	elem.innerHTML = newHTML;
 }
 
-function findStudent() {
+await function findStudent() {
 	var name = document.getElementById("userCard_ID");
 	name = name.value;
 
@@ -53,4 +53,13 @@ async function foundStudent(event) {
 	
 	$("#searchStudentModal").modal("hide");
 	getRentedEquipment(await getStudent(target.getAttribute("student_id")));
+}
+
+function cardSwipeFind() {
+	var input = document.getElementById("userCard_ID");
+	var str = input.value;
+	str = parseID(str);
+	getRentedEquipment(await getStudent(str));
+	
+	return false;
 }
