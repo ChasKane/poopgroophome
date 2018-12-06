@@ -16,25 +16,31 @@
 
     <style>
         .Waiting {
-            background-color: red;
+            background-color: #ffad99;
         }
-
         .Cutting {
-            background-color: yellow;
+            background-color: #ffffcc;
         }
-
         .Skipped {
-            background-color: grey;
+            background-color: #d6d6c2;
         }
-
         .Done {
-            background-color: lightgreen;
+            background-color: #80ff80;
         }
 
         .custom-container {
             padding-left: 260px;
             padding-right: 50px;
         }
+
+        #toplabel{
+                  display: block;
+                  font-size: 1.6em;
+                  margin-top: .8em;
+                  margin-bottom: 1em;
+                  margin-left: 0;
+                  margin-right: 0;
+              }
     </style>
 
     <body>
@@ -54,11 +60,12 @@
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                         <div id="meep" class="well b-color-3">
-                            <div>
-                                <center>
-                                    <h1 class="title-color">Laser Cutting Appointments</h1>
-                                </center>
+
+                            <div id="toplabel">
+                                <p> Laser Cutting Appointments  <p>
+                                <hr> 
                             </div>
+
                             <div>
                     
                                 <body id="TableBody" ><center>
@@ -122,13 +129,18 @@
                             </div>
                         </div>
                     </div>
+                    
+
+
                     <div id="menu1" class="tab-pane fade">
                         <body>
                             <div class="well b-color-3 container-fluid">
                                 <div class="row content" vis="block" id="laser_cutting_queue">
-                                    <div><center>
-                                        <h1 class="title-color">Laser Cutting Queue</h1>
-                                    </center></div>
+                                    
+                            <div id="toplabel">
+                                <p> Laser Queue <p>
+                                <hr> 
+                            </div>
     
                                     <form class="form-horizontal">
                                         <div class="from-group container-fluid">
@@ -205,10 +217,15 @@
                         </body>
 
                     </div>
+
                     <div id="menu2" class="tab-pane fade">
                         <div class="well b-color-3">
                             <center id="config_table" vis="block">
-                                <h1 class="title-color">Laser Cutting Configuration</h1>
+                                                                    
+                            <div id="toplabel">
+                                <p> Laser Configurations and Settings <p>
+                                <hr> 
+                            </div>
                                 <div>
                                     <button onclick="getLaserConfigs();">Update Config</button>
                                 </div>
@@ -264,7 +281,11 @@
                     </div>
                     <div id="menu3" class="tab-pane fade">
                             <div class="well b-color-3">
-                                <h2>LIVE Laser Cutting</h2>
+                                                                    
+                            <div id="toplabel">
+                                <p> Live Laser Cut <p>
+                                <hr> 
+                            </div>
                                 <div class="well b-color-3">
                                     [Insert Cam Feed HERE]
                                 </div>

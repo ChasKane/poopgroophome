@@ -24,21 +24,30 @@
             padding-right: 50px;
         }
         .Waiting {
-            background-color: red;
+            background-color: #ffad99;
         }
         .Cutting {
-            background-color: yellow;
+            background-color: #ffffcc;
         }
         .Skipped {
-            background-color: grey;
+            background-color: #d6d6c2;
         }
         .Done {
-            background-color: lightgreen;
+            background-color: #80ff80;
         }
         .custom-container {
             padding-left: 260px;
             padding-right: 50px;
         }
+
+        #toplabel{
+                  display: block;
+                  font-size: 1.6em;
+                  margin-top: .8em;
+                  margin-bottom: 1em;
+                  margin-left: 0;
+                  margin-right: 0;
+              }
     </style>
     
     <body>
@@ -59,9 +68,11 @@
                         <body>
                             <div id="3d_cutting_queue" class="well b-color-3 container-fluid" vis="block">
                                 <div class="row content">
-                                    <div><center>
-                                        <h1 class="title-color">3D Printer Queue</h1>
-                                    </center></div>
+                                    
+                            <div id="toplabel">
+                                <p> 3D Print Queue <p>
+                                <hr> 
+                            </div>
 
                                     <form class="form-horizontal">
                                         <div class="from-group container-fluid">
@@ -158,7 +169,11 @@
 
                     <div id="menu1" class="tab-pane fade">
                         <div class="well b-color-3">
-                            <h1>Material Tracking</h1>
+                                    
+                            <div id="toplabel">
+                                <p> 3D Material Tracking  <p>
+                                <hr> 
+                            </div>
                             <button type="button"  class="btn btn-default btn-sm" onclick="getmaterials();"> get materials </button>
                             <p></p>
                             <select id="selectmaterial">
