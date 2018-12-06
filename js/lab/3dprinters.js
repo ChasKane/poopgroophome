@@ -28,23 +28,17 @@ function fill3DPrinterQueue(object) {
 	var i = 0
 	
 	for (var idx in elements) {
-		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
+		newInnerHTML += "<tr pos=" + elements[idx].queue_pos + " class="+ elements[idx].status +">";
+		newInnerHTML += "<td>" + elements[idx].machine_id + "</td>";
+		newInnerHTML += "<td>" + elements[idx].student_name + "</td>"; 
+		newInnerHTML += "<td>" + elements[idx].tech_name + "</td>";
 		if(elements[idx].status == "Waiting" || elements[idx].status == "Printing") {
-			estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
-			newInnerHTML += "<td>" + elements[idx].machine_id + "</td>" + 
-						"<td>" + elements[idx].student_name + "</td>" + 
-						"<td>" + elements[idx].tech_name + "</td>" + 
-						"<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
+			estimated_time = calcTime(estimated_time, elements[idx].estimated_time);  
+			newInnerHTML += "<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
 		} else if(elements[idx].status == "Skipped") {
-			newInnerHTML += "<td>" + elements[idx].machine_id + "</td>" + 
-						"<td>" + elements[idx].student_name + "</td>" + 
-						"<td>" + elements[idx].tech_name + "</td>" + 
-						"<td>Skipped</td>" +'<td> <div class="selection">';
+			newInnerHTML += "<td>Skipped</td>" +'<td> <div class="selection">';
 		} else {
-			newInnerHTML += "<td>" + elements[idx].machine_id + "</td>" + 
-						"<td>" + elements[idx].student_name + "</td>" + 
-						"<td>" + elements[idx].tech_name + "</td>" + 
-						"<td>Done</td>" +'<td> <div class="selection">';
+			newInnerHTML += "<td>Done</td>" +'<td> <div class="selection">';
 		}
 		
 		newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
