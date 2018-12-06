@@ -24,7 +24,7 @@ if (!$stmt->execute()) {
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 extract($row);
 
-$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS total_time FROM (Laser_Queue as lq) WHERE lq.queue_pos < Laser_Queue.queue_pos) AS personal_wait_time FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
+$query = "SELECT queue_pos,machine_id,Student.student_id,tech_id,date_added,estimated_time,time_added,status,first_name,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(estimated_time))) AS personal_wait_time FROM (Laser_Queue as lq) WHERE lq.queue_pos < Laser_Queue.queue_pos) FROM Laser_Queue JOIN Student ON Laser_Queue.student_id=Student.student_id WHERE date_added=CURDATE()";
 $stmt = $db->prepare($query);
 
 if (!$stmt->execute()) {
@@ -43,8 +43,8 @@ if($num > 0) {
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		extract($row);
 
-		if ($total_time == null) {
-			$total_time = "00:00:00";
+		if ($personal_wait_time == null) {
+			$personal_wait_time = "00:00:00";
 		}
 
 		$laser_queue=array(
