@@ -176,7 +176,7 @@ async function fillStudentProfile(student) {
 	elem.setAttribute("student_id", student.student_id);
 
 	// fill in majors dropdown
-	getMajors("major_profile");
+	await getMajors("major_profile");
 	$("#major_profile").val(student.major_name);
 
 	// fill in materials used
