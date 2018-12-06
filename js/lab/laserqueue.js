@@ -80,7 +80,7 @@ function changeFunc(event) {
 		if(confirm("Change to cutting?")) {
 			targ.value = "Cutting";
 			targ.setAttribute("oldValue", "Cutting");
-			var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td").getAttribute("pos");
+			var elem = targ.parentElement.parentElement.parentElement.getAttribute("pos");
 			updatequeue(targ.value, elem)
 			// tell firebase to notify next 2 people
 		} else {
@@ -92,7 +92,7 @@ function changeFunc(event) {
 		targ.setAttribute("oldValue", targ.value);
 		
 		// yes i know this is not a great way to do thi
-		var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td").getAttribute("pos");
+		var elem = targ.parentElement.parentElement.parentElement.getAttribute("pos");
 		updatequeue(targ.value, elem)
 	}
 	// fillLaserQueue();
