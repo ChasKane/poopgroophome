@@ -175,6 +175,7 @@ $(document).ready(function() {
         if(href == "#home") {
         	checkSwap("3d_cutting_queue", "3d_cutting_queue");
 			checkSwap("manually_add_to_queue", "3d_cutting_queue");
+			document.getElementById("userCard_ID").value = "";
             focusOn("userCard_ID");
         }
         if(href != "#menu1") {
