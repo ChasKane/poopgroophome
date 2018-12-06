@@ -57,20 +57,19 @@ async function updatequeue(newStatus, position) {
 		"queue_pos" : position
 	};
 
-	try {
-		retval = await $.ajax({
-			url : url + "api/web/laserqueue/update.php",
-			type : "POST",
-			data : JSON.stringify(payload),
-			success : function(response, tStatus, responseCode) {
-				console.log(response);
-			}
+	var retval;
+	retval = await $.ajax({
+		url : url + "api/web/laserqueue/update.php",
+		type : "POST",
+		data : JSON.stringify(payload),
+		success : function(response, tStatus, responseCode) {
+			retval = response;
+			console.log(response);
+		}
 
-		});
-	} catch(e) {
-		console.log(e);
-	}
-	fillLaserQueue(await getlaserqueue());
+	});
+	fillLaserQueue(retval)
+	return retval;
 }
 
 function changeFunc(event) {
@@ -81,8 +80,8 @@ function changeFunc(event) {
 		if(confirm("Change to cutting?")) {
 			targ.value = "Cutting";
 			targ.setAttribute("oldValue", "Cutting");
-			var elem = targ.parentElement.parentElement.parentElement.getAttribute("pos");
-			updatequeue(targ.value, elem)
+			var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[0];
+			updatequeue(targ.value, elem.innerHTML)
 			// tell firebase to notify next 2 people
 		} else {
 			console.log(targ.getAttribute("oldvalue"));
@@ -93,8 +92,8 @@ function changeFunc(event) {
 		targ.setAttribute("oldValue", targ.value);
 		
 		// yes i know this is not a great way to do thi
-		var elem = targ.parentElement.parentElement.parentElement.getAttribute("pos");
-		updatequeue(targ.value, elem)
+		var elem = targ.parentElement.parentElement.parentElement.getElementsByTagName("td")[0];
+		updatequeue(targ.value, elem.innerHTML)
 	}
 	// fillLaserQueue();
 }
@@ -119,18 +118,11 @@ function fillLaserQueue(object) {
 	var i = 0
 	
 	for (var idx in elements) {
-		newInnerHTML += "<tr pos=" + elements[idx].queue_pos + " class="+ elements[idx].status +">";
-		newInnerHTML += "<td>" + elements[idx].machine_id + "</td>";
-		newInnerHTML += "<td>" + elements[idx].student_name + "</td>"; 
-		newInnerHTML += "<td>" + elements[idx].tech_name + "</td>";
-		if(elements[idx].status == "Waiting" || elements[idx].status == "Printing") {
-			estimated_time = calcTime(estimated_time, elements[idx].estimated_time);  
-			newInnerHTML += "<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
-		} else if(elements[idx].status == "Skipped") {
-			newInnerHTML += "<td>Skipped</td>" +'<td> <div class="selection">';
-		} else {
-			newInnerHTML += "<td>Done</td>" +'<td> <div class="selection">';
-		}
+		newInnerHTML += "<tr id=" + "r" + (i++) + " class="+ elements[idx].status +">";
+		estimated_time = calcTime(estimated_time, elements[idx].estimated_time);
+		newInnerHTML += "<td>" + elements[idx].queue_pos + "</td>" + "<td>" + elements[idx].machine_id + "</td>" + 
+						"<td>" + elements[idx].student_id + "</td>" + "<td>" + elements[idx].tech_id + "</td>" + 
+						"<td>" + estimated_time + "</td>" +'<td> <div class="selection">';
 		
 		newInnerHTML += "<select onchange='changeFunc(event)' oldvalue='" + elements[idx].status + "'>";
 		for (var idx2 in statuses) {
@@ -351,7 +343,6 @@ $(document).ready(function() {
         if(href == "#menu1") {
             checkSwap("laser_cutting_queue", "laser_cutting_queue");
 			checkSwap("manually_add_to_queue", "laser_cutting_queue");
-			document.getElementById("userCard_ID").value = "";
         	laserQueueButton();
         }
         if(href != "#menu1") {

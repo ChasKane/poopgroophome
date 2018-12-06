@@ -34,8 +34,8 @@
               
               ul.list {
                 list-style-type: none;
-                padding-left: 200px;
-                padding-top: 20px;
+                padding-left: 3%;
+                padding-top: 15px;
                 margin: 0;
                 width: 100%;
               }
@@ -116,7 +116,7 @@
                                 <form >
                                     <div >
                                         <label class="col-sm-1 control-label">Add:</label>
-                                        <div class="col-sm-2 dropdown" >
+                                        <div class="col-sm-3 dropdown" >
                                             <input id="user_ID" class="form-control" placeholder="Search" type="text" autocomplete="off" 
                                             onkeypress="return keyAccept(event, 'user_ID', cardSwipeAdd);">
                                         </div>
@@ -222,8 +222,11 @@
                             <div id="toplabel">
                             <p> Groups and Clubs <p>
                             <hr> </div>
+
                             <div class="col-xs-6">
+                                <p>Click to view members: </p>
                                 <div class="table-responsive">
+                                    <p></p>
                                     <table class="table table-bordered table-condensed table-hover">
                                         <thead>
                                             <tr>
@@ -238,6 +241,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="table-responsive">
+                                    <br> </br>
                                     <table class="table table-bordered table-condensed table-hover">
                                         <thead>
                                             <tr>
@@ -249,9 +253,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            
                             <br>
-                            <button onclick="loadClubTable()">Get Groups</button>
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="loadClubTable()">Get Groups</button> -->
+                            </div>
                         </div>
                     </div>
                         
@@ -263,11 +268,11 @@
                             <p> Majors <p>
                             <hr> </div>
                             <p id="menu3_text"></p>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-hover">
+                            <div  class="table-responsive">
+                                <table  style="max-width:680px;" class="table table-bordered table-condensed table-hover">
                                     <thead>
-                                        <tr>
-                                            <td>Majors</td>
+                                        <tr >
+                                            <td  >Majors</td>
                                             <td style="width: 80px">Delete</td>
                                         </tr>
                                     </thead>
@@ -277,9 +282,10 @@
                                 </table>
                             </div>
                             <input id="add_major" class="form-control" placeholder="New Major..." type="text">
-                            <button onclick="addMajor();">Add Major</button>
-                            <button onclick="getMajors();">Show Majors</button>
-                            <button onclick="deleteMajor()">Delete Selected Major</button>
+                            <br></br>
+                            <button type="button" class="btn btn-default btn-sm" onclick="addMajor();">Add Major</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="getMajors();">Show Majors</button>
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="deleteMajor()">Delete Selected Major</button>-->
                         </div>
                         
                     </div>
