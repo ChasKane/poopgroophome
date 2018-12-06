@@ -14,7 +14,7 @@ INSERT INTO Major VALUES ("Industrial Engineering");
 INSERT INTO Student VALUES (null, "buraj_card_id", "buraj", "bingireddy", "Computer Science", "burajbingireddy@knights.ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "", "N/A", "", "", "N/A", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "a", "a", "a", "Computer Science", "a@ucf.edu", 0.0, 0.0, null);
--- INSERT INTO Student VALUES (null, "1234567", "John", "Doe", "Mathematics", "johndoe@knights.ucf.edu", 0.0, 0.0, null);
+INSERT INTO Student VALUES (null, "1234567", "Melanie", "Guitard", "Computer Science", "melanie@ucf.edu", 0.0, 0.0, null);
 
 INSERT INTO Student VALUES (null, "1234567", "Mary", "Smith", "Computer Science", "mary.smith@ucf.edu", 0.0, 0.0, null);
 INSERT INTO Student VALUES (null, "1234568", "John", "Diaz", "Computer Science", "john.diaz@knights.ucf.edu", 0.0, 0.0, null);
@@ -319,6 +319,11 @@ INSERT INTO Notification VALUES (3, 2, NOW(), false);
 INSERT INTO Notification VALUES (3, 3, NOW(), false);
 INSERT INTO Notification VALUES (3, 4, NOW(), false);
 INSERT INTO Notification VALUES (3, 5, NOW(), false);
+
+INSERT INTO Notification VALUES (4, 2, NOW(), false);
+INSERT INTO Notification VALUES (4, 3, NOW(), false);
+INSERT INTO Notification VALUES (4, 4, NOW(), false);
+INSERT INTO Notification VALUES (4, 5, NOW(), false);
 
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "cut", 100, 1, 1000, "keep an eye out");
 INSERT INTO Laser_Configuration (material, tech_id, thickness, task, power, speed, ppi, notes) VALUES ("acrylic", 1, 0.22, "engrave", 100, 100, 1000, "keep an eye out");
