@@ -232,10 +232,10 @@ INSERT INTO FAQ VALUES (null, "Is the lab open on sundays?", "No, the lab is clo
 INSERT INTO FAQ VALUES (null, "Are you open game days", "We are typically not open on game days. Always ask to make sure.");
 INSERT INTO FAQ VALUES (null, "Do you guys supply material?", "No, we do not. Everyone brings their own materials.");
 
-INSERT INTO Lab_Hours VALUES ("08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05", "08:05", "20:05");
+INSERT INTO Lab_Hours VALUES ("10:00", "22:00", "10:00", "22:00", "10:00", "22:00", "10:00", "22:00", "10:00", "22:00", "10:00", "22:00", "10:00", "22:00");
 
 
-INSERT INTO Appointment_Hours VALUES ("20:05", "22:00", "20:05", "22:00", "20:05", "22:00", "20:05", "22:00", "20:05", "22:00", "20:05", "22:00", "20:05", "22:00");
+INSERT INTO Appointment_Hours VALUES ("18:00", "22:00", "18:00", "22:00", "18:00", "22:00", "18:00", "22:00", "18:00", "22:00", "18:00", "22:00", "18:00", "22:00");
 
 
 INSERT INTO Machine VALUES (null, "machine_fancy_laser", "Laser Cutter", "has some restrictions", "2010-01-01 08:05", "Working");
