@@ -97,5 +97,5 @@ async function addMajor() {
 			retval = response;
 		}
 	});
-	getMajors("major_table");
+	getMajorTable();
 }
