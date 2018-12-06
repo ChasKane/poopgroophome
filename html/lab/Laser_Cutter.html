@@ -9,8 +9,8 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src="../../js/students/laserqueue.js"></script>
-            <script src="../../js/lab/laserconfig.js"></script>
+      
+            <script src="../../js/lab/laserqueue.js"></script>
             <script src="../../js/common.js"></script>
     </head>
 
@@ -155,7 +155,7 @@
                                         <div class="from-group container-fluid">
                                             <label class="col-sm-1 ">Student:</label>
                                             <div class="col-sm-4">
-                                                <input id="userCard_ID" class="form-control dropdown-toggle" data-toggle="dropdown" placeholder="Search" type="text" onkeypress="fillDropdown(event, 'userCard_ID');return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                                  <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" autofocus>
 
                                                 <ul class="dropdown-menu" id="dropdown"><!--Dropdown list-->
                                                 
@@ -176,11 +176,10 @@
                                                     
                                                     <thead>
                                                         <tr>
-                                                            <th>Queue Position</th>
+                                                            
                                                             <th>Machine</th>
-                                                            <th>Student ID</th>
                                                             <th>Student Name</th>
-                                                            <th>Tech ID</th> <!-- waiting cutting done skipped-->
+                                                            <th>Tech Name</th> <!-- waiting cutting done skipped-->
                                                             <th>Estimated time</th> <!-- delete-->
                                                             <th>Status</th>
                                                         </tr>
@@ -295,6 +294,39 @@
             </div>
         </div>
     </body>
+
+     <!--Modal pop up, just leave it here-->
+    <div class="modal fade" id="searchStudentModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Search</h2>
+                </div>
+                <div id="searchDB" align="center" class="modal-body">
+                    <form 0>
+                        <label for="fname">First Name </label>
+                        <input class="form-control" type="text" id="student_search" autofocus name="firstname" placeholder="Your name.." onkeyup="return fillModalTable('student_search');">
+                        <br>
+                    </form>
+                
+                    <table class="table table-bordered table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <td>Student Name</td>
+                            </tr>
+                        </thead>
+                        <tbody id="student_table" style="min-height: 31px">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="addStudentClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
