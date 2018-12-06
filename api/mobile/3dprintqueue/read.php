@@ -64,9 +64,22 @@ if (!$stmt->execute()) {
 	return;
 }
 
+$query = "SELECT SEC_TO_TIME(SUM(SEC_TO_TIME(estimated_time))) AS overall_wait_time FROM Laser_Queue";
+$stmt = $db->prepare($query);
+
+if (!$stmt->execute()) {
+	http_response_code(503);
+	echo json_encode($stmt->errorInfo());
+	return;
+}
+
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+extract($row);
+
 $num = $stmt->rowCount();
 
 $threedprint_queues = array();
+$threedprint_queues["overall_wait_time"] = $overall_wait_time;
 
 if($num>0){
 	$threedprint_queues["threedprintqueues"] = array();
