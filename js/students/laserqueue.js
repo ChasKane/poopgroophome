@@ -226,13 +226,14 @@ async function addLaserQueueButton() {
 	var name = document.getElementById("userCard_ID");
 	name = name.value;
 
-	var students = getStudent(name);
-	if(students == undefined && students.students.length > 1) {
+	var students = await getStudent(name);
+	if(students == undefined || students.students.length > 1) {
 		document.getElementById("student_search").value = name;
 		fillModalTable("student_search");
 		$("#searchStudentModal").modal("show");
 		return;
-	} else {
+	} else if(students)
+	else {
 		fillAddLaserQueue(students);
 	}
 }
