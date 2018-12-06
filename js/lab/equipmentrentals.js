@@ -2,12 +2,13 @@
 function getRentedEquipment(student) {
 	student = student.students[0];
 	var payload = {
-		student : student.student_id
+		student_id : student.student_id
 	}
 
 	$.ajax({
 		url : url + "api/web/rentedinventory/read.php",
 		type : "POST",
+		data : JSON.stringify(payload),
 		success : function(response, tStatus, responseCode) {
 			updateRentalTable(response);
 		},
