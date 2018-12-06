@@ -106,7 +106,7 @@
                                     <div class="from-group container-fluid">
                                         <label class="col-sm-2 control-label">Find:</label>
                                         <div class="col-sm-8 dropdown" id="swipeCard"><!--Dropdown search-->
-                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeypress="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off" student_id="" autofocus>
+                                            <input id="userCard_ID" class="form-control" placeholder="Search" type="text" onkeyup="return keyAccept(event, 'userCard_ID', cardSwipeFind);" autocomplete="off">
 
                                         </div>
                                         <button type="button" class="btn btn-default btn-sm" onclick="loadStudentProfile(event);">Manually Find Student</button>
