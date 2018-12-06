@@ -72,7 +72,10 @@ function loadMajors(majors, id) {
 	var newHTML = "";
 
 	id = id.getAttribute("student_id");
-
+	result = await getStudent(id);
+	console.log(result)
+	result = result.students[0];
+	
 	for(var idx in majors) {
 		if(id != "" && majors[idx].major_name == result.major_name) {
 			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
