@@ -221,7 +221,7 @@ async function fillDropdown(e, input_id) {
 	return false;
 }
 
-async function fillModalTable(input_id, func) {
+async function fillModalTable(input_id) {
 	var dropdown = document.getElementById("student_table");
 	var input = document.getElementById(input_id);
 	var students = await getStudent(input.value);

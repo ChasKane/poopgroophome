@@ -37,6 +37,9 @@ function checkSwap(id, display_id) {
 // fairly specific function
 // turns visibility off on all elements on student page other than id passed in
 function swapStudentsHTML(id) {
+	if(id == 'main_student') {
+		document.getElementById("main_student").value = "";
+	}
 	checkSwap("student_profile", id);
 	checkSwap("main_student", id);
 	checkSwap("all_students", id);
@@ -62,14 +65,17 @@ function getMajors(id) {
 	});
 }
 
-function loadMajors(majors, id) {
+async function loadMajors(majors, id) {
 	majors = majors.majors;
 	var element = document.getElementById(id);
 	var id = document.getElementById("student_profile");
 	var newHTML = "";
 
 	id = id.getAttribute("student_id");
-
+	result = await getStudent(id);
+	console.log(result)
+	result = result.students[0];
+	
 	for(var idx in majors) {
 		if(id != "" && majors[idx].major_name == result.major_name) {
 			newHTML += "<option selected value='" + majors[idx].major_name + "'>" + majors[idx].major_name + "</option>";
@@ -173,7 +179,8 @@ async function fillStudentProfile(student) {
 	elem.setAttribute("student_id", student.student_id);
 
 	// fill in majors dropdown
-	getMajors("major_profile");
+	await getMajors("major_profile");
+	$("#major_profile").val(student.major_name);
 
 	// fill in materials used
 	elem = document.getElementById("material_used");
@@ -352,6 +359,10 @@ $(document).ready(function() {
         href = this.getAttribute('href');        
         if(href == "#home") {
             swapStudentsHTML("main_student");
+            document.getElementById("userCard_ID").value = "";
         } 
     });
+    $('#searchStudentModal').on('shown.bs.modal', function () {
+    	$("#student_search").focus();
+ 	});
 });
