@@ -59,7 +59,6 @@
 
         <div class="main container">
         <div id="display" class="col-sm-2" content-include-html="This is where the other HTML conent is displayed"></div>
-        <center><img style="padding-left:20%;"src="back.png" alt="" width="90%"></center>
         <p> </p>
         </div>
 
@@ -68,23 +67,21 @@
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
-<script>
     
-    
-  var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
+    <script>
+    var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
 
         /*function that includes html*/
         function includeHTML(arg)
         {
-            var z, i, elmnt, file, xhttp, id;
+            var html, i, elmnt, file, xhttp, id;
             file = arg
 
             /*loop thru html elements*/
-            z = document.getElementsByTagName("*");
-
-            for (i = 0; i < z.length; i++) 
+            html = document.getElementsByTagName("*");
+            for (i = 0; i < html.length; i++) 
             {
-                elmnt = z[i];
+                elmnt = html[i];
 
                 if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
                 {
@@ -114,15 +111,7 @@
         function modPop(arg)
     {
       var i, j;
-    
-      
-      //  if (true)
-      //  {
-          // document.getElementById("popViewTitle").innerHTML = "Hello There";
-          // document.getElementById("popViewBod").innerHTML = "<p></p>";
-          // document.getElementById("popBottomButt").innerHTML = "Close";
-      //    return;
-      //  }
+
         }
         
         // focus an element
