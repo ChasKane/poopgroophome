@@ -11,6 +11,7 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="../../js/onload.js"></script>
             
             
             <style>
@@ -66,60 +67,6 @@
     
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>
-    
-    <script>
-    var sessId, baseUrl = "http://104.248.113.22", objRequest, dbReqParam, xmlHRequest, tObjs, tIds;
-
-        /*function that includes html*/
-        function includeHTML(arg)
-        {
-            var html, i, elmnt, file, xhttp, id;
-            file = arg
-
-            /*loop thru html elements*/
-            html = document.getElementsByTagName("*");
-            for (i = 0; i < html.length; i++) 
-            {
-                elmnt = html[i];
-
-                if (elmnt.getAttribute("content-include-html") == "This is where the other HTML conent is displayed")
-                {
-                    /*make http req*/
-                    xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function()
-                    {
-                        if (this.readyState == 4)
-                        {
-                            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                            if (this.status == 404) {elmnt.innerHTML = "ERR 404: page not found!";}
-                            /*edit attrib, call again*/
-                            elmnt.setAttribute("content-include-html", "nope");
-                            includeHTML();
-                            elmnt.setAttribute("content-include-html", "This is where the other HTML conent is displayed");
-                        }
-                    }
-                    xhttp.open("GET", file, true);
-                    xhttp.send();
-                    
-                    return;
-                }
-            }
-        }
-
-        // Pop up function for confirmations and alerts
-        function modPop(arg)
-    {
-      var i, j;
-
-        }
-        
-        // focus an element
-        function focusPocus()
-        {
-            document.getElementById("userCard_ID").focus();
-        }
-        
-</script>       
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-messaging.js"></script>      
 
 </html>
